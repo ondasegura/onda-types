@@ -1,8 +1,8 @@
 {
     "name": "onda-types",
-    "version": "1.5.0",
+    "version": "1.6.0",
     "description": "Types repository for Onda applications",
-    "main": "index.js",
+    "main": "index.ts",
     "types": "index.d.ts",
     "publishConfig": {
         "access": "restricted"
@@ -15,7 +15,7 @@
     "files": [
         "backend-wroker-financeiro/**/*",
         "index.d.ts",
-        "index.js"
+        "index.ts"
     ],
     "scripts": {
         "build": "tsc",
