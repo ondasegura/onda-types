@@ -1,0 +1,22 @@
+import { Context as HonoContext } from "hono";
+import { UserPayload } from "./token/token";
+import { Pagarme as P } from "./pagarme";
+import { TypeDefaultOrderRequest as TypeOrder } from "./defaultOrder/defaultOrder";
+declare namespace BackendWorkerFinanceiro {
+    interface Context extends HonoContext {
+        set(key: "usuario_auth", params: UserPayload.PatternUserPayload): UserPayload.PatternUserPayload;
+        get(key: "usuario_auth"): UserPayload.PatternUserPayload;
+    }
+    type User = UserPayload.PatternUserPayload;
+    interface env {
+        JSON_WEB_TOKEN_AUTH_USER: string;
+        POSTGRESQL_DATABASE_URL: string;
+        SK_PAGARME: string;
+        URL_API_PAGARME: string;
+    }
+    namespace Controllers {
+    }
+    export import Pagarme = P;
+    export import TypeDefaultOrderRequest = TypeOrder;
+}
+export default BackendWorkerFinanceiro;
