@@ -8,14 +8,17 @@
         "access": "restricted"
     },
     "exports": {
+        ".": {
+            "import": "./dist/index.ts",
+            "types": "./dist/index.d.ts"
+        },
         "./backend-wroker-financeiro": {
-            "import": "./backend-wroker-financeiro/index.ts"
+            "import": "./backend-wroker-financeiro/index.ts",
+            "types": "./dist/backend-wroker-financeiro/index.d.ts"
         }
     },
     "files": [
-        "backend-wroker-financeiro/**/*",
-        "index.d.ts",
-        "index.ts"
+        "dist/**/*"
     ],
     "scripts": {
         "build": "tsc",
