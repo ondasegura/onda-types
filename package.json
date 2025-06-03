@@ -1,30 +1,16 @@
 {
     "name": "onda-types",
-    "version": "1.2.0",
+    "version": "1.3.0",
     "description": "Types repository for Onda applications",
     "main": "index.js",
     "types": "index.d.ts",
     "exports": {
-        "./backend-wave": {
-            "types": "./backend-wave/index.d.ts",
-            "import": "./backend-wave/index.js",
-            "require": "./backend-wave/index.js"
-        },
-        "./backend-onda": {
-            "types": "./backend-onda/index.d.ts",
-            "import": "./backend-onda/index.js",
-            "require": "./backend-onda/index.js"
-        },
-        "./frontend-app": {
-            "types": "./frontend-app/index.d.ts",
-            "import": "./frontend-app/index.js",
-            "require": "./frontend-app/index.js"
+        "./backend-wroker-financeiro": {
+            "import": "./backend-wroker-financeiro/index.js"
         }
     },
     "files": [
-        "backend-wave/**/*",
-        "backend-onda/**/*",
-        "frontend-app/**/*",
+        "backend-wroker-financeiro/**/*",
         "index.d.ts",
         "index.js"
     ],
