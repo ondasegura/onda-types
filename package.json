@@ -1,47 +1,47 @@
 {
-    "name": "onda-types",
-    "version": "1.7.0",
-    "description": "Types repository for Onda applications",
-    "main": "index.ts",
-    "types": "index.d.ts",
-    "publishConfig": {
-        "access": "restricted"
+  "name": "onda-types",
+  "version": "1.7.0",
+  "description": "Types repository for Onda applications",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "publishConfig": {
+    "access": "restricted"
+  },
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
     },
-    "exports": {
-        ".": {
-            "import": "./dist/index.ts",
-            "types": "./dist/index.d.ts"
-        },
-        "./backend-worker-financeiro": {
-            "import": "./backend-worker-financeiro/index.ts",
-            "types": "./dist/backend-worker-financeiro/index.d.ts"
-        }
-    },
-    "files": [
-        "dist/**/*"
-    ],
-    "scripts": {
-        "build": "tsc",
-        "prepublishOnly": "npm run build",
-        "test": "echo \"No tests specified\" && exit 0"
-    },
-    "keywords": [
-        "types",
-        "typescript",
-        "onda"
-    ],
-    "dependencies": {
-        "hono": "^4.7.8",
-        "zod": "^3.24.4"
-    },
-    "author": "Your Name",
-    "license": "MIT",
-    "devDependencies": {
-        "typescript": "^5.0.0",
-        "@types/node": "^20.0.0"
-    },
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/yourusername/onda-types.git"
+    "./backend-worker-financeiro": {
+      "import": "./dist/backend-worker-financeiro/index.js",
+      "types": "./dist/backend-worker-financeiro/index.d.ts"
     }
+  },
+  "files": [
+    "dist/**/*"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "prepublishOnly": "npm run build",
+    "test": "echo \"No tests specified\" && exit 0"
+  },
+  "keywords": [
+    "types",
+    "typescript",
+    "onda"
+  ],
+  "dependencies": {
+    "hono": "^4.7.8",
+    "zod": "^3.24.4"
+  },
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "@types/node": "^20.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/onda-types.git"
+  }
 }
