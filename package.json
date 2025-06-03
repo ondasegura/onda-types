@@ -1,6 +1,6 @@
 {
     "name": "onda-types",
-    "version": "1.4.0",
+    "version": "1.5.0",
     "description": "Types repository for Onda applications",
     "main": "index.js",
     "types": "index.d.ts",

@@ -2,6 +2,12 @@
 
 Repositório centralizado de tipos TypeScript para todos os aplicativos da Onda (pacote privado).
 
+bunx npm version minor --no-git-tag-version --no-git-checks
+git init
+git add .
+git commit -m "⚡ perf:"
+git push -u origin producao
+
 ## Instalação
 
 ```bash
