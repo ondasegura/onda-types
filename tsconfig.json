@@ -19,7 +19,7 @@
         "moduleResolution": "bundler",
         "allowImportingTsExtensions": true,
         "verbatimModuleSyntax": false,
-        "noEmit": true,
+        // "noEmit": true, removido para testar a importação de onda-types no worker-financeiro
 
         // Desativa verificações de tipo e regras estritas
         "strict": false, // Desativa todas as regras estritas
