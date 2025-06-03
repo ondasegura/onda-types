@@ -1,0 +1,44 @@
+{
+    "name": "onda-types",
+    "version": "1.4.0",
+    "description": "Types repository for Onda applications",
+    "main": "index.js",
+    "types": "index.d.ts",
+    "publishConfig": {
+        "access": "restricted"
+    },
+    "exports": {
+        "./backend-wroker-financeiro": {
+            "import": "./backend-wroker-financeiro/index.js"
+        }
+    },
+    "files": [
+        "backend-wroker-financeiro/**/*",
+        "index.d.ts",
+        "index.js"
+    ],
+    "scripts": {
+        "build": "tsc",
+        "prepublishOnly": "npm run build",
+        "test": "echo \"No tests specified\" && exit 0"
+    },
+    "keywords": [
+        "types",
+        "typescript",
+        "onda"
+    ],
+    "dependencies": {
+        "hono": "^4.7.8",
+        "zod": "^3.24.4"
+    },
+    "author": "Your Name",
+    "license": "MIT",
+    "devDependencies": {
+        "typescript": "^5.0.0",
+        "@types/node": "^20.0.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/yourusername/onda-types.git"
+    }
+}
