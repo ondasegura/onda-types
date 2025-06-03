@@ -3,10 +3,7 @@
   "version": "1.7.0",
   "description": "Types repository for Onda applications",
   "main": "dist/index.js",
-  "types": "dist/index.d.ts",
-  "publishConfig": {
-    "access": "restricted"
-  },
+  
   "exports": {
     ".": {
       "import": "./dist/index.js",
