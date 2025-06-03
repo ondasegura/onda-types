@@ -2,7 +2,7 @@ import { Context as HonoContext } from "hono";
 import { UserPayload } from "./token/token";
 import { Pagarme as P } from "./pagarme";
 import { TypeDefaultOrderRequest as TypeOrder } from "./defaultOrder/defaultOrder";
-namespace BackendWorkerFinanceiro {
+namespace t {
 
   export interface Context extends HonoContext {
     set(key: "usuario_auth", params: UserPayload.PatternUserPayload): UserPayload.PatternUserPayload;
@@ -27,4 +27,4 @@ namespace BackendWorkerFinanceiro {
 
 }
 
-export default BackendWorkerFinanceiro;
+export default t;
