@@ -1,43 +1,45 @@
 {
-  "name": "onda-types",
-  "version": "1.7.0",
-  "description": "Types repository for Onda applications",
-  "main": "dist/index.js",
-  "exports": {
-    ".": {
-      "import": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+    "name": "onda-types",
+    "version": "1.8.0",
+    "description": "Types repository for Onda applications",
+    "main": "dist/index.js",
+    "exports": {
+        ".": {
+            "import": "./dist/index.js",
+            "types": "./dist/index.d.ts"
+        },
+        "./backend-worker-financeiro": {
+            "import": "./dist/backend-worker-financeiro/index.js",
+            "types": "./dist/backend-worker-financeiro/index.d.ts"
+        }
     },
-    "./backend-worker-financeiro": {
-      "import": "./dist/backend-worker-financeiro/index.js",
-      "types": "./dist/backend-worker-financeiro/index.d.ts"
+    "files": [
+        "dist/**/*"
+    ],
+    "scripts": {
+        "build": "tsc",
+        "prepublishOnly": "npm run build",
+        "test": "echo \"No tests specified\" && exit 0"
+    },
+    "keywords": [
+        "types",
+        "typescript",
+        "onda"
+    ],
+    "dependencies": {
+        "hono": "^4.7.8",
+        "zod": "^3.25.49"
+    },
+    "author": "Your Name",
+    "license": "MIT",
+    "devDependencies": {
+        "@types/node": "^20.0.0",
+        "@cloudflare/workers-types": "^4.20250522.0",
+        "@types/bun": "^1.2.14",
+        "typescript": "^5.0.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/yourusername/onda-types.git"
     }
-  },
-  "files": [
-    "dist/**/*"
-  ],
-  "scripts": {
-    "build": "tsc",
-    "prepublishOnly": "npm run build",
-    "test": "echo \"No tests specified\" && exit 0"
-  },
-  "keywords": [
-    "types",
-    "typescript",
-    "onda"
-  ],
-  "dependencies": {
-    "hono": "^4.7.8",
-    "zod": "^3.25.49"
-  },
-  "author": "Your Name",
-  "license": "MIT",
-  "devDependencies": {
-    "@types/node": "^20.0.0",
-    "typescript": "^5.0.0"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/yourusername/onda-types.git"
-  }
 }

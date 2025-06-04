@@ -5,8 +5,12 @@ Repositório centralizado de tipos TypeScript para todos os aplicativos da Onda 
 bunx npm version minor --no-git-tag-version --no-git-checks
 git init
 git add .
-git commit -m "⚡ perf:"
+git commit -m "⚡ perf: "
 git push -u origin producao
+
+<!-- index.ts
+import BackendWorkerFinanceiro from "./backend-wroker-financeiro";
+export type t = typeof BackendWorkerFinanceiro; -->
 
 ## Instalação
 
@@ -160,8 +164,8 @@ Siga o padrão [Semantic Versioning](https://semver.org/):
 
 ## Funções
 
-POST::  criar
-GET::   buscar_pelo_filtro
-GET::   buscar_pelo_id
+POST:: criar
+GET:: buscar_pelo_filtro
+GET:: buscar_pelo_id
 PATCH:: atualizar_pelo_id
 DELETE:: deletar_pelo_id

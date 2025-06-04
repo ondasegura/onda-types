@@ -7,9 +7,9 @@
         "moduleDetection": "force",
         "jsx": "react-jsx",
         "allowJs": true,
-        
-        "types": ["zod"], 
-        
+
+        "types": ["zod", "typescript", "@types/bun", "@types/nod", "@cloudflare/workers-types"],
+
         // ✅ Necessário para gerar arquivos .d.ts
         "declaration": true,
         "emitDeclarationOnly": true,
@@ -38,5 +38,5 @@
         "strictBindCallApply": false, // Desativa verificações estritas de bind/call/apply
         "strictPropertyInitialization": false // Desativa verificações de inicialização de propriedades
     },
-    "include": ["index.ts", "backend-wroker-financeiro/**/*"]
+    "include": ["backend-wroker-financeiro/**/*", "backend-banco/**/*"]
 }
