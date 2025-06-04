@@ -38,5 +38,5 @@
         "strictBindCallApply": false, // Desativa verificações estritas de bind/call/apply
         "strictPropertyInitialization": false // Desativa verificações de inicialização de propriedades
     },
-    "include": ["backend-wroker-financeiro/**/*", "backend-banco/**/*"]
+    "include": ["backend-worker-financeiro/**/*", "backend-banco/**/*"]
 }
