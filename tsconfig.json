@@ -8,7 +8,7 @@
         "jsx": "react-jsx",
         "allowJs": true,
         
-        // "types": [""], removido para testar a importação de onda-types no worker-financeiro
+        "types": ["zod"], 
         
         // ✅ Necessário para gerar arquivos .d.ts
         "declaration": true,
@@ -19,7 +19,7 @@
         "moduleResolution": "bundler",
         "allowImportingTsExtensions": true,
         "verbatimModuleSyntax": false,
-        // "noEmit": true, removido para testar a importação de onda-types no worker-financeiro
+        "noEmit": true,
 
         // Desativa verificações de tipo e regras estritas
         "strict": false, // Desativa todas as regras estritas

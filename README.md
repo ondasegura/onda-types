@@ -157,3 +157,11 @@ Siga o padrão [Semantic Versioning](https://semver.org/):
 -   **MAJOR**: Mudanças que quebram compatibilidade
 -   **MINOR**: Adição de funcionalidades mantendo compatibilidade
 -   **PATCH**: Correções de bugs mantendo compatibilidade
+
+## Funções
+
+POST::  criar
+GET::   buscar_pelo_filtro
+GET::   buscar_pelo_id
+PATCH:: atualizar_pelo_id
+DELETE:: deletar_pelo_id

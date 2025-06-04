@@ -3,7 +3,6 @@
   "version": "1.7.0",
   "description": "Types repository for Onda applications",
   "main": "dist/index.js",
-  
   "exports": {
     ".": {
       "import": "./dist/index.js",
@@ -29,13 +28,13 @@
   ],
   "dependencies": {
     "hono": "^4.7.8",
-    "zod": "^3.24.4"
+    "zod": "^3.25.49"
   },
   "author": "Your Name",
   "license": "MIT",
   "devDependencies": {
-    "typescript": "^5.0.0",
-    "@types/node": "^20.0.0"
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
   },
   "repository": {
     "type": "git",
