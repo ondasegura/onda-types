@@ -1,6 +1,6 @@
 import BackendWorkerFinanceiro from "./backend-worker-financeiro";
 import BackendBanco from "./backend-banco";
-declare namespace t {
+export namespace t {
     // BACKENDS QUE ESTÃO FUNCIONADNO COM O PADRÃO TYPE:
     export import Financeiro = BackendWorkerFinanceiro;
 
@@ -19,7 +19,7 @@ declare namespace t {
 
 }
 
-export default t;
+
 
 
 
