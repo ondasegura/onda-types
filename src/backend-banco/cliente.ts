@@ -112,11 +112,11 @@ namespace ControllerCliente {
         export const InputSchema = z4.object({
             data: z4.object({
                 cliente: z4.object({
-                    _id: z4.string(),
+                    _id: z4.uuidv4(),
                     nome: z4.string().optional(),
                     email: z4.string().optional(),
                     cpf_cnpj: z4.string().optional(),
-                    celular: z4.string(),
+                    celular: z4.string().optional(),
                     tipo: ClienteTipoSchema.optional(),
                     endereco: EnderecoSchema.optional()
                 })
