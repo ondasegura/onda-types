@@ -1,6 +1,6 @@
 // Importar os tipos dos backends
-import * as BackendWorkerFinanceiro from "./dist/backend-worker-financeiro/index";
-import * as BackendBanco from "./dist/backend-worker-financeiro/index";
+import BackendWorkerFinanceiro from "./dist/backend-worker-financeiro";
+import BackendBanco from "./dist/backend-worker-financeiro";
 
 // Namespace que agrupa todos os tipos
 declare namespace t {
