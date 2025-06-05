@@ -1,7 +1,7 @@
 import z4 from "zod/v4";
 import ControllerAsaas from "./asaas";
 
-import t from "..";
+import t from "../index"
 namespace ControllerOrdemServico {
     // Schema para tipos de serviço
     const TipoServicoSchema = z4.union([
