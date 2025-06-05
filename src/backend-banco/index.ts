@@ -45,6 +45,12 @@ namespace BackendBanco {
         results: object
     }
 
+    export interface ContextoPadrao<T> {
+        data: T;
+        loading: boolean;
+        _ids?: string[];
+    }
+
 
     export interface Env {
         JSON_WEB_TOKEN_AUTH_USER: string;
