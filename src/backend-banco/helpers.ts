@@ -65,9 +65,9 @@ namespace ControllerHelpers {
 
     export namespace BuscarPeloId {
         export const InputSchema = z4.object({
-            data: {
+            data: z4.object({
                 _id: z4.uuidv4()
-            }
+            })
         });
         export type Input = z4.infer<typeof InputSchema>;
 
