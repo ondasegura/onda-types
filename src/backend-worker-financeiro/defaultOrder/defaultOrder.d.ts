@@ -1,4 +1,4 @@
-export declare namespace TypeDefaultOrderRequest {
+namespace TypeDefaultOrderRequest {
     type Phone = {
         area_code: string;
         number: string;
@@ -34,5 +34,7 @@ export declare namespace TypeDefaultOrderRequest {
         description?: string;
         external_reference: Array<string>;
     }
-    export {};
+    export { };
 }
+
+export default TypeDefaultOrderRequest
