@@ -22,13 +22,13 @@
     },
     "peerDependencies": {
         "@cloudflare/workers-types": "^4.0.0",
-        "hono": "^3.0.0",
+        "hono": "^4.7.11",
         "zod": "^3.0.0",
         "typescript": ">=4.0.0"
     },
     "devDependencies": {
         "@cloudflare/workers-types": "^4.0.0",
-        "hono": "^3.12.0",
+        "hono": "^4.7.11",
         "zod": "^3.22.0",
         "typescript": "^5.0.0"
     }
