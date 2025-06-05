@@ -10,14 +10,14 @@
 
         "types": ["zod", "typescript", "@types/bun", "@types/node", "@cloudflare/workers-types"],
 
-        // ✅ Para gerar arquivos .d.ts
+        // ✅ Para gerar arquivos .d.ts E .js
         "declaration": true,
-        "emitDeclarationOnly": true,
+        "emitDeclarationOnly": false, // ✅ Mudado para gerar .js também
         "outDir": "dist",
 
         // Bundler mode
         "moduleResolution": "bundler",
-        "allowImportingTsExtensions": true,
+        "allowImportingTsExtensions": false, // ✅ Mudado para false
         "verbatimModuleSyntax": false,
         "noEmit": false, // ✅ MUDADO: permite emissão de arquivos
 
@@ -36,6 +36,6 @@
         "strictBindCallApply": false,
         "strictPropertyInitialization": false
     },
-    "include": ["backend-worker-financeiro/**/*", "backend-banco/**/*"],
+    "include": ["src/**/*", "index.ts"],
     "exclude": ["node_modules", "dist"]
 }
