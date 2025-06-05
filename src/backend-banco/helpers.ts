@@ -36,11 +36,11 @@ namespace ControllerHelpers {
         export const InputSchema = z4.object({
             filtros: z4.object({
                 helper: z4.object({
-                    _id: z4.string().optional(),
-                    descricao: z4.string().optional(),
-                    entidade: z4.string().optional(),
-                    ativo: z4.boolean().optional(),
-                    create_id: z4.string().optional()
+                    _id: z4.string().optional().nullable(),
+                    descricao: z4.string().optional().nullable(),
+                    entidade: z4.string().optional().nullable(),
+                    ativo: z4.boolean().optional().nullable(),
+                    create_id: z4.string().optional().nullable()
                 })
             })
         });
