@@ -10,7 +10,7 @@ import NamesPaceEmail from "./email";
 import ControllerFinanceiro from "./financeiro";
 import ControllerConsulta from "./consulta";
 import ControllerHelpers from "./helpers";
-declare namespace BackendBanco {
+namespace BackendBanco {
     export import Cliente = ControllerCliente;
 
     export import OrdemServico = NamesPaceOrdemServico;
