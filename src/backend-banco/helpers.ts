@@ -1,4 +1,9 @@
 import z4 from "zod/v4";
+
+
+// COMO USAR ESE NAMESPACE NA HORA DE IMPORTAR: 
+// import t from "onda-types"
+// t.Banco.Controllers.Helpers.Criar.Input
 namespace ControllerHelpers {
     // Schema para o status do helper
     export const HelperStatusSchema = z4.union([z4.literal("ativo"), z4.literal("inativo")]);
@@ -36,11 +41,11 @@ namespace ControllerHelpers {
         export const InputSchema = z4.object({
             filtros: z4.object({
                 helper: z4.object({
-                    _id: z4.string().optional().nullable(),
-                    descricao: z4.string().optional().nullable(),
-                    entidade: z4.string().optional().nullable(),
-                    ativo: z4.boolean().optional().nullable(),
-                    create_id: z4.string().optional().nullable()
+                    _id: z4.string().optional(),
+                    descricao: z4.string().optional(),
+                    entidade: z4.string().optional(),
+                    ativo: z4.boolean().optional(),
+                    create_id: z4.string().optional()
                 })
             })
         });
@@ -99,3 +104,5 @@ namespace ControllerHelpers {
 }
 
 export default ControllerHelpers;
+
+
