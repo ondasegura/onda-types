@@ -1,4 +1,4 @@
-import BackendWorkerFinanceiro from "./backend-wroker-financeiro";
+import BackendWorkerFinanceiro from "./backend-worker-financeiro";
 import BackendBanco from "./backend-banco";
 declare namespace t {
     // BACKENDS QUE ESTÃO FUNCIONADNO COM O PADRÃO TYPE:
