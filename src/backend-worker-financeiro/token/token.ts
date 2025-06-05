@@ -1,4 +1,4 @@
-export declare namespace UserPayload {
+namespace UserPayload {
     type UserPayloadImobiliaria = {
         onda_colaborador_email: string;
         onda_colaborador_name: string;
@@ -30,5 +30,6 @@ export declare namespace UserPayload {
         organizacao: string;
     };
     export type PatternUserPayload = UserPayloadImobiliaria | UserPayloadWave;
-    export {};
 }
+
+export default UserPayload;

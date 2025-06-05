@@ -1,4 +1,4 @@
-export declare namespace TypeOrder {
+namespace TypeOrder {
     interface Metadata {
         tipo?: string;
         gerarAnexo1?: boolean;
@@ -55,5 +55,6 @@ export declare namespace TypeOrder {
         items?: Array<Items>;
         payments?: Array<Payments>;
     }
-    export {};
 }
+
+export default TypeOrder;

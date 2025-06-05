@@ -34,7 +34,6 @@ namespace TypeDefaultOrderRequest {
         description?: string;
         external_reference: Array<string>;
     }
-    export { };
 }
 
 export default TypeDefaultOrderRequest

@@ -1,4 +1,4 @@
-export declare namespace TypeCustomer {
+namespace TypeCustomer {
     export interface Customer {
         phones: Phone;
         name: string;
@@ -31,5 +31,6 @@ export declare namespace TypeCustomer {
     export type Output = Customer & {
         id: string;
     };
-    export {};
 }
+
+export default TypeCustomer;

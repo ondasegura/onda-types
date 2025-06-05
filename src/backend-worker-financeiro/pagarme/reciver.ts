@@ -1,4 +1,4 @@
-export declare namespace TypeReciver {
+namespace TypeReciver {
     type PhoneNumber = {
         ddd: string;
         number: string;
@@ -160,3 +160,5 @@ export declare namespace TypeReciver {
     };
     type PartnerForm = CreateReciver;
 }
+
+export default TypeReciver;

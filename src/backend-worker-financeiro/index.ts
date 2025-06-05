@@ -1,8 +1,8 @@
 import { Context as HonoContext } from "hono";
-import { UserPayload } from "./token/token";
-import { Pagarme as P } from "./pagarme";
-import { TypeDefaultOrderRequest as TypeOrder } from "./defaultOrder/defaultOrder";
-declare namespace BackendWorkerFinanceiro {
+import UserPayload from "./token/token";
+import P from "./pagarme";
+import TypeOrder from "./defaultOrder/defaultOrder";
+namespace BackendWorkerFinanceiro {
     interface Context extends HonoContext {
         set(key: "usuario_auth", params: UserPayload.PatternUserPayload): UserPayload.PatternUserPayload;
         get(key: "usuario_auth"): UserPayload.PatternUserPayload;
