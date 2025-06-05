@@ -23,7 +23,7 @@ namespace ControllerCliente {
     export type Endereco = z4.infer<typeof EnderecoSchema>;
 
     // Schema base para cliente
-    const ClienteBaseSchema = z4.object({
+    export const ClienteBaseSchema = z4.object({
         _id: z4.string(),
         nome: z4.string(),
         email: z4.string(),

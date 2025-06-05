@@ -1,6 +1,7 @@
 import z4 from "zod/v4";
 import ControllerAsaas from "./asaas";
 
+import t from "..";
 namespace ControllerOrdemServico {
     // Schema para tipos de serviço
     const TipoServicoSchema = z4.union([
@@ -95,17 +96,6 @@ namespace ControllerOrdemServico {
     export type IpInfo = z4.infer<typeof IpInfoSchema>;
 
 
-    const ClienteSchema = z4.object({
-        nome: z4.string().toLowerCase(),
-        email: z4.email().toLowerCase(),
-        cpf_cnpj: z4.string(),
-        celular: z4.string()
-            .transform(val => val.replace(/\D/g, '')).refine(val => val.length >= 8 && val.length <= 15, {
-                message: "Celular inválido. Deve conter entre 8 e 15 dígitos."
-            }),
-        cliente_asaas_id: z4.string()
-    });
-
 
     const OrdemServicoBaseSchema = z4.object({
         _id: z4.string(),
@@ -133,7 +123,7 @@ namespace ControllerOrdemServico {
         usuario_fornecedor_id: z4.string().optional().nullable(),
         ip_info: IpInfoSchema,
         status: OrdemServicoStatusSchema,
-        cliente: ClienteSchema,
+        cliente: t.Banco.Controllers.Cliente.ClienteBaseSchema,
         info_pagamento: z4.custom<ControllerAsaas.InfoPagamento>()
     });
 
