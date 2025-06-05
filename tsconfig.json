@@ -1,41 +1,15 @@
 {
     "compilerOptions": {
-        // Configurações básicas
-        "lib": ["ESNext", "DOM"],
-        "target": "ESNext",
+        "target": "ES2022",
         "module": "ESNext",
-        "moduleDetection": "force",
-        "jsx": "react-jsx",
-        "allowJs": true,
-
-        "types": ["zod", "typescript", "@types/bun", "@types/node", "@cloudflare/workers-types"],
-
-        // ✅ Para gerar arquivos .d.ts E .js
-        "declaration": true,
-        "emitDeclarationOnly": false, // ✅ Mudado para gerar .js também
-        "outDir": "dist",
-
-        // Bundler mode
-        "moduleResolution": "bundler",
-        "allowImportingTsExtensions": false, // ✅ Mudado para false
-        "verbatimModuleSyntax": false,
-        "noEmit": false, // ✅ MUDADO: permite emissão de arquivos
-
-        // Configurações relaxadas
-        "strict": false,
+        "lib": ["ES2022", "WebWorker"],
+        "strict": true,
+        "esModuleInterop": true,
         "skipLibCheck": true,
-        "noFallthroughCasesInSwitch": false,
-        "noUnusedLocals": false,
-        "noUnusedParameters": false,
-        "noPropertyAccessFromIndexSignature": false,
-        "noImplicitAny": false,
-        "noImplicitReturns": false,
-        "noImplicitThis": false,
-        "strictNullChecks": false,
-        "strictFunctionTypes": false,
-        "strictBindCallApply": false,
-        "strictPropertyInitialization": false
+        "forceConsistentCasingInFileNames": true,
+        "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true,
+        "types": ["@cloudflare/workers-types"]
     },
-    "include": ["dist/**/*", "index.ts"],
-    "exclude": ["node_modules", "dist"]
+    "include": ["src/**/*"]
 }

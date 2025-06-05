@@ -1,43 +1,35 @@
 {
     "name": "onda-types",
-    "version": "1.14.0",
-    "description": "Types repository for Onda applications",
-    "main": "index.ts",
-    "types": "dist/index.d.ts",
-    "exports": {
-        ".": {
-            "types": "./dist/index.d.ts",
-            "default": "./dist/index.d.ts"
-        }
-    },
+    "version": "1.0.0",
+    "description": "Repositório de types TypeScript com dependências",
+    "types": "src/index.ts",
+    "main": "src/index.ts",
     "files": [
-        "dist/**/*"
+        "src"
     ],
-    "scripts": {
-        "build": "node scripts/copy-types.js",
-        "dev": "npm run build",
-        "prepublishOnly": "npm run build",
-        "test": "echo \"No tests specified\" && exit 0"
-    },
     "keywords": [
         "types",
         "typescript",
-        "onda"
+        "cloudflare",
+        "hono",
+        "zod"
     ],
-    "dependencies": {
-        "hono": "^4.7.8",
-        "zod": "^3.25.49"
-    },
-    "author": "Your Name",
+    "author": "Seu Nome",
     "license": "MIT",
-    "devDependencies": {
-        "@types/node": "^20.0.0",
-        "@cloudflare/workers-types": "^4.20250522.0",
-        "@types/bun": "^1.2.14",
-        "typescript": "^5.0.0"
-    },
     "repository": {
         "type": "git",
-        "url": "https://github.com/yourusername/onda-types.git"
+        "url": "git+https://github.com/seu-usuario/types-repo.git"
+    },
+    "peerDependencies": {
+        "@cloudflare/workers-types": "^4.0.0",
+        "hono": "^3.0.0",
+        "zod": "^3.0.0",
+        "typescript": ">=4.0.0"
+    },
+    "devDependencies": {
+        "@cloudflare/workers-types": "^4.0.0",
+        "hono": "^3.12.0",
+        "zod": "^3.22.0",
+        "typescript": "^5.0.0"
     }
 }
