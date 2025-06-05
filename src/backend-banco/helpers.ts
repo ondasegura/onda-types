@@ -12,9 +12,9 @@ namespace ControllerHelpers {
     // Schema base para o helper
     export const HelperBaseSchema = z4.object({
         _id: z4.uuid(),
-        criacao: z4.string(),
-        atualizacao: z4.string().nullable(),
-        create_id: z4.string(),
+        data_criacao: z4.string(),
+        data_atualizacao: z4.string().nullable(),
+        usuario_create_id: z4.uuidv4(),
         descricao: z4.string(),
         entidade: z4.string(),
         ativo: z4.boolean()
@@ -49,7 +49,7 @@ namespace ControllerHelpers {
                     descricao: z4.string().optional(),
                     entidade: z4.string().optional(),
                     ativo: z4.boolean().optional(),
-                    create_id: z4.string().optional()
+                    usuario_create_id: z4.uuidv4().optional()
                 })
             })
         });
