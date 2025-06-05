@@ -1,13 +1,15 @@
 {
     "name": "onda-types",
-    "version": "1.13.0",
+    "version": "1.14.0",
     "description": "Types repository for Onda applications",
-    "main": "dist/index.d.ts",
+    "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "exports": {
         ".": {
             "types": "./dist/index.d.ts",
-            "default": "./dist/index.d.ts"
+            "import": "./dist/index.js",
+            "require": "./dist/index.js",
+            "default": "./dist/index.js"
         }
     },
     "files": [
@@ -15,6 +17,7 @@
     ],
     "scripts": {
         "build": "tsc",
+        "dev": "tsc --watch",
         "prepublishOnly": "npm run build",
         "test": "echo \"No tests specified\" && exit 0"
     },
