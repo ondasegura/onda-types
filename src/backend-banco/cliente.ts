@@ -91,9 +91,9 @@ namespace ControllerCliente {
 
     export namespace BuscarPeloId {
         export const InputSchema = z4.object({
-            data: {
-                _id: z4.uuidv4()
-            }
+            data: z4.object({
+                id_: z4.uuidv4()
+            })
         });
 
         const OutputSchema = ClienteBaseSchema;
