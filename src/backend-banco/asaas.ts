@@ -1,211 +1,224 @@
+import z4 from "zod/v4";
+
 namespace ControllerAsaas {
-    type BillingType = "PIX" | "BOLETO" | "CREDIT_CARD" | "UNDEFINED"
+    // Schemas para tipos básicos
+    export const BillingTypeSchema = z4.union([
+        z4.literal("PIX"),
+        z4.literal("BOLETO"),
+        z4.literal("CREDIT_CARD"),
+        z4.literal("UNDEFINED")
+    ]);
+    export type BillingType = z4.infer<typeof BillingTypeSchema>;
 
-    type NotificationEvent =
-        | 'PAYMENT_RECEIVED'
-        | 'PAYMENT_OVERDUE'
-        | 'PAYMENT_DUEDATE_WARNING'
-        | 'PAYMENT_CREATED'
-        | 'PAYMENT_UPDATED'
-        | 'SEND_LINHA_DIGITAVEL';
+    export const NotificationEventSchema = z4.union([
+        z4.literal('PAYMENT_RECEIVED'),
+        z4.literal('PAYMENT_OVERDUE'),
+        z4.literal('PAYMENT_DUEDATE_WARNING'),
+        z4.literal('PAYMENT_CREATED'),
+        z4.literal('PAYMENT_UPDATED'),
+        z4.literal('SEND_LINHA_DIGITAVEL')
+    ]);
+    export type NotificationEvent = z4.infer<typeof NotificationEventSchema>;
 
-    export interface NotificationConfig {
-        object: 'notification';
-        id: string;
-        customer: string;
-        enabled: boolean;
-        emailEnabledForProvider: boolean;
-        smsEnabledForProvider: boolean;
-        emailEnabledForCustomer: boolean;
-        smsEnabledForCustomer: boolean;
-        phoneCallEnabledForCustomer: boolean;
-        whatsappEnabledForCustomer: boolean;
-        event: NotificationEvent;
-        scheduleOffset: number;
-        deleted: boolean;
-    }
+    // Schema para NotificationConfig
+    export const NotificationConfigSchema = z4.object({
+        object: z4.literal('notification'),
+        id: z4.string(),
+        customer: z4.string(),
+        enabled: z4.boolean(),
+        emailEnabledForProvider: z4.boolean(),
+        smsEnabledForProvider: z4.boolean(),
+        emailEnabledForCustomer: z4.boolean(),
+        smsEnabledForCustomer: z4.boolean(),
+        phoneCallEnabledForCustomer: z4.boolean(),
+        whatsappEnabledForCustomer: z4.boolean(),
+        event: NotificationEventSchema,
+        scheduleOffset: z4.number(),
+        deleted: z4.boolean()
+    });
+    export type NotificationConfig = z4.infer<typeof NotificationConfigSchema>;
 
+    // Schema para Customer
+    export const CustomerSchema = z4.object({
+        object: z4.literal('customer'),
+        id: z4.string(),
+        dateCreated: z4.string(),
+        name: z4.string(),
+        email: z4.string(),
+        company: z4.string().nullable(),
+        phone: z4.string(),
+        mobilePhone: z4.string(),
+        address: z4.string().nullable(),
+        addressNumber: z4.string().nullable(),
+        complement: z4.string().nullable(),
+        province: z4.string().nullable(),
+        postalCode: z4.string().nullable(),
+        cpf_cnpj: z4.string(),
+        personType: z4.literal('FISICA'),
+        deleted: z4.boolean(),
+        additionalEmails: z4.string().nullable(),
+        externalReference: z4.string(),
+        notificationDisabled: z4.boolean(),
+        observations: z4.string().nullable(),
+        municipalInscription: z4.string().nullable(),
+        stateInscription: z4.string().nullable(),
+        canDelete: z4.boolean(),
+        cannotBeDeletedReason: z4.string().nullable(),
+        canEdit: z4.boolean(),
+        cannotEditReason: z4.string().nullable(),
+        city: z4.string().nullable(),
+        cityName: z4.string().nullable(),
+        state: z4.string().nullable(),
+        country: z4.literal('Brasil')
+    });
+    export type Customer = z4.infer<typeof CustomerSchema>;
 
-    export interface Customer {
-        object: 'customer';
-        id: string;
-        dateCreated: string;
-        name: string;
-        email: string;
-        company: string | null;
-        phone: string;
-        mobilePhone: string;
-        address: string | null;
-        addressNumber: string | null;
-        complement: string | null;
-        province: string | null;
-        postalCode: string | null;
-        cpf_cnpj: string;
-        personType: 'FISICA';
-        deleted: boolean;
-        additionalEmails: string | null;
-        externalReference: string;
-        notificationDisabled: boolean;
-        observations: string | null;
-        municipalInscription: string | null;
-        stateInscription: string | null;
-        canDelete: boolean;
-        cannotBeDeletedReason: string | null;
-        canEdit: boolean;
-        cannotEditReason: string | null;
-        city: string | null;
-        cityName: string | null;
-        state: string | null;
-        country: 'Brasil';
-    }
+    // Schema para InfoPagamento
+    export const InfoPagamentoSchema = z4.object({
+        pix: z4.object({
+            encodedImage: z4.string(),
+            qrcode: z4.string().optional(),
+            chave: z4.string().optional(),
+            nomeBeneficiario: z4.string().optional(),
+            cidade: z4.string().optional()
+        }).optional(),
+        bankSlip: z4.object({
+            url: z4.string().optional(),
+            codigoBarras: z4.string().optional(),
+            linhaDigitavel: z4.string().optional(),
+            vencimento: z4.string().optional(),
+            nomeBeneficiario: z4.string().optional(),
+            documentoBeneficiario: z4.string().optional()
+        }).optional(),
+        creditCard: z4.object({
+            autorizacao: z4.string().optional(),
+            bandeira: z4.string().optional(),
+            ultimosDigitos: z4.string().optional(),
+            nomeTitular: z4.string().optional(),
+            statusTransacao: z4.string().optional()
+        }).optional()
+    });
+    export type InfoPagamento = z4.infer<typeof InfoPagamentoSchema>;
 
-    export interface InfoPagamento {
-        pix?: {
-            encodedImage: string;
-            qrcode?: string;
-            chave?: string;
-            nomeBeneficiario?: string;
-            cidade?: string;
-        };
-        bankSlip?: {
-            url?: string;
-            codigoBarras?: string;
-            linhaDigitavel?: string;
-            vencimento?: string;
-            nomeBeneficiario?: string;
-            documentoBeneficiario?: string;
-        };
-        creditCard?: {
-            autorizacao?: string;
-            bandeira?: string;
-            ultimosDigitos?: string;
-            nomeTitular?: string;
-            statusTransacao?: string;
-        };
-    };
+    // Schemas para tipos auxiliares
+    export const DiscountInfoSchema = z4.object({
+        value: z4.number(),
+        limitDate: z4.string().nullable(),
+        dueDateLimitDays: z4.number(),
+        type: z4.union([z4.literal('FIXED'), z4.literal('PERCENTAGE')])
+    });
+    export type DiscountInfo = z4.infer<typeof DiscountInfoSchema>;
 
+    export const FineInfoSchema = z4.object({
+        value: z4.number(),
+        type: z4.union([z4.literal('FIXED'), z4.literal('PERCENTAGE')])
+    });
+    export type FineInfo = z4.infer<typeof FineInfoSchema>;
 
-    export interface PagamentoAsaas {
-        object: "payment";
-        id: string;
-        dateCreated: string;
-        customer: string;
-        checkoutSession: string | null;
-        paymentLink: string | null;
-        value: number;
-        netValue: number;
-        originalValue: number | null;
-        interestValue: number | null;
-        description: string | null;
-        billingType: BillingType;
-        pixTransaction: any | null;
-        status: string;
-        dueDate: string;
-        originalDueDate: string;
-        paymentDate: string | null;
-        clientPaymentDate: string | null;
-        installmentNumber: number | null;
-        invoiceUrl: string;
-        invoiceNumber: string;
-        externalReference: string | null;
-        deleted: boolean;
-        anticipated: boolean;
-        anticipable: boolean;
-        creditDate: string | null;
-        estimatedCreditDate: string | null;
-        transactionReceiptUrl: string | null;
-        nossoNumero: string;
-        bankSlipUrl: string;
-        lastInvoiceViewedDate: string | null;
-        lastBankSlipViewedDate: string | null;
-        discount: {
-            value: number;
-            limitDate: string | null;
-            dueDateLimitDays: number;
-            type: string;
-        };
-        fine: {
-            value: number;
-            type: string;
-        };
-        interest: {
-            value: number;
-            type: string;
-        };
-        postalService: boolean;
-        custody: any | null;
-        escrow: any | null;
-        refunds: any | null;
-    }
+    export const InterestInfoSchema = z4.object({
+        value: z4.number(),
+        type: z4.union([z4.literal('FIXED'), z4.literal('PERCENTAGE')])
+    });
+    export type InterestInfo = z4.infer<typeof InterestInfoSchema>;
 
+    // Schema para PagamentoAsaas
+    export const PagamentoAsaasSchema = z4.object({
+        object: z4.literal("payment"),
+        id: z4.string(),
+        dateCreated: z4.string(),
+        customer: z4.string(),
+        checkoutSession: z4.string().nullable(),
+        paymentLink: z4.string().nullable(),
+        value: z4.number(),
+        netValue: z4.number(),
+        originalValue: z4.number().nullable(),
+        interestValue: z4.number().nullable(),
+        description: z4.string().nullable(),
+        billingType: BillingTypeSchema,
+        pixTransaction: z4.any().nullable(),
+        status: z4.string(),
+        dueDate: z4.string(),
+        originalDueDate: z4.string(),
+        paymentDate: z4.string().nullable(),
+        clientPaymentDate: z4.string().nullable(),
+        installmentNumber: z4.number().nullable(),
+        invoiceUrl: z4.string(),
+        invoiceNumber: z4.string(),
+        externalReference: z4.string().nullable(),
+        deleted: z4.boolean(),
+        anticipated: z4.boolean(),
+        anticipable: z4.boolean(),
+        creditDate: z4.string().nullable(),
+        estimatedCreditDate: z4.string().nullable(),
+        transactionReceiptUrl: z4.string().nullable(),
+        nossoNumero: z4.string(),
+        bankSlipUrl: z4.string(),
+        lastInvoiceViewedDate: z4.string().nullable(),
+        lastBankSlipViewedDate: z4.string().nullable(),
+        discount: DiscountInfoSchema,
+        fine: FineInfoSchema,
+        interest: InterestInfoSchema,
+        postalService: z4.boolean(),
+        custody: z4.any().nullable(),
+        escrow: z4.any().nullable(),
+        refunds: z4.any().nullable()
+    });
+    export type PagamentoAsaas = z4.infer<typeof PagamentoAsaasSchema>;
 
-    interface DiscountInfo {
-        value: number;
-        limitDate: string | null;
-        dueDateLimitDays: number;
-        type: 'FIXED' | 'PERCENTAGE';
-    }
+    // Schema para Payment
+    export const PaymentSchema = z4.object({
+        object: z4.string(),
+        id: z4.string(),
+        dateCreated: z4.string(),
+        customer: z4.string(),
+        installment: z4.string(),
+        checkoutSession: z4.string().nullable(),
+        paymentLink: z4.string().nullable(),
+        value: z4.number(),
+        netValue: z4.number(),
+        originalValue: z4.number().nullable(),
+        interestValue: z4.number().nullable(),
+        description: z4.string(),
+        billingType: z4.string(),
+        canBePaidAfterDueDate: z4.boolean(),
+        pixTransaction: z4.string().nullable(),
+        status: z4.string(),
+        dueDate: z4.string(),
+        originalDueDate: z4.string(),
+        paymentDate: z4.string().nullable(),
+        clientPaymentDate: z4.string().nullable(),
+        installmentNumber: z4.number(),
+        invoiceUrl: z4.string(),
+        invoiceNumber: z4.string(),
+        externalReference: z4.string(),
+        deleted: z4.boolean(),
+        anticipated: z4.boolean(),
+        anticipable: z4.boolean(),
+        creditDate: z4.string().nullable(),
+        estimatedCreditDate: z4.string().nullable(),
+        transactionReceiptUrl: z4.string().nullable(),
+        nossoNumero: z4.string(),
+        bankSlipUrl: z4.string(),
+        lastInvoiceViewedDate: z4.string().nullable(),
+        lastBankSlipViewedDate: z4.string().nullable(),
+        discount: DiscountInfoSchema,
+        fine: FineInfoSchema,
+        interest: InterestInfoSchema,
+        postalService: z4.boolean(),
+        custody: z4.string().nullable(),
+        escrow: z4.string().nullable(),
+        refunds: z4.string().nullable()
+    });
+    export type Payment = z4.infer<typeof PaymentSchema>;
 
-    interface FineInfo {
-        value: number;
-        type: 'FIXED' | 'PERCENTAGE';
-    }
-
-    interface InterestInfo {
-        value: number;
-        type: 'FIXED' | 'PERCENTAGE';
-    }
-
-    interface Payment {
-        object: string;
-        id: string;
-        dateCreated: string;
-        customer: string;
-        installment: string;
-        checkoutSession: string | null;
-        paymentLink: string | null;
-        value: number;
-        netValue: number;
-        originalValue: number | null;
-        interestValue: number | null;
-        description: string;
-        billingType: string;
-        canBePaidAfterDueDate: boolean;
-        pixTransaction: string | null;
-        status: string;
-        dueDate: string;
-        originalDueDate: string;
-        paymentDate: string | null;
-        clientPaymentDate: string | null;
-        installmentNumber: number;
-        invoiceUrl: string;
-        invoiceNumber: string;
-        externalReference: string;
-        deleted: boolean;
-        anticipated: boolean;
-        anticipable: boolean;
-        creditDate: string | null;
-        estimatedCreditDate: string | null;
-        transactionReceiptUrl: string | null;
-        nossoNumero: string;
-        bankSlipUrl: string;
-        lastInvoiceViewedDate: string | null;
-        lastBankSlipViewedDate: string | null;
-        discount: DiscountInfo;
-        fine: FineInfo;
-        interest: InterestInfo;
-        postalService: boolean;
-        custody: string | null;
-        escrow: string | null;
-        refunds: string | null;
-    }
-
-    export interface receberNotificacaoPagamentoCheckoutTransparente {
-        id: string;
-        event: string;
-        dateCreated: string;
-        payment: Payment;
-    }
+    // Schema para receberNotificacaoPagamentoCheckoutTransparente
+    export const ReceberNotificacaoPagamentoCheckoutTransparenteSchema = z4.object({
+        id: z4.string(),
+        event: z4.string(),
+        dateCreated: z4.string(),
+        payment: PaymentSchema
+    });
+    export type ReceberNotificacaoPagamentoCheckoutTransparente = z4.infer<typeof ReceberNotificacaoPagamentoCheckoutTransparenteSchema>;
 }
 
-export default ControllerAsaas
+export default ControllerAsaas;
