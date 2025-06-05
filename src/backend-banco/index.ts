@@ -11,23 +11,25 @@ import ControllerFinanceiro from "./financeiro";
 import ControllerConsulta from "./consulta";
 import ControllerHelpers from "./helpers";
 namespace BackendBanco {
-    export import Cliente = ControllerCliente;
+    export namespace Controllers {
+        export import Cliente = ControllerCliente;
 
-    export import OrdemServico = NamesPaceOrdemServico;
+        export import OrdemServico = NamesPaceOrdemServico;
 
-    export import Usuario = ControllerUsuario;
+        export import Usuario = ControllerUsuario;
 
-    export import Asaas = ControllerAsaas;
+        export import Asaas = ControllerAsaas;
 
-    export import Pusher = NamesPacePusher;
+        export import Pusher = NamesPacePusher;
 
-    export import Email = NamesPaceEmail;
+        export import Email = NamesPaceEmail;
 
-    export import Financeiro = ControllerFinanceiro;
+        export import Financeiro = ControllerFinanceiro;
 
-    export import Consulta = ControllerConsulta;
+        export import Consulta = ControllerConsulta;
 
-    export import Helpers = ControllerHelpers;
+        export import Helpers = ControllerHelpers;
+    }
 
 
     export type Next = import("hono").Next;
@@ -63,8 +65,8 @@ namespace BackendBanco {
 
     export interface Context extends HonoContext {
         env: Env;
-        set(key: "usuario_auth", params: BackendBanco.Usuario.Auth): BackendBanco.Usuario.Auth;
-        get(key: "usuario_auth"): BackendBanco.Usuario.Auth;
+        set(key: "usuario_auth", params: BackendBanco.Controllers.Usuario.Auth): BackendBanco.Controllers.Usuario.Auth;
+        get(key: "usuario_auth"): BackendBanco.Controllers.Usuario.Auth;
     }
 }
 
