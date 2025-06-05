@@ -28,7 +28,6 @@ namespace ControllerCliente {
         nome: z4.string(),
         email: z4.string(),
         cpf_cnpj: z4.string(),
-        rg: z4.string(),
         tipo: z4.string(),
         data_criacao: z4.string(),
         celular: z4.string(),
@@ -43,12 +42,10 @@ namespace ControllerCliente {
         export const InputSchema = z4.object({
             data: z4.object({
                 cliente: z4.object({
-                    rg: z4.any(),
                     cpf_cnpj: z4.string(),
                     celular: z4.string(),
                     nome: z4.string(),
                     email: z4.string(),
-                    senha: z4.string().optional(),
                     tipo: ClienteTipoSchema,
                     endereco: EnderecoSchema.optional()
                 })
@@ -75,7 +72,6 @@ namespace ControllerCliente {
                     email: z4.string().optional(),
                     cpf_cnpj: z4.string().optional(),
                     celular: z4.string().optional(),
-                    rg: z4.string().optional(),
                     tipo: ClienteTipoSchema.optional(),
                     endereco: EnderecoSchema.optional()
                 })
@@ -120,7 +116,7 @@ namespace ControllerCliente {
                     nome: z4.string().optional(),
                     email: z4.string().optional(),
                     cpf_cnpj: z4.string().optional(),
-                    rg: z4.string().optional(),
+                    celular: z4.string(),
                     tipo: ClienteTipoSchema.optional(),
                     endereco: EnderecoSchema.optional()
                 })
