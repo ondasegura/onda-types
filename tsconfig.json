@@ -36,6 +36,6 @@
         "strictBindCallApply": false,
         "strictPropertyInitialization": false
     },
-    "include": ["src/**/*", "index.ts"],
+    "include": ["dist/**/*", "index.ts"],
     "exclude": ["node_modules", "dist"]
 }
