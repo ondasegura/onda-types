@@ -2,12 +2,12 @@
     "name": "onda-types",
     "version": "1.13.0",
     "description": "Types repository for Onda applications",
-    "main": "dist/index.js",
+    "main": "dist/index.d.ts",
     "types": "dist/index.d.ts",
     "exports": {
         ".": {
             "types": "./dist/index.d.ts",
-            "default": "./dist/index.js"
+            "default": "./dist/index.d.ts"
         }
     },
     "files": [
