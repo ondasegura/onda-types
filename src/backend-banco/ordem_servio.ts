@@ -98,7 +98,7 @@ namespace ControllerOrdemServico {
 
 
     const OrdemServicoBaseSchema = z4.object({
-        _id: z4.string(),
+        _id: z4.uuidv4(),
         data_criacao: z4.string(),
         data_atualizacao: z4.string().optional().nullable(),
         usuario_create_id: z4.string(),
@@ -206,7 +206,7 @@ namespace ControllerOrdemServico {
     export namespace BuscarPeloId {
         export const InputSchema = z4.object({
             data: z4.object({
-                _id: z4.string()
+                _id: z4.uuidv4()
             })
         });
 
