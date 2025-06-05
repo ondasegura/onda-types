@@ -11,7 +11,7 @@ namespace ControllerHelpers {
 
     // Schema base para o helper
     export const HelperBaseSchema = z4.object({
-        _id: z4.string(),
+        _id: z4.uuid(),
         criacao: z4.string(),
         atualizacao: z4.string().nullable(),
         create_id: z4.string(),
@@ -34,14 +34,18 @@ namespace ControllerHelpers {
         export type Input = z4.infer<typeof InputSchema>;
 
         export const OutputSchema = HelperBaseSchema;
-        export type Output = z4.infer<typeof OutputSchema>;
+        export type Output = {
+            data: {
+                helper: z4.infer<typeof OutputSchema>;
+            }
+        }
     }
 
     export namespace BuscarPeloFiltro {
         export const InputSchema = z4.object({
             filtros: z4.object({
                 helper: z4.object({
-                    _id: z4.string().optional(),
+                    _id: z4.uuidv4().optional(),
                     descricao: z4.string().optional(),
                     entidade: z4.string().optional(),
                     ativo: z4.boolean().optional(),
@@ -52,7 +56,11 @@ namespace ControllerHelpers {
         export type Input = z4.infer<typeof InputSchema>;
 
         export const OutputSchema = z4.array(HelperBaseSchema);
-        export type Output = z4.infer<typeof OutputSchema>;
+        export type Output = {
+            data: {
+                helpers: z4.infer<typeof OutputSchema>;
+            }
+        }
     }
 
     export namespace BuscarPeloId {
@@ -73,9 +81,9 @@ namespace ControllerHelpers {
 
     export namespace AtualizarPeloId {
         export const InputSchema = z4.object({
-            _id: z4.uuidv4(),
             data: z4.object({
                 helper: z4.object({
+                    _id: z4.uuidv4(),
                     descricao: z4.string().optional(),
                     entidade: z4.string().optional(),
                     ativo: z4.boolean().optional()
@@ -94,12 +102,16 @@ namespace ControllerHelpers {
 
     export namespace DeletarPeloId {
         export const InputSchema = z4.object({
-            id: z4.string()
+            _id: z4.string()
         });
         export type Input = z4.infer<typeof InputSchema>;
 
         export const OutputSchema = HelperBaseSchema;
-        export type Output = z4.infer<typeof OutputSchema>;
+        export type Output = {
+            data: {
+                helper: {}
+            }
+        }
     }
 }
 
