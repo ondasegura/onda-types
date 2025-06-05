@@ -18,6 +18,3 @@ declare namespace t {
 
 // Export default do namespace
 export default t;
-
-// Também exportar como named exports (opcional)
-export { BackendWorkerFinanceiro, BackendBanco };
