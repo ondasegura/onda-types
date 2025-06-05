@@ -10,6 +10,7 @@ import NamesPaceEmail from "./email";
 import ControllerFinanceiro from "./financeiro";
 import ControllerConsulta from "./consulta";
 import ControllerHelpers from "./helpers";
+import ControllerBucket from "./bucket";
 namespace BackendBanco {
     export namespace Controllers {
         export import Cliente = ControllerCliente;
@@ -29,6 +30,8 @@ namespace BackendBanco {
         export import Consulta = ControllerConsulta;
 
         export import Helpers = ControllerHelpers;
+
+        export import Bucket = ControllerBucket;
     }
 
 
