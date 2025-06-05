@@ -2,7 +2,7 @@
     "name": "onda-types",
     "version": "1.14.0",
     "description": "Types repository for Onda applications",
-    "main": "dist/index.d.ts",
+    "main": "index.ts",
     "types": "dist/index.d.ts",
     "exports": {
         ".": {
