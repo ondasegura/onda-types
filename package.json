@@ -1,16 +1,13 @@
 {
     "name": "onda-types",
-    "version": "1.11.0",
+    "version": "1.12.0",
     "description": "Types repository for Onda applications",
-    "main": "dist/index.d.ts",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
     "exports": {
         ".": {
-            "import": "./dist/index.d.ts",
-            "types": "./dist/index.d.ts"
-        },
-        "./backend-worker-financeiro": {
-            "import": "./dist/backend-worker-financeiro/index.js",
-            "types": "./dist/backend-worker-financeiro/index.d.ts"
+            "types": "./dist/index.d.ts",
+            "default": "./dist/index.js"
         }
     },
     "files": [
