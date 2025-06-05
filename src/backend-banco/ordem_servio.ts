@@ -1,7 +1,7 @@
 import z4 from "zod/v4";
 import ControllerAsaas from "./asaas";
 
-import t from "../index"
+import ControllerCliente from "./cliente";
 namespace ControllerOrdemServico {
     // Schema para tipos de serviço
     const TipoServicoSchema = z4.union([
@@ -123,7 +123,7 @@ namespace ControllerOrdemServico {
         usuario_fornecedor_id: z4.string().optional().nullable(),
         ip_info: IpInfoSchema,
         status: OrdemServicoStatusSchema,
-        cliente: t.Banco.Controllers.Cliente.ClienteBaseSchema,
+        cliente: ControllerCliente.ClienteBaseSchema,
         info_pagamento: z4.custom<ControllerAsaas.InfoPagamento>()
     });
 
