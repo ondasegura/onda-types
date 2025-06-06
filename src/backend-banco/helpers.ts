@@ -46,8 +46,8 @@ namespace ControllerHelpers {
             filtros: z4.object({
                 helper: z4.object({
                     _id: z4.uuidv4().optional(),
-                    descricao: z4.string().toLowerCase(),
-                    entidade: z4.string().toLowerCase(),
+                    descricao: z4.string().toLowerCase().optional(),
+                    entidade: z4.string().toLowerCase().optional(),
                     ativo: z4.boolean().optional(),
                     usuario_create_id: z4.uuidv4().optional()
                 })
