@@ -1,0 +1,51 @@
+{
+    "emmet.includeLanguages": {
+        "javascript": "javascriptreact"
+    }, //Ajuda no auto complete no react.js
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "terminal.integrated.allowChords": false,
+    "editor.renderWhitespace": "none",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "liveServer.settings.donotShowInfoMsg": true,
+    "workbench.startupEditor": "none",
+    "terminal.integrated.enableMultiLinePasteWarning": "never",
+    "[yaml]": {
+        "editor.tabSize": 4
+    },
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": "explicit"
+    },
+    "[javascript]": {
+        "editor.tabSize": 4,
+        "editor.insertSpaces": true,
+        "editor.detectIndentation": false
+    },
+    "vetur.format.options.tabSize": 4,
+    "terminal.integrated.tabs.defaultIcon": "beaker",
+    "editor.fastScrollSensitivity": 6,
+    "emmet.triggerExpansionOnTab": true,
+    "git.confirmSync": false,
+    "workbench.editorAssociations": {
+        "*.lnk": "default"
+    },
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "git.openRepositoryInParentFolders": "always",
+    "workbench.iconTheme": "vs-minimal",
+    "git.suggestSmartCommit": false,
+    "prettier.tabWidth": 4,
+    "prettier.bracketSpacing": false,
+    "prettier.printWidth": 180,
+    "terminal.integrated.env.windows": {},
+    "console-ninja.featureSet": "Community",
+    "editor.minimap.enabled": false,
+    "console-ninja.fontSize": 16,
+    "editor.largeFileOptimizations": false,
+    "extensions.ignoreRecommendations": true,
+    "chat.editing.alwaysSaveWithGeneratedChanges": true,
+    "C_Cpp.copilotHover": "disabled",
+    "editor.acceptSuggestionOnEnter": "off",
+    "editor.inlineSuggest.edits.allowCodeShifting": "never",
+    "editor.inlineSuggest.edits.renderSideBySide": "never"
+}

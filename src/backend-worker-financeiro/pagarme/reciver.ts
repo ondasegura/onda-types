@@ -67,6 +67,21 @@ namespace TypeReciver {
         type: z4.union([z4.literal("checking"), z4.literal("savings"), z4.string()])
     });
 
+    // Schema para transfer settings
+    export const TransferSettingsSchema = z4.object({
+        transfer_enabled: z4.boolean(),
+        transfer_interval: z4.union([z4.literal("Daily"), z4.literal("Weekly"), z4.literal("Monthly")]),
+        transfer_day: z4.number().int()
+    });
+
+    // Schema para automatic anticipation settings
+    export const AutomaticAnticipationSettingsSchema = z4.object({
+        enabled: z4.boolean(),
+        type: z4.union([z4.literal("full"), z4.literal("partial")]),
+        volume_percentage: z4.string(),
+        delay: z4.number().nullable()
+    });
+
     // Schema para CreateReciver
     export const CreateReciverSchema = z4.object({
         map: z4.any(),
@@ -90,7 +105,9 @@ namespace TypeReciver {
             address: CompleteAddressSchema,
             main_address: CompleteAddressSchema,
             managing_partners: z4.array(z4.any()),
-            default_bank_account: DefaultBankAccountSchema
+            default_bank_account: DefaultBankAccountSchema,
+            transfer_settings: TransferSettingsSchema,
+            automatic_anticipation_settings: AutomaticAnticipationSettingsSchema
         })
     });
     export type CreateReciver = z4.infer<typeof CreateReciverSchema>;
@@ -115,21 +132,6 @@ namespace TypeReciver {
         self_declared_legal_representative: z4.boolean(),
         address: CompleteAddressSchema,
         phone_numbers: z4.array(TypedPhoneSchema)
-    });
-
-    // Schema para transfer settings
-    export const TransferSettingsSchema = z4.object({
-        transfer_enabled: z4.boolean(),
-        transfer_interval: z4.union([z4.literal("Daily"), z4.literal("Weekly"), z4.literal("Monthly")]),
-        transfer_day: z4.number().int()
-    });
-
-    // Schema para automatic anticipation settings
-    export const AutomaticAnticipationSettingsSchema = z4.object({
-        enabled: z4.boolean(),
-        type: z4.union([z4.literal("full"), z4.literal("partial")]),
-        volume_percentage: z4.number(),
-        delay: z4.number().nullable()
     });
 
     // Schema para conta bancária da corporation
