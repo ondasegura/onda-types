@@ -54,7 +54,7 @@ namespace TypeDefaultOrderRequest {
         customer: BaseCustomerSchema,
         installments: z4.number().int().positive(),
         amount: z4.number().positive(),
-        method_payment: z4.array(MethodPaymentSchema).readonly(),
+        method_payment: z4.array(MethodPaymentSchema),
         metadata: z4.record(z4.string(), z4.any()).optional(),
         description: z4.string().optional(),
         external_reference: z4.array(z4.string())
