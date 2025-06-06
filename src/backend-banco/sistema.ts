@@ -15,17 +15,17 @@ namespace ControllerSistema {
         data_atualizacao: z4.date().nullable(),
         usuario_create_id: z4.uuidv4(),
         master_limpa_nome_custo: z4.number(),
-        master_limpa_nome_lucro: z4.number(),
+        master_limpa_nome_preco_venda: z4.number(),
         master_consulta_nome_custo: z4.number(),
-        master_consulta_nome_lucro: z4.number(),
+        master_consulta_nome_preco_venda: z4.number(),
         franqueado_limpa_nome_custo: z4.number(),
-        franqueado_limpa_nome_lucro: z4.number(),
+        franqueado_limpa_nome_preco_venda: z4.number(),
         franqueado_consulta_nome_custo: z4.number(),
-        franqueado_consulta_nome_lucro: z4.number(),
+        franqueado_consulta_nome_preco_venda: z4.number(),
         fornecedor_limpa_nome_custo: z4.number(),
-        fornecedor_limpa_nome_lucro: z4.number(),
+        fornecedor_limpa_nome_preco_venda: z4.number(),
         fornecedor_consulta_nome_custo: z4.number(),
-        fornecedor_consulta_nome_lucro: z4.number()
+        fornecedor_consulta_nome_preco_venda: z4.number()
     });
     export type SistemaBase = z4.infer<typeof SistemaBaseSchema>;
 
@@ -35,17 +35,17 @@ namespace ControllerSistema {
                 sistema: z4.object({
                     usuario_id: z4.uuidv4(),
                     master_limpa_nome_custo: z4.number(),
-                    master_limpa_nome_lucro: z4.number(),
+                    master_limpa_nome_preco_venda: z4.number(),
                     master_consulta_nome_custo: z4.number(),
-                    master_consulta_nome_lucro: z4.number(),
+                    master_consulta_nome_preco_venda: z4.number(),
                     franqueado_limpa_nome_custo: z4.number(),
-                    franqueado_limpa_nome_lucro: z4.number(),
+                    franqueado_limpa_nome_preco_venda: z4.number(),
                     franqueado_consulta_nome_custo: z4.number(),
-                    franqueado_consulta_nome_lucro: z4.number(),
+                    franqueado_consulta_nome_preco_venda: z4.number(),
                     fornecedor_limpa_nome_custo: z4.number(),
-                    fornecedor_limpa_nome_lucro: z4.number(),
+                    fornecedor_limpa_nome_preco_venda: z4.number(),
                     fornecedor_consulta_nome_custo: z4.number(),
-                    fornecedor_consulta_nome_lucro: z4.number(),
+                    fornecedor_consulta_nome_preco_venda: z4.number(),
                 })
             })
         });
@@ -65,17 +65,17 @@ namespace ControllerSistema {
                 sistema: z4.object({
                     _id: z4.uuidv4().optional(),
                     master_limpa_nome_custo: z4.number().optional(),
-                    master_limpa_nome_lucro: z4.number().optional(),
+                    master_limpa_nome_preco_venda: z4.number().optional(),
                     master_consulta_nome_custo: z4.number().optional(),
-                    master_consulta_nome_lucro: z4.number().optional(),
+                    master_consulta_nome_preco_venda: z4.number().optional(),
                     franqueado_limpa_nome_custo: z4.number().optional(),
-                    franqueado_limpa_nome_lucro: z4.number().optional(),
+                    franqueado_limpa_nome_preco_venda: z4.number().optional(),
                     franqueado_consulta_nome_custo: z4.number().optional(),
-                    franqueado_consulta_nome_lucro: z4.number().optional(),
+                    franqueado_consulta_nome_preco_venda: z4.number().optional(),
                     fornecedor_limpa_nome_custo: z4.number().optional(),
-                    fornecedor_limpa_nome_lucro: z4.number().optional(),
+                    fornecedor_limpa_nome_preco_venda: z4.number().optional(),
                     fornecedor_consulta_nome_custo: z4.number().optional(),
-                    fornecedor_consulta_nome_lucro: z4.number().optional(),
+                    fornecedor_consulta_nome_preco_venda: z4.number().optional(),
                     usuario_create_id: z4.uuidv4().optional()
                 })
             })
@@ -112,17 +112,17 @@ namespace ControllerSistema {
                 sistema: z4.object({
                     _id: z4.uuidv4(),
                     master_limpa_nome_custo: z4.number().optional(),
-                    master_limpa_nome_lucro: z4.number().optional(),
+                    master_limpa_nome_preco_venda: z4.number().optional(),
                     master_consulta_nome_custo: z4.number().optional(),
-                    master_consulta_nome_lucro: z4.number().optional(),
+                    master_consulta_nome_preco_venda: z4.number().optional(),
                     franqueado_limpa_nome_custo: z4.number().optional(),
-                    franqueado_limpa_nome_lucro: z4.number().optional(),
+                    franqueado_limpa_nome_preco_venda: z4.number().optional(),
                     franqueado_consulta_nome_custo: z4.number().optional(),
-                    franqueado_consulta_nome_lucro: z4.number().optional(),
+                    franqueado_consulta_nome_preco_venda: z4.number().optional(),
                     fornecedor_limpa_nome_custo: z4.number().optional(),
-                    fornecedor_limpa_nome_lucro: z4.number().optional(),
+                    fornecedor_limpa_nome_preco_venda: z4.number().optional(),
                     fornecedor_consulta_nome_custo: z4.number().optional(),
-                    fornecedor_consulta_nome_lucro: z4.number().optional(),
+                    fornecedor_consulta_nome_preco_venda: z4.number().optional(),
 
                 })
             })
