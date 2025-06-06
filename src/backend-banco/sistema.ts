@@ -6,8 +6,6 @@ import z4 from "zod/v4";
 // t.Banco.Controllers.Sistema.Criar.Input
 namespace ControllerSistema {
     // Schema para o status do sistema
-    export const SistemaStatusSchema = z4.union([z4.literal("ativo"), z4.literal("inativo")]);
-    export type SistemaStatus = z4.infer<typeof SistemaStatusSchema>;
 
     // Schema base para o sistema
     export const SistemaBaseSchema = z4.object({
@@ -78,7 +76,6 @@ namespace ControllerSistema {
                     fornecedor_limpa_nome_lucro: z4.number().optional(),
                     fornecedor_consulta_nome_custo: z4.number().optional(),
                     fornecedor_consulta_nome_lucro: z4.number().optional(),
-                    ativo: z4.boolean().optional(),
                     usuario_create_id: z4.uuidv4().optional()
                 })
             })
@@ -126,7 +123,7 @@ namespace ControllerSistema {
                     fornecedor_limpa_nome_lucro: z4.number().optional(),
                     fornecedor_consulta_nome_custo: z4.number().optional(),
                     fornecedor_consulta_nome_lucro: z4.number().optional(),
-                    ativo: z4.boolean().optional()
+
                 })
             })
         });
