@@ -1,6 +1,6 @@
 import { Context } from 'hono';
 import { ContentfulStatusCode } from 'hono/utils/http-status';
-import { z4 } from 'zod/v4';
+import z4 from 'zod/v4';
 
 namespace Response {
   // Schema base para responses
