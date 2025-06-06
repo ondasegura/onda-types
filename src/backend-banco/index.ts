@@ -11,6 +11,8 @@ import ControllerFinanceiro from "./financeiro";
 import ControllerConsulta from "./consulta";
 import ControllerHelpers from "./helpers";
 import ControllerBucket from "./bucket";
+
+import ControllerSistema from "./sistema";
 namespace BackendBanco {
     export namespace Controllers {
         export import Cliente = ControllerCliente;
@@ -32,6 +34,9 @@ namespace BackendBanco {
         export import Helpers = ControllerHelpers;
 
         export import Bucket = ControllerBucket;
+
+
+        export import Sistema = ControllerSistema;
     }
 
 
