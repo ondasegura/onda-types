@@ -11,7 +11,8 @@ namespace ControllerSistema {
 
     // Schema base para o sistema
     export const SistemaBaseSchema = z4.object({
-        _id: z4.uuid(),
+        _id: z4.uuidv4(),
+        usuario_id: z4.uuidv4(),
         data_criacao: z4.date(),
         data_atualizacao: z4.date().nullable(),
         usuario_create_id: z4.uuidv4(),
@@ -26,8 +27,7 @@ namespace ControllerSistema {
         fornecedor_limpa_nome_custo: z4.number(),
         fornecedor_limpa_nome_lucro: z4.number(),
         fornecedor_consulta_nome_custo: z4.number(),
-        fornecedor_consulta_nome_lucro: z4.number(),
-        ativo: z4.boolean()
+        fornecedor_consulta_nome_lucro: z4.number()
     });
     export type SistemaBase = z4.infer<typeof SistemaBaseSchema>;
 
@@ -35,6 +35,7 @@ namespace ControllerSistema {
         export const InputSchema = z4.object({
             data: z4.object({
                 sistema: z4.object({
+                    usuario_id: z4.uuidv4(),
                     master_limpa_nome_custo: z4.number(),
                     master_limpa_nome_lucro: z4.number(),
                     master_consulta_nome_custo: z4.number(),
@@ -47,7 +48,6 @@ namespace ControllerSistema {
                     fornecedor_limpa_nome_lucro: z4.number(),
                     fornecedor_consulta_nome_custo: z4.number(),
                     fornecedor_consulta_nome_lucro: z4.number(),
-                    ativo: z4.boolean().optional().default(true),
                 })
             })
         });
