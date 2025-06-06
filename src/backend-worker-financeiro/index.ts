@@ -2,7 +2,7 @@ import { Context as HonoContext } from "hono";
 import UserPayload from "./token/token";
 import P from "./pagarme";
 import TypeOrder from "./defaultOrder/defaultOrder";
-import {Response as R} from './response/Response';
+import R from './response/Response';
 
 namespace BackendWorkerFinanceiro {
     export interface Context extends HonoContext {
