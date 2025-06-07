@@ -56,6 +56,7 @@ namespace ControllerUsuario {
         organizacao: z4.literal("banco_s8"),
         exp: z4.number().optional(),
         delete: z4.boolean(),
+        token_para_webhook: z4.boolean(),
         iat: z4.number().optional()
     });
 
