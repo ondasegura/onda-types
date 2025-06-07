@@ -18,7 +18,6 @@ namespace ControllerSistema {
         master_limpa_nome_preco_venda: z4.number(),
         master_consulta_nome_custo: z4.number(),
         master_consulta_nome_preco_venda: z4.number(),
-        franqueado_limpa_nome_custo: z4.number(),
         franqueado_limpa_nome_preco_venda: z4.number(),
         franqueado_consulta_nome_preco_venda: z4.number(),
     });
@@ -53,13 +52,13 @@ namespace ControllerSistema {
             filtros: z4.object({
                 sistema: z4.object({
                     _id: z4.uuidv4().optional(),
+                    usuario_create_id: z4.uuidv4().optional(),
                     master_limpa_nome_custo: z4.number().optional(),
                     master_limpa_nome_preco_venda: z4.number().optional(),
                     master_consulta_nome_custo: z4.number().optional(),
                     master_consulta_nome_preco_venda: z4.number().optional(),
                     franqueado_limpa_nome_preco_venda: z4.number().optional(),
                     franqueado_consulta_nome_preco_venda: z4.number().optional(),
-                    usuario_create_id: z4.uuidv4().optional()
                 })
             })
         });
