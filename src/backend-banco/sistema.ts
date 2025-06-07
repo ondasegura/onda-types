@@ -20,12 +20,7 @@ namespace ControllerSistema {
         master_consulta_nome_preco_venda: z4.number(),
         franqueado_limpa_nome_custo: z4.number(),
         franqueado_limpa_nome_preco_venda: z4.number(),
-        franqueado_consulta_nome_custo: z4.number(),
         franqueado_consulta_nome_preco_venda: z4.number(),
-        fornecedor_limpa_nome_custo: z4.number(),
-        fornecedor_limpa_nome_preco_venda: z4.number(),
-        fornecedor_consulta_nome_custo: z4.number(),
-        fornecedor_consulta_nome_preco_venda: z4.number()
     });
     export type SistemaBase = z4.infer<typeof SistemaBaseSchema>;
 
@@ -38,14 +33,8 @@ namespace ControllerSistema {
                     master_limpa_nome_preco_venda: z4.number(),
                     master_consulta_nome_custo: z4.number(),
                     master_consulta_nome_preco_venda: z4.number(),
-                    franqueado_limpa_nome_custo: z4.number(),
                     franqueado_limpa_nome_preco_venda: z4.number(),
-                    franqueado_consulta_nome_custo: z4.number(),
                     franqueado_consulta_nome_preco_venda: z4.number(),
-                    fornecedor_limpa_nome_custo: z4.number(),
-                    fornecedor_limpa_nome_preco_venda: z4.number(),
-                    fornecedor_consulta_nome_custo: z4.number(),
-                    fornecedor_consulta_nome_preco_venda: z4.number(),
                 })
             })
         });
@@ -68,14 +57,8 @@ namespace ControllerSistema {
                     master_limpa_nome_preco_venda: z4.number().optional(),
                     master_consulta_nome_custo: z4.number().optional(),
                     master_consulta_nome_preco_venda: z4.number().optional(),
-                    franqueado_limpa_nome_custo: z4.number().optional(),
                     franqueado_limpa_nome_preco_venda: z4.number().optional(),
-                    franqueado_consulta_nome_custo: z4.number().optional(),
                     franqueado_consulta_nome_preco_venda: z4.number().optional(),
-                    fornecedor_limpa_nome_custo: z4.number().optional(),
-                    fornecedor_limpa_nome_preco_venda: z4.number().optional(),
-                    fornecedor_consulta_nome_custo: z4.number().optional(),
-                    fornecedor_consulta_nome_preco_venda: z4.number().optional(),
                     usuario_create_id: z4.uuidv4().optional()
                 })
             })
@@ -115,15 +98,8 @@ namespace ControllerSistema {
                     master_limpa_nome_preco_venda: z4.number().optional(),
                     master_consulta_nome_custo: z4.number().optional(),
                     master_consulta_nome_preco_venda: z4.number().optional(),
-                    franqueado_limpa_nome_custo: z4.number().optional(),
                     franqueado_limpa_nome_preco_venda: z4.number().optional(),
-                    franqueado_consulta_nome_custo: z4.number().optional(),
                     franqueado_consulta_nome_preco_venda: z4.number().optional(),
-                    fornecedor_limpa_nome_custo: z4.number().optional(),
-                    fornecedor_limpa_nome_preco_venda: z4.number().optional(),
-                    fornecedor_consulta_nome_custo: z4.number().optional(),
-                    fornecedor_consulta_nome_preco_venda: z4.number().optional(),
-
                 })
             })
         });
