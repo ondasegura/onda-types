@@ -243,7 +243,9 @@ namespace ControllerOrdemServico {
                     processo_concluido: z4.boolean().optional(),
                     data_processo_concluido: z4.date().optional(),
                     consulta_nome_realisada: z4.boolean().optional(),
-                    data_consulta_nome_realisada: z4.date().optional()
+                    data_consulta_nome_realisada: z4.date().optional(),
+                    preco_custo: z4.number(),
+                    preco_venda: z4.number(),
                 })
             })
         });
