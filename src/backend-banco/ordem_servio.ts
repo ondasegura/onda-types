@@ -93,8 +93,13 @@ namespace ControllerOrdemServico {
         asn: z4.string(),
         org: z4.string()
     });
+
     export type IpInfo = z4.infer<typeof IpInfoSchema>;
 
+
+
+
+    export type CobrancaAsaas = z4.infer<typeof ControllerAsaas.PaymentSchema>;
 
 
     const OrdemServicoBaseSchema = z4.object({
@@ -125,8 +130,6 @@ namespace ControllerOrdemServico {
         status: OrdemServicoStatusSchema,
         cliente: ControllerCliente.ClienteBaseSchema,
         info_pagamento: z4.custom<ControllerAsaas.InfoPagamento>(),
-        preco_custo: z4.number(),
-        preco_venda: z4.number(),
     });
 
     const OrdemConsultaNomeSchema = OrdemServicoBaseSchema.extend({
@@ -227,6 +230,7 @@ namespace ControllerOrdemServico {
                     _id: z4.uuidv4(),
                     titulo: z4.string().optional(),
                     ip_info: IpInfoSchema.optional(),
+                    cobranca: ControllerAsaas.PaymentSchema.optional(),
                     descricao: z4.string().optional(),
                     usuario_id: z4.string().optional(),
                     pagamendo_asaas_id: z4.string().optional(),
@@ -244,8 +248,6 @@ namespace ControllerOrdemServico {
                     data_processo_concluido: z4.date().optional(),
                     consulta_nome_realisada: z4.boolean().optional(),
                     data_consulta_nome_realisada: z4.date().optional(),
-                    preco_custo: z4.number(),
-                    preco_venda: z4.number(),
                 })
             })
         });
