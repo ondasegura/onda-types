@@ -124,7 +124,9 @@ namespace ControllerOrdemServico {
         ip_info: IpInfoSchema,
         status: OrdemServicoStatusSchema,
         cliente: ControllerCliente.ClienteBaseSchema,
-        info_pagamento: z4.custom<ControllerAsaas.InfoPagamento>()
+        info_pagamento: z4.custom<ControllerAsaas.InfoPagamento>(),
+        preco_custo: z4.number(),
+        preco_venda: z4.number(),
     });
 
     const OrdemConsultaNomeSchema = OrdemServicoBaseSchema.extend({
