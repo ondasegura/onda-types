@@ -166,57 +166,15 @@ namespace ControllerAsaas {
     export type PagamentoAsaas = z4.infer<typeof PagamentoAsaasSchema>;
 
     // Schema para Payment
-    export const PaymentSchema = z4.object({
-        object: z4.string(),
-        id: z4.string(),
-        dateCreated: z4.string(),
-        customer: z4.string(),
-        installment: z4.string(),
-        checkoutSession: z4.string().nullable(),
-        paymentLink: z4.string().nullable(),
-        value: z4.number(),
-        netValue: z4.number(),
-        originalValue: z4.number().nullable(),
-        interestValue: z4.number().nullable(),
-        description: z4.string(),
-        billingType: z4.string(),
-        canBePaidAfterDueDate: z4.boolean(),
-        pixTransaction: z4.string().nullable(),
-        status: z4.string(),
-        dueDate: z4.string(),
-        originalDueDate: z4.string(),
-        paymentDate: z4.string().nullable(),
-        clientPaymentDate: z4.string().nullable(),
-        installmentNumber: z4.number(),
-        invoiceUrl: z4.string(),
-        invoiceNumber: z4.string(),
-        externalReference: z4.string(),
-        deleted: z4.boolean(),
-        anticipated: z4.boolean(),
-        anticipable: z4.boolean(),
-        creditDate: z4.string().nullable(),
-        estimatedCreditDate: z4.string().nullable(),
-        transactionReceiptUrl: z4.string().nullable(),
-        nossoNumero: z4.string(),
-        bankSlipUrl: z4.string(),
-        lastInvoiceViewedDate: z4.string().nullable(),
-        lastBankSlipViewedDate: z4.string().nullable(),
-        discount: DiscountInfoSchema,
-        fine: FineInfoSchema,
-        interest: InterestInfoSchema,
-        postalService: z4.boolean(),
-        custody: z4.string().nullable(),
-        escrow: z4.string().nullable(),
-        refunds: z4.string().nullable()
-    });
-    export type Payment = z4.infer<typeof PaymentSchema>;
+
+    export type Payment = z4.infer<typeof PagamentoAsaasSchema>;
 
     // Schema para receberNotificacaoPagamentoCheckoutTransparente
     export const ReceberNotificacaoPagamentoCheckoutTransparenteSchema = z4.object({
         id: z4.string(),
         event: z4.string(),
         dateCreated: z4.string(),
-        payment: PaymentSchema
+        payment: PagamentoAsaasSchema
     });
     export type ReceberNotificacaoPagamentoCheckoutTransparente = z4.infer<typeof ReceberNotificacaoPagamentoCheckoutTransparenteSchema>;
 }
