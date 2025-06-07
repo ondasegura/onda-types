@@ -99,7 +99,7 @@ namespace ControllerOrdemServico {
 
 
 
-    export type CobrancaAsaas = z4.infer<typeof ControllerAsaas.PaymentSchema>;
+    export type CobrancaAsaas = z4.infer<typeof ControllerAsaas.PagamentoAsaasSchema>;
 
 
     const OrdemServicoBaseSchema = z4.object({
@@ -230,7 +230,7 @@ namespace ControllerOrdemServico {
                     _id: z4.uuidv4(),
                     titulo: z4.string().optional(),
                     ip_info: IpInfoSchema.optional(),
-                    cobranca: ControllerAsaas.PaymentSchema.optional(),
+                    cobranca: ControllerAsaas.PagamentoAsaasSchema.optional(),
                     descricao: z4.string().optional(),
                     usuario_id: z4.string().optional(),
                     pagamendo_asaas_id: z4.string().optional(),
