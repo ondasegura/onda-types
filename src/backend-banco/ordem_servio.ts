@@ -131,6 +131,10 @@ namespace ControllerOrdemServico {
         cliente: ControllerCliente.ClienteBaseSchema,
         info_pagamento: z4.custom<ControllerAsaas.InfoPagamento>(),
         cobranca: ControllerAsaas.PagamentoAsaasSchema.optional(),
+        fornecedor: z4.object({
+            _id: z4.uuidv4(),
+            nome: z4.string()
+        })
     });
 
     const OrdemConsultaNomeSchema = OrdemServicoBaseSchema.extend({
