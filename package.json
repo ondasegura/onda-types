@@ -1,6 +1,6 @@
 {
     "name": "onda-types",
-    "version": "1.40.0",
+    "version": "1.41.0",
     "description": "Repositório de types TypeScript com dependências",
     "main": "src/index.ts",
     "types": "src/index.ts",
