@@ -1,29 +1,24 @@
 import z4 from "zod/v4";
 
 namespace ControllerFinanceiro {
-
-    const CreditCardSchema = z4.object({
-        holderName: z4.string(),
-        number: z4.string(),
-        expiryMonth: z4.string(),
-        expiryYear: z4.string(),
-        ccv: z4.string()
-    });
-
-    const CreditCardHolderInfoSchema = z4.object({
-        name: z4.string(),
-        email: z4.string(),
-        cpfCnpj: z4.string(),
-        postalCode: z4.string(),
-        addressNumber: z4.string(),
-        addressComplement: z4.string().nullable(),
-        phone: z4.string().nullable(),
-        mobilePhone: z4.string().nullable()
-    });
-
     const CartaoCreditoSchema = z4.object({
-        creditCard: CreditCardSchema,
-        creditCardHolderInfo: CreditCardHolderInfoSchema,
+        creditCard: z4.object({
+            holderName: z4.string(),
+            number: z4.string(),
+            expiryMonth: z4.string(),
+            expiryYear: z4.string(),
+            ccv: z4.string()
+        }),
+        creditCardHolderInfo: z4.object({
+            name: z4.string(),
+            email: z4.string(),
+            cpfCnpj: z4.string().trim().transform((val) => val.replace(/[^a-zA-Z0-9]/g, '')),
+            postalCode: z4.string(),
+            addressNumber: z4.string(),
+            addressComplement: z4.string().nullable(),
+            phone: z4.string().nullable(),
+            mobilePhone: z4.string().nullable()
+        }),
         creditCardToken: z4.string().nullable()
     });
 

@@ -12,25 +12,25 @@ namespace ControllerCliente {
 
     // Schema para endereço
     const EnderecoSchema = z4.object({
-        cep: z4.string(),
+        cep: z4.string().transform((val) => val.replace(/\D/g, '')),
         logradouro: z4.string(),
         numero: z4.string(),
         complemento: z4.string().optional(),
         bairro: z4.string(),
         localidade: z4.string(),
-        uf: z4.string()
+        uf: z4.string().toLowerCase().trim()
     });
     export type Endereco = z4.infer<typeof EnderecoSchema>;
 
     // Schema base para cliente
     export const ClienteBaseSchema = z4.object({
-        _id: z4.string(),
-        nome: z4.string(),
-        email: z4.string(),
-        cpf_cnpj: z4.string(),
+        _id: z4.uuidv4(),
+        nome: z4.string().toLowerCase(),
+        email: z4.string().trim().toLowerCase(),
+        cpf_cnpj: z4.string().trim().transform((val) => val.replace(/[^a-zA-Z0-9]/g, '')),
         tipo: z4.string(),
         data_criacao: z4.string(),
-        celular: z4.string(),
+        celular: z4.string().transform((val) => val.replace(/\D/g, '')),
         data_atualizacao: z4.string(),
         cliente_asaas_id: z4.string(),
         endereco: EnderecoSchema.optional()
@@ -42,10 +42,10 @@ namespace ControllerCliente {
         export const InputSchema = z4.object({
             data: z4.object({
                 cliente: z4.object({
-                    cpf_cnpj: z4.string(),
-                    celular: z4.string(),
-                    nome: z4.string(),
-                    email: z4.string(),
+                    cpf_cnpj: z4.string().trim().transform((val) => val.replace(/[^a-zA-Z0-9]/g, '')),
+                    celular: z4.string().transform((val) => val.replace(/\D/g, '')),
+                    nome: z4.string().toLowerCase(),
+                    email: z4.string().trim().toLowerCase(),
                     tipo: ClienteTipoSchema,
                     endereco: EnderecoSchema.optional()
                 })
@@ -67,11 +67,11 @@ namespace ControllerCliente {
         export const InputSchema = z4.object({
             filtros: z4.object({
                 cliente: z4.object({
-                    _id: z4.string().optional(),
-                    nome: z4.string().optional(),
-                    email: z4.string().optional(),
-                    cpf_cnpj: z4.string().optional(),
-                    celular: z4.string().optional(),
+                    _id: z4.uuidv4().optional(),
+                    nome: z4.string().toLowerCase().optional(),
+                    email: z4.string().trim().toLowerCase().optional(),
+                    cpf_cnpj: z4.string().trim().transform((val) => val.replace(/[^a-zA-Z0-9]/g, '')).optional(),
+                    celular: z4.string().transform((val) => val.replace(/\D/g, '')).optional(),
                     tipo: ClienteTipoSchema.optional(),
                     endereco: EnderecoSchema.optional()
                 })
@@ -113,10 +113,10 @@ namespace ControllerCliente {
             data: z4.object({
                 cliente: z4.object({
                     _id: z4.uuidv4(),
-                    nome: z4.string().optional(),
-                    email: z4.string().optional(),
-                    cpf_cnpj: z4.string().optional(),
-                    celular: z4.string().optional(),
+                    nome: z4.string().toLowerCase().optional(),
+                    email: z4.string().trim().toLowerCase().optional(),
+                    cpf_cnpj: z4.string().trim().transform((val) => val.replace(/[^a-zA-Z0-9]/g, '')).optional(),
+                    celular: z4.string().transform((val) => val.replace(/\D/g, '')).optional(),
                     tipo: ClienteTipoSchema.optional(),
                     endereco: EnderecoSchema.optional()
                 })
@@ -134,7 +134,7 @@ namespace ControllerCliente {
 
     export namespace DeletarPeloId {
         const InputSchema = z4.object({
-            id: z4.string()
+            id: z4.uuidv4()
         });
 
         export type Input = z4.infer<typeof InputSchema>;
