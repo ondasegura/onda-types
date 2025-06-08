@@ -76,26 +76,20 @@ namespace ControllerAsaas {
     // Schema para InfoPagamento
     export const InfoPagamentoSchema = z4.object({
         pix: z4.object({
-            encodedImage: z4.string(),
-            qrcode: z4.string().optional(),
-            chave: z4.string().optional(),
-            nomeBeneficiario: z4.string().optional(),
-            cidade: z4.string().optional()
+            payload: z4.string(),
+            expirationDate: z4.string().optional(),
+            encodedImage: z4.string().optional()
         }).optional(),
         bankSlip: z4.object({
-            url: z4.string().optional(),
-            codigoBarras: z4.string().optional(),
-            linhaDigitavel: z4.string().optional(),
-            vencimento: z4.string().optional(),
-            nomeBeneficiario: z4.string().optional(),
-            documentoBeneficiario: z4.string().optional()
+            identificationField: z4.string().optional(),
+            nossoNumero: z4.string().optional(),
+            barCode: z4.string().optional(),
+            daysAfterDueDateToRegistrationCancellation: z4.string().optional(),
+            bankSlipUrl: z4.string().optional()
         }).optional(),
         creditCard: z4.object({
-            autorizacao: z4.string().optional(),
-            bandeira: z4.string().optional(),
-            ultimosDigitos: z4.string().optional(),
-            nomeTitular: z4.string().optional(),
-            statusTransacao: z4.string().optional()
+            creditCardNumber: z4.string().optional(),
+            creditCardBrand: z4.string().optional()
         }).optional()
     });
     export type InfoPagamento = z4.infer<typeof InfoPagamentoSchema>;
