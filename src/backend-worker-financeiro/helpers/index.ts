@@ -15,7 +15,7 @@ namespace ControllerHelpers {
         descricao: z4.string(),
         permissao: z4.number(),
         setor: z4.string(),
-        desc: z4.string()
+
     });
     export type HelperBase = z4.infer<typeof HelperBaseSchema>;
 
@@ -26,7 +26,7 @@ namespace ControllerHelpers {
                     descricao: z4.string(),
                     permissao: z4.number(),
                     setor: z4.string(),
-                    desc: z4.string()
+
                 })
             })
         });
@@ -48,7 +48,7 @@ namespace ControllerHelpers {
                     descricao: z4.string().optional(),
                     permissao: z4.number().optional(),
                     setor: z4.string().optional(),
-                    desc: z4.string().optional()
+
                 })
             })
         });
@@ -86,7 +86,7 @@ namespace ControllerHelpers {
                     descricao: z4.string().optional(),
                     permissao: z4.number().optional(),
                     setor: z4.string().optional(),
-                    desc: z4.string().optional()
+
                 })
             })
         });
