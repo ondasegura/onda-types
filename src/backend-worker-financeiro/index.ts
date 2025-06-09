@@ -5,8 +5,11 @@ import TypeOrder from "./defaultOrder/defaultOrder";
 import R from './response/Response';
 
 namespace BackendWorkerFinanceiro {
-    export interface Context extends HonoContext<{ Variables: { usuario_auth: UserPayload.PatternUserPayload } }> {}
-
+    export interface Context extends HonoContext { Variables: {
+        set(key: "usuario_auth", params: UserPayload.PatternUserPayload): UserPayload.PatternUserPayload;
+        get(key: "usuario_auth"): UserPayload.PatternUserPayload;
+        }
+    }
     export type User = UserPayload.PatternUserPayload;
     export interface env {
         JSON_WEB_TOKEN_AUTH_USER: string;
