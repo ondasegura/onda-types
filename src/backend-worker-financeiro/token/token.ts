@@ -29,10 +29,9 @@ namespace UserPayload {
         iat?: number;
         organizacao: string;
     };
-    type AuthPayload {
-        
-    };
+    
     export type PatternUserPayload = UserPayloadImobiliaria | UserPayloadWave;
+    export type AuthPayload = PatternUserPayload;
 }
 
 export default UserPayload;
