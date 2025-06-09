@@ -13,6 +13,8 @@ import ControllerHelpers from "./helpers";
 import ControllerBucket from "./bucket";
 
 import ControllerSistema from "./sistema";
+
+import ControllerLogs from "./logs";
 namespace BackendBanco {
     export namespace Controllers {
         export import Cliente = ControllerCliente;
@@ -34,6 +36,8 @@ namespace BackendBanco {
         export import Helpers = ControllerHelpers;
 
         export import Bucket = ControllerBucket;
+
+        export import Logs = ControllerLogs;
 
 
         export import Sistema = ControllerSistema;
