@@ -20,11 +20,12 @@ namespace BackendWorkerFinanceiro {
         URL_API_PAGARME: string;
     }
     export namespace Controllers {
+        export import Pagarme = P;
+        export import TypeDefaultOrderRequest = TypeOrder;
+        export import Response = R;
+        export import UserPayload = UP;
+        export import Helpers = ControllerHelpers;
     }
-    export import Pagarme = P;
-    export import TypeDefaultOrderRequest = TypeOrder;
-    export import Response = R;
-    export import UserPayload = UP;
-    export import Helpers = ControllerHelpers;
+
 }
 export default BackendWorkerFinanceiro;
