@@ -2,6 +2,7 @@ import { Context as HonoContext } from "hono";
 import UP from "./token/token";
 import P from "./pagarme";
 import TypeOrder from "./defaultOrder/defaultOrder";
+import TypeCustomer from "./pagarme/customer";
 import R from './response/Response';
 import ControllerHelpers from "./helpers";
 import UserPayload from "./token/token";
@@ -34,6 +35,7 @@ namespace BackendWorkerFinanceiro {
         export import Response = R;
         export import UserPayload = UP;
         export import Helpers = ControllerHelpers;
+        export import Customer = TypeCustomer;
     }
 
     export namespace Models {

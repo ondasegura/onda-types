@@ -28,7 +28,7 @@ namespace TypeCustomer {
     export const CustomerSchema = z4.object({
         phones: PhoneSchema,
         name: z4.string(),
-        email: z4.string().email(),
+        email: z4.email(),
         code: z4.string(),
         document: z4.string(),
         document_type: z4.string(),
