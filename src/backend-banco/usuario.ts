@@ -38,7 +38,22 @@ namespace ControllerUsuario {
         tipo: UsuarioTipoSchema,
         senha: z4.string().optional(),
         delete: z4.boolean(),
-        permissoes: z4.object({}).loose()
+        permissoes: z4.object({}).loose(),
+        master: z4.object({
+            _id: z4.uuidv4(),
+            nome: z4.string(),
+            email: z4.string(),
+        }).optional(),
+        franqueado: z4.object({
+            _id: z4.uuidv4(),
+            nome: z4.string(),
+            email: z4.string(),
+        }).optional(),
+        operador: z4.object({
+            _id: z4.uuidv4().nullable(),
+            nome: z4.string().nullable(),
+            email: z4.string().nullable(),
+        }).optional(),
     });
 
     export type UsuarioBase = z4.infer<typeof UsuarioBaseSchema>;
