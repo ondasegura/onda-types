@@ -3,11 +3,13 @@ import UP from "./token/token";
 import P from "./pagarme";
 import TypeOrder from "./defaultOrder/defaultOrder";
 import R from './response/Response';
+import ControllerHelpers from "./helpers";
 
 namespace BackendWorkerFinanceiro {
-    export interface Context extends HonoContext { Variables: {
-        set(key: "usuario_auth", params: UserPayload.PatternUserPayload): UserPayload.PatternUserPayload;
-        get(key: "usuario_auth"): UserPayload.PatternUserPayload;
+    export interface Context extends HonoContext {
+        Variables: {
+            set(key: "usuario_auth", params: UserPayload.PatternUserPayload): UserPayload.PatternUserPayload;
+            get(key: "usuario_auth"): UserPayload.PatternUserPayload;
         }
     }
     export type User = UserPayload.PatternUserPayload;
@@ -23,5 +25,6 @@ namespace BackendWorkerFinanceiro {
     export import TypeDefaultOrderRequest = TypeOrder;
     export import Response = R;
     export import UserPayload = UP;
+    export import Helpers = ControllerHelpers;
 }
 export default BackendWorkerFinanceiro;
