@@ -1,5 +1,5 @@
 import { Context as HonoContext } from "hono";
-import UserPayload from "./token/token";
+import UP from "./token/token";
 import P from "./pagarme";
 import TypeOrder from "./defaultOrder/defaultOrder";
 import R from './response/Response';
@@ -22,5 +22,6 @@ namespace BackendWorkerFinanceiro {
     export import Pagarme = P;
     export import TypeDefaultOrderRequest = TypeOrder;
     export import Response = R;
+    export import UserPayload = UP;
 }
 export default BackendWorkerFinanceiro;
