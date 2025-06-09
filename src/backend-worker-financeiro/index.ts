@@ -8,11 +8,13 @@ import UserPayload from "./token/token";
 import { Order as OrderModel } from "./pagarme/models/order";
 namespace BackendWorkerFinanceiro {
     export interface Context extends HonoContext {
-        Variables: {
+        env: {
             set(key: "usuario_auth", params: UserPayload.PatternUserPayload): UserPayload.PatternUserPayload;
             get(key: "usuario_auth"): UserPayload.PatternUserPayload;
         }
     }
+
+
     export type User = UserPayload.PatternUserPayload;
     export interface env {
         JSON_WEB_TOKEN_AUTH_USER: string;
@@ -29,7 +31,7 @@ namespace BackendWorkerFinanceiro {
     }
 
     export namespace Models {
-       export import Order = OrderModel;
+        export import Order = OrderModel;
     }
 
 }
