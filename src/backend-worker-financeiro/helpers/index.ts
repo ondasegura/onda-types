@@ -44,7 +44,7 @@ namespace ControllerHelpers {
         export const InputSchema = z4.object({
             filtros: z4.object({
                 helper: z4.object({
-                    _id: z4.number().optional(),
+                    _id: z4.string().optional(),
                     descricao: z4.string().optional(),
                     permissao: z4.number().optional(),
                     setor: z4.string().optional(),
@@ -65,7 +65,7 @@ namespace ControllerHelpers {
     export namespace BuscarPeloId {
         export const InputSchema = z4.object({
             data: z4.object({
-                _id: z4.number()
+                _id: z4.string()
             })
         });
         export type Input = z4.infer<typeof InputSchema>;
@@ -102,7 +102,7 @@ namespace ControllerHelpers {
 
     export namespace DeletarPeloId {
         export const InputSchema = z4.object({
-            _id: z4.number()
+            _id: z4.string()
         });
         export type Input = z4.infer<typeof InputSchema>;
 
