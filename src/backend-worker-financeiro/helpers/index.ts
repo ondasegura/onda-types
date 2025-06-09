@@ -11,7 +11,7 @@ namespace ControllerHelpers {
 
     // Schema base para o helper
     export const HelperBaseSchema = z4.object({
-        _id: z4.number(),
+        _id: z4.string(),
         descricao: z4.string(),
         permissao: z4.number(),
         setor: z4.string(),
@@ -82,7 +82,7 @@ namespace ControllerHelpers {
         export const InputSchema = z4.object({
             data: z4.object({
                 helper: z4.object({
-                    _id: z4.number(),
+                    _id: z4.string(),
                     descricao: z4.string().optional(),
                     permissao: z4.number().optional(),
                     setor: z4.string().optional(),
