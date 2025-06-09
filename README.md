@@ -5,7 +5,7 @@ Repositório centralizado de tipos TypeScript para todos os aplicativos da Onda 
 bunx npm version minor --no-git-tag-version --no-git-checks
 git init
 git add .
-git commit -m "⚡ perf: as ss "
+git commit -m "⚡ perf: as ss s"
 git push -u origin producao
 
 <!-- index.ts
