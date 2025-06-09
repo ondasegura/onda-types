@@ -9,7 +9,7 @@ namespace Response {
     code: z4.string(),
     type: z4.enum(['success', 'error', 'warning']),
     message: z4.string(),
-    results: z4.array(z4.unknown()).optional(),
+    results: z4.unknown().optional(),
     error: z4.unknown().optional(),
   });
 
