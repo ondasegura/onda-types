@@ -24,7 +24,7 @@ namespace TypeDefaultOrderRequest {
     // Schema para BaseCustomer
     export const BaseCustomerSchema = z4.object({
         name: z4.string().optional(),
-        email: z4.string().email().optional(),
+        email: z4.email().optional(),
         document: z4.string().optional(),
         gender: z4.union([z4.literal("male"), z4.literal("female")]).optional(),
         phone: PhoneSchema.optional(),

@@ -4,6 +4,7 @@ import P from "./pagarme";
 import TypeOrder from "./defaultOrder/defaultOrder";
 import R from './response/Response';
 import ControllerHelpers from "./helpers";
+import UserPayload from "./token/token";
 
 namespace BackendWorkerFinanceiro {
     export interface Context extends HonoContext {
