@@ -63,9 +63,8 @@ export namespace ControllerFinancial {
             customer_id: z4.string()
         });
 
-        // Tipos derivados
-        export type FullCustomer = z4.infer<typeof FullCustomerSchema>;
-        export type CustomerIdOnly = z4.infer<typeof CustomerIdOnlySchema>;
+        type FullCustomer = z4.infer<typeof FullCustomerSchema>;
+        type CustomerIdOnly = z4.infer<typeof CustomerIdOnlySchema>;
         export type Customer = FullCustomer | CustomerIdOnly;
 
         export const InputSchema = z4.object({
@@ -78,7 +77,8 @@ export namespace ControllerFinancial {
                 method_payment: z4.array(z4.string()),
                 metadata: z4.record(z4.string(), z4.unknown()),
                 description: z4.string(),
-                external_reference: z4.array(z4.string())
+                external_reference: z4.array(z4.string()),
+                due_at: z4.date().optional()
             })
         });
 
