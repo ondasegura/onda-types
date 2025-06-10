@@ -8,6 +8,7 @@ import ControllerHelpers from "./helpers";
 import UserPayload from "./token/token";
 import { ControllerFinancial as CF } from "./order";
 import CL from "./logs/logs";
+import CR from "./reciver/reciver"
 namespace BackendWorkerFinanceiro {
     // export interface Context extends HonoContext {
     //     env: {
@@ -39,6 +40,7 @@ namespace BackendWorkerFinanceiro {
         export import Customer = TypeCustomer;
         export import ControllerFinancial = CF;
         export import ControllerLogs = CL;
+        export import ControllerReciver = CR;
     }
 }
 export default BackendWorkerFinanceiro;
