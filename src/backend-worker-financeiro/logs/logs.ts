@@ -18,7 +18,7 @@ namespace ControllerLogs {
     type_user: z4.string()
   });
 
-  export type Log = z4.infer<typeof LogSchema>;
+  export type LogBase = z4.infer<typeof LogSchema>;
 
     export namespace Criar {
       export const InputSchema = z4.object({
@@ -50,15 +50,16 @@ namespace ControllerLogs {
       export const InputSchema = z4.object({
         filtros: z4.object({
           log: z4.object({
-            class_name: z4.string(),
-            matrix: z4.string(),
-            static_function: z4.string(),
-            error_message: z4.string(),
-            error_returned_by_system: z4.unknown(),
-            organization: z4.string(),
+            _id: z4.string().optional().nullable(),
+            class_name: z4.string().optional().nullable(),
+            matrix: z4.string().optional().nullable(),
+            static_function: z4.string().optional().nullable(),
+            error_message: z4.string().optional().nullable(),
+            error_returned_by_system: z4.unknown().optional().nullable(),
+            organization: z4.string().optional().nullable(),
             type: LogTypeSchema,
-            user: z4.string(),
-            type_user: z4.string()
+            user: z4.string().optional().nullable(),
+            type_user: z4.string().optional().nullable()
           })
         })
       });
