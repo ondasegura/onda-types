@@ -38,7 +38,7 @@ export namespace ControllerFinancial {
 
     export namespace Create {
 
-        const FullCustomerSchema = z4.object({
+        export const FullCustomerSchema = z4.object({
             name: z4.string(),
             email: z4.string().email(),
             document: z4.string(),
@@ -59,9 +59,14 @@ export namespace ControllerFinancial {
             external_reference: z4.string()
         });
 
-        const CustomerIdOnlySchema = z4.object({
+        export const CustomerIdOnlySchema = z4.object({
             customer_id: z4.string()
         });
+
+        // Tipos derivados
+        export type FullCustomer = z4.infer<typeof FullCustomerSchema>;
+        export type CustomerIdOnly = z4.infer<typeof CustomerIdOnlySchema>;
+        export type Customer = FullCustomer | CustomerIdOnly;
 
         export const InputSchema = z4.object({
             data: z4.object({
@@ -79,14 +84,11 @@ export namespace ControllerFinancial {
 
         export type Input = z4.infer<typeof InputSchema>;
 
-
         export type Output = {
             data: {
                 order: z4.infer<typeof SchemaBase>
             }
         };
-
-
     }
 
     export namespace GetByFilter {
@@ -97,16 +99,16 @@ export namespace ControllerFinancial {
                     checkout: z4.string().optional().nullable()
                 })
             })
-        })
-        export type Input = z4.infer<typeof InputSchema>
+        });
 
-        export const OutputSchema = z4.array(SchemaBase)
+        export type Input = z4.infer<typeof InputSchema>;
+
+        export const OutputSchema = z4.array(SchemaBase);
         export type Output = {
             data: {
                 orders: z4.infer<typeof OutputSchema>;
             }
-        }
-
+        };
     }
 
     export namespace GetById {
@@ -114,16 +116,16 @@ export namespace ControllerFinancial {
             data: z4.object({
                 _id: z4.uuidv4()
             })
-        })
+        });
 
-        export type Input = z4.infer<typeof InputSchema>
+        export type Input = z4.infer<typeof InputSchema>;
 
         export const OutputSchema = SchemaBase;
         export type Output = {
-            data:{
+            data: {
                 order: z4.infer<typeof OutputSchema>
             }
-        }
+        };
     }
 
     export namespace UpdateById {
@@ -136,32 +138,31 @@ export namespace ControllerFinancial {
                     status: z4.number().int().optional().nullable()
                 })
             })
-        })
+        });
 
-        export type Input = z4.infer<typeof InputSchema>
-        export const OutputSchema = SchemaBase
+        export type Input = z4.infer<typeof InputSchema>;
+        export const OutputSchema = SchemaBase;
 
         export type Output = {
             data: {
                 order: z4.infer<typeof OutputSchema>
             }
-        }
+        };
     }
 
     export namespace DeleteById {
         export const InputSchema = z4.object({
             _id: z4.uuidv4()
-        })
+        });
 
-        export type Input = z4.infer<typeof InputSchema>
+        export type Input = z4.infer<typeof InputSchema>;
 
-        export const OutputSchema = SchemaBase
+        export const OutputSchema = SchemaBase;
         export type Output = {
             data: {
                 order: {}
             }
-        }
+        };
     }
-
 
 }
