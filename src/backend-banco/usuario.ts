@@ -186,6 +186,8 @@ namespace ControllerUsuario {
                     email: z4.email().toLowerCase().optional(),
                     registro: RegistroTipoSchema.optional(),
                     senha: z4.string().optional(),
+                    authenticator_secret: z4.string().optional(),
+                    authenticator_ativo: z4.boolean().optional(),
                     tipo: UsuarioTipoSchema.optional(),
                     celular: z4.string().transform(val => val.replace(/\D/g, '')).refine(val => val.length >= 8 && val.length <= 15, {
                         message: "Celular inválido. Deve conter entre 8 e 15 dígitos."
