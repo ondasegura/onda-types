@@ -16,7 +16,7 @@ import z4 from "zod/v4";
 // COMO USAR ESE NAMESPACE NA HORA DE IMPORTAR: 
 // import t from "onda-types"
 // t.Financeiro.Reciver.Criar.Input
-namespace ControllerReciver {
+export namespace ControllerReciver {
     // Schemas auxiliares
     const BasicPhoneSchema = z4.object({
       ddd: z4.string(),
@@ -118,7 +118,7 @@ namespace ControllerReciver {
         data: z4.infer<typeof OutputSchema>
       };
     }
-
+    
     export namespace BuscarPeloFiltro {
       export const InputSchema = z4.object({
         filtros: z4.object({
