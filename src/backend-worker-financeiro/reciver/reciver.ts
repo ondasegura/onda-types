@@ -79,7 +79,7 @@ export namespace ControllerReciver {
       phone_numbers: z4.array(TypedPhoneSchema)
     });
 
-    const BaseReciverSchema = z4.object({
+    export const BaseReciverSchema = z4.object({
       type: z4.union([z4.literal("individual"), z4.literal("corporation")]),
       external_reference: z4.string(),
       name: z4.string(),
@@ -101,23 +101,70 @@ export namespace ControllerReciver {
       managing_partners: z4.array(ManagingPartnerSchema),
       default_bank_account: DefaultBankAccountSchema,
       transfer_settings: TransferSettingsSchema,
-      automatic_anticipation_settings: AutomaticAnticipationSettingsSchema
+      automatic_anticipation_settings: AutomaticAnticipationSettingsSchema,
+      code: z4.string()
     });
 
-    export namespace Criar {
-      export const InputSchema = z4.object({
-        data: BaseReciverSchema
-      });
-      export type Input = z4.infer<typeof InputSchema>;
+    export const IndividualReceiverSchema = BaseReciverSchema.extend({
+      type: z4.literal("individual"),
+      name: z4.string(),
+      mother_name: z4.string(),
+      birthdate: z4.string(),
+      monthly_income: z4.number(),
+      professional_occupation: z4.string(),
+      email: z4.string().email(),
+      document: z4.string(),
+      site_url: z4.string(),
+      phone_numbers: z4.array(BasicPhoneSchema),
+      address: CompleteAddressSchema,
+      default_bank_account: DefaultBankAccountSchema,
+      transfer_settings: TransferSettingsSchema,
+      automatic_anticipation_settings: AutomaticAnticipationSettingsSchema,
+      code: z4.string()
+    });
 
-      export const OutputSchema = z4.object({
-        _id: z4.string(),
-        ...BaseReciverSchema.shape
-      });
-      export type Output = {
-        data: z4.infer<typeof OutputSchema>
-      };
-    }
+    export const CorporationReceiverSchema = BaseReciverSchema.extend({
+      type: z4.literal("corporation"),
+      company_name: z4.string(),
+      trading_name: z4.string(),
+      annual_revenue: z4.number(),
+      corporation_type: z4.string(),
+      founding_date: z4.string(),
+      email: z4.string().email(),
+      document: z4.string(),
+      site_url: z4.string(),
+      phone_numbers: z4.array(BasicPhoneSchema),
+      main_address: CompleteAddressSchema,
+      managing_partners: z4.array(ManagingPartnerSchema),
+      default_bank_account: DefaultBankAccountSchema,
+      transfer_settings: TransferSettingsSchema,
+      automatic_anticipation_settings: AutomaticAnticipationSettingsSchema,
+      code: z4.string()
+    });
+
+  const DiscriminatedReciverSchema = z4.discriminatedUnion("type", [
+    IndividualReceiverSchema,
+    CorporationReceiverSchema
+  ]);
+
+  export namespace Criar {
+    export const InputSchema = z4.object({
+      data: z4.object({
+        reciver: DiscriminatedReciverSchema
+      })
+    });
+    export type Input = z4.infer<typeof InputSchema>;
+
+    export const OutputSchema = z4.object({
+      _id: z4.string(),
+      ...BaseReciverSchema.shape
+    });
+    export type Output = {
+      data: {
+        reciver: z4.infer<typeof OutputSchema>;
+      }
+    };
+  }
     
     export namespace BuscarPeloFiltro {
       export const InputSchema = z4.object({
