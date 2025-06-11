@@ -36,6 +36,15 @@ export namespace ControllerFinancial {
         deleted: z4.boolean()
     });
 
+    export const PaymentMethodSchema = z4.union([
+        z4.literal("boleto"),
+        z4.literal("credit_card"),
+        z4.literal("debit_card"),
+        z4.literal("pix")
+    ]);
+    
+    export type PaymentMethod = z4.infer<typeof PaymentMethodSchema>;
+
     export namespace Create {
 
         export const FullCustomerSchema = z4.object({
@@ -63,10 +72,6 @@ export namespace ControllerFinancial {
             customer_id: z4.string()
         });
 
-        type FullCustomer = z4.infer<typeof FullCustomerSchema>;
-        type CustomerIdOnly = z4.infer<typeof CustomerIdOnlySchema>;
-        export type Customer = FullCustomer | CustomerIdOnly;
-
         export const InputSchema = z4.object({
             data: z4.object({
                 checkout: z4.string(),
@@ -74,7 +79,7 @@ export namespace ControllerFinancial {
                 installments: z4.number(),
                 amount: z4.number(),
                 code: z4.string(),
-                method_payment: z4.array(z4.string()),
+                method_payment: z4.array(PaymentMethodSchema),
                 metadata: z4.record(z4.string(), z4.unknown()),
                 description: z4.string(),
                 external_reference: z4.array(z4.string()),
