@@ -131,7 +131,7 @@ namespace ControllerUsuario {
         export type Input = z4.infer<typeof InputSchema>;
         export type Output = {
             data: {
-                usuario: z4.infer<typeof UsuarioBaseSchema>
+                usuario: z4.infer<typeof AuthSchema>
             }
         }
     }
