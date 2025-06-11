@@ -228,6 +228,20 @@ namespace ControllerUsuario {
             }
         }
     }
+
+    export namespace gerarAuthenticatorCode {
+        export type Output = {
+            data: {
+                authenticator: {
+                    secret: string;
+                    otpAuthUrl: string;
+                    manualKey: string;
+                    issuer: string;
+                    label: string;
+                }
+            }
+        }
+    }
 }
 
 export default ControllerUsuario;
