@@ -80,6 +80,7 @@ export namespace ControllerReciver {
     });
 
     export const BaseReciverSchema = z4.object({
+      _id: z4.uuid(),
       type: z4.union([z4.literal("individual"), z4.literal("corporation")]),
       external_reference: z4.string(),
       name: z4.string(),
@@ -106,6 +107,7 @@ export namespace ControllerReciver {
     });
 
     export const IndividualReceiverSchema = BaseReciverSchema.extend({
+      _id: z4.uuid(),
       type: z4.literal("individual"),
       name: z4.string(),
       mother_name: z4.string(),
@@ -150,15 +152,12 @@ export namespace ControllerReciver {
   export namespace Criar {
     export const InputSchema = z4.object({
       data: z4.object({
-        reciver: DiscriminatedReciverSchema
+        reciver: z4.object(DiscriminatedReciverSchema)
       })
     });
     export type Input = z4.infer<typeof InputSchema>;
 
-    export const OutputSchema = z4.object({
-      _id: z4.string(),
-      ...BaseReciverSchema.shape
-    });
+    export const OutputSchema = DiscriminatedReciverSchema;
     export type Output = {
       data: {
         reciver: z4.infer<typeof OutputSchema>;
@@ -169,10 +168,12 @@ export namespace ControllerReciver {
     export namespace BuscarPeloFiltro {
       export const InputSchema = z4.object({
         filtros: z4.object({
-          type: z4.union([z4.literal("individual"), z4.literal("corporation")]).optional(),
-          external_reference: z4.string().optional(),
-          document: z4.string().optional(),
-          email: z4.string().optional()
+          recivers: z4.object({
+            type: z4.union([z4.literal("individual"), z4.literal("corporation")]).optional(),
+            external_reference: z4.string().optional(),
+            document: z4.string().optional(),
+            email: z4.string().optional()
+          })
         })
       });
       export type Input = z4.infer<typeof InputSchema>;
@@ -180,7 +181,7 @@ export namespace ControllerReciver {
       export const OutputSchema = z4.array(Criar.OutputSchema);
       export type Output = {
         data: {
-          recebedores: z4.infer<typeof OutputSchema>
+          recivers: z4.infer<typeof OutputSchema>
         }
       };
     }
@@ -188,7 +189,9 @@ export namespace ControllerReciver {
     export namespace BuscarPeloId {
       export const InputSchema = z4.object({
         data: z4.object({
-          _id: z4.string()
+          reciver: z4.object({
+            _id: z4.string()
+          })
         })
       });
       export type Input = z4.infer<typeof InputSchema>;
@@ -196,7 +199,7 @@ export namespace ControllerReciver {
       export const OutputSchema = Criar.OutputSchema;
       export type Output = {
         data: {
-          recebedor: z4.infer<typeof OutputSchema>
+          reciver: z4.infer<typeof OutputSchema>
         }
       };
     }
@@ -204,8 +207,10 @@ export namespace ControllerReciver {
     export namespace AtualizarPeloId {
       export const InputSchema = z4.object({
         data: z4.object({
-          _id: z4.string(),
-          update: BaseReciverSchema.partial()
+          reciver: z4.object({
+            _id: z4.string(),
+            update: BaseReciverSchema.partial()
+          })
         })
       });
       export type Input = z4.infer<typeof InputSchema>;
@@ -213,7 +218,7 @@ export namespace ControllerReciver {
       export const OutputSchema = Criar.OutputSchema;
       export type Output = {
         data: {
-          recebedor: z4.infer<typeof OutputSchema>
+          reciver: z4.infer<typeof OutputSchema>
         }
       };
     }
