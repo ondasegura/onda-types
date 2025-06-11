@@ -72,8 +72,6 @@ namespace ControllerUsuario {
         exp: z4.number().optional(),
         delete: z4.boolean(),
         token_para_webhook: z4.boolean(),
-        authenticator_ativo: z4.boolean(),
-        authenticator_secret: z4.string(),
         iat: z4.number().optional()
     });
 
@@ -128,10 +126,17 @@ namespace ControllerUsuario {
             })
         });
 
+
         export type Input = z4.infer<typeof InputSchema>;
+
+        const UsuarioExtendSchema = UsuarioBaseSchema.extend({
+            authenticator_ativo: z4.boolean(),
+            authenticator_secret: z4.string().optional()
+        });
+
         export type Output = {
             data: {
-                usuario: z4.infer<typeof AuthSchema>
+                usuario: z4.infer<typeof UsuarioExtendSchema>
             }
         }
     }
