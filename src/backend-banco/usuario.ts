@@ -234,10 +234,7 @@ namespace ControllerUsuario {
             data: {
                 authenticator: {
                     secret: string;
-                    otpAuthUrl: string;
-                    manualKey: string;
-                    issuer: string;
-                    label: string;
+                    otp_auth_url: string;
                 }
             }
         }
