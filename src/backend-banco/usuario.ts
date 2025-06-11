@@ -72,6 +72,8 @@ namespace ControllerUsuario {
         exp: z4.number().optional(),
         delete: z4.boolean(),
         token_para_webhook: z4.boolean(),
+        authenticator_ativo: z4.boolean(),
+        authenticator_secret: z4.string(),
         iat: z4.number().optional()
     });
 
