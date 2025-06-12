@@ -89,6 +89,7 @@ namespace ControllerUsuario {
             tipo: UsuarioTipoSchema,
             get_code: z4.boolean().optional(),
             token: z4.string(),
+            permissoes: z4.object({}).loose(),
             authenticator_ativo: z4.boolean(),
             authenticator_secret: z4.string().optional()
         }),
