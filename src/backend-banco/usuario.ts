@@ -233,6 +233,17 @@ namespace ControllerUsuario {
     }
 
     export namespace gerarAuthenticatorCode {
+        export const InputSchema = z4.object({
+            data: z4.object({
+                usuario: z4.object({
+                    senha: z4.string(),
+                })
+            })
+        });
+
+
+        export type Input = z4.infer<typeof InputSchema>;
+
         export type Output = {
             data: {
                 authenticator: {
