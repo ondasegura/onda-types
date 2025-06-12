@@ -80,15 +80,21 @@ namespace ControllerUsuario {
 
     export type Auth = z4.infer<typeof AuthSchema>;
 
-    // Schema para AuthFront
-    const AuthFrontSchema = z4.object({
-        _id: z4.string(),
-        nome: z4.string().toLowerCase(),
-        email: z4.email().toLowerCase(),
-        tipo: UsuarioTipoSchema,
-        get_code: z4.boolean().optional(),
-        token: z4.string()
-    });
+    const AuthFrontSchema = z4.discriminatedUnion('type', [
+        z4.object({
+            type: z4.literal('login'),
+            _id: z4.string(),
+            nome: z4.string().toLowerCase(),
+            email: z4.email().toLowerCase(),
+            tipo: UsuarioTipoSchema,
+            get_code: z4.boolean().optional(),
+            token: z4.string()
+        }),
+        z4.object({
+            type: z4.literal('code'),
+            get_code: z4.boolean()
+        })
+    ]);
 
     export type AuthFront = {
         data: {
