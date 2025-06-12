@@ -62,6 +62,7 @@ namespace ControllerUsuario {
     // Schema para Auth
     const AuthSchema = z4.object({
         _id: z4.string(),
+        type: z4.literal('base'),
         usuario_master_id: z4.string(),
         usuario_franqueado_id: z4.string(),
         usuario_operador_id: z4.string().nullable(),
@@ -75,6 +76,7 @@ namespace ControllerUsuario {
         token_para_webhook: z4.boolean(),
         authenticator_ativo: z4.boolean(),
         authenticator_secret: z4.string(),
+        permissoes: z4.object({}).loose(),
         iat: z4.number().optional()
     });
 
@@ -96,7 +98,8 @@ namespace ControllerUsuario {
         z4.object({
             type: z4.literal('code'),
             get_code: z4.boolean()
-        })
+        }),
+        AuthSchema
     ]);
 
     export type AuthFront = {
@@ -144,7 +147,7 @@ namespace ControllerUsuario {
 
         type AuthLogin = z4.infer<typeof AuthFrontSchema> & { type: 'login' };
         type AuthCode = z4.infer<typeof AuthFrontSchema> & { type: 'code' };
-        type AuthSchema = z4.infer<typeof AuthSchema> & { type: 'base' };
+        type AuthSchema = z4.infer<typeof AuthFrontSchema> & { type: 'base' };
 
         export type Output<T extends 'login' | 'code' | 'base'> = {
             data: {
