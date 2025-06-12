@@ -39,6 +39,7 @@ namespace ControllerUsuario {
         senha: z4.string().optional(),
         delete: z4.boolean(),
         permissoes: z4.object({}).loose(),
+        authenticator_ativo: z4.boolean(),
         master: z4.object({
             _id: z4.uuidv4(),
             nome: z4.string(),
@@ -123,6 +124,7 @@ namespace ControllerUsuario {
                 usuario: z4.object({
                     email: z4.email().toLowerCase(),
                     senha: z4.string(),
+                    code: z4.string().optional(),
 
                 })
             })
