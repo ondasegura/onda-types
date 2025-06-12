@@ -144,7 +144,7 @@ namespace ControllerUsuario {
         type AuthLogin = z4.infer<typeof AuthFrontSchema> & { type: 'login' };
         type AuthCode = z4.infer<typeof AuthFrontSchema> & { type: 'code' };
 
-        export type AuthFront<T extends 'login' | 'code'> = {
+        export type Output<T extends 'login' | 'code'> = {
             data: {
                 usuario_auth: T extends 'login' ? AuthLogin : AuthCode
             }
