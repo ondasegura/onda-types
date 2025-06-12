@@ -36,7 +36,6 @@ namespace ControllerUsuario {
                 message: "Celular inválido. Deve conter entre 8 e 15 dígitos."
             }),
         tipo: UsuarioTipoSchema,
-        senha: z4.string().optional(),
         delete: z4.boolean(),
         permissoes: z4.object({}).loose(),
         authenticator_ativo: z4.boolean(),
@@ -70,6 +69,7 @@ namespace ControllerUsuario {
         nome: z4.string().toLowerCase(),
         email: z4.email().toLowerCase(),
         tipo: UsuarioTipoSchema,
+        senha: z4.string(),
         organizacao: z4.literal("banco_s8"),
         exp: z4.number().optional(),
         delete: z4.boolean(),
