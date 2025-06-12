@@ -86,7 +86,7 @@ namespace ControllerUsuario {
         nome: z4.string().toLowerCase(),
         email: z4.email().toLowerCase(),
         tipo: UsuarioTipoSchema,
-        get_code: z4.boolean(),
+        get_code: z4.boolean().optional(),
         token: z4.string()
     });
 
