@@ -146,7 +146,7 @@ namespace ControllerUsuario {
 
         export type Output<T extends 'login' | 'code'> = {
             data: {
-                usuario_auth: T extends 'login' ? AuthLogin : AuthCode
+                usuario: T extends 'login' ? AuthLogin : AuthCode
             }
         }
     }
