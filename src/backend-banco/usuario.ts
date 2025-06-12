@@ -69,7 +69,7 @@ namespace ControllerUsuario {
         nome: z4.string().toLowerCase(),
         email: z4.email().toLowerCase(),
         tipo: UsuarioTipoSchema,
-        senha: z4.string(),
+        senha: z4.string().optional(),
         organizacao: z4.literal("banco_s8"),
         exp: z4.number().optional(),
         delete: z4.boolean(),
