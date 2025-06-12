@@ -88,7 +88,9 @@ namespace ControllerUsuario {
             email: z4.email().toLowerCase(),
             tipo: UsuarioTipoSchema,
             get_code: z4.boolean().optional(),
-            token: z4.string()
+            token: z4.string(),
+            authenticator_ativo: z4.boolean(),
+            authenticator_secret: z4.string().optional()
         }),
         z4.object({
             type: z4.literal('code'),
@@ -140,14 +142,10 @@ namespace ControllerUsuario {
 
         export type Input = z4.infer<typeof InputSchema>;
 
-        const UsuarioExtendSchema = UsuarioBaseSchema.extend({
-            authenticator_ativo: z4.boolean(),
-            authenticator_secret: z4.string().optional()
-        });
 
         export type Output = {
             data: {
-                usuario: z4.infer<typeof UsuarioExtendSchema>
+                usuario: z4.infer<typeof AuthFrontSchema>
             }
         }
     }
