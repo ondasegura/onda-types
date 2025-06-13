@@ -14,7 +14,6 @@ namespace ControllerAnimais {
         data_criacao: z4.date(),
         data_atualizacao: z4.date().nullable(),
         usuario_create_id: z4.uuidv4(),
-        id: z4.number(),
         descricao: z4.string(),
         tipo: z4.string(),
         valor: z4.number(),
@@ -29,7 +28,6 @@ namespace ControllerAnimais {
         export const InputSchema = z4.object({
             data: z4.object({
                 animal: z4.object({
-                    id: z4.number(),
                     descricao: z4.string(),
                     tipo: z4.string(),
                     valor: z4.number(),
@@ -55,7 +53,6 @@ namespace ControllerAnimais {
             filtros: z4.object({
                 animal: z4.object({
                     _id: z4.uuidv4().optional(),
-                    id: z4.number().optional(),
                     descricao: z4.string().optional(),
                     tipo: z4.string().optional(),
                     valor: z4.number().optional(),
@@ -98,7 +95,6 @@ namespace ControllerAnimais {
             data: z4.object({
                 animal: z4.object({
                     _id: z4.uuidv4(),
-                    id: z4.number().optional(),
                     descricao: z4.string().optional(),
                     tipo: z4.string().optional(),
                     valor: z4.number().optional(),
