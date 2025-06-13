@@ -10,7 +10,7 @@ namespace ControllerAnimais {
     export type AnimalStatus = z4.infer<typeof AnimalStatusSchema>;
 
     export const AnimalBaseSchema = z4.object({
-        _id: z4.uuid(),
+        _id: z4.uuidv4(),
         data_criacao: z4.date(),
         data_atualizacao: z4.date().nullable(),
         usuario_create_id: z4.uuidv4(),
@@ -117,7 +117,7 @@ namespace ControllerAnimais {
 
     export namespace DeletarPeloId {
         export const InputSchema = z4.object({
-            _id: z4.string()
+            _id: z4.uuidv4()
         });
         export type Input = z4.infer<typeof InputSchema>;
 
