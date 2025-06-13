@@ -76,6 +76,7 @@ namespace ControllerStatus {
                     total_itens: Number;
                     total_paginas: number;
                     itens_por_pagina: number;
+                    total_itens_pagina_atual: number;
                 },
                 status: z4.infer<typeof OutputSchema>;
             }
