@@ -60,11 +60,9 @@ namespace ControllerStatus {
                     icon: z4.string().optional().nullable(),
                     priority: z4.number().optional().nullable(),
                     ativo: z4.boolean().optional().nullable(),
-                    usuario_create_id: z4.uuidv4().optional().nullable()
-                }),
-                tabulacao: z4.object({
+                    usuario_create_id: z4.uuidv4().optional().nullable(),
                     pagina: z4.number().min(1).positive().default(1),
-                })
+                }),
             })
         });
         export type Input = z4.infer<typeof InputSchema>;
