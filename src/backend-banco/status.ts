@@ -52,6 +52,7 @@ namespace ControllerStatus {
         export const InputSchema = z4.object({
             filtros: z4.object({
                 status: z4.object({
+                    pagina: z4.number().min(0),
                     _id: z4.uuidv4().optional().nullable(),
                     name: z4.string().optional().nullable(),
                     code: z4.string().optional().nullable(),
@@ -61,15 +62,20 @@ namespace ControllerStatus {
                     priority: z4.number().optional().nullable(),
                     ativo: z4.boolean().optional().nullable(),
                     usuario_create_id: z4.uuidv4().optional().nullable(),
-                    pagina: z4.number().min(1).positive().default(1),
                 }),
+
             })
         });
+
         export type Input = z4.infer<typeof InputSchema>;
 
         export const OutputSchema = z4.array(StatusBaseSchema);
         export type Output = {
             data: {
+                paginacao: {
+                    total_itens: Number;
+                    total_paginas: number
+                },
                 status: z4.infer<typeof OutputSchema>;
             }
         }
