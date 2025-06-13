@@ -74,7 +74,8 @@ namespace ControllerStatus {
             data: {
                 paginacao: {
                     total_itens: Number;
-                    total_paginas: number
+                    total_paginas: number;
+                    itens_por_pagina: number;
                 },
                 status: z4.infer<typeof OutputSchema>;
             }
