@@ -52,15 +52,15 @@ namespace ControllerAnimais {
         export const InputSchema = z4.object({
             filtros: z4.object({
                 animal: z4.object({
-                    _id: z4.uuidv4().optional(),
-                    descricao: z4.string().optional(),
-                    tipo: z4.string().optional(),
-                    valor: z4.number().optional(),
-                    data: z4.string().optional(),
-                    categoria: z4.string().optional(),
-                    usuario_id: z4.number().optional(),
-                    ativo: z4.boolean().optional(),
-                    usuario_create_id: z4.uuidv4().optional()
+                    _id: z4.uuidv4().optional().nullable(),
+                    descricao: z4.string().optional().nullable(),
+                    tipo: z4.string().optional().nullable(),
+                    valor: z4.number().optional().nullable(),
+                    data: z4.string().optional().nullable(),
+                    categoria: z4.string().optional().nullable(),
+                    usuario_id: z4.number().optional().nullable(),
+                    ativo: z4.boolean().optional().nullable(),
+                    usuario_create_id: z4.uuidv4().optional().nullable()
                 })
             })
         });
