@@ -8,7 +8,7 @@ import ControllerHelpers from "./controllers/helpers";
 import UserPayload from "./controllers/token/token";
 import { ControllerFinancial as CF } from "./order";
 import CL from "./controllers/logs/logs";
-import CR from "./controllers/reciver/reciver"
+import CR from "./controllers/reciver/recebedor"
 namespace BackendWorkerFinanceiro {
     // export interface Context extends HonoContext {
     //     env: {
