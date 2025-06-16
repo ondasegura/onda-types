@@ -140,7 +140,7 @@ export namespace ControllerRecebedor {
   export namespace Criar {
     export const InputSchema = z4.object({
       data: z4.object({
-        recebedor: z4.object(RecebedorDiscriminadoSchema)
+        recebedor: RecebedorDiscriminadoSchema
       })
     });
     export type Input = z4.infer<typeof InputSchema>;
