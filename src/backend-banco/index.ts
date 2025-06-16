@@ -53,7 +53,7 @@ namespace BackendBanco {
 
         export import Status = ControllerStatus;
 
-        export import ContasPagar = ControllerContasPagar;
+        export import ContaPagar = ControllerContasPagar;
     }
 
 
