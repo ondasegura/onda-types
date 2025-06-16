@@ -20,12 +20,12 @@ namespace BackendWorkerFinanceiro {
     // }
 
     export interface Context extends HonoContext {
-        env: env;
+        env: Env;
         set(key: "usuario_auth", params: UserPayload.PatternUserPayload): UserPayload.PatternUserPayload;
         get(key: "usuario_auth"): UserPayload.PatternUserPayload;
     }
     export type User = UserPayload.PatternUserPayload;
-    export interface env {
+    export interface Env {
         JSON_WEB_TOKEN_AUTH_USER: string;
         POSTGRESQL_DATABASE_URL: string;
         SK_PAGARME: string;
