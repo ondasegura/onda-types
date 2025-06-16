@@ -40,7 +40,7 @@ namespace BackendWorkerFinanceiro {
         export import Customer = TypeCustomer;
         export import ControllerFinancial = CF;
         export import ControllerLogs = CL;
-        export import ControllerReciver = CR;
+        export import ControllerRecebedor = CR;
     }
 
     export namespace Services {
