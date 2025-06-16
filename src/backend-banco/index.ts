@@ -16,10 +16,6 @@ import ControllerSistema from "./sistema";
 
 import ControllerLogs from "./logs";
 
-import ControllerAnimais from "./animais";
-
-import ControllerStatus from "./status";
-
 import ControllerContasPagar from "./contasPagar";
 namespace BackendBanco {
     export namespace Controllers {
@@ -48,10 +44,6 @@ namespace BackendBanco {
 
         export import Sistema = ControllerSistema;
 
-
-        export import Animais = ControllerAnimais;
-
-        export import Status = ControllerStatus;
 
         export import ContaPagar = ControllerContasPagar;
     }
