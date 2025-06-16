@@ -139,7 +139,7 @@ export namespace ControllerRecebedor {
 
   export namespace Criar {
     export const InputSchema = z4.object({
-      dados: z4.object({
+      data: z4.object({
         recebedor: z4.object(RecebedorDiscriminadoSchema)
       })
     });
@@ -147,7 +147,7 @@ export namespace ControllerRecebedor {
 
     export const OutputSchema = RecebedorDiscriminadoSchema;
     export type Output = {
-      dados: {
+      data: {
         recebedor: z4.infer<typeof OutputSchema>;
       }
     };
@@ -168,7 +168,7 @@ export namespace ControllerRecebedor {
 
     export const OutputSchema = z4.array(Criar.OutputSchema);
     export type Output = {
-      dados: {
+      data: {
         recebedores: z4.infer<typeof OutputSchema>
       }
     };
@@ -176,7 +176,7 @@ export namespace ControllerRecebedor {
 
   export namespace BuscarPeloId {
     export const InputSchema = z4.object({
-      dados: z4.object({
+      data: z4.object({
         recebedor: z4.object({
           id: z4.string()
         })
@@ -186,7 +186,7 @@ export namespace ControllerRecebedor {
 
     export const OutputSchema = Criar.OutputSchema;
     export type Output = {
-      dados: {
+      data: {
         recebedor: z4.infer<typeof OutputSchema>
       }
     };
@@ -194,7 +194,7 @@ export namespace ControllerRecebedor {
 
   export namespace AtualizarPeloId {
     export const InputSchema = z4.object({
-      dados: z4.object({
+      data: z4.object({
         recebedor: z4.object({
           id: z4.string(),
           atualizacao: RecebedorBaseSchema.partial()
@@ -205,7 +205,7 @@ export namespace ControllerRecebedor {
 
     export const OutputSchema = Criar.OutputSchema;
     export type Output = {
-      dados: {
+      data: {
         recebedor: z4.infer<typeof OutputSchema>
       }
     };
@@ -221,7 +221,7 @@ export namespace ControllerRecebedor {
       sucesso: z4.boolean()
     });
     export type Output = {
-      dados: z4.infer<typeof OutputSchema>
+      data: z4.infer<typeof OutputSchema>
     };
   }
 }
