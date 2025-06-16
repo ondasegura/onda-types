@@ -1,14 +1,14 @@
 import { Context as HonoContext } from "hono";
-import UP from "./token/token";
-import P from "./pagarme";
-import TypeOrder from "./defaultOrder/defaultOrder";
-import TypeCustomer from "./pagarme/customer";
-import R from './response/Response';
-import ControllerHelpers from "./helpers";
-import UserPayload from "./token/token";
+import UP from "./controllers/token/token";
+import P from "./controllers/pagarme";
+import TypeOrder from "./controllers/defaultOrder/defaultOrder";
+import TypeCustomer from "./controllers/pagarme/customer";
+import R from './controllers/response/Response';
+import ControllerHelpers from "./controllers/helpers";
+import UserPayload from "./controllers/token/token";
 import { ControllerFinancial as CF } from "./order";
-import CL from "./logs/logs";
-import CR from "./reciver/reciver"
+import CL from "./controllers/logs/logs";
+import CR from "./controllers/reciver/reciver"
 namespace BackendWorkerFinanceiro {
     // export interface Context extends HonoContext {
     //     env: {
@@ -41,6 +41,10 @@ namespace BackendWorkerFinanceiro {
         export import ControllerFinancial = CF;
         export import ControllerLogs = CL;
         export import ControllerReciver = CR;
+    }
+
+    export namespace Services {
+
     }
 }
 export default BackendWorkerFinanceiro;

@@ -1,5 +1,5 @@
 import z4 from "zod/v4";
-import { ControllerFinancial } from "../order"
+import { ControllerFinancial } from "../../order"
 namespace TypeOrder {
     // Schema para Metadata
     export const MetadataSchema = z4.object({
@@ -19,7 +19,7 @@ namespace TypeOrder {
     export type Items = z4.infer<typeof ItemsSchema>;
 
     // Schema para PaymentMethod
-   
+
 
     // Schema para InstallmentsCreditCard
     export const InstallmentsCreditCardSchema = z4.object({
