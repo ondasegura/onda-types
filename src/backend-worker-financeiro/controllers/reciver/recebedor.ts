@@ -95,7 +95,7 @@ export namespace ControllerRecebedor {
   });
 
   export const RecebedorIndividualSchema = RecebedorBaseSchema.extend({
-    id: z4.uuid(),
+    _id: z4.uuid(),
     tipo: z4.literal("individual"),
     nome: z4.string(),
     nome_mae: z4.string(),
@@ -114,6 +114,7 @@ export namespace ControllerRecebedor {
   });
 
   export const RecebedorEmpresaSchema = RecebedorBaseSchema.extend({
+    _id: z4.uuid(),
     tipo: z4.literal("empresa"),
     razao_social: z4.string(),
     nome_fantasia: z4.string(),
