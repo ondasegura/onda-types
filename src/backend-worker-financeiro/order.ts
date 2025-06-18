@@ -45,7 +45,7 @@ export namespace ControllerFinancial {
     
     export type PaymentMethod = z4.infer<typeof PaymentMethodSchema>;
 
-    export namespace Create {
+    export namespace Criar {
 
         export const FullCustomerSchema = z4.object({
             name: z4.string(),
@@ -96,7 +96,7 @@ export namespace ControllerFinancial {
         };
     }
 
-    export namespace GetByFilter {
+    export namespace BuscarPeloFiltro {
         export const InputSchema = z4.object({
             filter: z4.object({
                 order: z4.object({
@@ -116,7 +116,7 @@ export namespace ControllerFinancial {
         };
     }
 
-    export namespace GetById {
+    export namespace BuscarPeloId {
         export const InputSchema = z4.object({
             data: z4.object({
                 _id: z4.uuidv4()
@@ -133,7 +133,7 @@ export namespace ControllerFinancial {
         };
     }
 
-    export namespace UpdateById {
+    export namespace AtualizarPeloId {
         export const InputSchema = z4.object({
             data: z4.object({
                 order: z4.object({
@@ -155,7 +155,7 @@ export namespace ControllerFinancial {
         };
     }
 
-    export namespace DeleteById {
+    export namespace DeletarPeloId {
         export const InputSchema = z4.object({
             _id: z4.uuidv4()
         });
