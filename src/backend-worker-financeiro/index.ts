@@ -9,6 +9,7 @@ import UserPayload from "./controllers/token/token";
 import { ControllerFinancial as CF } from "./order";
 import CL from "./controllers/logs/logs";
 import CR from "./controllers/recebedor/recebedor"
+import ServicePagarme from "./services/pagarme";
 namespace BackendWorkerFinanceiro {
     // export interface Context extends HonoContext {
     //     env: {
@@ -44,7 +45,7 @@ namespace BackendWorkerFinanceiro {
     }
 
     export namespace Services {
-
+        export import Pagarme = ServicePagarme;
     }
 }
 export default BackendWorkerFinanceiro;
