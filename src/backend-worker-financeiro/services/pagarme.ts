@@ -22,7 +22,7 @@ namespace SevicePagarme {
                 state: z4.string(),
                 country: z4.string(),
             }).optional(),
-            birthdate: z4.string(),
+            birthdate: z4.string().optional(),
             phones: z4.object({
                 home_phone: z4.object({
                     country_code: z4.string(),
@@ -35,7 +35,7 @@ namespace SevicePagarme {
                     number: z4.string(),
                 }).optional(),
             }),
-            metadata: z4.record(z4.string(), z4.any()),
+            metadata: z4.record(z4.string(), z4.any()).optional(),
         });
         export type Input = z4.infer<typeof InputSchema>;
 
