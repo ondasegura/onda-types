@@ -4,11 +4,10 @@ import z4 from "zod/v4";
 // COMO USAR ESE NAMESPACE NA HORA DE IMPORTAR: 
 // import t from "onda-types"
 // t.Banco.Controllers.Logs.Criar.Input
-namespace ControllerLogs {
+namespace ControllerLog {
     export const LogBaseSchema = z4.object({
         _id: z4.uuid(),
         data_criacao: z4.date(),
-        data_atualizacao: z4.date().nullable(),
         usuario_create_id: z4.number(),
         matrix: z4.string().toLowerCase(),
         mensagem_id: z4.string().toLowerCase(),
@@ -61,4 +60,4 @@ namespace ControllerLogs {
 
 }
 
-export default ControllerLogs;
+export default ControllerLog;
