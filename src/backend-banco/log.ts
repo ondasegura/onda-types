@@ -38,7 +38,7 @@ namespace ControllerLog {
             filtros: z4.object({
                 log: z4.object({
                     _id: z4.int().optional(),
-                    matrix: z4.uuidv4().optional(),
+                    matrix: z4.uuidv4(),
                     data_criacao: z4.date().optional(),
                     usuario_create_id: z4.number().optional(),
                     mensagem_id: z4.number().int().optional(),
