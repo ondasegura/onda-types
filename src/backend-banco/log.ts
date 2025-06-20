@@ -6,11 +6,11 @@ import z4 from "zod/v4";
 // t.Banco.Controllers.Logs.Criar.Input
 namespace ControllerLog {
     export const LogBaseSchema = z4.object({
-        _id: z4.uuid(),
+        _id: z4.int(),
+        matrix: z4.uuidv4(),
         data_criacao: z4.date(),
-        usuario_create_id: z4.number(),
-        matrix: z4.string().toLowerCase(),
-        mensagem_id: z4.string().toLowerCase(),
+        usuario_create_id: z4.uuidv4(),
+        mensagem_id: z4.number(),
     });
     export type LogBase = z4.infer<typeof LogBaseSchema>;
 
@@ -18,10 +18,8 @@ namespace ControllerLog {
         export const InputSchema = z4.object({
             data: z4.object({
                 log: z4.object({
-                    matrix: z4.string().toLowerCase(),
-                    data_criacao: z4.string(),
-                    usuario_create_id: z4.number(),
-                    mensagem_id: z4.string().toLowerCase()
+                    matrix: z4.uuidv4(),
+                    mensagem_id: z4.number().int()
                 })
             })
         });
@@ -39,12 +37,11 @@ namespace ControllerLog {
         export const InputSchema = z4.object({
             filtros: z4.object({
                 log: z4.object({
-                    _id: z4.uuid().optional(),
-                    matrix: z4.string().toLowerCase().optional(),
-                    data_criacao: z4.string().optional(),
+                    _id: z4.int().optional(),
+                    matrix: z4.uuidv4().optional(),
+                    data_criacao: z4.date().optional(),
                     usuario_create_id: z4.number().optional(),
-                    mensagem_id: z4.string().toLowerCase().optional(),
-                    ativo: z4.boolean().optional()
+                    mensagem_id: z4.number().int().optional(),
                 })
             })
         });
