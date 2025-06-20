@@ -11,9 +11,9 @@ namespace SevicePagarme {
             email: z4.string().email(),
             code: z4.string(),
             document: z4.string(),
-            type: z4.literal("individual"),
-            document_type: z4.literal("CPF"),
-            gender: z4.literal("male"),
+            type: z4.string(),
+            document_type: z4.string(),
+            gender: z4.string(),
             address: z4.object({
                 line_1: z4.string(),
                 line_2: z4.string(),
