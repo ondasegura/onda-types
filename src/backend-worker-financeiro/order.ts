@@ -1,6 +1,6 @@
 import z4 from "zod/v4";
 
-export namespace ControllerFinancial {
+export namespace ControllerFinanceiro {
 
     export const SchemaBase = z4.object({
         external_code: z4.string(),
@@ -36,18 +36,18 @@ export namespace ControllerFinancial {
         deleted: z4.boolean()
     });
 
-    export const PaymentMethodSchema = z4.union([
+    export const MetodosPagamentoSchema = z4.union([
         z4.literal("boleto"),
         z4.literal("credit_card"),
         z4.literal("debit_card"),
         z4.literal("pix")
     ]);
     
-    export type PaymentMethod = z4.infer<typeof PaymentMethodSchema>;
+    export type MetodosPagamento = z4.infer<typeof MetodosPagamentoSchema>;
 
     export namespace Criar {
 
-        export const FullCustomerSchema = z4.object({
+        export const ClienteCompletoSchema = z4.object({
             name: z4.string(),
             email: z4.string().email(),
             document: z4.string(),
@@ -68,18 +68,18 @@ export namespace ControllerFinancial {
             external_reference: z4.string()
         });
 
-        export const CustomerIdOnlySchema = z4.object({
+        export const ClienteIdSchema = z4.object({
             customer_id: z4.string()
         });
 
         export const InputSchema = z4.object({
             data: z4.object({
                 checkout: z4.string(),
-                customer: z4.union([FullCustomerSchema, CustomerIdOnlySchema]),
+                customer: z4.union([ClienteCompletoSchema, ClienteIdSchema]),
                 installments: z4.number(),
                 amount: z4.number(),
                 code: z4.string(),
-                method_payment: z4.array(PaymentMethodSchema),
+                method_payment: z4.array(MetodosPagamentoSchema),
                 metadata: z4.record(z4.string(), z4.unknown()),
                 description: z4.string(),
                 external_reference: z4.array(z4.string()),
