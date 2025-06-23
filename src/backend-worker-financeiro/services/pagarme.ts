@@ -100,101 +100,101 @@ namespace SevicePagarme {
         // Schemas auxiliares
         const TelefoneBasicoSchema = z4.object({
             ddd: z4.string(),
-            numero: z4.string(),
+            number: z4.string(),
         });
 
         const TelefoneComTipoSchema = z4.object({
             ddd: z4.string(),
-            numero: z4.string(),
-            tipo: z4.union([z4.literal("celular"), z4.literal("fixo")]),
+            number: z4.string(),
+            type: z4.union([z4.literal("celular"), z4.literal("fixo")]),
         });
 
         const EnderecoCompletoSchema = z4.object({
-            rua: z4.string(),
-            complemento: z4.string(),
-            numero_rua: z4.string(),
-            bairro: z4.string(),
-            cidade: z4.string(),
-            estado: z4.string(),
-            cep: z4.string(),
-            ponto_referencia: z4.string(),
+            street: z4.string(),
+            complementary: z4.string(),
+            street_number: z4.string(),
+            neighborhood: z4.string(),
+            city: z4.string(),
+            state: z4.string(),
+            zip_code: z4.string(),
+            reference_point: z4.string(),
         });
 
         const ContaBancariaSchema = z4.object({
-            nome_titular: z4.string(),
-            tipo_titular: z4.union([z4.literal("individual"), z4.literal("empresa")]),
-            documento_titular: z4.string(),
-            banco: z4.string(),
-            numero_agencia: z4.string(),
-            digito_agencia: z4.string(),
-            numero_conta: z4.string(),
-            digito_conta: z4.string(),
-            tipo: z4.union([z4.literal("corrente"), z4.literal("poupanca"), z4.string()]),
+            holder_name: z4.string(),
+            holder_type: z4.union([z4.literal("individual"), z4.literal("empresa")]),
+            holder_document: z4.string(),
+            bank: z4.string(),
+            branch_number: z4.string(),
+            branch_check_digit: z4.string(),
+            account_number: z4.string(),
+            account_check_digit: z4.string(),
+            type: z4.union([z4.literal("corrente"), z4.literal("poupanca"), z4.string()]),
         });
 
         const ConfiguracoesTransferenciaSchema = z4.object({
-            transferencia_habilitada: z4.boolean(),
-            intervalo_transferencia: z4.union([z4.literal("Diaria"), z4.literal("Semanal"), z4.literal("Mensal")]),
-            dia_transferencia: z4.number().int(),
+            transfer_enabled: z4.boolean(),
+            transfer_interval: z4.union([z4.literal("Diaria"), z4.literal("Semanal"), z4.literal("Mensal")]),
+            transfer_day: z4.number().int(),
         });
 
         const ConfiguracoesAntecipacaoSchema = z4.object({
-            habilitado: z4.boolean(),
-            tipo: z4.union([z4.literal("completa"), z4.literal("parcial")]),
-            percentual_volume: z4.string(),
-            atraso: z4.number().nullable(),
+            enabled: z4.boolean(),
+            type: z4.union([z4.literal("completa"), z4.literal("parcial")]),
+            volume_percentage: z4.string(),
+            delay: z4.number().nullable(),
         });
 
         const SocioAdministradorSchema = z4.object({
-            nome: z4.string(),
+            name: z4.string(),
             email: z4.string().email(),
-            documento: z4.string(),
-            tipo: z4.union([z4.literal("individual"), z4.literal("empresa")]),
-            nome_mae: z4.string(),
-            data_nascimento: z4.string(),
-            renda_mensal: z4.number(),
-            ocupacao_profissional: z4.string(),
-            representante_legal_autodeclarado: z4.boolean(),
-            endereco: EnderecoCompletoSchema,
-            telefones: z4.array(TelefoneComTipoSchema),
+            document: z4.string(),
+            type: z4.union([z4.literal("individual"), z4.literal("empresa")]),
+            mother_name: z4.string(),
+            birthdate: z4.string(),
+            monthly_income: z4.number(),
+            professional_occupation: z4.string(),
+            self_declared_legal_representative: z4.boolean(),
+            address: EnderecoCompletoSchema,
+            phone_numbers: z4.array(TelefoneComTipoSchema),
         });
 
         export const RecebedorBaseSchema = z4.object({
             _id: z4.uuid().optional(),
-            referencia_externa: z4.string(),
+            external_reference: z4.string(),
             email: z4.string().email(),
             documento: z4.string(),
             site: z4.string(),
             telefones: z4.array(TelefoneBasicoSchema),
-            conta_bancaria: ContaBancariaSchema,
-            configuracoes_transferencia: ConfiguracoesTransferenciaSchema,
-            configuracoes_antecipacao: ConfiguracoesAntecipacaoSchema,
-            codigo: z4.string(),
+            default_bank_account: ContaBancariaSchema,
+            transfer_settings: ConfiguracoesTransferenciaSchema,
+            automatic_anticipation_settings: ConfiguracoesAntecipacaoSchema,
+            code: z4.string(),
         });
 
         export const RecebedorIndividualSchema = RecebedorBaseSchema.extend({
-            tipo: z4.literal("individual"),
-            nome: z4.string(),
-            nome_mae: z4.string(),
-            data_nascimento: z4.string(),
-            renda_mensal: z4.number(),
-            ocupacao_profissional: z4.string(),
-            endereco: EnderecoCompletoSchema,
+            type: z4.literal("individual"),
+            name: z4.string(),
+            mother_name: z4.string(),
+            birthdate: z4.string(),
+            monthly_income: z4.number(),
+            professional_occupation: z4.string(),
+            address: EnderecoCompletoSchema,
         });
 
         export const RecebedorEmpresaSchema = RecebedorBaseSchema.extend({
-            tipo: z4.literal("empresa"),
-            razao_social: z4.string(),
-            nome_fantasia: z4.string(),
-            faturamento_anual: z4.number(),
-            tipo_empresa: z4.string(),
-            data_fundacao: z4.string(),
-            endereco_principal: EnderecoCompletoSchema,
-            socios_administradores: z4.array(SocioAdministradorSchema),
+            type: z4.literal("empresa"),
+            company_name: z4.string(),
+            trading_name: z4.string(),
+            annual_revenue: z4.number(),
+            corporation_type: z4.string(),
+            founding_date: z4.string(),
+            main_address: EnderecoCompletoSchema,
+            managing_partners: z4.array(SocioAdministradorSchema),
         });
 
         export namespace RecebedorDiscriminado {
-            export const InputSchema = z4.discriminatedUnion("tipo", [RecebedorEmpresaSchema, RecebedorIndividualSchema]);
+            export const InputSchema = z4.discriminatedUnion("type", [RecebedorEmpresaSchema, RecebedorIndividualSchema]);
         }
 
         export const InputSchema = z4.object({
