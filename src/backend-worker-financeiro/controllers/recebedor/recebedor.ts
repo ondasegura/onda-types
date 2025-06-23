@@ -147,7 +147,7 @@ export namespace ControllerRecebedor {
         export const InputSchema = z4.object({
             data: z4.object({
                 recebedor: z4.object({
-                    id: z4.string(),
+                    _id: z4.string(),
                 }),
             }),
         });
@@ -192,7 +192,7 @@ export namespace ControllerRecebedor {
         export const InputSchema = z4.object({
             data: z4.object({
                 recebedor: z4.object({
-                    id: z4.string(),
+                    _id: z4.string(),
                     atualizacao: AtualizazaoSchema.partial(),
                 }),
             }),
@@ -210,7 +210,7 @@ export namespace ControllerRecebedor {
 
     export namespace DeletarPeloId {
         export const InputSchema = z4.object({
-            id: z4.string(),
+            _id: z4.string(),
         });
 
         export type Input = z4.infer<typeof InputSchema>;
