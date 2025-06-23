@@ -1,5 +1,5 @@
 import z4 from "zod/v4";
-import { ControllerFinancial } from "../../order"
+import { ControllerFinanceiro } from "../../order"
 namespace TypeOrder {
     // Schema para Metadata
     export const MetadataSchema = z4.object({
@@ -65,7 +65,7 @@ namespace TypeOrder {
         skip_checkout_success_page: z4.boolean().optional(),
         default_payment_method: z4.string().optional(),
         success_url: z4.string().url().optional(),
-        accepted_payment_methods: z4.array(ControllerFinancial.PaymentMethodSchema).readonly().optional(),
+        accepted_payment_methods: z4.array(ControllerFinanceiro.PaymentMethodSchema).readonly().optional(),
         credit_card: CreditCardSchema.optional(),
         pix: PixSchema.optional(),
         boleto: BoletoSchema.optional()
