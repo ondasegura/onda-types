@@ -63,18 +63,18 @@ namespace SevicePagarme {
             }),
             created_at: z4.string(),
             updated_at: z4.string(),
-            birthdate: z4.string(),
+            birthdate: z4.string().optional(),
             phones: z4.object({
                 home_phone: z4.object({
                     country_code: z4.string(),
                     number: z4.string(),
                     area_code: z4.string(),
-                }),
+                }).optional(),
                 mobile_phone: z4.object({
                     country_code: z4.string(),
                     number: z4.string(),
                     area_code: z4.string(),
-                }),
+                }).optional(),
             }),
             metadata: z4.record(z4.string(), z4.any()),
         });
