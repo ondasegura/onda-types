@@ -6,7 +6,7 @@ import TypeCustomer from "./controllers/pagarme/customer";
 import R from './controllers/response/Response';
 import ControllerHelpers from "./controllers/helpers";
 import UserPayload from "./controllers/token/token";
-import { ControllerFinancial as CF } from "./order";
+import { ControllerFinanceiro as CF } from "./order";
 import CL from "./controllers/logs/logs";
 import CR from "./controllers/recebedor/recebedor"
 import ControllerClientes from "../backend-banco/cliente";
