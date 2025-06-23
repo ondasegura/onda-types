@@ -143,7 +143,8 @@ namespace ControllerContasReceber {
                     code: z4.string().optional().nullable(),
                     description: z4.string().optional().nullable(),
                     ativo: z4.boolean().optional().nullable(),
-                    usuario_create_id: z4.uuidv4().optional().nullable()
+                    usuario_create_id: z4.uuidv4().optional().nullable(),
+                    deleted: z4.boolean().optional().nullable()
                 })
             })
         });
@@ -195,7 +196,8 @@ namespace ControllerContasReceber {
                     metadata: MetadataSchema.optional(),
                     description: z4.string().optional(),
                     external_reference: z4.array(z4.string()).optional(),
-                    ativo: z4.boolean().optional()
+                    ativo: z4.boolean().optional(),
+                    deleted: z4.boolean().optional()
                 })
             })
         });
