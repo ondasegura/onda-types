@@ -14,7 +14,7 @@ import ControllerBucket from "./bucket";
 
 import ControllerSistema from "./sistema";
 
-import ControllerLogs from "./logs";
+import ControllerLog from "./log";
 
 import ControllerContasPagar from "./contasPagar";
 namespace BackendBanco {
@@ -39,8 +39,7 @@ namespace BackendBanco {
 
         export import Bucket = ControllerBucket;
 
-        export import Logs = ControllerLogs;
-
+        export import Log = ControllerLog;
 
         export import Sistema = ControllerSistema;
 
