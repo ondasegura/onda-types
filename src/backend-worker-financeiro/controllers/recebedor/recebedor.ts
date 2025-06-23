@@ -162,13 +162,38 @@ export namespace ControllerRecebedor {
     }
 
     export namespace AtualizarPeloId {
-        const AtualizazaoSchema = z4.union([RecebedorIndividualSchema.partial(), RecebedorEmpresaSchema.partial()]);
+        const AtualizazaoSchema = z4.object({
+            _id: z4.uuid(),
+            tipo: z4.union([z4.literal("individual"), z4.literal("empresa")]),
+            referencia_externa: z4.string(),
+            nome: z4.string(),
+            nome_mae: z4.string(),
+            data_nascimento: z4.string(),
+            renda_mensal: z4.number(),
+            ocupacao_profissional: z4.string(),
+            razao_social: z4.string(),
+            nome_fantasia: z4.string(),
+            faturamento_anual: z4.number(),
+            tipo_empresa: z4.string(),
+            data_fundacao: z4.string(),
+            email: z4.string().email(),
+            documento: z4.string(),
+            site: z4.string(),
+            telefones: z4.array(TelefoneBasicoSchema),
+            endereco: EnderecoCompletoSchema,
+            endereco_principal: EnderecoCompletoSchema,
+            socios_administradores: z4.array(SocioAdministradorSchema),
+            conta_bancaria: ContaBancariaSchema,
+            configuracoes_transferencia: ConfiguracoesTransferenciaSchema,
+            configuracoes_antecipacao: ConfiguracoesAntecipacaoSchema,
+            codigo: z4.string(),
+        });
 
         export const InputSchema = z4.object({
             data: z4.object({
                 recebedor: z4.object({
                     id: z4.string(),
-                    atualizacao: AtualizazaoSchema,
+                    atualizacao: AtualizazaoSchema.partial(),
                 }),
             }),
         });
