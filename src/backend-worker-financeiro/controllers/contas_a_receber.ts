@@ -205,7 +205,14 @@ namespace ControllerContasReceber {
                     description: z4.string().optional(),
                     external_reference: z4.array(z4.string()).optional(),
                     ativo: z4.boolean().optional(),
-                    deleted: z4.boolean().optional()
+                    deleted: z4.boolean().optional(),
+                    external_code: z4.string().optional(),
+                    external_id: z4.number().optional(),
+                    paymente_types: z4.number().optional(),
+                    payer: z4.string().optional(),
+                    document: z4.string().optional(),
+                    status: z4.string().optional(),
+                    payment_id: z4.string().optional()
                 })
             })
         });
