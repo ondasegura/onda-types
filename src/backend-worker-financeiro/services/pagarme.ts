@@ -196,6 +196,20 @@ namespace SevicePagarme {
         export namespace RecebedorDiscriminado {
             export const InputSchema = z4.discriminatedUnion("tipo", [RecebedorEmpresaSchema, RecebedorIndividualSchema]);
         }
+
+        export const InputSchema = z4.object({
+            data: z4.object({
+                recebedor: RecebedorDiscriminado,
+            }),
+        });
+        export type Input = z4.infer<typeof InputSchema>;
+
+        export const OutputSchema = RecebedorDiscriminado;
+        export type Output = {
+            data: {
+                recebedor: z4.infer<typeof OutputSchema>;
+            };
+        };
     }
 }
 
