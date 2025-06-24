@@ -199,7 +199,7 @@ namespace SevicePagarme {
 
         export const InputSchema = z4.object({
             data: z4.object({
-                recebedor: RecebedorDiscriminado,
+                recebedor: RecebedorDiscriminado.InputSchema,
             }),
         });
         export type Input = z4.infer<typeof InputSchema>;
