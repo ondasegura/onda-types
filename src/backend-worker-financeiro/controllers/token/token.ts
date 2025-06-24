@@ -1,4 +1,4 @@
-import z4 from "zod/v4";
+import z4, { string } from "zod/v4";
 
 namespace UserPayload {
   export const UserPayloadImobiliariaSchema = z4.object({
@@ -16,9 +16,10 @@ namespace UserPayload {
     onda_imob_parceiro: z4.number(),
     onda_imob_id: z4.number(),
     onda_colaborador_id: z4.number(),
-    type_user: z4.literal('imobiliaria'),
+    type_user: z4.literal("imobiliaria"),
     iat: z4.number().optional(),
     organizacao: z4.string(),
+    app: z4.string().optional(),
   });
 
   export type UserPayloadImobiliaria = z4.infer<typeof UserPayloadImobiliariaSchema>;
@@ -30,14 +31,16 @@ namespace UserPayload {
     onda_user_id: z4.number(),
     onda_imob_id: z4.number(),
     onda_colaborador_id: z4.number(),
-    type_user: z4.literal('ONDA_USER'),
+    type_user: z4.literal("ONDA_USER"),
     iat: z4.number().optional(),
     organizacao: z4.string(),
+    app: z4.string().optional(),
   });
 
   export type UserPayloadWave = z4.infer<typeof UserPayloadWaveSchema>;
 
-  export const PatternUserPayloadSchema = z4.union([
+
+  export const PatternUserPayloadSchema = z4.discriminatedUnion("type_user", [
     UserPayloadImobiliariaSchema,
     UserPayloadWaveSchema,
   ]);
@@ -46,6 +49,14 @@ namespace UserPayload {
 
   export const AuthPayloadSchema = PatternUserPayloadSchema;
   export type AuthPayload = PatternUserPayload;
+
+  const userToken = z4.object({
+    _id: string(),
+    tipo: string(),
+    app: z4.literal("wave"),
+  });
+
+  export type UserToken = z4.infer<typeof userToken>;
 }
 
 export default UserPayload;

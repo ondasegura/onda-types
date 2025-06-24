@@ -17,8 +17,8 @@ import ServicePagarme from "./services/pagarme";
 namespace BackendWorkerFinanceiro {
     export interface Context extends HonoContext {
         env: Env;
-        set(key: "usuario_auth", params: UserPayload.PatternUserPayload): UserPayload.PatternUserPayload;
-        get(key: "usuario_auth"): UserPayload.PatternUserPayload;
+        set(key: "usuario_auth", params: UserPayload.UserToken): UserPayload.UserToken;
+        get(key: "usuario_auth"): UserPayload.UserToken;
     }
     export type User = UserPayload.PatternUserPayload;
     export interface Env {
