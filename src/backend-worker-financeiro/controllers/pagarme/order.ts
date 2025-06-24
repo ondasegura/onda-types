@@ -1,11 +1,11 @@
 import z4 from "zod/v4";
-import { ControllerFinancial } from "../../order"
+import {ControllerFinancial} from "../../order";
 namespace TypeOrder {
     // Schema para Metadata
     export const MetadataSchema = z4.object({
         tipo: z4.string().optional(),
         gerarAnexo1: z4.boolean().optional(),
-        gerarBoletos: z4.boolean().optional()
+        gerarBoletos: z4.boolean().optional(),
     });
     export type Metadata = z4.infer<typeof MetadataSchema>;
 
@@ -14,17 +14,16 @@ namespace TypeOrder {
         amount: z4.number().optional(),
         description: z4.string().optional(),
         quantity: z4.number().int().optional(),
-        code: z4.string().optional()
+        code: z4.string().optional(),
     });
     export type Items = z4.infer<typeof ItemsSchema>;
 
     // Schema para PaymentMethod
 
-
     // Schema para InstallmentsCreditCard
     export const InstallmentsCreditCardSchema = z4.object({
         number: z4.number().int().optional(),
-        total: z4.number().optional()
+        total: z4.number().optional(),
     });
     export type InstallmentsCreditCard = z4.infer<typeof InstallmentsCreditCardSchema>;
 
@@ -32,21 +31,21 @@ namespace TypeOrder {
     export const CreditCardSchema = z4.object({
         capture: z4.boolean().optional(),
         statement_descriptor: z4.literal("Onda Segura").optional(),
-        installments: z4.array(InstallmentsCreditCardSchema).optional()
+        installments: z4.array(InstallmentsCreditCardSchema).optional(),
     });
     export type CreditCard = z4.infer<typeof CreditCardSchema>;
 
     // Schema para AdditionalInformationPix
     export const AdditionalInformationPixSchema = z4.object({
         name: z4.literal("Onda Segura").optional(),
-        value: z4.string().optional()
+        value: z4.string().optional(),
     });
     export type AdditionalInformationPix = z4.infer<typeof AdditionalInformationPixSchema>;
 
     // Schema para Pix
     export const PixSchema = z4.object({
         expires_in: z4.union([z4.number(), z4.string()]).optional(),
-        additional_information: z4.array(AdditionalInformationPixSchema).optional()
+        additional_information: z4.array(AdditionalInformationPixSchema).optional(),
     });
     export type Pix = z4.infer<typeof PixSchema>;
 
@@ -54,7 +53,7 @@ namespace TypeOrder {
     export const BoletoSchema = z4.object({
         bank: z4.string().optional(),
         instructions: z4.string().optional(),
-        due_at: z4.date().optional()
+        due_at: z4.date().optional(),
     });
     export type Boleto = z4.infer<typeof BoletoSchema>;
 
@@ -68,14 +67,14 @@ namespace TypeOrder {
         accepted_payment_methods: z4.array(ControllerFinancial.PaymentMethodSchema).readonly().optional(),
         credit_card: CreditCardSchema.optional(),
         pix: PixSchema.optional(),
-        boleto: BoletoSchema.optional()
+        boleto: BoletoSchema.optional(),
     });
     export type Checkout = z4.infer<typeof CheckoutSchema>;
 
     // Schema para Payments
     export const PaymentsSchema = z4.object({
         payment_method: z4.literal("checkout").optional(),
-        checkout: CheckoutSchema.optional()
+        checkout: CheckoutSchema.optional(),
     });
     export type Payments = z4.infer<typeof PaymentsSchema>;
 
@@ -85,7 +84,7 @@ namespace TypeOrder {
         customer_id: z4.string(),
         metadata: MetadataSchema.optional(),
         items: z4.array(ItemsSchema).optional(),
-        payments: z4.array(PaymentsSchema).optional()
+        payments: z4.array(PaymentsSchema).optional(),
     });
     export type Order = z4.infer<typeof OrderSchema>;
 }
