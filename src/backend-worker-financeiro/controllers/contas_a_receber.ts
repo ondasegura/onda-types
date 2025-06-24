@@ -23,7 +23,7 @@ namespace ControllerContasReceber {
         installment_amaount: z4.number(),
         helper_type_order_id: z4.number(),
         due_date: z4.iso.datetime(),
-        meta_data: z4.record(z4.string(), z4.unknown()),
+        metadata: z4.record(z4.string(), z4.unknown()),
         payment_id: z4.string(),
         code_installment: z4.string(),
         url_charge: z4.string().url(),
@@ -212,7 +212,16 @@ namespace ControllerContasReceber {
                     payer: z4.string().optional(),
                     document: z4.string().optional(),
                     status: z4.string().optional(),
-                    payment_id: z4.string().optional()
+                    payment_id: z4.string().optional(),
+                    code_installment: z4.string().optional(),
+                    url_charge: z4.string().optional(),
+                    url_invoice: z4.string().optional(),
+                    external_reference_primary: z4.string().optional(),
+                    external_reference_secondary: z4.string().optional(),
+                    external_reference_tertiary: z4.string().optional(),
+                    external_reference_quaternary: z4.string().optional(),
+                    updated_user: z4.string(),
+                    
                 })
             })
         });
