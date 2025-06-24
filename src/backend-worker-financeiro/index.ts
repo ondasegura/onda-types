@@ -11,6 +11,7 @@ import CL from "./controllers/logs/logs";
 import CR from "./controllers/recebedor/recebedor"
 import ControllerClientes from "../backend-banco/cliente";
 import ControllerContasReceber from "./controllers/contas_a_receber";
+import ControllerCliente from "./controllers/cliente";
 //SERVICES
 import ServicePagarme from "./services/pagarme";
 namespace BackendWorkerFinanceiro {
@@ -38,6 +39,9 @@ namespace BackendWorkerFinanceiro {
         export import Recebedor = CR;
         export import Clientes = ControllerClientes;
         export import ContasReceber = ControllerContasReceber;
+
+        //Cliente correto novo cadastro
+        export import Cliente = ControllerCliente;
     }
 
     export namespace Services {
