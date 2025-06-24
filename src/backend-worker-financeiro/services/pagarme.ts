@@ -122,25 +122,25 @@ namespace SevicePagarme {
 
         const ContaBancariaSchema = z4.object({
             holder_name: z4.string(),
-            holder_type: z4.union([z4.literal("individual"), z4.literal("empresa")]),
+            holder_type: z4.union([z4.literal("individual"), z4.literal("company")]),
             holder_document: z4.string(),
             bank: z4.string(),
             branch_number: z4.string(),
             branch_check_digit: z4.string(),
             account_number: z4.string(),
             account_check_digit: z4.string(),
-            type: z4.union([z4.literal("corrente"), z4.literal("poupanca"), z4.string()]),
+            type: z4.union([z4.literal("checking"), z4.literal("savings"), z4.string()]),
         });
 
         const ConfiguracoesTransferenciaSchema = z4.object({
             transfer_enabled: z4.boolean(),
-            transfer_interval: z4.union([z4.literal("Diaria"), z4.literal("Semanal"), z4.literal("Mensal")]),
+            transfer_interval: z4.union([z4.literal("Daily"), z4.literal("Weekly"), z4.literal("Monthly")]),
             transfer_day: z4.number().int(),
         });
 
         const ConfiguracoesAntecipacaoSchema = z4.object({
             enabled: z4.boolean(),
-            type: z4.union([z4.literal("completa"), z4.literal("parcial")]),
+            type: z4.union([z4.literal("full"), z4.literal("parcial")]),
             volume_percentage: z4.string(),
             delay: z4.number().nullable(),
         });
@@ -149,7 +149,7 @@ namespace SevicePagarme {
             name: z4.string(),
             email: z4.string().email(),
             document: z4.string(),
-            type: z4.union([z4.literal("individual"), z4.literal("empresa")]),
+            type: z4.literal("individual"),
             mother_name: z4.string(),
             birthdate: z4.string(),
             monthly_income: z4.number(),
@@ -183,7 +183,7 @@ namespace SevicePagarme {
         });
 
         export const RecebedorEmpresaSchema = RecebedorBaseSchema.extend({
-            type: z4.literal("empresa"),
+            type: z4.literal("corporation"),
             company_name: z4.string(),
             trading_name: z4.string(),
             annual_revenue: z4.number(),
