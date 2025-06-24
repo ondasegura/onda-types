@@ -20,6 +20,7 @@ namespace BackendWorkerFinanceiro {
         set(key: "usuario_auth", params: UserPayload.UserToken): UserPayload.UserToken;
         get(key: "usuario_auth"): UserPayload.UserToken;
     }
+    export import Token = UserPayload;
     export type User = UserPayload.PatternUserPayload;
     export interface Env {
         JSON_WEB_TOKEN_AUTH_USER: string;
