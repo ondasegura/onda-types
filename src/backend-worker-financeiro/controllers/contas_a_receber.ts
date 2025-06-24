@@ -11,7 +11,7 @@ namespace ControllerContasReceber {
         customer: z4.string().optional(),
         paymente_types: z4.number().optional(),
         payer: z4.string().optional(),
-        document: z4.string().optional(),
+        document: z4.string().optional().transform((val) => val?.replace(/\D/g, "")),
         checkout: z4.string().optional(),
         status: z4.number().optional(),
         card_number: z4.string().optional(),
@@ -60,7 +60,7 @@ namespace ControllerContasReceber {
     export const CustomerSchema = z4.object({
         name: z4.string(),
         email: z4.string(),
-        document: z4.string(),
+        document: z4.string().transform((val) => val.replace(/\D/g, "")),
         phone: PhoneSchema,
         address: AddressSchema,
         external_reference: z4.string()
@@ -150,7 +150,7 @@ namespace ControllerContasReceber {
                     customer: z4.string().optional().nullable(),
                     paymente_types: z4.number().optional().nullable(),
                     payer: z4.string().optional().nullable(),
-                    document: z4.string().optional().nullable(),
+                    document: z4.string().transform((val)=> val.replace(/\D/g, "")).optional().nullable(),
                     status: z4.string().optional().nullable(),
                     payment_id: z4.string().optional().nullable()
                 })
