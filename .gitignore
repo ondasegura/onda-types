@@ -28,4 +28,4 @@ lerna-debug.log*
 .DS_Store
 
 #git
-git-commit.bat
+git-commit.ps1
