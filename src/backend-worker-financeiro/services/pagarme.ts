@@ -159,52 +159,86 @@ namespace SevicePagarme {
             phone_numbers: z4.array(TelefoneComTipoSchema),
         });
 
-        export const RecebedorBaseSchema = z4.object({
-            _id: z4.uuid().optional(),
-            external_reference: z4.string(),
-            email: z4.string().email(),
-            documento: z4.string(),
-            site: z4.string(),
-            telefones: z4.array(TelefoneBasicoSchema),
-            default_bank_account: ContaBancariaSchema,
-            transfer_settings: ConfiguracoesTransferenciaSchema,
-            automatic_anticipation_settings: ConfiguracoesAntecipacaoSchema,
-            code: z4.string(),
-        });
-
-        export const RecebedorIndividualSchema = RecebedorBaseSchema.extend({
+        const RegisterInformationIndividualSchema = z4.object({
             type: z4.literal("individual"),
+            email: z4.string().email(),
+            document: z4.string(),
             name: z4.string(),
-            mother_name: z4.string(),
+            mother_name: z4.string().optional(),
             birthdate: z4.string(),
             monthly_income: z4.number(),
             professional_occupation: z4.string(),
             address: EnderecoCompletoSchema,
+            phone_numbers: z4.array(TelefoneComTipoSchema),
+            site_url: z4.string().url().optional(),
         });
 
-        export const RecebedorEmpresaSchema = RecebedorBaseSchema.extend({
+        const RegisterInformationCorporationSchema = z4.object({
             type: z4.literal("corporation"),
+            email: z4.string().email(),
+            document: z4.string(),
             company_name: z4.string(),
             trading_name: z4.string(),
-            annual_revenue: z4.number(),
             corporation_type: z4.string(),
             founding_date: z4.string(),
+            annual_revenue: z4.number(),
             main_address: EnderecoCompletoSchema,
+            phone_numbers: z4.array(TelefoneComTipoSchema),
             managing_partners: z4.array(SocioAdministradorSchema),
+            site_url: z4.string().url().optional(),
         });
 
-        export namespace RecebedorDiscriminado {
-            export const InputSchema = z4.discriminatedUnion("type", [RecebedorEmpresaSchema, RecebedorIndividualSchema]);
-        }
+        const RegisterInformationDiscriminadoSchema = z4.discriminatedUnion("type", [RegisterInformationCorporationSchema, RegisterInformationIndividualSchema]);
+
+        // export const RecebedorBaseSchema = z4.object({
+        //     _id: z4.uuid().optional(),
+        //     external_reference: z4.string(),
+        //     email: z4.string().email(),
+        //     documento: z4.string(),
+        //     site: z4.string(),
+        //     telefones: z4.array(TelefoneBasicoSchema),
+        //     default_bank_account: ContaBancariaSchema,
+        //     transfer_settings: ConfiguracoesTransferenciaSchema,
+        //     automatic_anticipation_settings: ConfiguracoesAntecipacaoSchema,
+        //     code: z4.string(),
+        // });
+
+        // export const RecebedorIndividualSchema = RecebedorBaseSchema.extend({
+        //     type: z4.literal("individual"),
+        //     name: z4.string(),
+        //     mother_name: z4.string(),
+        //     birthdate: z4.string(),
+        //     monthly_income: z4.number(),
+        //     professional_occupation: z4.string(),
+        //     address: EnderecoCompletoSchema,
+        // });
+
+        // export const RecebedorEmpresaSchema = RecebedorBaseSchema.extend({
+        //     type: z4.literal("corporation"),
+        //     company_name: z4.string(),
+        //     trading_name: z4.string(),
+        //     annual_revenue: z4.number(),
+        //     corporation_type: z4.string(),
+        //     founding_date: z4.string(),
+        //     main_address: EnderecoCompletoSchema,
+        //     managing_partners: z4.array(SocioAdministradorSchema),
+        // });
+
+        // export namespace RecebedorDiscriminado {
+        //     export const InputSchema = z4.discriminatedUnion("type", [RecebedorEmpresaSchema, RecebedorIndividualSchema]);
+        // }
 
         export const InputSchema = z4.object({
-            data: z4.object({
-                recebedor: RecebedorDiscriminado.InputSchema,
-            }),
+            register_information: RegisterInformationDiscriminadoSchema,
+            default_bank_account: ContaBancariaSchema,
+            transfer_settings: ConfiguracoesTransferenciaSchema,
+            automatic_anticipation_settings: ConfiguracoesAntecipacaoSchema,
+            code: z4.string(),
+            external_reference: z4.string(),
         });
         export type Input = z4.infer<typeof InputSchema>;
 
-        export const OutputSchema = RecebedorDiscriminado;
+        export const OutputSchema = InputSchema.extend({_id: z4.string()});
         export type Output = {
             data: {
                 recebedor: z4.infer<typeof OutputSchema>;
