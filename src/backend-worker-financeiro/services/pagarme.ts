@@ -140,7 +140,7 @@ namespace SevicePagarme {
 
         const ConfiguracoesAntecipacaoSchema = z4.object({
             enabled: z4.boolean(),
-            type: z4.union([z4.literal("full"), z4.literal("parcial")]),
+            type: z4.union([z4.literal("full"), z4.literal("1025")]),
             volume_percentage: z4.string(),
             delay: z4.number().nullable(),
         });
