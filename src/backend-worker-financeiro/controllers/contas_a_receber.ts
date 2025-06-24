@@ -7,7 +7,7 @@ import z4 from "zod/v4";
 namespace ControllerContasReceber {
     export const SchemaBase = z4.object({
         external_code: z4.string().optional(),
-        external_id: z4.number().optional(),
+        external_id: z4.string().optional(),
         customer: z4.string().optional(),
         paymente_types: z4.number().optional(),
         payer: z4.string().optional(),
