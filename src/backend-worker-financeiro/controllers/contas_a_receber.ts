@@ -5,83 +5,12 @@ import z4 from "zod/v4";
 // import t from "onda-types"
 // t.Financeiro.Controllers.ContasReceber.Criar.Input
 namespace ControllerContasReceber {
-    export const SchemaBase = z4.object({
-        external_code: z4.string().optional(),
-        external_id: z4.string().optional(),
-        customer: z4.string().optional(),
-        paymente_types: z4.number().optional(),
-        payer: z4.string().optional(),
-        document: z4.string().optional().transform((val) => val?.replace(/\D/g, "")),
-        checkout: z4.string().optional(),
-        status: z4.number().optional(),
-        card_number: z4.string().optional(),
-        serial_number: z4.string().optional(),
-        description: z4.string().optional(),
-        amount: z4.number().optional(),
-        installment_count: z4.number().optional(),
-        installment: z4.number().optional(),
-        installment_amaount: z4.number().optional(),
-        helper_type_order_id: z4.number().optional(),
-        due_date: z4.iso.datetime().optional(),
-        metadata: z4.record(z4.string(), z4.unknown()).optional(),
-        payment_id: z4.string().optional(),
-        code_installment: z4.string().optional(),
-        url_charge: z4.string().url().optional(),
-        url_invoice: z4.string().url().optional(),
-        external_reference_primary: z4.string().optional(),
-        external_reference_secondary: z4.string().optional(),
-        external_reference_tertiary: z4.string().optional(),
-        external_reference_quaternary: z4.string().optional(),
-        created_user: z4.string().optional(),
-        created_at: z4.iso.datetime().optional(),
-        updated_user: z4.string().optional(),
-        updated_at: z4.iso.datetime().optional(),
-        deleted: z4.boolean().optional()
-    });
 
-    export const PhoneSchema = z4.object({
-        area_code: z4.string(),
-        number: z4.string(),
-        country_code: z4.string()
-    });
-    export type Phone = z4.infer<typeof PhoneSchema>;
+    export const ContasReceberCheckoutSchema = z4.string();
+    export type ContasReceberCheckout = z4.infer<typeof ContasReceberCheckoutSchema>;
 
-    export const AddressSchema = z4.object({
-        street: z4.string(),
-        number: z4.string(),
-        complement: z4.string(),
-        neighborhood: z4.string(),
-        city: z4.string(),
-        state: z4.string(),
-        zipcode: z4.string()
-    });
-    export type Address = z4.infer<typeof AddressSchema>;
-
-    export const CustomerSchema = z4.object({
-        name: z4.string(),
-        email: z4.string(),
-        document: z4.string().transform((val) => val.replace(/\D/g, "")),
-        phone: PhoneSchema,
-        address: AddressSchema,
-        external_reference: z4.string()
-    });
-    export type Customer = z4.infer<typeof CustomerSchema>;
-
-    export const MetadataSchema = z4.record(z4.string(), z4.any());
-    export type Metadata = z4.infer<typeof MetadataSchema>;
-
-    export const ClienteIdSchema = z4.object({
-        customer_id: z4.string()
-    });
-
-    export const MetodosPagamentoSchema = z4.union([
-        z4.literal("boleto"),
-        z4.literal("credit_card"),
-        z4.literal("debit_card"),
-        z4.literal("pix")
-    ]);
-
-    export type MetodosPagamento = z4.infer<typeof MetodosPagamentoSchema>;
+    export const ContasReceberMetodoPagamentoSchema = z4.array(z4.string());
+    export type ContasReceberMetodoPagamento = z4.infer<typeof ContasReceberMetodoPagamentoSchema>;
 
     export const ContasReceberBaseSchema = z4.object({
         _id: z4.uuid(),
@@ -89,43 +18,49 @@ namespace ControllerContasReceber {
         data_atualizacao: z4.date().nullable(),
         usuario_create_id: z4.uuidv4(),
         checkout: z4.string(),
-        customer: z4.union([CustomerSchema, ClienteIdSchema]),
-        installments: z4.number(),
-        amount: z4.number(),
-        due_at: z4.string(),
-        code: z4.string(),
-        method_payment: z4.array(z4.string()),
-        metadata: MetadataSchema,
-        description: z4.string(),
-        external_reference: z4.array(z4.string()),
+        cliente_id: z4.string(),
+        parcelas: z4.number(),
+        valor: z4.number(),
+        vencimento: z4.string(),
+        codigo: z4.string(),
+        metodo_pagamento: z4.array(z4.string()),
+        tipo_pagamento: z4.number(),
+        descricao: z4.string(),
+        referencia_externa_primaria: z4.string(),
+        referencia_externa_secundaria: z4.string(),
+        referencia_externa_terciaria: z4.string(),
+        referencia_externa_quartenaria: z4.string(),
         ativo: z4.boolean()
     });
-    export type ContasReceberBase = z4.infer<typeof SchemaBase>;
+    export type ContasReceberBase = z4.infer<typeof ContasReceberBaseSchema>;
 
     export namespace Criar {
         export const InputSchema = z4.object({
             data: z4.object({
-                contasReceber: z4.object({
+                contas_receber: z4.object({
                     checkout: z4.string(),
-                    customer: z4.union([CustomerSchema, ClienteIdSchema]),
-                    installments: z4.number(),
-                    amount: z4.number(),
-                    due_at: z4.iso.datetime().optional(),
-                    code: z4.string(),
-                    method_payment: z4.array(MetodosPagamentoSchema),
-                    metadata: MetadataSchema,
-                    description: z4.string(),
-                    external_reference: z4.array(z4.string()),
-                    ativo: z4.boolean().optional().default(true)
+                    cliente_id: z4.string(),
+                    parcelas: z4.number(),
+                    valor: z4.number(),
+                    vencimento: z4.string(),
+                    codigo: z4.string(),
+                    metodo_pagamento: z4.array(z4.string()),
+                    tipo_pagamento: z4.number(),
+                    descricao: z4.string(),
+                    referencia_externa_primaria: z4.string(),
+                    referencia_externa_secundaria: z4.string(),
+                    referencia_externa_terciaria: z4.string(),
+                    referencia_externa_quartenaria: z4.string(),
+                    ativo: z4.boolean().optional().default(true),
                 })
             })
         });
         export type Input = z4.infer<typeof InputSchema>;
 
-        export const OutputSchema = SchemaBase;
+        export const OutputSchema = ContasReceberBaseSchema;
         export type Output = {
             data: {
-                contasReceber: z4.infer<typeof OutputSchema>;
+                contas_receber: z4.infer<typeof OutputSchema>;
             }
         }
     }
@@ -133,33 +68,31 @@ namespace ControllerContasReceber {
     export namespace BuscarPeloFiltro {
         export const InputSchema = z4.object({
             filtros: z4.object({
-                contasReceber: z4.object({
+                contas_receber: z4.object({
                     pagina: z4.number().min(0),
                     _id: z4.uuidv4().optional().nullable(),
                     checkout: z4.string().optional().nullable(),
-                    installments: z4.number().optional().nullable(),
-                    amount: z4.number().optional().nullable(),
-                    due_at: z4.string().optional().nullable(),
-                    code: z4.string().optional().nullable(),
-                    description: z4.string().optional().nullable(),
-                    ativo: z4.boolean().optional().nullable(),
+                    cliente_id: z4.string().optional().nullable(),
+                    parcelas: z4.number().optional().nullable(),
+                    valor: z4.number().optional().nullable(),
+                    vencimento: z4.string().optional().nullable(),
+                    codigo: z4.string().optional().nullable(),
+                    metodo_pagamento: z4.array(z4.string()).optional().nullable(),
+                    tipo_pagamento: z4.number().optional().nullable(),
+                    descricao: z4.string().optional().nullable(),
+                    referencia_externa_primaria: z4.string().optional().nullable(),
+                    referencia_externa_secundaria: z4.string().optional().nullable(),
+                    referencia_externa_terciaria: z4.string().optional().nullable(),
+                    referencia_externa_quartenaria: z4.string().optional().nullable(),
                     usuario_create_id: z4.uuidv4().optional().nullable(),
-                    deleted: z4.boolean().optional().nullable(),
-                    external_code: z4.string().optional().nullable(),
-                    external_id: z4.number().optional().nullable(),
-                    customer: z4.string().optional().nullable(),
-                    paymente_types: z4.number().optional().nullable(),
-                    payer: z4.string().optional().nullable(),
-                    document: z4.string().transform((val)=> val.replace(/\D/g, "")).optional().nullable(),
-                    status: z4.string().optional().nullable(),
-                    payment_id: z4.string().optional().nullable()
-                })
+                }),
+
             })
         });
 
         export type Input = z4.infer<typeof InputSchema>;
 
-        export const OutputSchema = z4.array(SchemaBase);
+        export const OutputSchema = z4.array(ContasReceberBaseSchema);
         export type Output = {
             data: {
                 paginacao: {
@@ -168,7 +101,7 @@ namespace ControllerContasReceber {
                     itens_por_pagina: number;
                     total_itens_pagina_atual: number;
                 },
-                contasReceber: z4.infer<typeof OutputSchema>;
+                contas_receber: z4.infer<typeof OutputSchema>;
             }
         }
     }
@@ -181,10 +114,10 @@ namespace ControllerContasReceber {
         });
         export type Input = z4.infer<typeof InputSchema>;
 
-        export const OutputSchema = SchemaBase;
+        export const OutputSchema = ContasReceberBaseSchema;
         export type Output = {
             data: {
-                contasReceber: z4.infer<typeof OutputSchema>
+                contas_receber: z4.infer<typeof OutputSchema>
             }
         }
     }
@@ -192,45 +125,31 @@ namespace ControllerContasReceber {
     export namespace AtualizarPeloId {
         export const InputSchema = z4.object({
             data: z4.object({
-                contasReceber: z4.object({
+                contas_receber: z4.object({
                     _id: z4.uuidv4(),
                     checkout: z4.string().optional(),
-                    customer: CustomerSchema.optional(),
-                    installments: z4.number().optional(),
-                    amount: z4.number().optional(),
-                    due_at: z4.string().optional(),
-                    code: z4.string().optional(),
-                    method_payment: z4.array(z4.string()).optional(),
-                    metadata: MetadataSchema.optional(),
-                    description: z4.string().optional(),
-                    external_reference: z4.array(z4.string()).optional(),
-                    ativo: z4.boolean().optional(),
-                    deleted: z4.boolean().optional(),
-                    external_code: z4.string().optional(),
-                    external_id: z4.number().optional(),
-                    paymente_types: z4.number().optional(),
-                    payer: z4.string().optional(),
-                    document: z4.string().optional(),
-                    status: z4.string().optional(),
-                    payment_id: z4.string().optional(),
-                    code_installment: z4.string().optional(),
-                    url_charge: z4.string().optional(),
-                    url_invoice: z4.string().optional(),
-                    external_reference_primary: z4.string().optional(),
-                    external_reference_secondary: z4.string().optional(),
-                    external_reference_tertiary: z4.string().optional(),
-                    external_reference_quaternary: z4.string().optional(),
-                    updated_user: z4.string(),
-                    
+                    cliente_id: z4.string().optional(),
+                    parcelas: z4.number().optional(),
+                    valor: z4.number().optional(),
+                    vencimento: z4.string().optional(),
+                    codigo: z4.string().optional(),
+                    metodo_pagamento: z4.array(z4.string()).optional(),
+                    tipo_pagamento: z4.number().optional(),
+                    descricao: z4.string().optional(),
+                    referencia_externa_primaria: z4.string().optional(),
+                    referencia_externa_secundaria: z4.string().optional(),
+                    referencia_externa_terciaria: z4.string().optional(),
+                    referencia_externa_quartenaria: z4.string().optional(),
+                    ativo: z4.boolean().optional()
                 })
             })
         });
         export type Input = z4.infer<typeof InputSchema>;
 
-        export const OutputSchema = SchemaBase;
+        export const OutputSchema = ContasReceberBaseSchema;
         export type Output = {
             data: {
-                contasReceber: z4.infer<typeof OutputSchema>
+                contas_receber: z4.infer<typeof OutputSchema>
             }
         }
     }
@@ -244,7 +163,7 @@ namespace ControllerContasReceber {
         export const OutputSchema = ContasReceberBaseSchema;
         export type Output = {
             data: {
-                contasReceber: {}
+                contas_receber: {}
             }
         }
     }
