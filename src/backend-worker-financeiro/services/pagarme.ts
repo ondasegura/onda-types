@@ -104,8 +104,8 @@ namespace SevicePagarme {
         });
 
         const TelefoneComTipoSchema = z4.object({
-            ddd: z4.string(),
-            number: z4.string(),
+            ddd: z4.string().min(2),
+            number: z4.string().min(9),
             type: z4.union([z4.literal("mobile"), z4.literal("landline")]),
         });
 
@@ -125,10 +125,10 @@ namespace SevicePagarme {
             holder_type: z4.union([z4.literal("individual"), z4.literal("company")]),
             holder_document: z4.string(),
             bank: z4.string(),
-            branch_number: z4.string(),
-            branch_check_digit: z4.string(),
-            account_number: z4.string(),
-            account_check_digit: z4.string(),
+            branch_number: z4.string().max(4),
+            branch_check_digit: z4.string().max(1),
+            account_number: z4.string().max(13),
+            account_check_digit: z4.string().max(1),
             type: z4.union([z4.literal("checking"), z4.literal("savings"), z4.string()]),
         });
 
@@ -148,7 +148,7 @@ namespace SevicePagarme {
         const SocioAdministradorSchema = z4.object({
             name: z4.string(),
             email: z4.string().email(),
-            document: z4.string(),
+            document: z4.string().max(11),
             type: z4.literal("individual"),
             mother_name: z4.string(),
             birthdate: z4.string(),
@@ -162,7 +162,7 @@ namespace SevicePagarme {
         const RegisterInformationIndividualSchema = z4.object({
             type: z4.literal("individual"),
             email: z4.string().email(),
-            document: z4.string(),
+            document: z4.string().max(11),
             name: z4.string(),
             mother_name: z4.string().optional(),
             birthdate: z4.string(),
@@ -234,7 +234,6 @@ namespace SevicePagarme {
             transfer_settings: ConfiguracoesTransferenciaSchema,
             automatic_anticipation_settings: ConfiguracoesAntecipacaoSchema,
             code: z4.string(),
-            external_reference: z4.string(),
         });
         export type Input = z4.infer<typeof InputSchema>;
 
