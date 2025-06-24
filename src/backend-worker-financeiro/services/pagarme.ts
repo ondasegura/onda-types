@@ -237,7 +237,7 @@ namespace SevicePagarme {
         });
         export type Input = z4.infer<typeof InputSchema>;
 
-        export const OutputSchema = InputSchema.extend({_id: z4.string()});
+        export const OutputSchema = InputSchema;
         export type Output = {
             data: {
                 recebedor: z4.infer<typeof OutputSchema>;
