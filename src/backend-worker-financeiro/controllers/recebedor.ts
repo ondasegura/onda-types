@@ -10,13 +10,13 @@ export namespace ControllerRecebedor {
     });
     // Schemas auxiliares
     const TelefoneBasicoSchema = z4.object({
-        ddd: z4.string(),
+        ddd: z4.string({error: "O ddd é obrigatório"}),
         numero: z4.string(),
     });
 
     const TelefoneComTipoSchema = z4.object({
-        ddd: z4.string().length(2, "O DDD deve conter 2 dígitos."),
-        numero: z4.string().length(9, "O número de telefone deve conter 9 dígitos."),
+        ddd: z4.string({error: "O ddd é obrigatório"}).length(2, "O DDD deve conter 2 dígitos."),
+        numero: z4.string({error: "O número é obrigatório"}).length(9, "O número de telefone deve conter 9 dígitos."),
         tipo: z4.union([z4.literal("celular"), z4.literal("fixo")]),
     });
 
