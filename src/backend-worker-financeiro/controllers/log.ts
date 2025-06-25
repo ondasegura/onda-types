@@ -6,6 +6,10 @@ namespace ControllerLog {
     z4.literal("log")
   ]);
 
+
+
+  export type LogType = z4.infer<typeof LogTypeSchema>;
+
   export const LogSchema = z4.object({
     class_name: z4.string(),
     matrix: z4.string(),
