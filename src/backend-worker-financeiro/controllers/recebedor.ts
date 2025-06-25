@@ -5,6 +5,9 @@ import z4 from "zod/v4";
 // t.Financeiro.Recebedor.Criar.Input
 
 export namespace ControllerRecebedor {
+    const remover_simbolos = z4.string().transform((valor) => {
+        return valor.replace(/\D/g, "");
+    });
     // Schemas auxiliares
     const TelefoneBasicoSchema = z4.object({
         ddd: z4.string(),
@@ -24,7 +27,7 @@ export namespace ControllerRecebedor {
         bairro: z4.string(),
         cidade: z4.string(),
         estado: z4.string(),
-        cep: z4.string().length(8, "O CEP deve conter 8 dígitos."),
+        cep: z4.preprocess((valor) => String(valor ?? ""), remover_simbolos.pipe(z4.string().length(8, "O CEP deve conter 8 dígitos."))),
         ponto_referencia: z4.string(),
     });
 
