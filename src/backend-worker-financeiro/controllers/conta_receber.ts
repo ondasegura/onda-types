@@ -6,11 +6,8 @@ import z4 from "zod/v4";
 // t.Financeiro.Controllers.ContaReceber.Criar.Input
 namespace ControllerContaReceber {
 
-   export const ContaReceberCheckoutSchema = z4.string();
-   export type ContaReceberCheckout = z4.infer<typeof ContaReceberCheckoutSchema>;
-
-   export const ContaReceberMetodoPagamentoSchema = z4.array(z4.string());
-   export type ContaReceberMetodoPagamento = z4.infer<typeof ContaReceberMetodoPagamentoSchema>;
+   export const ContaReceberStatusSchema = z4.union([z4.literal("ativo"), z4.literal("inativo")]);
+   export type ContaReceberStatus = z4.infer<typeof ContaReceberStatusSchema>;
 
    export const ContaReceberBaseSchema = z4.object({
        _id: z4.uuid(),
@@ -30,7 +27,19 @@ namespace ControllerContaReceber {
        referencia_externa_secundaria: z4.string(),
        referencia_externa_terciaria: z4.string(),
        referencia_externa_quartenaria: z4.string(),
-       ativo: z4.boolean()
+       ativo: z4.boolean(),
+       documento_titular: z4.string(),
+       titular: z4.string(),
+       status: z4.number(),
+       numero_cartao: z4.string(),
+       numero_serial: z4.string(),
+       pagamento_id: z4.string(),
+       parcela: z4.number(),
+       valor_pacela: z4.number(),
+       url_pedido: z4.string(),
+       url_cobranca: z4.string(),
+       transacao_id: z4.string(),
+       meta_data: z4.record(z4.string(), z4.any()).optional()
    });
    export type ContaReceberBase = z4.infer<typeof ContaReceberBaseSchema>;
 
@@ -51,7 +60,7 @@ namespace ControllerContaReceber {
                    referencia_externa_secundaria: z4.string(),
                    referencia_externa_terciaria: z4.string(),
                    referencia_externa_quartenaria: z4.string(),
-                   ativo: z4.boolean().optional().default(true),
+                   meta_data: z4.record(z4.string(), z4.any()).optional()
                })
            })
        });
@@ -85,6 +94,17 @@ namespace ControllerContaReceber {
                    referencia_externa_terciaria: z4.string().optional().nullable(),
                    referencia_externa_quartenaria: z4.string().optional().nullable(),
                    ativo: z4.boolean().optional().nullable(),
+                   documento_titular: z4.string().optional().nullable(),
+                   titular: z4.string().optional().nullable(),
+                   status: z4.number().optional().nullable(),
+                   numero_cartao: z4.string().optional().nullable(),
+                   numero_serial: z4.string().optional().nullable(),
+                   pagamento_id: z4.string().optional().nullable(),
+                   parcela: z4.number().optional().nullable(),
+                   valor_pacela: z4.number().optional().nullable(),
+                   url_pedido: z4.string().optional().nullable(),
+                   url_cobranca: z4.string().optional().nullable(),
+                   transacao_id: z4.string().optional().nullable(),
                    usuario_create_id: z4.uuidv4().optional().nullable(),
                }),
 
@@ -141,7 +161,18 @@ namespace ControllerContaReceber {
                    referencia_externa_secundaria: z4.string().optional(),
                    referencia_externa_terciaria: z4.string().optional(),
                    referencia_externa_quartenaria: z4.string().optional(),
-                   ativo: z4.boolean().optional()
+                   ativo: z4.boolean().optional(),
+                   documento_titular: z4.string().optional(),
+                   titular: z4.string().optional(),
+                   status: z4.number().optional(),
+                   numero_cartao: z4.string().optional(),
+                   numero_serial: z4.string().optional(),
+                   pagamento_id: z4.string().optional(),
+                   parcela: z4.number().optional(),
+                   valor_pacela: z4.number().optional(),
+                   url_pedido: z4.string().optional(),
+                   url_cobranca: z4.string().optional(),
+                   transacao_id: z4.string().optional()
                })
            })
        });
