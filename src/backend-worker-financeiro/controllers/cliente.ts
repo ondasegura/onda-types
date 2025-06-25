@@ -137,22 +137,23 @@ namespace ControllerCliente {
             data: z4.object({
                 cliente: z4.object({
                     _id: z4.uuidv4(),
-                    nome: z4.string().optional(),
-                    email: z4.email().optional(),
-                    codigo: z4.string().optional(),
-                    cpf_cnpj: z4.string().optional(),
-                    tipo: ClienteTipoSchema.optional(),
-                    genero: ClienteGeneroSchema.optional(),
-                    data_nascimento: z4.string().optional(),
-                    endereco: z4.string().optional(),
-                    complemento: z4.string().optional(),
-                    cep: z4.string().optional(),
-                    cidade: z4.string().optional(),
-                    estado: z4.string().optional(),
-                    pais: z4.string().optional(),
-                    telefone: z4.string().optional(),
-                    celular: z4.string().optional(),
-                    excluido: z4.boolean().optional()
+                    nome: z4.string().optional().nullable(),
+                    email: z4.email().optional().nullable(),
+                    codigo: z4.string().optional().nullable(),
+                    cpf_cnpj: z4.string().optional().nullable(),
+                    tipo: ClienteTipoSchema.optional().nullable(),
+                    genero: ClienteGeneroSchema.optional().nullable(),
+                    data_nascimento: z4.string().optional().nullable(),
+                    endereco: z4.string().optional().nullable(),
+                    complemento: z4.string().optional().nullable(),
+                    cep: z4.string().optional().nullable(),
+                    cidade: z4.string().optional().nullable(),
+                    estado: z4.string().optional().nullable(),
+                    pais: z4.string().optional().nullable(),
+                    telefone: z4.string().optional().nullable(),
+                    celular: z4.string().optional().nullable(),
+                    asaas_external_id: z4.string().optional().nullable(),
+                    excluido: z4.boolean().optional().nullable()
                 })
             })
         });
