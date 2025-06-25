@@ -58,6 +58,7 @@ namespace ControllerContaReceber {
                    referencia_externa_secundaria: z4.string(),
                    referencia_externa_terciaria: z4.string(),
                    referencia_externa_quartenaria: z4.string()
+                   
                })
            })
        });
