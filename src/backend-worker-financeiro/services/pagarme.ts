@@ -1,5 +1,5 @@
 import z4 from "zod/v4";
-import ControllerRecebedor from "../controllers/recebedor/recebedor";
+import ControllerRecebedor from "../controllers/recebedor";
 
 // COMO USAR ESTE NAMESPACE NA HORA DE IMPORTAR:
 // import t from "onda-types"

@@ -1,6 +1,6 @@
 import TypeOrder from "./order";
 import TypeCustomer from "./customer";
-import ControllerRecebedor from "../recebedor/recebedor";
+import ControllerRecebedor from "../recebedor";
 namespace Pagarme {
     export import Order = TypeOrder;
     export import Customer = TypeCustomer;

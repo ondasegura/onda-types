@@ -1,17 +1,23 @@
 import { Context as HonoContext } from "hono";
-import UP from "./controllers/token/token";
+
+
+// CONTROLLERS:
+import UP from "./controllers/token";
 import P from "./controllers/pagarme";
-import TypeOrder from "./controllers/defaultOrder/defaultOrder";
+import DefaultOrder from "./controllers/default_order";
 import TypeCustomer from "./controllers/pagarme/customer";
-import R from './controllers/response/Response';
+import R from './controllers/response';
+import UserPayload from "./controllers/token";
+import { ControllerFinanceiro as CF } from "./controllers/order";
+import CL from "./controllers/logs";
+import CR from "./controllers/recebedor"
+
+// USAR ESSE PADRÃO DE IMPORTAÇÃO COM O NOME ESPLICITO:
 import ControllerHelpers from "./controllers/helpers";
-import UserPayload from "./controllers/token/token";
-import { ControllerFinanceiro as CF } from "./order";
-import CL from "./controllers/logs/logs";
-import CR from "./controllers/recebedor/recebedor"
-import ControllerClientes from "../backend-banco/cliente";
-import ControllerContasReceber from "./controllers/contas_a_receber";
+import ControllerContasReceber from "./controllers/conta_receber";
 import ControllerCliente from "./controllers/cliente";
+
+
 //SERVICES
 import ServicePagarme from "./services/pagarme";
 namespace BackendWorkerFinanceiro {
@@ -30,7 +36,7 @@ namespace BackendWorkerFinanceiro {
     }
     export namespace Controllers {
         export import Pagarme = P;
-        export import TypeDefaultOrderRequest = TypeOrder;
+        export import TypeDefaultOrderRequest = DefaultOrder;
         export import Response = R;
         export import UserPayload = UP;
         export import Helpers = ControllerHelpers;
@@ -38,7 +44,7 @@ namespace BackendWorkerFinanceiro {
         export import ControllerFinanceiro = CF; //remover apos o teste
         export import ControllerLogs = CL;
         export import Recebedor = CR;
-        export import Clientes = ControllerClientes;
+
         export import ContaReceber = ControllerContasReceber;
         //Cliente correto novo cadastro
         export import Cliente = ControllerCliente;

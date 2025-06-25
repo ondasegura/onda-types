@@ -1,5 +1,5 @@
 import z4 from "zod/v4";
-import t from "./index";
+import t from "../index";
 
 export namespace NamesPaceEmail {
     export namespace sendEmail {
