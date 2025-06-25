@@ -62,6 +62,7 @@ namespace ControllerContaReceber {
                })
            })
        });
+       
        export type Input = z4.infer<typeof InputSchema>;
 
        export const OutputSchema = ContaReceberBaseSchema;
