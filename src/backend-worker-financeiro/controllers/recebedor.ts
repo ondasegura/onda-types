@@ -12,8 +12,8 @@ export namespace ControllerRecebedor {
     });
 
     const TelefoneComTipoSchema = z4.object({
-        ddd: z4.string(),
-        numero: z4.string(),
+        ddd: z4.string().length(2, "O DDD deve conter 2 dígitos."),
+        numero: z4.string().length(9, "O número de telefone deve conter 9 dígitos."),
         tipo: z4.union([z4.literal("celular"), z4.literal("fixo")]),
     });
 
@@ -24,7 +24,7 @@ export namespace ControllerRecebedor {
         bairro: z4.string(),
         cidade: z4.string(),
         estado: z4.string(),
-        cep: z4.string(),
+        cep: z4.string().length(8, "O CEP deve conter 8 dígitos."),
         ponto_referencia: z4.string(),
     });
 
@@ -33,11 +33,11 @@ export namespace ControllerRecebedor {
         tipo_titular: z4.union([z4.literal("individual"), z4.literal("empresa")]),
         documento_titular: z4.string(),
         banco: z4.string(),
-        numero_agencia: z4.string(),
-        digito_agencia: z4.string(),
-        numero_conta: z4.string(),
-        digito_conta: z4.string(),
-        tipo: z4.union([z4.literal("corrente"), z4.literal("poupanca"), z4.string()]),
+        numero_agencia: z4.string().length(4, "A agência deve conter 4 dígitos."),
+        digito_agencia: z4.string().max(1, "O dígito da agência deve conter no máximo 1 dígito."),
+        numero_conta: z4.string().max(13, "O númeo da conta deve conter no máximo 13 dígitos."),
+        digito_conta: z4.string().max(1, "O dígito da conta deve conter no máximo 1 dígito."),
+        tipo: z4.union([z4.literal("corrente"), z4.literal("poupanca"), z4.string()], "O tipo da conta deve ser corrente ou poupança."),
     });
 
     const ConfiguracoesTransferenciaSchema = z4.object({
@@ -55,7 +55,7 @@ export namespace ControllerRecebedor {
 
     const SocioAdministradorSchema = z4.object({
         nome: z4.string(),
-        email: z4.string().email(),
+        email: z4.email(),
         documento: z4.string(),
         tipo: z4.union([z4.literal("individual"), z4.literal("empresa")]),
         nome_mae: z4.string(),
@@ -70,7 +70,7 @@ export namespace ControllerRecebedor {
     export const RecebedorBaseSchema = z4.object({
         _id: z4.uuid().optional(),
         referencia_externa: z4.string(),
-        email: z4.string().email(),
+        email: z4.email(),
         documento: z4.string(),
         site: z4.string(),
         telefones: z4.array(TelefoneBasicoSchema),
@@ -176,7 +176,7 @@ export namespace ControllerRecebedor {
             faturamento_anual: z4.number(),
             tipo_empresa: z4.string(),
             data_fundacao: z4.string(),
-            email: z4.string().email(),
+            email: z4.email(),
             documento: z4.string(),
             site: z4.string(),
             telefones: z4.array(TelefoneBasicoSchema),
