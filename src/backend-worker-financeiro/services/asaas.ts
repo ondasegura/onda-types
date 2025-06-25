@@ -53,7 +53,7 @@ namespace ServiceAsaas {
     export namespace CriarCliente {
         export const InputSchema = z4.object({
             data: z4.object({
-                customer: z4.object({
+                cliente: z4.object({
                     name: z4.string(),
                     cpfCnpj: z4.string(),
                     email: z4.email(),
