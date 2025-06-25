@@ -123,6 +123,23 @@ namespace ServiceAsaas {
         z4.literal('SEND_LINHA_DIGITAVEL')
     ]);
     export type NotificationEvent = z4.infer<typeof NotificationEventSchema>;
+
+    export const NotificationConfigSchema = z4.object({
+        object: z4.literal('notification'),
+        id: z4.string(),
+        customer: z4.string(),
+        enabled: z4.boolean(),
+        emailEnabledForProvider: z4.boolean(),
+        smsEnabledForProvider: z4.boolean(),
+        emailEnabledForCustomer: z4.boolean(),
+        smsEnabledForCustomer: z4.boolean(),
+        phoneCallEnabledForCustomer: z4.boolean(),
+        whatsappEnabledForCustomer: z4.boolean(),
+        event: NotificationEventSchema,
+        scheduleOffset: z4.number(),
+        deleted: z4.boolean()
+    });
+    export type NotificationConfig = z4.infer<typeof NotificationConfigSchema>;
 }
 
 export default ServiceAsaas
