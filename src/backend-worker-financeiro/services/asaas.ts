@@ -174,7 +174,7 @@ namespace ServiceAsaas {
 
             export type Output = {
                 data: {
-                    cliente: z4.infer<typeof OutputSchema>;
+                    clientes: z4.infer<typeof OutputSchema>;
                 };
             };
         }
