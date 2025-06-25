@@ -86,7 +86,6 @@ export namespace ControllerRecebedor {
     // --- Schemas Principais ---
 
     export const RecebedorBaseSchema = z4.object({
-        _id: z4.string().uuid(),
         referencia_externa: add_mensagem_campo_obrigatorio("Referência externa"),
         email: add_mensagem_campo_obrigatorio("Email").email({message: "O formato do e-mail é inválido."}),
         documento: add_mensagem_campo_obrigatorio("Documento"),
