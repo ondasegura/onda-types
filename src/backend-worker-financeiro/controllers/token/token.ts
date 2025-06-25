@@ -28,7 +28,7 @@ namespace UserPayload {
     onda_user_username: z4.string(),
     onda_user_departamento: z4.string(),
     onda_user_email: z4.email(),
-    onda_user_id: z4.number(),
+    onda_user_id: z4.string(),
     onda_imob_id: z4.string(),
     onda_colaborador_id: z4.number(),
     type_user: z4.literal("ONDA_USER"),
