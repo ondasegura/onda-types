@@ -1,59 +1,46 @@
-import {ZodIssue} from "zod";
 import z4 from "zod/v4";
 
 // COMO USAR ESTE NAMESPACE NA HORA DE IMPORTAR:
 // import t from "onda-types"
 // t.Financeiro.Recebedor.Criar.Input
 
-export const add_mensagem_campo_obrigatorio = (label: string) => {
-    const mensagem_campo_obrigatorio = `O campo '${label}' é obrigatório`;
-    return z4
-        .string({
-            error: mensagem_campo_obrigatorio,
-        })
-        .trim()
-        .min(1, {message: mensagem_campo_obrigatorio});
-};
-
 export namespace ControllerRecebedor {
     const remover_simbolos = z4.string().transform((valor) => {
         return valor.replace(/\D/g, "");
     });
-
-    // --- Schemas auxiliares ---
-
+    // Schemas auxiliares
     const TelefoneBasicoSchema = z4.object({
-        ddd: add_mensagem_campo_obrigatorio("DDD").length(2, {message: "O DDD deve conter 2 dígitos."}),
-        numero: add_mensagem_campo_obrigatorio("Número").length(9, {message: "O número de telefone deve conter 9 dígitos."}),
+        ddd: z4.string(),
+        numero: z4.string(),
     });
 
     const TelefoneComTipoSchema = z4.object({
-        ddd: add_mensagem_campo_obrigatorio("DDD").length(2, {message: "O DDD deve conter 2 dígitos."}),
-        numero: add_mensagem_campo_obrigatorio("Número").length(9, {message: "O número de telefone deve conter 9 dígitos."}),
+        ddd: z4.string().length(2, "O DDD deve conter 2 dígitos."),
+        numero: z4.string().length(9, "O número de telefone deve conter 9 dígitos."),
         tipo: z4.union([z4.literal("celular"), z4.literal("fixo")]),
     });
 
     const EnderecoCompletoSchema = z4.object({
-        rua: add_mensagem_campo_obrigatorio("Rua"),
-        complemento: add_mensagem_campo_obrigatorio("Complemento"),
-        numero_rua: add_mensagem_campo_obrigatorio("Número do endereço"),
-        bairro: add_mensagem_campo_obrigatorio("Bairro"),
-        cidade: add_mensagem_campo_obrigatorio("Cidade"),
-        estado: add_mensagem_campo_obrigatorio("Estado"),
-        cep: z4.preprocess((valor) => String(valor ?? ""), remover_simbolos.pipe(add_mensagem_campo_obrigatorio("CEP").length(8, {message: "O CEP deve conter 8 dígitos."}))),
-        ponto_referencia: add_mensagem_campo_obrigatorio("Ponto de referência"),
+        rua: z4.string(),
+        complemento: z4.string(),
+        numero_rua: z4.string(),
+        bairro: z4.string(),
+        cidade: z4.string(),
+        estado: z4.string(),
+        cep: z4.preprocess((valor) => String(valor ?? ""), remover_simbolos.pipe(z4.string().length(8, "O CEP deve conter 8 dígitos."))),
+        ponto_referencia: z4.string(),
     });
 
     const ContaBancariaSchema = z4.object({
-        nome_titular: add_mensagem_campo_obrigatorio("Nome do titular"),
+        nome_titular: z4.string(),
         tipo_titular: z4.union([z4.literal("individual"), z4.literal("empresa")]),
-        documento_titular: add_mensagem_campo_obrigatorio("Documento do titular"),
-        banco: add_mensagem_campo_obrigatorio("Banco"),
-        numero_agencia: add_mensagem_campo_obrigatorio("Número da agência").length(4, {message: "A agência deve conter 4 dígitos."}),
-        digito_agencia: add_mensagem_campo_obrigatorio("Dígito da agência").max(1, {message: "O dígito da agência deve conter no máximo 1 dígito."}),
-        numero_conta: add_mensagem_campo_obrigatorio("Número da conta").max(13, {message: "O número da conta deve conter no máximo 13 dígitos."}),
-        digito_conta: add_mensagem_campo_obrigatorio("Dígito da conta").max(1, {message: "O dígito da conta deve conter no máximo 1 dígito."}),
-        tipo: z4.union([z4.literal("corrente"), z4.literal("poupanca"), z4.string()]),
+        documento_titular: z4.string(),
+        banco: z4.string(),
+        numero_agencia: z4.string().length(4, "A agência deve conter 4 dígitos."),
+        digito_agencia: z4.string().max(1, "O dígito da agência deve conter no máximo 1 dígito."),
+        numero_conta: z4.string().max(13, "O númeo da conta deve conter no máximo 13 dígitos."),
+        digito_conta: z4.string().max(1, "O dígito da conta deve conter no máximo 1 dígito."),
+        tipo: z4.union([z4.literal("corrente"), z4.literal("poupanca"), z4.string()], "O tipo da conta deve ser corrente ou poupança."),
     });
 
     const ConfiguracoesTransferenciaSchema = z4.object({
@@ -65,55 +52,54 @@ export namespace ControllerRecebedor {
     const ConfiguracoesAntecipacaoSchema = z4.object({
         habilitado: z4.boolean(),
         tipo: z4.union([z4.literal("completa"), z4.literal("parcial")]),
-        percentual_volume: add_mensagem_campo_obrigatorio("Percentual de volume"),
+        percentual_volume: z4.string(),
         atraso: z4.number().nullable(),
     });
 
     const SocioAdministradorSchema = z4.object({
-        nome: add_mensagem_campo_obrigatorio("Nome do sócio"),
-        email: add_mensagem_campo_obrigatorio("Email do sócio").email({message: "O formato do e-mail é inválido."}),
-        documento: add_mensagem_campo_obrigatorio("Documento do sócio"),
+        nome: z4.string(),
+        email: z4.email(),
+        documento: z4.string(),
         tipo: z4.union([z4.literal("individual"), z4.literal("empresa")]),
-        nome_mae: add_mensagem_campo_obrigatorio("Nome da mãe do sócio"),
-        data_nascimento: add_mensagem_campo_obrigatorio("Data de nascimento do sócio"),
+        nome_mae: z4.string(),
+        data_nascimento: z4.string(),
         renda_mensal: z4.number(),
-        ocupacao_profissional: add_mensagem_campo_obrigatorio("Ocupação profissional do sócio"),
+        ocupacao_profissional: z4.string(),
         representante_legal_autodeclarado: z4.boolean(),
         endereco: EnderecoCompletoSchema,
         telefones: z4.array(TelefoneComTipoSchema),
     });
 
-    // --- Schemas Principais ---
-
     export const RecebedorBaseSchema = z4.object({
-        referencia_externa: add_mensagem_campo_obrigatorio("Referência externa"),
-        email: add_mensagem_campo_obrigatorio("Email").email({message: "O formato do e-mail é inválido."}),
-        documento: add_mensagem_campo_obrigatorio("Documento"),
-        site: z4.string().url({message: "O formato do site é inválido."}).optional(),
+        _id: z4.uuid().optional(),
+        referencia_externa: z4.string(),
+        email: z4.email(),
+        documento: z4.string(),
+        site: z4.string(),
         telefones: z4.array(TelefoneBasicoSchema),
         conta_bancaria: ContaBancariaSchema,
         configuracoes_transferencia: ConfiguracoesTransferenciaSchema,
         configuracoes_antecipacao: ConfiguracoesAntecipacaoSchema,
-        codigo: add_mensagem_campo_obrigatorio("Código"),
+        codigo: z4.string(),
     });
 
     export const RecebedorIndividualSchema = RecebedorBaseSchema.extend({
         tipo: z4.literal("individual"),
-        nome: add_mensagem_campo_obrigatorio("Nome"),
-        nome_mae: add_mensagem_campo_obrigatorio("Nome da mãe"),
-        data_nascimento: add_mensagem_campo_obrigatorio("Data de nascimento"),
+        nome: z4.string(),
+        nome_mae: z4.string(),
+        data_nascimento: z4.string(),
         renda_mensal: z4.number(),
-        ocupacao_profissional: add_mensagem_campo_obrigatorio("Ocupação profissional"),
+        ocupacao_profissional: z4.string(),
         endereco: EnderecoCompletoSchema,
     });
 
     export const RecebedorEmpresaSchema = RecebedorBaseSchema.extend({
         tipo: z4.literal("empresa"),
-        razao_social: add_mensagem_campo_obrigatorio("Razão social"),
-        nome_fantasia: add_mensagem_campo_obrigatorio("Nome fantasia"),
+        razao_social: z4.string(),
+        nome_fantasia: z4.string(),
         faturamento_anual: z4.number(),
-        tipo_empresa: add_mensagem_campo_obrigatorio("Tipo da empresa"),
-        data_fundacao: add_mensagem_campo_obrigatorio("Data de fundação"),
+        tipo_empresa: z4.string(),
+        data_fundacao: z4.string(),
         endereco_principal: EnderecoCompletoSchema,
         socios_administradores: z4.array(SocioAdministradorSchema),
     });
@@ -140,10 +126,13 @@ export namespace ControllerRecebedor {
         export const InputSchema = z4.object({
             filtros: z4.object({
                 recebedores: z4.object({
-                    tipo: z4.union([z4.literal("individual"), z4.literal("empresa")]).nullable(),
-                    referencia_externa: z4.string().nullable(),
-                    documento: z4.string().nullable(),
-                    email: z4.string().nullable(),
+                    tipo: z4
+                        .union([z4.literal("individual"), z4.literal("empresa")])
+                        .optional()
+                        .nullable(),
+                    referencia_externa: z4.string().optional().nullable(),
+                    documento: z4.string().optional().nullable(),
+                    email: z4.string().optional().nullable(),
                 }),
             }),
         });
