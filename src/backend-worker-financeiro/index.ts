@@ -1,22 +1,20 @@
-import { Context as HonoContext } from "hono";
-
+import {Context as HonoContext} from "hono";
 
 // CONTROLLERS:
 import UP from "./controllers/token";
 import P from "./controllers/pagarme";
 import DefaultOrder from "./controllers/default_order";
 import TypeCustomer from "./controllers/pagarme/customer";
-import R from './controllers/response';
+import R from "./controllers/response";
 import UserPayload from "./controllers/token";
-import { ControllerFinanceiro as CF } from "./controllers/order";
+import {ControllerFinanceiro as CF} from "./controllers/order";
 import ControllerLog from "./controllers/log";
-import CR from "./controllers/recebedor"
+import ControllerRecebedor from "./controllers/recebedor";
 
 // USAR ESSE PADRÃO DE IMPORTAÇÃO COM O NOME ESPLICITO:
 import ControllerHelpers from "./controllers/helpers";
 import ControllerContasReceber from "./controllers/conta_receber";
 import ControllerCliente from "./controllers/cliente";
-
 
 //SERVICES
 import ServicePagarme from "./services/pagarme";
@@ -46,7 +44,7 @@ namespace BackendWorkerFinanceiro {
         export import Customer = TypeCustomer;
         export import ControllerFinanceiro = CF; //remover apos o teste
         export import Log = ControllerLog;
-        export import Recebedor = CR;
+        export import Recebedor = ControllerRecebedor;
 
         export import ContaReceber = ControllerContasReceber;
         //Cliente correto novo cadastro
