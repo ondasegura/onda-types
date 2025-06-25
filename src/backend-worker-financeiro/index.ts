@@ -9,7 +9,7 @@ import TypeCustomer from "./controllers/pagarme/customer";
 import R from './controllers/response';
 import UserPayload from "./controllers/token";
 import { ControllerFinanceiro as CF } from "./controllers/order";
-import CL from "./controllers/logs";
+import ControllerLog from "./controllers/log";
 import CR from "./controllers/recebedor"
 
 // USAR ESSE PADRÃO DE IMPORTAÇÃO COM O NOME ESPLICITO:
@@ -45,7 +45,7 @@ namespace BackendWorkerFinanceiro {
         export import Helpers = ControllerHelpers;
         export import Customer = TypeCustomer;
         export import ControllerFinanceiro = CF; //remover apos o teste
-        export import ControllerLogs = CL;
+        export import Log = ControllerLog;
         export import Recebedor = CR;
 
         export import ContaReceber = ControllerContasReceber;
