@@ -3,7 +3,6 @@ import z4 from "zod/v4"
 
 namespace ServiceAsaas {
 
-
     export namespace Cobranca {
         export namespace Criar {
             export const InputSchema = z4.object({
@@ -53,7 +52,6 @@ namespace ServiceAsaas {
             export type Output = z4.infer<typeof OutputSchema>;
         }
     }
-
 
     export namespace Cliente {
         export namespace Criar {
@@ -180,7 +178,6 @@ namespace ServiceAsaas {
                 };
             };
         }
-
     }
 
     export namespace Notification {
