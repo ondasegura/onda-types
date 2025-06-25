@@ -94,6 +94,9 @@ namespace SevicePagarme {
     }
 
     export namespace Recebedor {
+        const remover_simbolos = z4.string().transform((valor) => {
+            return valor.replace(/\D/g, "");
+        });
         export namespace Criar {
             const TelefoneComTipoSchema = z4.object({
                 ddd: z4.string().length(2, "O DDD deve conter 2 dígitos."),
@@ -108,7 +111,7 @@ namespace SevicePagarme {
                 neighborhood: z4.string(),
                 city: z4.string(),
                 state: z4.string(),
-                zip_code: z4.string().length(8, "O CEP deve conter 8 dígitos."),
+                zip_code: z4.preprocess((valor) => String(valor ?? ""), remover_simbolos.pipe(z4.string().length(8, "O CEP deve conter 8 dígitos."))),
                 reference_point: z4.string(),
             });
 
