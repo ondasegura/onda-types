@@ -39,7 +39,7 @@ namespace ControllerContaReceber {
        url_pedido: z4.string(),
        url_cobranca: z4.string(),
        transacao_id: z4.string(),
-       meta_data: z4.record(z4.string(), z4.any()).optional()
+       metadata: z4.record(z4.string(), z4.any()).optional()
    });
    export type ContaReceberBase = z4.infer<typeof ContaReceberBaseSchema>;
 
@@ -60,7 +60,7 @@ namespace ControllerContaReceber {
                    referencia_externa_secundaria: z4.string(),
                    referencia_externa_terciaria: z4.string(),
                    referencia_externa_quartenaria: z4.string(),
-                   meta_data: z4.record(z4.string(), z4.any()).optional()
+                   metadata: z4.record(z4.string(), z4.any()).optional()
                })
            })
        });
