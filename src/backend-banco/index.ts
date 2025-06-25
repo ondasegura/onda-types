@@ -1,22 +1,22 @@
 import { Context as HonoContext } from "hono";
 import type { D1Database, R2Bucket } from '@cloudflare/workers-types';
 
-import ControllerCliente from "./cliente";
-import NamesPaceOrdemServico from "./ordem_servio";
-import ControllerUsuario from "./usuario";
-import ControllerAsaas from "./asaas";
-import NamesPacePusher from "./pusher";
-import NamesPaceEmail from "./email";
-import ControllerFinanceiro from "./financeiro";
-import ControllerConsulta from "./consulta";
-import ControllerHelpers from "./helpers";
-import ControllerBucket from "./bucket";
+import ControllerCliente from "./controllers/cliente";
+import NamesPaceOrdemServico from "./controllers/ordem_servio";
+import ControllerUsuario from "./controllers/usuario";
+import ControllerAsaas from "./controllers/asaas";
+import NamesPacePusher from "./controllers/pusher";
+import NamesPaceEmail from "./controllers/email";
+import ControllerFinanceiro from "./controllers/financeiro";
+import ControllerConsulta from "./controllers/consulta";
+import ControllerHelpers from "./controllers/helpers";
+import ControllerBucket from "./controllers/bucket";
 
-import ControllerSistema from "./sistema";
+import ControllerSistema from "./controllers/sistema";
 
-import ControllerLog from "./log";
+import ControllerLog from "./controllers/log";
 
-import ControllerContasPagar from "./contasPagar";
+import ControllerContasPagar from "./controllers/contasPagar";
 namespace BackendBanco {
     export namespace Controllers {
         export import Cliente = ControllerCliente;

@@ -5,6 +5,7 @@ namespace t {
     export import Financeiro = BackendWorkerFinanceiro;
 
     export import Banco = BackendBanco;
+
     // Bucket: BackendWorkerFinanceiro,
     // Wave: BackendWorkerFinanceiro,
     // Portal: BackendWorkerFinanceiro,

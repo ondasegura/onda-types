@@ -1,5 +1,5 @@
 import z4 from "zod/v4";
-import {ControllerFinanceiro} from "../../order";
+import { ControllerFinanceiro } from "../order";
 namespace TypeOrder {
     // Schema para Metadata
     export const MetadataSchema = z4.object({
