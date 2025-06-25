@@ -33,6 +33,8 @@ namespace BackendWorkerFinanceiro {
         POSTGRESQL_DATABASE_URL: string;
         SK_PAGARME: string;
         URL_API_PAGARME: string;
+        BASE_URL_ASAAS: string;
+        SK_TOKEN_ASAAS: string;
     }
     export namespace Controllers {
         export import Pagarme = P;
