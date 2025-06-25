@@ -20,6 +20,7 @@ import ControllerCliente from "./controllers/cliente";
 
 //SERVICES
 import ServicePagarme from "./services/pagarme";
+import ServiceAsaas from "./services/asaas";
 namespace BackendWorkerFinanceiro {
     export interface Context extends HonoContext {
         env: Env;
@@ -54,6 +55,7 @@ namespace BackendWorkerFinanceiro {
 
     export namespace Services {
         export import Pagarme = ServicePagarme;
+        export import Asaas = ServiceAsaas;
     }
 }
 export default BackendWorkerFinanceiro;
