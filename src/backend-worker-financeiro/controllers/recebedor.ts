@@ -55,7 +55,7 @@ export namespace ControllerRecebedor {
         cidade: add_mensagem_campo_obrigatorio("Cidade"),
         estado: add_mensagem_campo_obrigatorio("Estado"),
         cep: z4.preprocess((valor) => String(valor ?? ""), remover_simbolos.pipe(getBaseString("CEP").length(8, {message: "O CEP deve conter 8 dígitos."}))),
-        ponto_referencia: z4.string().optional(), // Marcado como opcional para clareza
+        ponto_referencia: add_mensagem_campo_obrigatorio("Ponto de referência"),
     });
 
     const ContaBancariaSchema = z4.object({
@@ -100,7 +100,7 @@ export namespace ControllerRecebedor {
     // --- Schemas Principais ---
 
     export const RecebedorBaseSchema = z4.object({
-        _id: z4.string().uuid().optional(),
+        _id: z4.string().uuid(),
         referencia_externa: add_mensagem_campo_obrigatorio("Referência externa"),
         email: getBaseString("Email").email({message: "O formato do e-mail é inválido."}),
         documento: add_mensagem_campo_obrigatorio("Documento"),
@@ -155,13 +155,10 @@ export namespace ControllerRecebedor {
         export const InputSchema = z4.object({
             filtros: z4.object({
                 recebedores: z4.object({
-                    tipo: z4
-                        .union([z4.literal("individual"), z4.literal("empresa")])
-                        .optional()
-                        .nullable(),
-                    referencia_externa: z4.string().optional().nullable(),
-                    documento: z4.string().optional().nullable(),
-                    email: z4.string().optional().nullable(),
+                    tipo: z4.union([z4.literal("individual"), z4.literal("empresa")]).nullable(),
+                    referencia_externa: z4.string().nullable(),
+                    documento: z4.string().nullable(),
+                    email: z4.string().nullable(),
                 }),
             }),
         });
