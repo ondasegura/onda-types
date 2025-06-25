@@ -37,7 +37,9 @@ namespace ControllerContaReceber {
        parcela: z4.number(),
        valor_pacela: z4.number(),
        url_pedido: z4.string(),
-       url_cobranca: z4.string()
+       url_cobranca: z4.string(),
+       transacao_id: z4.string(),
+       meta_data: z4.record(z4.string(), z4.any()).optional()
    });
    export type ContaReceberBase = z4.infer<typeof ContaReceberBaseSchema>;
 
@@ -49,7 +51,7 @@ namespace ControllerContaReceber {
                    cliente_id: z4.string(),
                    parcelas: z4.number(),
                    valor: z4.number(),
-                   vencimento: z4.string(),
+                   vencimento: z4.iso.datetime().optional(),
                    codigo: z4.string(),
                    metodo_pagamento: z4.array(z4.string()),
                    tipo_pagamento: z4.number(),
@@ -57,12 +59,11 @@ namespace ControllerContaReceber {
                    referencia_externa_primaria: z4.string(),
                    referencia_externa_secundaria: z4.string(),
                    referencia_externa_terciaria: z4.string(),
-                   referencia_externa_quartenaria: z4.string()
-                   
+                   referencia_externa_quartenaria: z4.string(),
+                   meta_data: z4.record(z4.string(), z4.any()).optional()
                })
            })
        });
-       
        export type Input = z4.infer<typeof InputSchema>;
 
        export const OutputSchema = ContaReceberBaseSchema;
@@ -103,6 +104,7 @@ namespace ControllerContaReceber {
                    valor_pacela: z4.number().optional().nullable(),
                    url_pedido: z4.string().optional().nullable(),
                    url_cobranca: z4.string().optional().nullable(),
+                   transacao_id: z4.string().optional().nullable(),
                    usuario_create_id: z4.uuidv4().optional().nullable(),
                }),
 
@@ -169,7 +171,8 @@ namespace ControllerContaReceber {
                    parcela: z4.number().optional(),
                    valor_pacela: z4.number().optional(),
                    url_pedido: z4.string().optional(),
-                   url_cobranca: z4.string().optional()
+                   url_cobranca: z4.string().optional(),
+                   transacao_id: z4.string().optional()
                })
            })
        });
