@@ -15,20 +15,6 @@ export const add_mensagem_campo_obrigatorio = (label: string) => {
         .min(1, {message: mensagem_campo_obrigatorio});
 };
 
-/**
- * Para campos de texto que, além de obrigatórios, têm regras específicas
- * (tamanho, formato, etc.). Oferece máxima flexibilidade.
- * @param label O nome do campo para a mensagem de erro.
- */
-export const getBaseString = (label: string) =>
-    z4.string({
-        error: `O campo '${label}' é obrigatório.`,
-    });
-
-// ===================================================================================
-// SEU NAMESPACE ADAPTADO
-// ===================================================================================
-
 export namespace ControllerRecebedor {
     const remover_simbolos = z4.string().transform((valor) => {
         return valor.replace(/\D/g, "");
@@ -37,13 +23,13 @@ export namespace ControllerRecebedor {
     // --- Schemas auxiliares ---
 
     const TelefoneBasicoSchema = z4.object({
-        ddd: getBaseString("DDD").length(2, {message: "O DDD deve conter 2 dígitos."}),
-        numero: getBaseString("Número").length(9, {message: "O número de telefone deve conter 9 dígitos."}),
+        ddd: add_mensagem_campo_obrigatorio("DDD").length(2, {message: "O DDD deve conter 2 dígitos."}),
+        numero: add_mensagem_campo_obrigatorio("Número").length(9, {message: "O número de telefone deve conter 9 dígitos."}),
     });
 
     const TelefoneComTipoSchema = z4.object({
-        ddd: getBaseString("DDD").length(2, {message: "O DDD deve conter 2 dígitos."}),
-        numero: getBaseString("Número").length(9, {message: "O número de telefone deve conter 9 dígitos."}),
+        ddd: add_mensagem_campo_obrigatorio("DDD").length(2, {message: "O DDD deve conter 2 dígitos."}),
+        numero: add_mensagem_campo_obrigatorio("Número").length(9, {message: "O número de telefone deve conter 9 dígitos."}),
         tipo: z4.union([z4.literal("celular"), z4.literal("fixo")]),
     });
 
@@ -54,7 +40,7 @@ export namespace ControllerRecebedor {
         bairro: add_mensagem_campo_obrigatorio("Bairro"),
         cidade: add_mensagem_campo_obrigatorio("Cidade"),
         estado: add_mensagem_campo_obrigatorio("Estado"),
-        cep: z4.preprocess((valor) => String(valor ?? ""), remover_simbolos.pipe(getBaseString("CEP").length(8, {message: "O CEP deve conter 8 dígitos."}))),
+        cep: z4.preprocess((valor) => String(valor ?? ""), remover_simbolos.pipe(add_mensagem_campo_obrigatorio("CEP").length(8, {message: "O CEP deve conter 8 dígitos."}))),
         ponto_referencia: add_mensagem_campo_obrigatorio("Ponto de referência"),
     });
 
@@ -63,10 +49,10 @@ export namespace ControllerRecebedor {
         tipo_titular: z4.union([z4.literal("individual"), z4.literal("empresa")]),
         documento_titular: add_mensagem_campo_obrigatorio("Documento do titular"),
         banco: add_mensagem_campo_obrigatorio("Banco"),
-        numero_agencia: getBaseString("Número da agência").length(4, {message: "A agência deve conter 4 dígitos."}),
-        digito_agencia: getBaseString("Dígito da agência").max(1, {message: "O dígito da agência deve conter no máximo 1 dígito."}),
-        numero_conta: getBaseString("Número da conta").max(13, {message: "O número da conta deve conter no máximo 13 dígitos."}),
-        digito_conta: getBaseString("Dígito da conta").max(1, {message: "O dígito da conta deve conter no máximo 1 dígito."}),
+        numero_agencia: add_mensagem_campo_obrigatorio("Número da agência").length(4, {message: "A agência deve conter 4 dígitos."}),
+        digito_agencia: add_mensagem_campo_obrigatorio("Dígito da agência").max(1, {message: "O dígito da agência deve conter no máximo 1 dígito."}),
+        numero_conta: add_mensagem_campo_obrigatorio("Número da conta").max(13, {message: "O número da conta deve conter no máximo 13 dígitos."}),
+        digito_conta: add_mensagem_campo_obrigatorio("Dígito da conta").max(1, {message: "O dígito da conta deve conter no máximo 1 dígito."}),
         tipo: z4.union([z4.literal("corrente"), z4.literal("poupanca"), z4.string()]),
     });
 
@@ -85,7 +71,7 @@ export namespace ControllerRecebedor {
 
     const SocioAdministradorSchema = z4.object({
         nome: add_mensagem_campo_obrigatorio("Nome do sócio"),
-        email: getBaseString("Email do sócio").email({message: "O formato do e-mail é inválido."}),
+        email: add_mensagem_campo_obrigatorio("Email do sócio").email({message: "O formato do e-mail é inválido."}),
         documento: add_mensagem_campo_obrigatorio("Documento do sócio"),
         tipo: z4.union([z4.literal("individual"), z4.literal("empresa")]),
         nome_mae: add_mensagem_campo_obrigatorio("Nome da mãe do sócio"),
@@ -102,7 +88,7 @@ export namespace ControllerRecebedor {
     export const RecebedorBaseSchema = z4.object({
         _id: z4.string().uuid(),
         referencia_externa: add_mensagem_campo_obrigatorio("Referência externa"),
-        email: getBaseString("Email").email({message: "O formato do e-mail é inválido."}),
+        email: add_mensagem_campo_obrigatorio("Email").email({message: "O formato do e-mail é inválido."}),
         documento: add_mensagem_campo_obrigatorio("Documento"),
         site: z4.string().url({message: "O formato do site é inválido."}).optional(),
         telefones: z4.array(TelefoneBasicoSchema),
