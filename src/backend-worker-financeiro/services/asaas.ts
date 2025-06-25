@@ -112,6 +112,17 @@ namespace ServiceAsaas {
         export type Output = z4.infer<typeof OutputSchema>;
 
     }
+
+
+    export const NotificationEventSchema = z4.union([
+        z4.literal('PAYMENT_RECEIVED'),
+        z4.literal('PAYMENT_OVERDUE'),
+        z4.literal('PAYMENT_DUEDATE_WARNING'),
+        z4.literal('PAYMENT_CREATED'),
+        z4.literal('PAYMENT_UPDATED'),
+        z4.literal('SEND_LINHA_DIGITAVEL')
+    ]);
+    export type NotificationEvent = z4.infer<typeof NotificationEventSchema>;
 }
 
 export default ServiceAsaas
