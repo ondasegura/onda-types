@@ -5,6 +5,8 @@ import z4 from "zod/v4";
 // t.Financeiro.Recebedor.Criar.Input
 
 export namespace ControllerRecebedor {
+    export const TipoSchema = z4.union([z4.literal("individual"), z4.literal("empresa")]);
+    export type Tipo = z4.infer<typeof TipoSchema>;
     const remover_simbolos = z4.string().transform((valor) => {
         return valor.replace(/\D/g, "");
     });
@@ -60,7 +62,7 @@ export namespace ControllerRecebedor {
         nome: z4.string(),
         email: z4.email(),
         documento: z4.string(),
-        tipo: z4.union([z4.literal("individual"), z4.literal("empresa")]),
+        tipo: z4.literal("individual"),
         nome_mae: z4.string(),
         data_nascimento: z4.string(),
         renda_mensal: z4.number(),
