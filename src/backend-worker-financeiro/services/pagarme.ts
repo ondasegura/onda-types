@@ -97,6 +97,10 @@ namespace SevicePagarme {
         const remover_simbolos = z4.string().transform((valor) => {
             return valor.replace(/\D/g, "");
         });
+
+        const dd_mm_aaaa = z4.string().transform((valor) => {
+            return;
+        });
         export namespace Criar {
             const TelefoneComTipoSchema = z4.object({
                 ddd: z4.string().length(2),

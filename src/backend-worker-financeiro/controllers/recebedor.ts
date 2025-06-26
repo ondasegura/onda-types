@@ -124,7 +124,7 @@ export namespace ControllerRecebedor {
     export namespace BuscarPeloFiltro {
         export const InputSchema = z4.object({
             filtros: z4.object({
-                recebedores: z4.object({
+                recebedor: z4.object({
                     tipo: z4.union([z4.literal("individual"), z4.literal("empresa")]).nullable(),
                     referencia_externa: z4.string().nullable(),
                     documento: z4.string().nullable(),
