@@ -125,6 +125,7 @@ export namespace ControllerRecebedor {
         export const InputSchema = z4.object({
             filtros: z4.object({
                 recebedor: z4.object({
+                    pagina: z4.number().min(0),
                     tipo: z4.union([z4.literal("individual"), z4.literal("empresa")]).nullable(),
                     referencia_externa: z4.string().nullable(),
                     documento: z4.string().nullable(),
@@ -137,6 +138,12 @@ export namespace ControllerRecebedor {
         export const OutputSchema = z4.array(Criar.OutputSchema);
         export type Output = {
             data: {
+                paginacao: {
+                    total_itens: number;
+                    total_paginas: number;
+                    itens_por_pagina: number;
+                    total_itens_pagina_atual: number;
+                };
                 recebedores: z4.infer<typeof OutputSchema>;
             };
         };
