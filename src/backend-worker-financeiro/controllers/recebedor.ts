@@ -17,7 +17,7 @@ export namespace ControllerRecebedor {
     const TelefoneComTipoSchema = z4.object({
         ddd: z4.string().length(2),
         numero: z4.string().length(9),
-        tipo: z4.union([z4.literal("celular"), z4.literal("fixo")]).optional(),
+        tipo: z4.union([z4.literal("celular"), z4.literal("fixo")]),
     });
 
     const EnderecoCompletoSchema = z4.object({
@@ -71,7 +71,6 @@ export namespace ControllerRecebedor {
     });
 
     export const RecebedorBaseSchema = z4.object({
-        _id: z4.uuid().optional(),
         referencia_externa: z4.string(),
         email: z4.email(),
         documento: z4.string(),
@@ -126,13 +125,10 @@ export namespace ControllerRecebedor {
         export const InputSchema = z4.object({
             filtros: z4.object({
                 recebedores: z4.object({
-                    tipo: z4
-                        .union([z4.literal("individual"), z4.literal("empresa")])
-                        .optional()
-                        .nullable(),
-                    referencia_externa: z4.string().optional().nullable(),
-                    documento: z4.string().optional().nullable(),
-                    email: z4.string().optional().nullable(),
+                    tipo: z4.union([z4.literal("individual"), z4.literal("empresa")]).nullable(),
+                    referencia_externa: z4.string().nullable(),
+                    documento: z4.string().nullable(),
+                    email: z4.string().nullable(),
                 }),
             }),
         });
