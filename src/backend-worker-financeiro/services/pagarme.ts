@@ -99,7 +99,7 @@ namespace SevicePagarme {
         });
 
         const dd_mm_aaaa = z4.string().transform((valor) => {
-            return;
+            return valor.replace(/^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/, "");
         });
         export namespace Criar {
             const TelefoneComTipoSchema = z4.object({
