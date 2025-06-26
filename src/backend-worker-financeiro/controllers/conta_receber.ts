@@ -56,13 +56,13 @@ namespace ControllerContaReceber {
        export const InputSchema = z4.object({
            data: z4.object({
                conta_receber: z4.object({
-                   checkout: z4.string(),
+                   checkout: (CheckoutSchema),
                    cliente_id: z4.string(),
                    parcelas: z4.number(),
                    valor: z4.number(),
                    vencimento: z4.iso.datetime().optional(),
                    codigo: z4.string(),
-                   metodo_pagamento: z4.array(z4.string()),
+                   metodo_pagamento: z4.array(MetodoPagamentoSchema).min(1),
                    tipo_pagamento: z4.number(),
                    descricao: z4.string(),
                    referencia_externa_primaria: z4.string(),
