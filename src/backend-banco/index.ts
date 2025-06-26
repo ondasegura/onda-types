@@ -80,6 +80,7 @@ namespace BackendBanco {
         RESEND_API_KEY: string,
         BEARER_TOKEN_BACKEND_WAVE: string,
         BASE_URL_BACKEND_WAVE: string,
+        SET_TOKEN_ANALISANDO: string,
         DB: D1Database,
         BUCKET_BINDING: R2Bucket,
         AMBIENTE: "PRODUCAO" | "SANDBOX";
