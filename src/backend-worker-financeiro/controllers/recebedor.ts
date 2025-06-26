@@ -73,7 +73,7 @@ export namespace ControllerRecebedor {
     });
 
     export const RecebedorBaseSchema = z4.object({
-        _id: z4.string(),
+        _id: z4.string().optional(),
         referencia_externa: z4.string(),
         email: z4.email(),
         documento: z4.string(),
