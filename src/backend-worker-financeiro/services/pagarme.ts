@@ -99,9 +99,9 @@ namespace SevicePagarme {
         });
         export namespace Criar {
             const TelefoneComTipoSchema = z4.object({
-                ddd: z4.string().length(2, "O DDD deve conter 2 dígitos."),
-                number: z4.string().length(9, "O número de telefone deve conter 9 dígitos."),
-                type: z4.union([z4.literal("mobile"), z4.literal("landline")]),
+                ddd: z4.string().length(2),
+                number: z4.string().length(9),
+                type: z4.union([z4.literal("mobile"), z4.literal("landline")]).optional,
             });
 
             const EnderecoCompletoSchema = z4.object({
@@ -111,7 +111,7 @@ namespace SevicePagarme {
                 neighborhood: z4.string(),
                 city: z4.string(),
                 state: z4.string(),
-                zip_code: z4.preprocess((valor) => String(valor ?? ""), remover_simbolos.pipe(z4.string().length(8, "O CEP deve conter 8 dígitos."))),
+                zip_code: z4.preprocess((valor) => String(valor ?? ""), remover_simbolos.pipe(z4.string().length(8))),
                 reference_point: z4.string(),
             });
 
@@ -120,11 +120,11 @@ namespace SevicePagarme {
                 holder_type: z4.union([z4.literal("individual"), z4.literal("company")]),
                 holder_document: z4.string(),
                 bank: z4.string(),
-                branch_number: z4.string().length(4, "A agência deve conter 4 dígitos."),
-                branch_check_digit: z4.string().max(1, "O dígito da agência deve conter no máximo 1 dígito."),
-                account_number: z4.string().max(13, "O númeo da conta deve conter no máximo 13 dígitos."),
-                account_check_digit: z4.string().max(1, "O dígito da conta deve conter no máximo 1 dígito."),
-                type: z4.union([z4.literal("checking"), z4.literal("savings"), z4.string()], "O tipo da conta deve ser corrente ou poupança."),
+                branch_number: z4.string().length(4),
+                branch_check_digit: z4.string().max(1),
+                account_number: z4.string().max(13),
+                account_check_digit: z4.string().max(1),
+                type: z4.union([z4.literal("checking"), z4.literal("savings"), z4.string()]),
             });
 
             const ConfiguracoesTransferenciaSchema = z4.object({
