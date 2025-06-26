@@ -10,7 +10,7 @@ export namespace ControllerRecebedor {
     const remover_simbolos = z4.string().transform((valor) => {
         return valor.replace(/\D/g, "");
     });
-    // Schemas auxiliares
+    // Schemas auxiliaresd
     const TelefoneBasicoSchema = z4.object({
         ddd: z4.string(),
         numero: z4.string(),
