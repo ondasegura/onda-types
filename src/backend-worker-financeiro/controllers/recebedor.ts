@@ -133,6 +133,9 @@ export namespace ControllerRecebedor {
                     referencia_externa: z4.string().nullable(),
                     documento: z4.string().nullable(),
                     email: z4.string().nullable(),
+                    nome: z4.string().nullable().optional(),
+                    nome_fantasia: z4.string().nullable().optional(),
+                    razao_social: z4.string().nullable().optional(),
                 }),
             }),
         });
