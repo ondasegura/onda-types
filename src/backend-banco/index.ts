@@ -17,6 +17,9 @@ import ControllerSistema from "./controllers/sistema";
 import ControllerLog from "./controllers/log";
 
 import ControllerContasPagar from "./controllers/contasPagar";
+
+//SERVICES
+import ServicesAnalisando from "./services/analisando";
 namespace BackendBanco {
     export namespace Controllers {
         export import Cliente = ControllerCliente;
@@ -45,6 +48,10 @@ namespace BackendBanco {
 
 
         export import ContaPagar = ControllerContasPagar;
+    }
+
+    export namespace Services {
+        export import Analisando = ServicesAnalisando
     }
 
 
