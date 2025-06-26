@@ -129,8 +129,11 @@ export namespace ControllerRecebedor {
             filtros: z4.object({
                 recebedor: z4.object({
                     pagina: z4.number().min(0),
-                    tipo: z4.union([z4.literal("individual"), z4.literal("empresa")]).nullable(),
-                    referencia_externa: z4.string().nullable(),
+                    tipo: z4
+                        .union([z4.literal("individual"), z4.literal("empresa")])
+                        .nullable()
+                        .optional(),
+                    referencia_externa: z4.string().nullable().optional(),
                     documento: z4.string().nullable().optional(),
                     email: z4.string().nullable().optional(),
                     nome: z4.string().nullable().optional(),
