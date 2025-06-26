@@ -101,7 +101,7 @@ namespace SevicePagarme {
             const TelefoneComTipoSchema = z4.object({
                 ddd: z4.string().length(2),
                 number: z4.string().length(9),
-                type: z4.union([z4.literal("mobile"), z4.literal("landline")]).optional,
+                type: z4.union([z4.literal("mobile"), z4.literal("landline")]),
             });
 
             const EnderecoCompletoSchema = z4.object({
