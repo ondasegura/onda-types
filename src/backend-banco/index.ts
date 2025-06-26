@@ -81,6 +81,7 @@ namespace BackendBanco {
         BEARER_TOKEN_BACKEND_WAVE: string,
         BASE_URL_BACKEND_WAVE: string,
         SET_TOKEN_ANALISANDO: string,
+        BASE_URL_ANALISANDO: string,
         DB: D1Database,
         BUCKET_BINDING: R2Bucket,
         AMBIENTE: "PRODUCAO" | "SANDBOX";
