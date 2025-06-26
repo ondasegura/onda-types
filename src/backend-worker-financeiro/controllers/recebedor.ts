@@ -159,10 +159,10 @@ export namespace ControllerRecebedor {
         });
         export type Input = z4.infer<typeof InputSchema>;
 
-        export const OutputSchema = Criar.OutputSchema;
+
         export type Output = {
             data: {
-                recebedor: z4.infer<typeof OutputSchema>;
+                recebedor: z4.infer<typeof RecebedorDiscriminadoSchema>;
             };
         };
     }
@@ -206,10 +206,10 @@ export namespace ControllerRecebedor {
 
         export type Input = z4.infer<typeof InputSchema>;
 
-        export const OutputSchema = Criar.OutputSchema;
+
         export type Output = {
             data: {
-                recebedor: z4.infer<typeof OutputSchema>;
+                recebedor: z4.infer<typeof RecebedorDiscriminadoSchema>;
             };
         };
     }
