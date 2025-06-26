@@ -8,19 +8,28 @@ namespace ControllerContaReceber {
 
    export const ContaReceberStatusSchema = z4.union([z4.literal("ativo"), z4.literal("inativo")]);
    export type ContaReceberStatus = z4.infer<typeof ContaReceberStatusSchema>;
-
+    export const CheckoutSchema = z4.union([
+        z4.literal("pagarme"),
+        z4.literal("asaas")
+        ])
+    export const MetodoPagamentoSchema = z4.union([
+        z4.literal('credit_card'),
+        z4.literal('boleto'),
+        z4.literal('debit_card'),
+        z4.literal('pix'),
+    ])
    export const ContaReceberBaseSchema = z4.object({
        _id: z4.uuid(),
        data_criacao: z4.date(),
        data_atualizacao: z4.date().nullable(),
        usuario_create_id: z4.uuidv4(),
-       checkout: z4.string(),
+       checkout: CheckoutSchema,
        cliente_id: z4.string(),
        parcelas: z4.number(),
        valor: z4.number(),
        vencimento: z4.string(),
        codigo: z4.string(),
-       metodo_pagamento: z4.array(z4.string()),
+       metodo_pagamento: z4.array(MetodoPagamentoSchema).min(1),
        tipo_pagamento: z4.number(),
        descricao: z4.string(),
        referencia_externa_primaria: z4.string(),
@@ -39,7 +48,7 @@ namespace ControllerContaReceber {
        url_pedido: z4.string(),
        url_cobranca: z4.string(),
        transacao_id: z4.string(),
-       meta_data: z4.record(z4.string(), z4.any()).optional()
+       metadata: z4.record(z4.string(), z4.any()).optional()
    });
    export type ContaReceberBase = z4.infer<typeof ContaReceberBaseSchema>;
 
@@ -47,20 +56,20 @@ namespace ControllerContaReceber {
        export const InputSchema = z4.object({
            data: z4.object({
                conta_receber: z4.object({
-                   checkout: z4.string(),
+                   checkout: (CheckoutSchema),
                    cliente_id: z4.string(),
                    parcelas: z4.number(),
                    valor: z4.number(),
                    vencimento: z4.iso.datetime().optional(),
                    codigo: z4.string(),
-                   metodo_pagamento: z4.array(z4.string()),
+                   metodo_pagamento: z4.array(MetodoPagamentoSchema).min(1),
                    tipo_pagamento: z4.number(),
                    descricao: z4.string(),
                    referencia_externa_primaria: z4.string(),
                    referencia_externa_secundaria: z4.string(),
                    referencia_externa_terciaria: z4.string(),
                    referencia_externa_quartenaria: z4.string(),
-                   meta_data: z4.record(z4.string(), z4.any()).optional()
+                   metadata: z4.record(z4.string(), z4.any()).optional()
                })
            })
        });

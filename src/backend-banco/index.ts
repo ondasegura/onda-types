@@ -17,6 +17,9 @@ import ControllerSistema from "./controllers/sistema";
 import ControllerLog from "./controllers/log";
 
 import ControllerContasPagar from "./controllers/contasPagar";
+
+//SERVICES
+import ServicesAnalisando from "./services/analisando";
 namespace BackendBanco {
     export namespace Controllers {
         export import Cliente = ControllerCliente;
@@ -45,6 +48,10 @@ namespace BackendBanco {
 
 
         export import ContaPagar = ControllerContasPagar;
+    }
+
+    export namespace Services {
+        export import Analisando = ServicesAnalisando
     }
 
 
@@ -80,6 +87,8 @@ namespace BackendBanco {
         RESEND_API_KEY: string,
         BEARER_TOKEN_BACKEND_WAVE: string,
         BASE_URL_BACKEND_WAVE: string,
+        SET_TOKEN_ANALISANDO: string,
+        BASE_URL_ANALISANDO: string,
         DB: D1Database,
         BUCKET_BINDING: R2Bucket,
         AMBIENTE: "PRODUCAO" | "SANDBOX";
