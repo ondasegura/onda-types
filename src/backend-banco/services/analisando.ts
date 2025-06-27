@@ -3,7 +3,7 @@ import z4 from "zod/v4";
 
 namespace ServicesAnalisando {
     export namespace Token {
-        export const TokenOutputSchema = z4.object({
+        export const OutputSchema = z4.object({
             status: z4.number().int(),
             code: z4.literal("SUCCESS"),
             type: z4.literal("success"),
@@ -14,12 +14,12 @@ namespace ServicesAnalisando {
             })
         });
 
-        export type Output = z4.infer<typeof TokenOutputSchema>;
+        export type Output = z4.infer<typeof OutputSchema>;
     }
 
     export namespace ConsultaSerasa {
 
-        export const inputSchema = z4.object({
+        export const InputSchema = z4.object({
             dadoPesquisado: z4.string(),
             Cod: z4.union([
                 z4.literal("4"),
@@ -233,7 +233,7 @@ namespace ServicesAnalisando {
             }),
         });
 
-        export type Input = z4.infer<typeof inputSchema>
+        export type Input = z4.infer<typeof InputSchema>
 
         export type Output = z4.infer<typeof OutputSchema>
     }
