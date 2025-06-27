@@ -5,10 +5,12 @@ import z4 from "zod/v4";
 // t.Financeiro.Recebedor.Criar.Input
 
 export namespace ControllerRecebedor {
+    export const TipoSchema = z4.union([z4.literal("individual"), z4.literal("empresa")]);
+    export type Tipo = z4.infer<typeof TipoSchema>;
     const remover_simbolos = z4.string().transform((valor) => {
         return valor.replace(/\D/g, "");
     });
-    // Schemas auxiliares
+    // Schemas auxiliaresd
     const TelefoneBasicoSchema = z4.object({
         ddd: z4.string(),
         numero: z4.string(),
@@ -60,7 +62,7 @@ export namespace ControllerRecebedor {
         nome: z4.string(),
         email: z4.email(),
         documento: z4.string(),
-        tipo: z4.union([z4.literal("individual"), z4.literal("empresa")]),
+        tipo: z4.literal("individual"),
         nome_mae: z4.string(),
         data_nascimento: z4.string(),
         renda_mensal: z4.number(),
@@ -71,7 +73,7 @@ export namespace ControllerRecebedor {
     });
 
     export const RecebedorBaseSchema = z4.object({
-        _id: z4.string(),
+        _id: z4.string().optional(),
         referencia_externa: z4.string(),
         email: z4.email(),
         documento: z4.string(),
@@ -127,10 +129,16 @@ export namespace ControllerRecebedor {
             filtros: z4.object({
                 recebedor: z4.object({
                     pagina: z4.number().min(0),
-                    tipo: z4.union([z4.literal("individual"), z4.literal("empresa")]).nullable(),
-                    referencia_externa: z4.string().nullable(),
-                    documento: z4.string().nullable(),
-                    email: z4.string().nullable(),
+                    tipo: z4
+                        .union([z4.literal("individual"), z4.literal("empresa")])
+                        .nullable()
+                        .optional(),
+                    referencia_externa: z4.string().nullable().optional(),
+                    documento: z4.string().nullable().optional(),
+                    email: z4.string().nullable().optional(),
+                    nome: z4.string().nullable().optional(),
+                    nome_fantasia: z4.string().nullable().optional(),
+                    razao_social: z4.string().nullable().optional(),
                 }),
             }),
         });
