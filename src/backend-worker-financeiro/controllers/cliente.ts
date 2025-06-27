@@ -153,6 +153,7 @@ namespace ControllerCliente {
                     telefone: z4.string().optional().nullable(),
                     celular: z4.string().optional().nullable(),
                     asaas_external_id: z4.string().optional().nullable(),
+                    pagarme_external_id: z4.string().optional().nullable(),
                     excluido: z4.boolean().optional().nullable()
                 })
             })
