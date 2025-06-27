@@ -193,6 +193,7 @@ namespace ControllerOrdemServico {
         export const InputSchema = z4.object({
             filtros: z4.object({
                 ordem_servico: z4.object({
+                    pagina: z4.number().min(0),
                     _id: z4.uuidv4().optional().nullable(),
                     titulo: z4.string().optional().nullable(),
                     usuario_id: z4.string().optional().nullable(),
@@ -208,6 +209,12 @@ namespace ControllerOrdemServico {
         export type Input = z4.infer<typeof InputSchema>;
         export type Output = {
             data: {
+                paginacao: {
+                    total_itens: number;
+                    total_paginas: number;
+                    itens_por_pagina: number;
+                    total_itens_pagina_atual: number;
+                },
                 ordens_servico: z4.infer<typeof OutputSchema>
             }
         }
