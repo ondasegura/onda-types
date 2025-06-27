@@ -1,5 +1,6 @@
 import z4 from "zod/v4";
 
+import ServicesAnalisando from "../services/analisando";
 namespace ControllerConsulta {
     // Schema base para consulta
     export const ConsultaBaseSchema = z4.object({
@@ -8,7 +9,7 @@ namespace ControllerConsulta {
         data_atualizacao: z4.string(),
         ordem_servico_id: z4.string(),
         delete: z4.boolean(),
-        consulta: z4.string()
+        consulta: ServicesAnalisando.ConsultaSerasa.OutputSchemaSalvo
     });
     export type ConsultaBase = z4.infer<typeof ConsultaBaseSchema>;
 
