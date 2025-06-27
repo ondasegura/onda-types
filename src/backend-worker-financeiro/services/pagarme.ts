@@ -97,6 +97,10 @@ namespace SevicePagarme {
         const remover_simbolos = z4.string().transform((valor) => {
             return valor.replace(/\D/g, "");
         });
+
+        const dd_mm_aaaa = z4.string().transform((valor) => {
+            return valor.replace(/^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/, "");
+        });
         export namespace Criar {
             const TelefoneComTipoSchema = z4.object({
                 ddd: z4.string().length(2),
@@ -146,7 +150,7 @@ namespace SevicePagarme {
                 document: z4.string().max(11),
                 type: z4.literal("individual"),
                 mother_name: z4.string(),
-                birthdate: z4.string(),
+                birthdate: z4.preprocess((valor) => String(valor ?? ""), dd_mm_aaaa.pipe(z4.string())),
                 monthly_income: z4.number(),
                 professional_occupation: z4.string(),
                 self_declared_legal_representative: z4.boolean(),
@@ -160,7 +164,7 @@ namespace SevicePagarme {
                 document: z4.string().max(11),
                 name: z4.string(),
                 mother_name: z4.string().optional(),
-                birthdate: z4.string(),
+                birthdate: z4.preprocess((valor) => String(valor ?? ""), dd_mm_aaaa.pipe(z4.string())),
                 monthly_income: z4.number(),
                 professional_occupation: z4.string(),
                 address: EnderecoCompletoSchema,
