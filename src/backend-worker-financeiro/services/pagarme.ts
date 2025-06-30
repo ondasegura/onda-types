@@ -219,12 +219,15 @@ namespace SevicePagarme {
                     value: z4.string(),
                 })),
             }).optional()
+            export type Pix = z4.infer<typeof PixSchema>
 
             export const BoletoSchema = z4.object({
                 bank: z4.string(),
                 due_at: z4.string(),
                 instructions: z4.string(),
             }).optional()
+            export type Boleto = z4.infer<typeof BoletoSchema>
+
             export const CartaoDeCreditoSchema = z4.object({
                     capture: z4.boolean(),
                     statement_descriptor: z4.string(),
@@ -233,6 +236,7 @@ namespace SevicePagarme {
                         total: z4.number(),
                 })),
             }).optional()
+            export type CartaoDeCredito = z4.infer<typeof CartaoDeCreditoSchema>
 
             export const InputSchema = z4.object({
                 data: z4.object({
