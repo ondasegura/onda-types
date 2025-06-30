@@ -157,7 +157,7 @@ namespace ControllerContaPagar {
         }
     }
 
-    export type ContaPagarActions = {
+    export type TController = {
         Criar: {
             Input: Criar.Input;
             Output: Criar.Output;
