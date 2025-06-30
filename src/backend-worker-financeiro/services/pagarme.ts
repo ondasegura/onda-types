@@ -41,7 +41,7 @@ namespace SevicePagarme {
                             number: z4.string(),
                         })
                         .optional(),
-                }),
+                }).optional(),
                 metadata: z4.record(z4.string(), z4.any()).optional(),
             });
             export type Input = z4.infer<typeof InputSchema>;
