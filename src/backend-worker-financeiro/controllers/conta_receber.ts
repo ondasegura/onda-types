@@ -27,7 +27,7 @@ namespace ControllerContaReceber {
        cliente_id: z4.string(),
        parcelas: z4.number(),
        valor: z4.number(),
-       vencimento: z4.string(),
+       vencimento: z4.iso.datetime(),
        codigo: z4.string(),
        metodo_pagamento: z4.array(MetodoPagamentoSchema).min(1),
        tipo_pagamento: z4.number(),
