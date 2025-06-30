@@ -3,7 +3,7 @@ import z4 from "zod/v4";
 // tipagem:
 // COMO USAR ESE NAMESPACE NA HORA DE IMPORTAR: 
 // import t from "onda-types"
-// t.Banco.Controllers.ContaPagar.Criar.Input
+// Criar.Input
 namespace ControllerContaPagar {
 
     export const ContaPagarStatusSchema = z4.union([z4.literal("pendente"), z4.literal("pago"), z4.literal("cancelado")]);
@@ -156,6 +156,52 @@ namespace ControllerContaPagar {
             }
         }
     }
+
+    export type ContaPagarActions = {
+        Criar: {
+            Input: Criar.Input;
+            Output: Criar.Output;
+        };
+        BuscarPeloFiltro: {
+            Input: BuscarPeloFiltro.Input;
+            Output: BuscarPeloFiltro.Output;
+        };
+        BuscarPeloId: {
+            Input: BuscarPeloId.Input;
+            Output: BuscarPeloId.Output;
+        };
+        AtualizarPeloId: {
+            Input: AtualizarPeloId.Input;
+            Output: AtualizarPeloId.Output;
+        };
+        DeletarPeloId: {
+            Input: DeletarPeloId.Input;
+            Output: DeletarPeloId.Output;
+        };
+        states: {
+            modal: {
+                item: BuscarPeloId.Output["data"]["conta_pagar"];
+                loading: boolean;
+            };
+            pagina: {
+                loading: boolean;
+                itens: BuscarPeloFiltro.Output["data"]["conta_pagar"];
+                paginacao: {
+                    total_itens: number;
+                    total_paginas: number;
+                    total_itens_pagina_atual: number;
+                    itens_por_pagina: number;
+                };
+            };
+            formulario: {
+                open?: boolean;
+                item: BuscarPeloId.Output["data"]["conta_pagar"];
+                progress?: number;
+                loading: boolean;
+                loading_submit?: boolean;
+            };
+        };
+    };
 }
 
 export default ControllerContaPagar;
