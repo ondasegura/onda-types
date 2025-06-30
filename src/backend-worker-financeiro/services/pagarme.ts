@@ -211,6 +211,29 @@ namespace SevicePagarme {
     export namespace Pedido {
 
         export namespace Criar{
+
+            export const PixSchema = z4.object({
+                expires_in: z4.string(),
+                additional_information: z4.array(z4.object({
+                    name: z4.string(),
+                    value: z4.string(),
+                })),
+            }).optional()
+
+            export const BoletoSchema = z4.object({
+                bank: z4.string(),
+                due_at: z4.string(),
+                instructions: z4.string(),
+            }).optional()
+            export const CartaoDeCreditoSchema = z4.object({
+                    capture: z4.boolean(),
+                    statement_descriptor: z4.string(),
+                    installments: z4.array(z4.object({
+                        number: z4.number(),
+                        total: z4.number(),
+                })),
+            }).optional()
+
             export const InputSchema = z4.object({
                 data: z4.object({
                     order: z4.object({
@@ -232,26 +255,9 @@ namespace SevicePagarme {
                                 expires_in: z4.number(),
                                 skip_checkout_success_page: z4.boolean(),
                                 success_url: z4.string(),
-                                boleto: z4.object({
-                                    bank: z4.string(),
-                                    due_at: z4.string(),
-                                    instructions: z4.string(),
-                                }).optional(),
-                                pix: z4.object({
-                                    expires_in: z4.string(),
-                                    additional_information: z4.array(z4.object({
-                                        name: z4.string(),
-                                        value: z4.string(),
-                                    })),
-                                }).optional(),
-                                credit_card: z4.object({
-                                    capture: z4.boolean(),
-                                    statement_descriptor: z4.string(),
-                                    installments: z4.array(z4.object({
-                                        number: z4.number(),
-                                        total: z4.number(),
-                                    })),
-                                }).optional(),
+                                boleto: PixSchema,
+                                pix: BoletoSchema,
+                                credit_card: CartaoDeCreditoSchema
                             }),
                         })),
                     })
