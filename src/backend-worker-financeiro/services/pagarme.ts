@@ -223,7 +223,7 @@ namespace SevicePagarme {
 
             export const BoletoSchema = z4.object({
                 bank: z4.string(),
-                due_at: z4.string(),
+                due_at: z4.iso.datetime().optional(),
                 instructions: z4.string(),
             }).optional()
             export type Boleto = z4.infer<typeof BoletoSchema>
