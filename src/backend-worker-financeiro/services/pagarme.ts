@@ -238,6 +238,13 @@ namespace SevicePagarme {
             }).optional()
             export type CartaoDeCredito = z4.infer<typeof CartaoDeCreditoSchema>
 
+            const MetodoPagamentoSchema = z4.union([
+                z4.literal('pix'),
+                z4.literal('boleto'),
+                z4.literal('credit_card'),
+                z4.literal('debit_card')
+            ])
+
             export const InputSchema = z4.object({
                 data: z4.object({
                     order: z4.object({
@@ -253,9 +260,9 @@ namespace SevicePagarme {
                         payments: z4.array(z4.object({
                             payment_method: z4.literal("checkout"),
                             checkout: z4.object({
-                                accepted_payment_methods: z4.array(z4.enum(["boleto", "pix", "credit_card"])),
+                                accepted_payment_methods: z4.array(MetodoPagamentoSchema),
                                 customer_editable: z4.boolean(),
-                                default_payment_method: z4.enum(["boleto", "pix", "credit_card"]),
+                                default_payment_method: MetodoPagamentoSchema,
                                 expires_in: z4.number(),
                                 skip_checkout_success_page: z4.boolean(),
                                 success_url: z4.string(),
