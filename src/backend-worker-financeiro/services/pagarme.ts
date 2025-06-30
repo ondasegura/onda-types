@@ -247,7 +247,7 @@ namespace SevicePagarme {
 
             export const InputSchema = z4.object({
                 data: z4.object({
-                    order: z4.object({
+                    pedido: z4.object({
                         code: z4.string(),
                         customer_id: z4.string(),
                         metadata: z4.record(z4.string(), z4.any()). optional(),
