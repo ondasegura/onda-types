@@ -215,7 +215,7 @@ namespace ControllerOrdemServico {
                     itens_por_pagina: number;
                     total_itens_pagina_atual: number;
                 },
-                ordens_servico: z4.infer<typeof OutputSchema>
+                ordem_servico: z4.infer<typeof OutputSchema>
             }
         }
     }
@@ -286,6 +286,52 @@ namespace ControllerOrdemServico {
             }
         }
     }
+
+    export type TController = {
+        Criar: {
+            Input: Criar.Input;
+            Output: Criar.Output;
+        };
+        BuscarPeloFiltro: {
+            Input: BuscarPeloFiltro.Input;
+            Output: BuscarPeloFiltro.Output;
+        };
+        BuscarPeloId: {
+            Input: BuscarPeloId.Input;
+            Output: BuscarPeloId.Output;
+        };
+        AtualizarPeloId: {
+            Input: AtualizarPeloId.Input;
+            Output: AtualizarPeloId.Output;
+        };
+        DeletarPeloId: {
+            Input: DeletarPeloId.Input;
+            Output: DeletarPeloId.Output;
+        };
+        states: {
+            modal: {
+                item: BuscarPeloId.Output["data"]["ordem_servico"];
+                loading: boolean;
+            };
+            pagina: {
+                loading: boolean;
+                itens: BuscarPeloFiltro.Output["data"]["ordem_servico"];
+                paginacao: {
+                    total_itens: number;
+                    total_paginas: number;
+                    total_itens_pagina_atual: number;
+                    itens_por_pagina: number;
+                };
+            };
+            formulario: {
+                open?: boolean;
+                item: BuscarPeloId.Output["data"]["ordem_servico"];
+                progress?: number;
+                loading: boolean;
+                loading_submit?: boolean;
+            };
+        };
+    };
 }
 
 export default ControllerOrdemServico;
