@@ -266,8 +266,8 @@ namespace SevicePagarme {
                                 expires_in: z4.number(),
                                 skip_checkout_success_page: z4.boolean(),
                                 success_url: z4.string(),
-                                boleto: PixSchema,
-                                pix: BoletoSchema,
+                                boleto: BoletoSchema,
+                                pix: PixSchema,
                                 credit_card: CartaoDeCreditoSchema
                             }),
                         })),
