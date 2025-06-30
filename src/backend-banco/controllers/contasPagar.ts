@@ -12,7 +12,7 @@ namespace ControllerContaPagar {
     export const ContaPagarFormaPagamentoSchema = z4.union([z4.literal("boleto"), z4.literal("transferencia"), z4.literal("dinheiro"), z4.literal("cartao")]);
     export type ContaPagarFormaPagamento = z4.infer<typeof ContaPagarFormaPagamentoSchema>;
 
-    export const ContaPagarBaseSchema = z4.object({
+    export const BaseSchema = z4.object({
         _id: z4.string(),
         data_criacao: z4.date(),
         data_atualizacao: z4.date().nullable(),
@@ -29,7 +29,7 @@ namespace ControllerContaPagar {
         deletado: z4.boolean(),
         ativo: z4.boolean()
     });
-    export type ContaPagarBase = z4.infer<typeof ContaPagarBaseSchema>;
+    export type Base = z4.infer<typeof BaseSchema>;
 
     export namespace Criar {
         export const InputSchema = z4.object({
@@ -51,7 +51,7 @@ namespace ControllerContaPagar {
         });
         export type Input = z4.infer<typeof InputSchema>;
 
-        export const OutputSchema = ContaPagarBaseSchema;
+        export const OutputSchema = BaseSchema;
         export type Output = {
             data: {
                 conta_pagar: z4.infer<typeof OutputSchema>;
@@ -84,7 +84,7 @@ namespace ControllerContaPagar {
 
         export type Input = z4.infer<typeof InputSchema>;
 
-        export const OutputSchema = z4.array(ContaPagarBaseSchema);
+        export const OutputSchema = z4.array(BaseSchema);
         export type Output = {
             data: {
                 paginacao: {
@@ -106,7 +106,7 @@ namespace ControllerContaPagar {
         });
         export type Input = z4.infer<typeof InputSchema>;
 
-        export const OutputSchema = ContaPagarBaseSchema;
+        export const OutputSchema = BaseSchema;
         export type Output = {
             data: {
                 conta_pagar: z4.infer<typeof OutputSchema>
@@ -135,7 +135,7 @@ namespace ControllerContaPagar {
         });
         export type Input = z4.infer<typeof InputSchema>;
 
-        export const OutputSchema = ContaPagarBaseSchema;
+        export const OutputSchema = BaseSchema;
         export type Output = {
             data: {
                 conta_pagar: z4.infer<typeof OutputSchema>
@@ -149,7 +149,7 @@ namespace ControllerContaPagar {
         });
         export type Input = z4.infer<typeof InputSchema>;
 
-        export const OutputSchema = ContaPagarBaseSchema;
+        export const OutputSchema = BaseSchema;
         export type Output = {
             data: {
                 conta_pagar: {}
