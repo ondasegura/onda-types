@@ -199,7 +199,10 @@ namespace ControllerOrdemServico {
                     usuario_id: z4.string().optional().nullable(),
                     tipo_usuario: UsuarioTipoSchema.optional().nullable(),
                     tipo_servico: TipoServicoSchema.optional().nullable(),
-                    status: OrdemServicoStatusSchema.optional().nullable()
+                    status: OrdemServicoStatusSchema.optional().nullable(),
+                    cliente: z4.object({
+                        nome: z4.string().optional().nullable(),
+                    })
                 })
             })
         });
