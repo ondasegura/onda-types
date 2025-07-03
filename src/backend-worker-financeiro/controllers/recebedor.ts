@@ -39,7 +39,11 @@ export namespace ControllerRecebedor {
         documento_titular: z4.string(),
         banco: z4.string(),
         numero_agencia: z4.string().length(4),
-        digito_agencia: z4.string().max(1),
+        digito_agencia: z4
+            .string()
+            .transform((value) => (value === "" ? null : value))
+            .nullable()
+            .optional(),
         numero_conta: z4.string().max(13),
         digito_conta: z4.string().max(1),
         tipo: z4.union([z4.literal("corrente"), z4.literal("poupanca"), z4.string()]),
