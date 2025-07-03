@@ -41,7 +41,7 @@ namespace SevicePagarme {
                             number: z4.string(),
                         })
                         .optional(),
-                }),
+                }).optional(),
                 metadata: z4.record(z4.string(), z4.any()).optional(),
             });
             export type Input = z4.infer<typeof InputSchema>;
@@ -207,6 +207,178 @@ namespace SevicePagarme {
             export type Output = {
                 data: {
                     recebedor: z4.infer<typeof OutputSchema>;
+                };
+            };
+        }
+    }
+
+    export namespace Pedido {
+
+        export namespace Criar{
+
+            export const PixSchema = z4.object({
+                expires_in: z4.string(),
+                additional_information: z4.array(z4.object({
+                    name: z4.string(),
+                    value: z4.string(),
+                })),
+            }).optional()
+            export type Pix = z4.infer<typeof PixSchema>
+
+            export const BoletoSchema = z4.object({
+                bank: z4.string(),
+                due_at: z4.iso.datetime().optional(),
+                instructions: z4.string(),
+            }).optional()
+            export type Boleto = z4.infer<typeof BoletoSchema>
+
+            export const CartaoDeCreditoSchema = z4.object({
+                    capture: z4.boolean(),
+                    statement_descriptor: z4.string(),
+                    installments: z4.array(z4.object({
+                        number: z4.number(),
+                        total: z4.number(),
+                })),
+            }).optional()
+            export type CartaoDeCredito = z4.infer<typeof CartaoDeCreditoSchema>
+
+            const MetodoPagamentoSchema = z4.union([
+                z4.literal('pix'),
+                z4.literal('boleto'),
+                z4.literal('credit_card'),
+                z4.literal('debit_card')
+            ])
+
+            export const InputSchema = z4.object({
+                data: z4.object({
+                    pedido: z4.object({
+                        code: z4.string(),
+                        customer_id: z4.string(),
+                        metadata: z4.record(z4.string(), z4.any()). optional(),
+                        items: z4.array(z4.object({
+                            amount: z4.number(),
+                            code: z4.string(),
+                            description: z4.string(),
+                            quantity: z4.number(),
+                        })),
+                        payments: z4.array(z4.object({
+                            payment_method: z4.literal("checkout"),
+                            checkout: z4.object({
+                                accepted_payment_methods: z4.array(MetodoPagamentoSchema),
+                                customer_editable: z4.boolean(),
+                                default_payment_method: MetodoPagamentoSchema,
+                                expires_in: z4.number(),
+                                skip_checkout_success_page: z4.boolean(),
+                                success_url: z4.string(),
+                                boleto: BoletoSchema,
+                                pix: PixSchema,
+                                credit_card: CartaoDeCreditoSchema
+                            }),
+                        })),
+                    })
+                })
+            });
+            export type Input = z4.infer<typeof InputSchema>;
+
+            export const OutputSchema = z4.object({
+                id: z4.string(),
+                code: z4.string(),
+                amount: z4.number(),
+                currency: z4.string(),
+                closed: z4.boolean(),
+                items: z4.array(z4.object({
+                    id: z4.string(),
+                    type: z4.string(),
+                    description: z4.string(),
+                    amount: z4.number(),
+                    quantity: z4.number(),
+                    status: z4.string(),
+                    created_at: z4.string(),
+                    updated_at: z4.string(),
+                    code: z4.string(),
+                })),
+                customer: z4.object({
+                    id: z4.string(),
+                    name: z4.string(),
+                    email: z4.string(),
+                    code: z4.string(),
+                    document: z4.string(),
+                    document_type: z4.string(),
+                    type: z4.string(),
+                    gender: z4.string(),
+                    delinquent: z4.boolean(),
+                    created_at: z4.string(),
+                    updated_at: z4.string(),
+                    phones: z4.record(z4.string(), z4.any()),
+                }),
+                status: z4.string(),
+                created_at: z4.string(),
+                updated_at: z4.string(),
+                checkouts: z4.array(z4.object({
+                    id: z4.string(),
+                    currency: z4.string(),
+                    amount: z4.number(),
+                    status: z4.string(),
+                    default_payment_method: z4.string(),
+                    success_url: z4.string(),
+                    payment_url: z4.string(),
+                    customer_editable: z4.boolean(),
+                    required_fields: z4.array(z4.string()),
+                    billing_address_editable: z4.boolean(),
+                    skip_checkout_success_page: z4.boolean(),
+                    shippable: z4.boolean(),
+                    created_at: z4.string(),
+                    updated_at: z4.string(),
+                    expires_at: z4.string(),
+                    accepted_payment_methods: z4.array(z4.string()),
+                    accepted_brands: z4.array(z4.string()),
+                    accepted_multi_payment_methods: z4.array(z4.any()),
+                    customer: z4.object({
+                        id: z4.string(),
+                        name: z4.string(),
+                        email: z4.string(),
+                        code: z4.string(),
+                        document: z4.string(),
+                        document_type: z4.string(),
+                        type: z4.string(),
+                        gender: z4.string(),
+                        delinquent: z4.boolean(),
+                        created_at: z4.string(),
+                        updated_at: z4.string(),
+                        phones: z4.record(z4.string(), z4.any()),
+                    }),
+                    credit_card: z4.object({
+                        capture: z4.boolean(),
+                        statementDescriptor: z4.string(),
+                        statement_descriptor: z4.string(),
+                        authentication: z4.object({
+                            type: z4.string(),
+                            threed_secure: z4.record(z4.string(), z4.any()),
+                        }),
+                        installments: z4.array(z4.object({
+                            number: z4.number(),
+                            total: z4.number(),
+                        })),
+                    }).optional(),
+                    boleto: z4.object({
+                        due_at: z4.string(),
+                        instructions: z4.string(),
+                    }).optional(),
+                    pix: z4.object({
+                        expires_at: z4.string(),
+                        additional_information: z4.array(z4.object({
+                            name: z4.string(),
+                            value: z4.string(),
+                        })),
+                    }).optional(),
+                    billing_address: z4.record(z4.string(), z4.any()),
+                    metadata: z4.record(z4.string(), z4.any()),
+                })),
+                metadata: z4.record(z4.string(), z4.any()),
+            });
+            export type Output = {
+                data: {
+                    pedido: z4.infer<typeof OutputSchema>;
                 };
             };
         }
