@@ -8,7 +8,7 @@ namespace ServiceAsaas {
         export namespace CriarCobrancaBoleto {
             const billingTypes = ['boleto', 'pix', 'credit_card'] as const
 
-            const fineObject = ['PERCENTAGE', 'FIXED'] as const
+            const fineObject = z4.union([z4.literal('PERCENTAGE'), z4.literal('FIXED')])
 
             export const billingTypeSchema = z4
                 .enum(billingTypes)
@@ -30,7 +30,7 @@ namespace ServiceAsaas {
                         }).optional(),
                         fine: z4.object({
                             value: z4.number(),
-                            type: z4.enum(fineObject),
+                            type: fineObject,
                         }).optional(),
                     })
                 })
