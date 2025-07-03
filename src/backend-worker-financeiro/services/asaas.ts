@@ -4,52 +4,92 @@ import z4 from "zod/v4"
 namespace ServiceAsaas {
 
     export namespace Cobranca {
-        export namespace Criar {
+
+        export namespace CriarCobrancaBoleto {
+            export const billingTypeSchema = z4.union([z4.literal('boleto')])
+
             export const InputSchema = z4.object({
                 data: z4.object({
-                    asaas: z4.object({
-                        descricao: z4.string(),
-                        permissao: z4.number(),
-                        setor: z4.string(),
-                    })
-                })
-            })
-            export const OutputSchema = z4.object({
-                data: z4.object({
-                    asaas: z4.object({
-                        descricao: z4.string(),
-                        permissao: z4.number(),
-                        setor: z4.string(),
+                    cobranca: z4.object({
+                        billingType: billingTypeSchema.transform((value) => value.toUpperCase()),
+                        customer: z4.string(),
+                        dueDate: z4.date(),
+                        description: z4.string(),
+                        externalReference: z4.string(),
+                        installmentCount: z4.number(),
+                        totalValue: z4.number(),
+                        postalService: z4.boolean().default(false),
+                        interest: z4.object({
+                            value: z4.number(),
+                        }).optional(),
+                        fine: z4.object({
+                            value: z4.number(),
+                            type: z4.string(),
+                        }).optional(),
                     })
                 })
             });
-
             export type Input = z4.infer<typeof InputSchema>;
-            export type Output = z4.infer<typeof OutputSchema>;
-        }
 
-        export namespace CriarComCartaoDeCredito {
-            export const InputSchema = z4.object({
-                data: z4.object({
-                    asaas: z4.object({
-                        descricao: z4.string(),
-                        permissao: z4.number(),
-                        setor: z4.string(),
-                    })
-                })
-            })
             export const OutputSchema = z4.object({
-                data: z4.object({
-                    asaas: z4.object({
-                        descricao: z4.string(),
-                        permissao: z4.number(),
-                        setor: z4.string(),
-                    })
-                })
+                object: z4.string(),
+                id: z4.string(),
+                dateCreated: z4.string(),
+                customer: z4.string(),
+                installment: z4.string(),
+                checkoutSession: z4.string().nullable(),
+                paymentLink: z4.string().nullable(),
+                value: z4.number(),
+                netValue: z4.number(),
+                originalValue: z4.number().nullable(),
+                interestValue: z4.number().nullable(),
+                description: z4.string(),
+                billingType: z4.string(),
+                canBePaidAfterDueDate: z4.boolean(),
+                pixTransaction: z4.string().nullable(),
+                status: z4.string(),
+                dueDate: z4.string(),
+                originalDueDate: z4.string(),
+                paymentDate: z4.string().nullable(),
+                clientPaymentDate: z4.string().nullable(),
+                installmentNumber: z4.number(),
+                invoiceUrl: z4.string(),
+                invoiceNumber: z4.string(),
+                externalReference: z4.string(),
+                deleted: z4.boolean(),
+                anticipated: z4.boolean(),
+                anticipable: z4.boolean(),
+                creditDate: z4.string().nullable(),
+                estimatedCreditDate: z4.string().nullable(),
+                transactionReceiptUrl: z4.string().nullable(),
+                nossoNumero: z4.string(),
+                bankSlipUrl: z4.string(),
+                lastInvoiceViewedDate: z4.string().nullable(),
+                lastBankSlipViewedDate: z4.string().nullable(),
+                discount: z4.object({
+                    value: z4.number(),
+                    limitDate: z4.string().nullable(),
+                    dueDateLimitDays: z4.number(),
+                    type: z4.string(),
+                }),
+                fine: z4.object({
+                    value: z4.number(),
+                    type: z4.string(),
+                }),
+                interest: z4.object({
+                    value: z4.number(),
+                    type: z4.string(),
+                }),
+                postalService: z4.boolean(),
+                custody: z4.string().nullable(),
+                escrow: z4.string().nullable(),
+                refunds: z4.string().nullable(),
             });
-
-            export type Input = z4.infer<typeof InputSchema>;
-            export type Output = z4.infer<typeof OutputSchema>;
+            export type Output = {
+                data: {
+                    cobranca: z4.infer<typeof OutputSchema>;
+                };
+            };
         }
     }
 

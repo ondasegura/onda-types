@@ -18,7 +18,7 @@ namespace ControllerConsulta {
             data: z4.object({
                 consulta: z4.object({
                     ordem_servico_id: z4.string(),
-                    consulta: z4.object({}).passthrough()
+                    consulta: z4.looseObject({})
                 })
             })
         });
@@ -49,7 +49,7 @@ namespace ControllerConsulta {
 
         export const OutputSchema = z4.object({
             data: z4.object({
-                consultas: z4.array(ConsultaBaseSchema)
+                consulta: z4.array(ConsultaBaseSchema)
             })
         });
         export type Output = z4.infer<typeof OutputSchema>;
@@ -105,6 +105,52 @@ namespace ControllerConsulta {
         });
         export type Output = z4.infer<typeof OutputSchema>;
     }
+
+    export type TController = {
+        Criar: {
+            Input: Criar.Input;
+            Output: Criar.Output;
+        };
+        BuscarPeloFiltro: {
+            Input: BuscarPeloFiltro.Input;
+            Output: BuscarPeloFiltro.Output;
+        };
+        BuscarPeloId: {
+            Input: BuscarPeloId.Input;
+            Output: BuscarPeloId.Output;
+        };
+        AtualizarPeloId: {
+            Input: AtualizarPeloId.Input;
+            Output: AtualizarPeloId.Output;
+        };
+        DeletarPeloId: {
+            Input: DeletarPeloId.Input;
+            Output: DeletarPeloId.Output;
+        };
+        states: {
+            modal: {
+                item: BuscarPeloId.Output["data"]["consulta"];
+                loading: boolean;
+            };
+            pagina: {
+                loading: boolean;
+                itens: BuscarPeloFiltro.Output["data"]["consulta"];
+                paginacao: {
+                    total_itens: number;
+                    total_paginas: number;
+                    total_itens_pagina_atual: number;
+                    itens_por_pagina: number;
+                };
+            };
+            formulario: {
+                open?: boolean;
+                item: BuscarPeloId.Output["data"]["consulta"];
+                progress?: number;
+                loading: boolean;
+                loading_submit?: boolean;
+            };
+        };
+    };
 }
 
 export default ControllerConsulta;
