@@ -17,7 +17,7 @@ namespace ServiceAsaas {
             export const InputSchema = z4.object({
                 data: z4.object({
                     cobranca: z4.object({
-                        billingType: billingTypes,
+                        billingType: billingTypeSchema,
                         customer: z4.string(),
                         dueDate: z4.date(),
                         description: z4.string(),
