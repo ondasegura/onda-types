@@ -170,37 +170,110 @@ namespace ServicesAnalisando {
                     ).optional().nullable(),
                 }).optional().nullable(),
             }).optional().nullable(),
+            // negativeData VISTORIADO OK
             negativeData: z4.object({
+                check: z4.object({
+                    summary: z4.object({
+                        count: z4.number().optional().nullable(),
+                        balance: z4.number().optional().nullable(),
+                        lastOccurrence: z4.string().optional().nullable(),
+                        firstOccurrence: z4.string().optional().nullable(),
+                    }).optional().nullable(),
+                    checkResponse: z4.array(z4.object({
+                        city: z4.string().optional().nullable(),
+                        cadus: z4.string().optional().nullable(),
+                        alinea: z4.number().optional().nullable(),
+                        bankId: z4.number().optional().nullable(),
+                        bankName: z4.string().optional().nullable(),
+                        checkCount: z4.number().optional().nullable(),
+                        checkNumber: z4.string().optional().nullable(),
+                        federalUnit: z4.string().optional().nullable(),
+                        legalSquare: z4.string().optional().nullable(),
+                        bankAgencyId: z4.number().optional().nullable(),
+                        occurrenceDate: z4.string().optional().nullable(),
+                    })).optional().nullable(),
+                }).optional().nullable(),
                 pefin: z4.object({
                     summary: z4.object({
                         count: z4.number().optional().nullable(),
                         balance: z4.number().optional().nullable(),
+                        lastOccurrence: z4.string().optional().nullable(),
+                        firstOccurrence: z4.string().optional().nullable(),
                     }).optional().nullable(),
+                    pefinResponse: z4.array(z4.object({
+                        cadus: z4.string().optional().nullable(),
+                        amount: z4.number().optional().nullable(),
+                        dispute: z4.object({
+                            disputeIndicativeFlag: z4.boolean().optional().nullable(),
+                        }).optional().nullable(),
+                        principal: z4.boolean().optional().nullable(),
+                        contractId: z4.string().optional().nullable(),
+                        legalNature: z4.string().optional().nullable(),
+                        legalSquare: z4.string().optional().nullable(),
+                        creditorName: z4.string().optional().nullable(),
+                        legalNatureId: z4.string().optional().nullable(),
+                        occurrenceDate: z4.string().optional().nullable(),
+                    })).optional().nullable(),
                 }).optional().nullable(),
                 refin: z4.object({
                     summary: z4.object({
                         count: z4.number().optional().nullable(),
                         balance: z4.number().optional().nullable(),
+                        lastOccurrence: z4.string().optional().nullable(),
+                        firstOccurrence: z4.string().optional().nullable(),
                     }).optional().nullable(),
+                    refinResponse: z4.array(z4.object({
+                        cadus: z4.string().optional().nullable(),
+                        amount: z4.number().optional().nullable(),
+                        principal: z4.boolean().optional().nullable(),
+                        contractId: z4.string().optional().nullable(),
+                        legalNature: z4.string().optional().nullable(),
+                        legalSquare: z4.string().optional().nullable(),
+                        creditorName: z4.string().optional().nullable(),
+                        legalNatureId: z4.string().optional().nullable(),
+                        occurrenceDate: z4.string().optional().nullable(),
+                    })).optional().nullable(),
+                }).optional().nullable(),
+                notary: z4.object({
+                    summary: z4.object({
+                        count: z4.number().optional().nullable(),
+                        balance: z4.number().optional().nullable(),
+                        lastOccurrence: z4.string().optional().nullable(),
+                        firstOccurrence: z4.string().optional().nullable(),
+                    }).optional().nullable(),
+                    notaryResponse: z4.array(z4.object({
+                        city: z4.string().optional().nullable(),
+                        cadus: z4.string().optional().nullable(),
+                        amount: z4.number().optional().nullable(),
+                        dispute: z4.object({
+                            disputeIndicativeFlag: z4.boolean().optional().nullable(),
+                        }).optional().nullable(),
+                        federalUnit: z4.string().optional().nullable(),
+                        legalSquare: z4.string().optional().nullable(),
+                        officeNumber: z4.string().optional().nullable(),
+                        occurrenceDate: z4.string().optional().nullable(),
+                    })).optional().nullable(),
                 }).optional().nullable(),
                 collectionRecords: z4.object({
                     summary: z4.object({
                         count: z4.number().optional().nullable(),
                         balance: z4.number().optional().nullable(),
                     }).optional().nullable(),
+                    collectionRecordsResponse: z4.array(z4.object({
+                        occurrenceDate: z4.string().optional().nullable(),
+                        legalNatureId: z4.string().optional().nullable(),
+                        legalNature: z4.string().optional().nullable(),
+                        contractId: z4.string().optional().nullable(),
+                        creditorName: z4.string().optional().nullable(),
+                        amount: z4.number().optional().nullable(),
+                        city: z4.string().optional().nullable(),
+                        federalUnit: z4.string().optional().nullable(),
+                        legalSquare: z4.string().optional().nullable(),
+                        principal: z4.boolean().optional().nullable(),
+                    })).optional().nullable(),
                 }).optional().nullable(),
-                check: z4.object({
-                    summary: z4.object({
-                        count: z4.number().optional().nullable(),
-                        balance: z4.number().optional().nullable(),
-                    }).optional().nullable(),
-                }).optional().nullable(),
-                notary: z4.object({
-                    summary: z4.object({
-                        count: z4.number().optional().nullable(),
-                        balance: z4.number().optional().nullable(),
-                    }).optional().nullable(),
-                }).optional().nullable(),
+
+
             }).optional().nullable(),
             facts: z4.object({
                 judgementFilings: z4.object({
