@@ -11,7 +11,7 @@ namespace ServiceAsaas {
             export const InputSchema = z4.object({
                 data: z4.object({
                     cobranca: z4.object({
-                        billingType: z4.string().transform((value) => value.toUpperCase()),
+                        billingType: billingTypeSchema.transform((value) => value.toUpperCase()),
                         customer: z4.string(),
                         dueDate: z4.date(),
                         description: z4.string(),
