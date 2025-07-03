@@ -18,7 +18,7 @@ export namespace ControllerRecebedor {
 
     const TelefoneComTipoSchema = z4.object({
         ddd: z4.string().length(2),
-        numero: z4.string().length(9),
+        numero: z4.string().min(8),
         tipo: z4.union([z4.literal("celular"), z4.literal("fixo")]),
     });
 
