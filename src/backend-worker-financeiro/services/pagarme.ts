@@ -125,7 +125,11 @@ namespace SevicePagarme {
                 holder_document: z4.string(),
                 bank: z4.string(),
                 branch_number: z4.string().length(4),
-                branch_check_digit: z4.string().max(1),
+                branch_check_digit: z4
+                    .string()
+                    .transform((value) => (value === "" ? null : value))
+                    .nullable()
+                    .optional(),
                 account_number: z4.string().max(13),
                 account_check_digit: z4.string().max(1),
                 type: z4.union([z4.literal("checking"), z4.literal("savings"), z4.string()]),
