@@ -6,12 +6,18 @@ namespace ServiceAsaas {
     export namespace Cobranca {
 
         export namespace CriarCobrancaBoleto {
-            export const billingTypeSchema = z4.union([z4.literal('boleto')])
+            const billingTypes = ['boleto', 'pix', 'credit_card'] as const
+
+            const fineObject = ['PERCENTAGE', 'FIXED'] as const
+
+            export const billingTypeSchema = z4
+                .enum(billingTypes)
+                .transform((value) => value.toUpperCase() as Uppercase<typeof value>)
 
             export const InputSchema = z4.object({
                 data: z4.object({
                     cobranca: z4.object({
-                        billingType: billingTypeSchema.transform((value) => value.toUpperCase()),
+                        billingType: billingTypes,
                         customer: z4.string(),
                         dueDate: z4.date(),
                         description: z4.string(),
@@ -24,7 +30,7 @@ namespace ServiceAsaas {
                         }).optional(),
                         fine: z4.object({
                             value: z4.number(),
-                            type: z4.string(),
+                            type: z4.enum(fineObject),
                         }).optional(),
                     })
                 })
