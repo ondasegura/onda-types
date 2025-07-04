@@ -19,7 +19,10 @@ export namespace ControllerRecebedor {
     const TelefoneComTipoSchema = z4.object({
         ddd: z4.string().length(2),
         numero: z4.string().min(8),
-        tipo: z4.union([z4.literal("celular"), z4.literal("fixo")]),
+        tipo: z4
+            .union([z4.literal("celular"), z4.literal("fixo")])
+            .optional()
+            .nullable(),
     });
 
     const EnderecoCompletoSchema = z4.object({
@@ -80,7 +83,7 @@ export namespace ControllerRecebedor {
         _id: z4.string().optional(),
         email: z4.email(),
         documento: z4.string(),
-        site: z4.string(),
+        site: z4.string().optional().nullable(),
         telefones: z4.array(TelefoneBasicoSchema),
         conta_bancaria: ContaBancariaSchema,
         configuracoes_transferencia: ConfiguracoesTransferenciaSchema,

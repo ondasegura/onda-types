@@ -7,12 +7,10 @@ import ControllerRecebedor from "../controllers/recebedor";
 namespace SevicePagarme {
     export namespace Cliente {
         export namespace Criar {
-
             const generos = {
-            feminino: 'female',
-            masculino: 'male',
-            } as const
-
+                feminino: "female",
+                masculino: "male",
+            } as const;
 
             export const InputSchema = z4.object({
                 name: z4.string(),
@@ -21,7 +19,7 @@ namespace SevicePagarme {
                 document: z4.string(),
                 type: z4.string(),
                 document_type: z4.string(),
-                gender: z4.enum(['feminino', 'masculino']).transform((valor) => generos[valor]),
+                gender: z4.enum(["feminino", "masculino"]).transform((valor) => generos[valor]),
                 address: z4
                     .object({
                         line_1: z4.string(),
@@ -114,7 +112,10 @@ namespace SevicePagarme {
             const TelefoneComTipoSchema = z4.object({
                 ddd: z4.string().length(2),
                 number: z4.string().min(8),
-                type: z4.union([z4.literal("mobile"), z4.literal("landline")]),
+                type: z4
+                    .union([z4.literal("mobile"), z4.literal("landline")])
+                    .optional()
+                    .nullable(),
             });
 
             const EnderecoCompletoSchema = z4.object({
