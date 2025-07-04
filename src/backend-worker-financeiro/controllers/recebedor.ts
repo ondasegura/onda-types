@@ -78,7 +78,6 @@ export namespace ControllerRecebedor {
 
     export const RecebedorBaseSchema = z4.object({
         _id: z4.string().optional(),
-        referencia_externa: z4.string(),
         email: z4.email(),
         documento: z4.string(),
         site: z4.string(),
@@ -137,7 +136,6 @@ export namespace ControllerRecebedor {
                         .union([z4.literal("individual"), z4.literal("empresa")])
                         .nullable()
                         .optional(),
-                    referencia_externa: z4.string().nullable().optional(),
                     documento: z4.string().nullable().optional(),
                     email: z4.string().nullable().optional(),
                     nome: z4.string().nullable().optional(),
@@ -183,7 +181,6 @@ export namespace ControllerRecebedor {
         const AtualizazaoSchema = z4.object({
             _id: z4.uuid(),
             tipo: z4.union([z4.literal("individual"), z4.literal("empresa")]),
-            referencia_externa: z4.string(),
             nome: z4.string(),
             nome_mae: z4.string(),
             data_nascimento: z4.string(),
