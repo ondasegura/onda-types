@@ -257,11 +257,11 @@ namespace ControllerContaReceber {
                 };
             };
             formulario: {
-                open?: boolean;
+                open: boolean;
                 item: BuscarPeloId.Output["data"]["conta_receber"];
-                progress?: number;
+                progress: number;
                 loading: boolean;
-                loading_submit?: boolean;
+                loading_submit: boolean;
             };
         };
     };

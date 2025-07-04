@@ -203,11 +203,11 @@ namespace ControllerCliente {
                 };
             };
             formulario: {
-                open?: boolean;
+                open: boolean;
                 item: BuscarPeloId.Output["data"]["cliente"];
-                progress?: number;
+                progress: number;
                 loading: boolean;
-                loading_submit?: boolean;
+                loading_submit: boolean;
             };
         };
     };
