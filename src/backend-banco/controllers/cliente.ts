@@ -83,7 +83,7 @@ namespace ControllerCliente {
         export type Input = z4.infer<typeof InputSchema>;
         export type Output = {
             data: {
-                clientes: z4.infer<typeof OutputSchema>
+                cliente: z4.infer<typeof OutputSchema>
             }
         }
 
@@ -144,9 +144,53 @@ namespace ControllerCliente {
                 cliente: {}
             }
         }
-
-
     }
+
+    export type TController = {
+        Criar: {
+            Input: Criar.Input;
+            Output: Criar.Output;
+        };
+        BuscarPeloFiltro: {
+            Input: BuscarPeloFiltro.Input;
+            Output: BuscarPeloFiltro.Output;
+        };
+        BuscarPeloId: {
+            Input: BuscarPeloId.Input;
+            Output: BuscarPeloId.Output;
+        };
+        AtualizarPeloId: {
+            Input: AtualizarPeloId.Input;
+            Output: AtualizarPeloId.Output;
+        };
+        DeletarPeloId: {
+            Input: DeletarPeloId.Input;
+            Output: DeletarPeloId.Output;
+        };
+        states: {
+            modal: {
+                item: BuscarPeloId.Output["data"]["cliente"];
+                loading: boolean;
+            };
+            pagina: {
+                loading: boolean;
+                itens: BuscarPeloFiltro.Output["data"]["cliente"];
+                paginacao: {
+                    total_itens: number;
+                    total_paginas: number;
+                    total_itens_pagina_atual: number;
+                    itens_por_pagina: number;
+                };
+            };
+            formulario: {
+                open?: boolean;
+                item: BuscarPeloId.Output["data"]["cliente"];
+                progress?: number;
+                loading: boolean;
+                loading_submit?: boolean;
+            };
+        };
+    };
 }
 
 export default ControllerCliente;
