@@ -336,11 +336,11 @@ namespace ControllerOrdemServico {
                 };
             };
             formulario: {
-                open?: boolean;
+                open: boolean;
                 item: BuscarPeloId.Output["data"]["ordem_servico"];
-                progress?: number;
+                progress: number;
                 loading: boolean;
-                loading_submit?: boolean;
+                loading_submit: boolean;
             };
         };
     };
