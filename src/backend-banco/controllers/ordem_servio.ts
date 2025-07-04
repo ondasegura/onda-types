@@ -324,6 +324,17 @@ namespace ControllerOrdemServico {
                     itens_por_pagina: number;
                 };
             };
+            pagina_mini_select: {
+                loading: boolean;
+                itens: BuscarPeloFiltro.Output["data"]["ordem_servico"];
+                item_selecionado: BuscarPeloId.Output["data"]["ordem_servico"];
+                paginacao: {
+                    total_itens: number;
+                    total_paginas: number;
+                    total_itens_pagina_atual: number;
+                    itens_por_pagina: number;
+                };
+            };
             formulario: {
                 open?: boolean;
                 item: BuscarPeloId.Output["data"]["ordem_servico"];
