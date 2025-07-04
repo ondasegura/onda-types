@@ -3,13 +3,10 @@ import ControllerAsaas from "./asaas";
 
 import ControllerCliente from "./cliente";
 namespace ControllerOrdemServico {
-    // Schema para tipos de serviço
-    const TipoServicoSchema = z4.union([
-        z4.literal("consulta_nome"),
-        z4.literal("limpa_nome"),
-        z4.literal("audiencia"),
-        z4.literal("contrato")
-    ]);
+    export const tipo_servico_array = ["consulta_nome", "limpa_nome", "audiencia", "contrato"] as const;
+
+    const TipoServicoSchema = z4.enum(tipo_servico_array);
+
     export type TipoServico = z4.infer<typeof TipoServicoSchema>;
 
     // Schema para tipos de usuário
