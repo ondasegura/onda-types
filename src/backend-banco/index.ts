@@ -1,5 +1,6 @@
 import { Context as HonoContext } from "hono";
 import type { D1Database, R2Bucket } from '@cloudflare/workers-types';
+import z4 from "zod/v4";
 
 import ControllerCliente from "./controllers/cliente";
 import NamesPaceOrdemServico from "./controllers/ordem_servio";
@@ -54,6 +55,10 @@ namespace BackendBanco {
         export import Analisando = ServicesAnalisando
     }
 
+    export namespace Geral {
+        export type Entidades = "ordem_servico" | "cliente" | "consulta" | "bucket" | "helper"
+    }
+
 
     export type Next = import("hono").Next;
 
@@ -65,14 +70,8 @@ namespace BackendBanco {
         results: object
     }
 
-    export interface ContextoPadrao<T> {
-        data: T;
-        loading: boolean;
-        _ids?: string[];
-    }
 
-
-    export interface Env {
+    interface Env {
         JSON_WEB_TOKEN_AUTH_USER: string;
         SET_UUID_USUARIO_MASTER: string;
         SET_SENHA_USUARIO_MASTER: string;
