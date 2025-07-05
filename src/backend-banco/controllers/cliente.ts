@@ -204,7 +204,8 @@ namespace ControllerCliente {
             };
             formulario: {
                 open: boolean;
-                item: BuscarPeloId.Output["data"]["cliente"];
+                atualizar: BuscarPeloId.Output["data"]["cliente"];
+                criar: Criar.Input["data"]["cliente"];
                 progress: number;
                 loading: boolean;
                 loading_submit: boolean;
