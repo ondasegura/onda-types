@@ -6,9 +6,7 @@ namespace ControllerOrdemServico {
     // Schema para tipos de serviço
     export const TipoServicoSchema = z4.union([
         z4.literal("consulta_nome"),
-        z4.literal("limpa_nome"),
-        z4.literal("audiencia"),
-        z4.literal("contrato")
+        z4.literal("limpa_nome")
     ]);
     export type TipoServico = z4.infer<typeof TipoServicoSchema>;
 
