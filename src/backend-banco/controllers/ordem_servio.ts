@@ -4,7 +4,7 @@ import ControllerAsaas from "./asaas";
 import ControllerCliente from "./cliente";
 namespace ControllerOrdemServico {
     // Schema para tipos de serviço
-    const TipoServicoSchema = z4.union([
+    export const TipoServicoSchema = z4.union([
         z4.literal("consulta_nome"),
         z4.literal("limpa_nome"),
         z4.literal("audiencia"),
@@ -337,7 +337,8 @@ namespace ControllerOrdemServico {
             };
             formulario: {
                 open: boolean;
-                item: BuscarPeloId.Output["data"]["ordem_servico"];
+                atualizar: BuscarPeloId.Output["data"]["ordem_servico"];
+                criar: Criar.Input["data"]["ordem_servico"];
                 progress: number;
                 loading: boolean;
                 loading_submit: boolean;
