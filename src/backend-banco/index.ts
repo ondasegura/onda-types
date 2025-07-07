@@ -1,9 +1,9 @@
-import { Context as HonoContext } from "hono";
-import type { D1Database, R2Bucket } from '@cloudflare/workers-types';
+import {Context as HonoContext} from "hono";
+import type {D1Database, R2Bucket} from "@cloudflare/workers-types";
 import z4 from "zod/v4";
 
 import ControllerCliente from "./controllers/cliente";
-import NamesPaceOrdemServico from "./controllers/ordem_servio";
+import NamesPaceOrdemServico from "./controllers/ordem_servico";
 import ControllerUsuario from "./controllers/usuario";
 import ControllerAsaas from "./controllers/asaas";
 import NamesPacePusher from "./controllers/pusher";
@@ -47,18 +47,16 @@ namespace BackendBanco {
 
         export import Sistema = ControllerSistema;
 
-
         export import ContaPagar = ControllerContasPagar;
     }
 
     export namespace Services {
-        export import Analisando = ServicesAnalisando
+        export import Analisando = ServicesAnalisando;
     }
 
     export namespace Geral {
-        export type Entidades = "ordem_servico" | "cliente" | "consulta" | "bucket" | "helper"
+        export type Entidades = "ordem_servico" | "cliente" | "consulta" | "bucket" | "helper";
     }
-
 
     export type Next = import("hono").Next;
 
@@ -67,9 +65,8 @@ namespace BackendBanco {
         code: string;
         type: string;
         message: string;
-        results: object
+        results: object;
     }
-
 
     interface Env {
         JSON_WEB_TOKEN_AUTH_USER: string;
@@ -79,18 +76,18 @@ namespace BackendBanco {
         SK_TOKEN_ASAAS: string;
         BASE_URL_ASAAS: string;
         BASE_URL_FRONTEND_BANCO_IFRAME_ASAAS: string;
-        PUSHER_APP_ID: string,
-        PUSHER_APP_KEY: string,
-        PUSHER_APP_SECRET: string,
-        PUSHER_APP_CLUSTER: string,
-        RESEND_API_KEY: string,
-        BEARER_TOKEN_BACKEND_WAVE: string,
-        BASE_URL_BACKEND_WAVE: string,
-        SET_TOKEN_ANALISANDO: string,
-        BASE_URL_ANALISANDO: string,
-        SET_USER_UI_ANALISANDO: string,
-        DB: D1Database,
-        BUCKET_BINDING: R2Bucket,
+        PUSHER_APP_ID: string;
+        PUSHER_APP_KEY: string;
+        PUSHER_APP_SECRET: string;
+        PUSHER_APP_CLUSTER: string;
+        RESEND_API_KEY: string;
+        BEARER_TOKEN_BACKEND_WAVE: string;
+        BASE_URL_BACKEND_WAVE: string;
+        SET_TOKEN_ANALISANDO: string;
+        BASE_URL_ANALISANDO: string;
+        SET_USER_UI_ANALISANDO: string;
+        DB: D1Database;
+        BUCKET_BINDING: R2Bucket;
         AMBIENTE: "PRODUCAO" | "SANDBOX";
     }
 
