@@ -47,19 +47,6 @@ namespace ControllerOrdemServico {
         z4.literal("cancelada")
     ]);
 
-    const StatusAudienciaSchema = z4.union([
-        z4.literal("aguardando_pagamento"),
-        z4.literal("agendada"),
-        z4.literal("realizada"),
-        z4.literal("cancelada")
-    ]);
-
-    const StatusContratoSchema = z4.union([
-        z4.literal("aguardando_pagamento"),
-        z4.literal("aguardando_assinatura"),
-        z4.literal("assinado"),
-        z4.literal("cancelada")
-    ]);
 
     // Schema para informações de IP
     const IpInfoSchema = z4.object({
@@ -145,28 +132,19 @@ namespace ControllerOrdemServico {
         status: StatusLimpaNomeSchema
     });
 
-    const OrdemAudienciaSchema = OrdemServicoBaseSchema.extend({
-        tipo_servico: z4.literal("audiencia"),
-        status: StatusAudienciaSchema
-    });
 
-    const OrdemContratoSchema = OrdemServicoBaseSchema.extend({
-        tipo_servico: z4.literal("contrato"),
-        status: StatusContratoSchema
-    });
+
 
     const OrdemServicoSchema = z4.union([
         OrdemConsultaNomeSchema,
         OrdemLimpaNomeSchema,
-        OrdemAudienciaSchema,
-        OrdemContratoSchema
+
     ]);
 
     export type OrdemServicoBase = z4.infer<typeof OrdemServicoBaseSchema>;
     export type OrdemConsultaNome = z4.infer<typeof OrdemConsultaNomeSchema>;
     export type OrdemLimpaNome = z4.infer<typeof OrdemLimpaNomeSchema>;
-    export type OrdemAudiencia = z4.infer<typeof OrdemAudienciaSchema>;
-    export type OrdemContrato = z4.infer<typeof OrdemContratoSchema>;
+
     export type OrdemServico = z4.infer<typeof OrdemServicoSchema>;
 
     export namespace Criar {
