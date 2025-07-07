@@ -97,7 +97,6 @@ namespace ServiceAsaas {
                 };
             };
         }
-
         export namespace BuscarCobranca {
             export const InputSchema = z4.object({
                 data: z4.object({
