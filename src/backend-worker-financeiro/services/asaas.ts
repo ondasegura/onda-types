@@ -1,4 +1,4 @@
-import z4 from "zod/v4"
+import z4, { optional } from "zod/v4"
 
 
 namespace ServiceAsaas {
@@ -97,12 +97,19 @@ namespace ServiceAsaas {
                 };
             };
         }
-
-        export namespace BuscarCobrancaPelaInstallment {
+        export namespace BuscarCobranca {
             export const InputSchema = z4.object({
                 data: z4.object({
                     cobranca: z4.object({
-                        installment: z4.string(),
+                        installment: z4.string().optional().nullable(),
+                        customer: z4.string().optional().nullable(),
+                        limit: z4.number().int().optional().nullable(),
+                        status: z4.string().optional().nullable(),
+                        externalReference: z4.string().optional().nullable(),
+                        "dateCreate[ge]": z4.string().optional().nullable(),
+                        "dateCreate[le]": z4.string().optional().nullable(),
+                        "dueDate[ge]": z4.string().optional().nullable(),
+                        "dueDate[le]": z4.string().optional().nullable()
                     })
                 })
             });
