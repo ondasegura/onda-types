@@ -19,7 +19,7 @@ namespace ControllerOrdemServico {
     export type UsuarioTipo = z4.infer<typeof UsuarioTipoSchema>;
 
     // Schema para status geral de ordem de serviço
-    const OrdemServicoStatusSchema = z4.union([
+    export const OrdemServicoStatusSchema = z4.union([
         z4.literal("aguardando_pagamento"),
         z4.literal("aguardando_documentos"),
         z4.literal("processando_analise"),
