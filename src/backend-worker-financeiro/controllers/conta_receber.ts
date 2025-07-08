@@ -75,7 +75,8 @@ namespace ControllerContaReceber {
                     parcela: z4.number().optional(),
                     valor_pacela: z4.number().optional(),
                     url_pedido: z4.string().optional(),
-                    url_cobranca: z4.string().optional()
+                    url_cobranca: z4.string().optional(),
+                    transacao_id: z4.string()
                 })
             })
         });
