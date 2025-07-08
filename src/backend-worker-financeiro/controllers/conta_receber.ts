@@ -69,7 +69,14 @@ namespace ControllerContaReceber {
                     referencia_externa_secundaria: z4.string(),
                     referencia_externa_terciaria: z4.string(),
                     referencia_externa_quartenaria: z4.string(),
-                    metadata: z4.record(z4.string(), z4.any()).optional()
+                    metadata: z4.record(z4.string(), z4.any()).optional(),
+                    status: z4.number().optional(),
+                    pagamento_id: z4.string().optional(),
+                    parcela: z4.number().optional(),
+                    valor_pacela: z4.number().optional(),
+                    url_pedido: z4.string().optional(),
+                    url_cobranca: z4.string().optional(),
+                    transacao_id: z4.string().optional(),
                 })
             })
         });
