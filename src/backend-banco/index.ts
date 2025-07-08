@@ -20,7 +20,6 @@ import ControllerLog from "./controllers/log";
 import ControllerContasPagar from "./controllers/contasPagar";
 
 //TESTE GUSTAVO
-import ControllerAdmin from "./controllers/admin";
 
 //SERVICES
 import ServicesAnalisando from "./services/analisando";
@@ -52,7 +51,7 @@ namespace BackendBanco {
 
         export import ContaPagar = ControllerContasPagar;
 
-        export import Admin = ControllerAdmin;
+
     }
 
     export namespace Services {
