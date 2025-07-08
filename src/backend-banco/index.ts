@@ -1,5 +1,5 @@
-import {Context as HonoContext} from "hono";
-import type {D1Database, R2Bucket} from "@cloudflare/workers-types";
+import { Context as HonoContext } from "hono";
+import type { D1Database, R2Bucket } from "@cloudflare/workers-types";
 import z4 from "zod/v4";
 
 import ControllerCliente from "./controllers/cliente";
@@ -18,6 +18,9 @@ import ControllerSistema from "./controllers/sistema";
 import ControllerLog from "./controllers/log";
 
 import ControllerContasPagar from "./controllers/contasPagar";
+
+//TESTE GUSTAVO
+import ControllerAdmin from "./controllers/admin";
 
 //SERVICES
 import ServicesAnalisando from "./services/analisando";
@@ -48,6 +51,8 @@ namespace BackendBanco {
         export import Sistema = ControllerSistema;
 
         export import ContaPagar = ControllerContasPagar;
+
+        export import Admin = ControllerAdmin;
     }
 
     export namespace Services {
