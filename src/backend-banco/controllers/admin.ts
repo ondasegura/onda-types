@@ -1,4 +1,4 @@
-import z4 from "zod/v4";
+import z4, { object } from "zod/v4";
 
 // tipagem:
 // COMO USAR ESE NAMESPACE NA HORA DE IMPORTAR: 
@@ -122,7 +122,9 @@ namespace ControllerAdmin {
 
     export namespace DeletarPeloId {
         export const InputSchema = z4.object({
-            _id: z4.string()
+            data: object({
+                _id: z4.uuidv4()
+            })
         });
         export type Input = z4.infer<typeof InputSchema>;
 
