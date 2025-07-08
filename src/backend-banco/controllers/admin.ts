@@ -133,6 +133,64 @@ namespace ControllerAdmin {
             }
         }
     }
+
+    export type TController = {
+        Criar: {
+            Input: Criar.Input;
+            Output: Criar.Output;
+        };
+        BuscarPeloFiltro: {
+            Input: BuscarPeloFiltro.Input;
+            Output: BuscarPeloFiltro.Output;
+        };
+        BuscarPeloId: {
+            Input: BuscarPeloId.Input;
+            Output: BuscarPeloId.Output;
+        };
+        AtualizarPeloId: {
+            Input: AtualizarPeloId.Input;
+            Output: AtualizarPeloId.Output;
+        };
+        DeletarPeloId: {
+            Input: DeletarPeloId.Input;
+            Output: DeletarPeloId.Output;
+        };
+        states: {
+            modal: {
+                item: BuscarPeloId.Output["data"]["admin"];
+                loading: boolean;
+            };
+            pagina: {
+                loading: boolean;
+                itens: BuscarPeloFiltro.Output["data"]["admin"];
+                paginacao: {
+                    total_itens: number;
+                    total_paginas: number;
+                    total_itens_pagina_atual: number;
+                    itens_por_pagina: number;
+                };
+            };
+            pagina_mini_select: {
+                loading: boolean;
+                itens: BuscarPeloFiltro.Output["data"]["admin"];
+                item_selecionado: BuscarPeloId.Output["data"]["admin"];
+                paginacao: {
+                    total_itens: number;
+                    total_paginas: number;
+                    total_itens_pagina_atual: number;
+                    itens_por_pagina: number;
+                };
+            };
+            formulario: {
+                open: boolean;
+                atualizar: BuscarPeloId.Output["data"]["admin"];
+                criar: Criar.Input["data"]["admin"];
+                progress: number;
+                loading: boolean;
+                loading_submit: boolean;
+            };
+        };
+    };
 }
 
 export default ControllerAdmin;
