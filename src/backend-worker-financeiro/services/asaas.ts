@@ -182,6 +182,24 @@ namespace ServiceAsaas {
                 };
             };
         }
+        export namespace DeletarCobranca {
+            export const InputSchema = z4.object({
+                data: z4.object({
+                    id: z4.string(),
+                })
+            });
+            export type Input = z4.infer<typeof InputSchema>;
+
+            export const OutputSchema = z4.object({
+                deleted: z4.boolean(),
+                id: z4.string(),
+            });
+            export type Output = {
+                data: {
+                    cobranca: z4.infer<typeof OutputSchema>;
+                };
+            };
+        }
 
     }
 
