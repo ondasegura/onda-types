@@ -192,7 +192,7 @@ namespace ServicePagarme {
             const RegisterInformationOutputSchema = z4.object({
                 email: z4.string().email(),
                 document: z4.string(),
-                type: z4.literal("individual"),
+                type: z4.string(),
                 phone_numbers: z4.array(TelefoneComTipoSchema),
                 name: z4.string(),
                 mother_name: z4.string(),
@@ -208,7 +208,7 @@ namespace ServicePagarme {
                 email: z4.string().email(),
                 code: z4.string(),
                 document: z4.string(),
-                type: z4.literal("individual"),
+                type: z4.string(),
                 payment_mode: z4.literal("bank_transfer"),
                 status: z4.literal("active"),
                 created_at: z4.string().datetime(),
