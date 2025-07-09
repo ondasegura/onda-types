@@ -4,7 +4,7 @@ import ControllerRecebedor from "../controllers/recebedor";
 // COMO USAR ESTE NAMESPACE NA HORA DE IMPORTAR:
 // import t from "onda-types"
 // t.Financeiro.Services.CriarCliente.Input
-namespace SevicePagarme {
+namespace ServicePagarme {
     export namespace Cliente {
         export namespace Criar {
             const generos = {
@@ -478,4 +478,4 @@ namespace SevicePagarme {
     }
 }
 
-export default SevicePagarme;
+export default ServicePagarme;
