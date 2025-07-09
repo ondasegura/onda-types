@@ -413,6 +413,52 @@ namespace SevicePagarme {
                 };
             };
         }
+
+        export namespace Deletar {
+            export const InputSchema = z4.object({
+                data: z4.object({
+                    id: z4.string(),
+                    status: z4.string(),
+                })
+            });
+            export type Input = z4.infer<typeof InputSchema>;
+
+            export const OutputSchema = z4.object({
+                id: z4.string(),
+                code: z4.string(),
+                amount: z4.number(),
+                currency: z4.string(),
+                closed: z4.boolean(),
+                items: z4.array(z4.object({
+                    id: z4.string(),
+                    description: z4.string(),
+                    amount: z4.number(),
+                    quantity: z4.number(),
+                    status: z4.string(),
+                    created_at: z4.string(),
+                    updated_at: z4.string(),
+                })),
+                customer: z4.object({
+                    id: z4.string(),
+                    name: z4.string(),
+                    email: z4.string(),
+                    delinquent: z4.boolean(),
+                    created_at: z4.string(),
+                    updated_at: z4.string(),
+                    phones: z4.record(z4.string(),z4.any()),
+                    metadata: z4.record(z4.string(), z4.any()),
+                }),
+                status: z4.string(),
+                created_at: z4.string(),
+                updated_at: z4.string(),
+                closed_at: z4.string(),
+            });
+            export type Output = {
+                data: {
+                    cobranca: z4.infer<typeof OutputSchema>;
+                };
+            };
+        }
     }
 }
 
