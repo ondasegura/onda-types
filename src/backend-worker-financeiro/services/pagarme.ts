@@ -4,7 +4,7 @@ import ControllerRecebedor from "../controllers/recebedor";
 // COMO USAR ESTE NAMESPACE NA HORA DE IMPORTAR:
 // import t from "onda-types"
 // t.Financeiro.Services.CriarCliente.Input
-namespace SevicePagarme {
+namespace ServicePagarme {
     export namespace Cliente {
         export namespace Criar {
             const generos = {
@@ -158,6 +158,68 @@ namespace SevicePagarme {
                 delay: z4.number().nullable(),
             });
 
+            const DefaultBankAccountOutputSchema = z4.object({
+                id: z4.string(),
+                holder_name: z4.string(),
+                holder_type: z4.literal("individual"),
+                holder_document: z4.string(),
+                bank: z4.string(),
+                branch_number: z4.string(),
+                account_number: z4.string(),
+                account_check_digit: z4.string(),
+                type: z4.literal("checking"),
+                status: z4.literal("active"),
+                created_at: z4.string().datetime(),
+                updated_at: z4.string().datetime(),
+            });
+
+            const GatewayRecipientSchema = z4.object({
+                gateway: z4.literal("pagarme"),
+                status: z4.literal("active"),
+                pgid: z4.string(),
+                createdAt: z4.string().datetime(),
+                updatedAt: z4.string().datetime(),
+            });
+
+            const AutomaticAnticipationSettingsOutputSchema = z4.object({
+                enabled: z4.boolean(),
+                type: z4.literal("full"),
+                // No JSON, 'volume_percentage' é um número
+                volume_percentage: z4.number(),
+                delay: z4.number(),
+            });
+
+            const RegisterInformationOutputSchema = z4.object({
+                email: z4.string().email(),
+                document: z4.string(),
+                type: z4.string(),
+                phone_numbers: z4.array(TelefoneComTipoSchema),
+                name: z4.string(),
+                mother_name: z4.string(),
+                birthdate: z4.string(),
+                monthly_income: z4.string(),
+                professional_occupation: z4.string(),
+                address: EnderecoCompletoSchema,
+            });
+
+            const RecebedorCompletoOutputSchema = z4.object({
+                id: z4.string(),
+                name: z4.string(),
+                email: z4.string().email(),
+                code: z4.string(),
+                document: z4.string(),
+                type: z4.string(),
+                payment_mode: z4.literal("bank_transfer"),
+                status: z4.literal("active"),
+                created_at: z4.string().datetime(),
+                updated_at: z4.string().datetime(),
+                transfer_settings: ConfiguracoesTransferenciaSchema,
+                default_bank_account: DefaultBankAccountOutputSchema,
+                gateway_recipients: z4.array(GatewayRecipientSchema),
+                automatic_anticipation_settings: AutomaticAnticipationSettingsOutputSchema,
+                register_information: RegisterInformationOutputSchema,
+            });
+
             const SocioAdministradorSchema = z4.object({
                 name: z4.string(),
                 email: z4.email(),
@@ -211,7 +273,7 @@ namespace SevicePagarme {
                 code: z4.string(),
             });
 
-            export const OutputSchema = InputSchema;
+            export const OutputSchema = RecebedorCompletoOutputSchema;
 
             export type Input = z4.infer<typeof InputSchema>;
             export type Output = {
@@ -462,4 +524,4 @@ namespace SevicePagarme {
     }
 }
 
-export default SevicePagarme;
+export default ServicePagarme;

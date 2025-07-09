@@ -17,7 +17,7 @@ import ControllerContasReceber from "./controllers/conta_receber";
 import ControllerCliente from "./controllers/cliente";
 
 //SERVICES
-import ServicePagarme from "./services/pagarme";
+import SP from "./services/pagarme";
 import ServiceAsaas from "./services/asaas";
 namespace BackendWorkerFinanceiro {
     export interface Context extends HonoContext {
@@ -52,7 +52,7 @@ namespace BackendWorkerFinanceiro {
     }
 
     export namespace Services {
-        export import Pagarme = ServicePagarme;
+        export import ServicePagarme = SP;
         export import Asaas = ServiceAsaas;
     }
 }
