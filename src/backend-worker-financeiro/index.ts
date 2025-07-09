@@ -52,7 +52,7 @@ namespace BackendWorkerFinanceiro {
     }
 
     export namespace Services {
-        export import Pagarme = SP;
+        export import ServicePagarme = SP;
         export import Asaas = ServiceAsaas;
     }
 }
