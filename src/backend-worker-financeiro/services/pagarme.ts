@@ -480,7 +480,7 @@ namespace ServicePagarme {
             export const InputSchema = z4.object({
                 data: z4.object({
                     id: z4.string(),
-                    status: z4.string(),
+                    status: z4.literal('canceled'),
                 })
             });
             export type Input = z4.infer<typeof InputSchema>;
