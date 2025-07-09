@@ -202,7 +202,7 @@ namespace SevicePagarme {
                 address: EnderecoCompletoSchema,
             });
 
-            const RecebedorCompletoSchema = z4.object({
+            const RecebedorCompletoOutputSchema = z4.object({
                 id: z4.string(),
                 name: z4.string(),
                 email: z4.string().email(),
@@ -273,13 +273,7 @@ namespace SevicePagarme {
                 code: z4.string(),
             });
 
-            export const OutputSchema = z4.object({
-                data: {
-                    recebedor: {
-                        RecebedorCompletoSchema,
-                    },
-                },
-            });
+            export const OutputSchema = RecebedorCompletoOutputSchema;
 
             export type Input = z4.infer<typeof InputSchema>;
             export type Output = {
