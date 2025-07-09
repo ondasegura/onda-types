@@ -93,31 +93,23 @@ export namespace ControllerRecebedor {
 
     export const RecebedorIndividualSchema = RecebedorBaseSchema.extend({
         tipo: z4.literal("individual"),
-        email: z4.email(),
-        documento: z4.string(),
         nome: z4.string(),
         nome_mae: z4.string(),
         data_nascimento: z4.string(),
         renda_mensal: z4.number(),
         ocupacao_profissional: z4.string(),
-        telefones: TelefoneComTipoSchema,
         endereco: EnderecoCompletoSchema,
-        site: z4.string(),
     });
 
     export const RecebedorEmpresaSchema = RecebedorBaseSchema.extend({
         tipo: z4.literal("empresa"),
-        email: z4.email(),
-        documento: z4.string(),
         razao_social: z4.string(),
         nome_fantasia: z4.string(),
         faturamento_anual: z4.number(),
         tipo_empresa: z4.string(),
         data_fundacao: z4.string(),
         endereco_principal: EnderecoCompletoSchema,
-        telefones: TelefoneComTipoSchema,
         socios_administradores: z4.array(SocioAdministradorSchema),
-        site: z4.string().url().optional(),
     });
 
     // export const InformacoesRegistroRecebedorIndividualSchema = z4.object({
