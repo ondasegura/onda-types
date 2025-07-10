@@ -96,7 +96,7 @@ export namespace ControllerRecebedor {
         nome: z4.string(),
         nome_mae: z4.string(),
         data_nascimento: z4.string(),
-        renda_mensal: z4.number(),
+        renda_mensal: z4.transform((val) => Number(val)),
         ocupacao_profissional: z4.string(),
         endereco: EnderecoCompletoSchema,
     });
@@ -105,7 +105,7 @@ export namespace ControllerRecebedor {
         tipo: z4.literal("empresa"),
         razao_social: z4.string(),
         nome_fantasia: z4.string(),
-        faturamento_anual: z4.number(),
+        faturamento_anual: z4.transform((val) => Number(val)),
         tipo_empresa: z4.string(),
         data_fundacao: z4.string(),
         endereco_principal: EnderecoCompletoSchema,
