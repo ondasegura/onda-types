@@ -169,16 +169,16 @@ namespace ServicePagarme {
                 account_check_digit: z4.string(),
                 type: z4.literal("checking"),
                 status: z4.literal("active"),
-                created_at: z4.string().datetime(),
-                updated_at: z4.string().datetime(),
+                created_at: z4.string(),
+                updated_at: z4.string(),
             });
 
             const GatewayRecipientSchema = z4.object({
                 gateway: z4.literal("pagarme"),
                 status: z4.literal("active"),
                 pgid: z4.string(),
-                createdAt: z4.string().datetime(),
-                updatedAt: z4.string().datetime(),
+                createdAt: z4.string(),
+                updatedAt: z4.string(),
             });
 
             const AutomaticAnticipationSettingsOutputSchema = z4.object({
@@ -190,7 +190,7 @@ namespace ServicePagarme {
             });
 
             const RegisterInformationOutputSchema = z4.object({
-                email: z4.string().email(),
+                email: z4.string(),
                 document: z4.string(),
                 type: z4.string(),
                 phone_numbers: z4.array(TelefoneComTipoSchema),
@@ -205,14 +205,14 @@ namespace ServicePagarme {
             const RecebedorCompletoOutputSchema = z4.object({
                 id: z4.string(),
                 name: z4.string(),
-                email: z4.string().email(),
+                email: z4.string(),
                 code: z4.string(),
                 document: z4.string(),
                 type: z4.string(),
                 payment_mode: z4.literal("bank_transfer"),
                 status: z4.literal("active"),
-                created_at: z4.string().datetime(),
-                updated_at: z4.string().datetime(),
+                created_at: z4.string(),
+                updated_at: z4.string(),
                 transfer_settings: ConfiguracoesTransferenciaSchema,
                 default_bank_account: DefaultBankAccountOutputSchema,
                 gateway_recipients: z4.array(GatewayRecipientSchema),
@@ -245,7 +245,7 @@ namespace ServicePagarme {
                 professional_occupation: z4.string(),
                 address: EnderecoCompletoSchema,
                 phone_numbers: z4.array(TelefoneComTipoSchema),
-                site_url: z4.string().url().optional(),
+                site_url: z4.string().optional(),
             });
 
             const RegisterInformationCorporationSchema = z4.object({
@@ -260,7 +260,7 @@ namespace ServicePagarme {
                 main_address: EnderecoCompletoSchema,
                 phone_numbers: z4.array(TelefoneComTipoSchema),
                 managing_partners: z4.array(SocioAdministradorSchema),
-                site_url: z4.string().url().optional(),
+                site_url: z4.string().optional(),
             });
 
             const RegisterInformationDiscriminadoSchema = z4.discriminatedUnion("type", [RegisterInformationCorporationSchema, RegisterInformationIndividualSchema]);
@@ -480,8 +480,8 @@ namespace ServicePagarme {
             export const InputSchema = z4.object({
                 data: z4.object({
                     id: z4.string(),
-                    status: z4.literal('canceled'),
-                })
+                    status: z4.literal("canceled"),
+                }),
             });
             export type Input = z4.infer<typeof InputSchema>;
 
@@ -491,15 +491,17 @@ namespace ServicePagarme {
                 amount: z4.number(),
                 currency: z4.string(),
                 closed: z4.boolean(),
-                items: z4.array(z4.object({
-                    id: z4.string(),
-                    description: z4.string(),
-                    amount: z4.number(),
-                    quantity: z4.number(),
-                    status: z4.string(),
-                    created_at: z4.string(),
-                    updated_at: z4.string(),
-                })),
+                items: z4.array(
+                    z4.object({
+                        id: z4.string(),
+                        description: z4.string(),
+                        amount: z4.number(),
+                        quantity: z4.number(),
+                        status: z4.string(),
+                        created_at: z4.string(),
+                        updated_at: z4.string(),
+                    })
+                ),
                 customer: z4.object({
                     id: z4.string(),
                     name: z4.string(),
@@ -507,7 +509,7 @@ namespace ServicePagarme {
                     delinquent: z4.boolean(),
                     created_at: z4.string(),
                     updated_at: z4.string(),
-                    phones: z4.record(z4.string(),z4.any()),
+                    phones: z4.record(z4.string(), z4.any()),
                     metadata: z4.record(z4.string(), z4.any()),
                 }),
                 status: z4.string(),
