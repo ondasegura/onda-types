@@ -321,7 +321,10 @@ namespace ServicePagarme {
                             number: z4.number(),
                             total: z4.number(),
                         })
-                    ),
+                    ).optional(),
+                    free_installment: z4.number().optional().default(1),
+                    interest_rate: z4.number().min(0.01).max(100).optional(),
+                    max_installments: z4.number().optional().default(2)
                 })
                 .optional();
             export type CartaoDeCredito = z4.infer<typeof CartaoDeCreditoSchema>;
