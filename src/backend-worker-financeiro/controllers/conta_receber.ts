@@ -1,4 +1,4 @@
-import z4 from "zod/v4";
+import z4, { includes } from "zod/v4";
 
 // tipagem:
 // COMO USAR ESE NAMESPACE NA HORA DE IMPORTAR: 
@@ -65,6 +65,7 @@ namespace ControllerContaReceber {
                     metodo_pagamento: z4.array(MetodoPagamentoSchema).min(1),
                     tipo_pagamento: z4.number(),
                     descricao: z4.string(),
+                    porcentagem_juros: z4.number().optional(),
                     referencia_externa_primaria: z4.string(),
                     referencia_externa_secundaria: z4.string(),
                     referencia_externa_terciaria: z4.string(),
@@ -77,7 +78,18 @@ namespace ControllerContaReceber {
                     url_pedido: z4.string().optional(),
                     url_cobranca: z4.string().optional(),
                     transacao_id: z4.string().optional()
-                })
+                }).refine(
+                    (val) => {
+                        const aceitaCartao = val.metodo_pagamento.includes("credit_card");
+                        const jurosInformado = val.porcentagem_juros !== undefined;
+                        return !aceitaCartao || jurosInformado;
+                    },
+                    {
+                        path: ["porcentagem_juros"],
+                        message: "porcentagem_juros é obrigatória quando o método de pagamento inclui cartão de crédito",
+                    }
+                )
+
             })
         });
         export type Input = z4.infer<typeof InputSchema>;
