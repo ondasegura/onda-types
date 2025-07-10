@@ -266,11 +266,15 @@ namespace ServicePagarme {
             const RegisterInformationDiscriminadoSchema = z4.discriminatedUnion("type", [RegisterInformationCorporationSchema, RegisterInformationIndividualSchema]);
 
             export const InputSchema = z4.object({
-                register_information: RegisterInformationDiscriminadoSchema,
-                default_bank_account: ContaBancariaSchema,
-                transfer_settings: ConfiguracoesTransferenciaSchema,
-                automatic_anticipation_settings: ConfiguracoesAntecipacaoSchema,
-                code: z4.string(),
+                data: {
+                    recebedor: {
+                        register_information: RegisterInformationDiscriminadoSchema,
+                        default_bank_account: ContaBancariaSchema,
+                        transfer_settings: ConfiguracoesTransferenciaSchema,
+                        automatic_anticipation_settings: ConfiguracoesAntecipacaoSchema,
+                        code: z4.string(),
+                    },
+                },
             });
 
             export const OutputSchema = RecebedorCompletoOutputSchema;
