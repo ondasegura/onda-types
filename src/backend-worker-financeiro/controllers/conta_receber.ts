@@ -80,9 +80,10 @@ namespace ControllerContaReceber {
                     transacao_id: z4.string().optional()
                 }).refine(
                     (val) => {
+                        const checkout = val.checkout === 'pagarme'
                         const aceitaCartao = val.metodo_pagamento.includes("credit_card");
                         const jurosInformado = val.porcentagem_juros !== undefined;
-                        return !aceitaCartao || jurosInformado;
+                        return !aceitaCartao || jurosInformado || checkout;
                     },
                     {
                         path: ["porcentagem_juros"],
