@@ -23,7 +23,7 @@ namespace ServiceAsaas {
                         description: z4.string(),
                         externalReference: z4.string(),
                         installmentCount: z4.number(),
-                        totalValue: z4.number(),
+                        totalValue: z4.number().transform((val) => val / 100),
                         postalService: z4.boolean().default(false),
                         interest: z4.object({
                             value: z4.number(),
