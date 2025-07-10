@@ -167,7 +167,7 @@ namespace ControllerContaReceber {
                     checkout: z4.string().optional(),
                     cliente_id: z4.string().optional(),
                     parcelas: z4.number().optional(),
-                    valor: z4.number().optional(),
+                    valor: z4.number().int().optional().describe("O valor original deve ser multiplicado por 100"),
                     vencimento: z4.string().optional(),
                     codigo: z4.string().optional(),
                     metodo_pagamento: z4.array(z4.string()).optional(),
