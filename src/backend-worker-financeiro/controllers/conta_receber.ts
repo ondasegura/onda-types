@@ -267,7 +267,8 @@ namespace ControllerContaReceber {
             };
             formulario: {
                 open: boolean;
-                item: BuscarPeloId.Output["data"]["conta_receber"];
+                atualizar: BuscarPeloId.Output["data"]["conta_receber"];
+                criar: Criar.Input["data"]["conta_receber"];
                 progress: number;
                 loading: boolean;
                 loading_submit: boolean;
