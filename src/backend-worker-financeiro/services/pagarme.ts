@@ -130,7 +130,7 @@ namespace ServicePagarme {
             });
 
             const ContaBancariaSchema = z4.object({
-                holder_name: z4.string(),
+                holder_name: z4.string().transform((value) => (value.length > 30 ? value.slice(0, 27) + "..." : value)),
                 holder_type: z4.union([z4.literal("individual"), z4.literal("company")]),
                 holder_document: z4.string(),
                 bank: z4.string(),
