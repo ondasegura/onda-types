@@ -267,13 +267,13 @@ namespace ServicePagarme {
 
             export const InputSchema = z4.object({
                 data: z4.object({
-                    recebedor: {
+                    recebedor: z4.object({
                         register_information: RegisterInformationDiscriminadoSchema,
                         default_bank_account: ContaBancariaSchema,
                         transfer_settings: ConfiguracoesTransferenciaSchema,
                         automatic_anticipation_settings: ConfiguracoesAntecipacaoSchema,
                         code: z4.string(),
-                    },
+                    }),
                 }),
             });
 
