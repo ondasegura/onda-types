@@ -226,7 +226,7 @@ namespace ServicePagarme {
                 document: z4.string().max(11),
                 type: z4.literal("individual"),
                 mother_name: z4.string(),
-                birthdate: z4.preprocess((valor) => String(valor ?? ""), dd_mm_aaaa.pipe(z4.string())),
+                birthdate: z4.string(),
                 monthly_income: z4.transform((val) => Number(val)),
                 professional_occupation: z4.string(),
                 self_declared_legal_representative: z4.boolean(),
