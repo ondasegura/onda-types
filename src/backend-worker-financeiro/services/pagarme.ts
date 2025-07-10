@@ -266,7 +266,7 @@ namespace ServicePagarme {
             const RegisterInformationDiscriminadoSchema = z4.discriminatedUnion("type", [RegisterInformationCorporationSchema, RegisterInformationIndividualSchema]);
 
             export const InputSchema = z4.object({
-                data: {
+                data: z4.object({
                     recebedor: {
                         register_information: RegisterInformationDiscriminadoSchema,
                         default_bank_account: ContaBancariaSchema,
@@ -274,7 +274,7 @@ namespace ServicePagarme {
                         automatic_anticipation_settings: ConfiguracoesAntecipacaoSchema,
                         code: z4.string(),
                     },
-                },
+                }),
             });
 
             export const OutputSchema = RecebedorCompletoOutputSchema;
