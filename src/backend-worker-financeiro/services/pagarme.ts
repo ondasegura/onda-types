@@ -105,9 +105,6 @@ namespace ServicePagarme {
             return valor.replace(/\D/g, "");
         });
 
-        // const dd_mm_aaaa = z4.string().transform((valor) => {
-        //     return valor.replace(/^([0-9]{2})\/([0-9]{2})\/([0-9]{4})$/, "");
-        // });
         export namespace Criar {
             const TelefoneComTipoSchema = z4.object({
                 ddd: z4.string().length(2),
@@ -283,8 +280,19 @@ namespace ServicePagarme {
             };
         }
         export namespace ReceberEventoWebhook {
-            // input e output
-            //função
+            export const InputSchema = z4.object({
+                id: z4.string(),
+            });
+
+            export const OutputSchema = z4.object({
+                recipient_id: z4.string(),
+            });
+            export type Input = z4.infer<typeof InputSchema>;
+            export type Output = {
+                data: {
+                    recebedor: z4.infer<typeof OutputSchema>;
+                };
+            };
         }
     }
 
@@ -316,12 +324,17 @@ namespace ServicePagarme {
                 .object({
                     capture: z4.boolean(),
                     statement_descriptor: z4.string(),
-                    installments: z4.array(
-                        z4.object({
-                            number: z4.number(),
-                            total: z4.number(),
-                        })
-                    ),
+                    installments: z4
+                        .array(
+                            z4.object({
+                                number: z4.number(),
+                                total: z4.number(),
+                            })
+                        )
+                        .optional(),
+                    free_installment: z4.number().optional().default(1),
+                    interest_rate: z4.number().min(0.01).max(100).optional(),
+                    max_installments: z4.number().optional().default(2),
                 })
                 .optional();
             export type CartaoDeCredito = z4.infer<typeof CartaoDeCreditoSchema>;

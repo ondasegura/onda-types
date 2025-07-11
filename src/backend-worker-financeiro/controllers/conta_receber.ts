@@ -1,4 +1,4 @@
-import z4 from "zod/v4";
+import z4, { includes } from "zod/v4";
 
 // tipagem:
 // COMO USAR ESE NAMESPACE NA HORA DE IMPORTAR: 
@@ -18,6 +18,12 @@ namespace ControllerContaReceber {
         z4.literal('debit_card'),
         z4.literal('pix'),
     ])
+
+    export const JurosSchemaAsaas = z4.object({
+        tipo: z4.union([z4.literal('PERCENTAGE'), z4.literal('FIXED')]),
+        valor: z4.number().max(99.99)
+    }).optional()
+
     export const ContaReceberBaseSchema = z4.object({
         _id: z4.uuid(),
         data_criacao: z4.date(),
@@ -56,19 +62,25 @@ namespace ControllerContaReceber {
         export const InputSchema = z4.object({
             data: z4.object({
                 conta_receber: z4.object({
-                    checkout: (CheckoutSchema),
+                    checkout: CheckoutSchema,
                     cliente_id: z4.string(),
                     parcelas: z4.number(),
                     valor: z4.number(),
                     vencimento: z4.iso.datetime().optional(),
                     codigo: z4.string(),
                     metodo_pagamento: z4.array(MetodoPagamentoSchema).min(1),
-                    tipo_pagamento: z4.number(),
+                    tipo_pagamento: z4.union([z4.enum(['241'])]).optional().nullable().default("241"),
                     descricao: z4.string(),
+                    juros: z4.object({
+                        tipo: z4.union([z4.literal('PERCENTAGE'), z4.literal('FIXED')]),
+                        valor: z4.number().max(99.99)
+                    })
+                    ,
+                    multa: z4.number().int().max(10).optional(),
                     referencia_externa_primaria: z4.string(),
-                    referencia_externa_secundaria: z4.string(),
-                    referencia_externa_terciaria: z4.string(),
-                    referencia_externa_quartenaria: z4.string(),
+                    referencia_externa_secundaria: z4.string().optional().nullable(),
+                    referencia_externa_terciaria: z4.string().optional().nullable(),
+                    referencia_externa_quartenaria: z4.string().optional().nullable(),
                     metadata: z4.record(z4.string(), z4.any()).optional(),
                     status: z4.number().optional(),
                     pagamento_id: z4.string().optional(),
@@ -77,7 +89,32 @@ namespace ControllerContaReceber {
                     url_pedido: z4.string().optional(),
                     url_cobranca: z4.string().optional(),
                     transacao_id: z4.string().optional()
-                })
+                }).refine(
+                    (val) => {
+                        if (!val.vencimento) return true;
+                        const hoje = new Date();
+                        const vencimento = new Date(val.vencimento);
+                        return vencimento < hoje;
+                    },
+                    {
+                        path: ["vencimento"],
+                        message: "A data de vencimento não pode ser anterior à data atual.",
+                    }
+                )
+                    .refine(
+                        (val) => {
+                            const checkout = val.checkout === 'asaas'
+                            const aceitaBoleto = val.metodo_pagamento.includes("boleto")
+                            const multaInformado = val.multa === undefined;
+
+                            return checkout || aceitaBoleto || multaInformado || multaInformado
+                        },
+                        {
+                            path: ["multa"],
+                            message: "multa é obrigatória quando o checkout é asaas"
+                        }
+                    )
+
             })
         });
         export type Input = z4.infer<typeof InputSchema>;
@@ -122,6 +159,7 @@ namespace ControllerContaReceber {
                     url_cobranca: z4.string().optional().nullable(),
                     transacao_id: z4.string().optional().nullable(),
                     usuario_create_id: z4.uuidv4().optional().nullable(),
+                    excluido: z4.boolean().optional().nullable().default(false)
                 }),
 
             })
@@ -146,7 +184,8 @@ namespace ControllerContaReceber {
     export namespace BuscarPeloId {
         export const InputSchema = z4.object({
             data: z4.object({
-                _id: z4.uuidv4()
+                _id: z4.uuidv4(),
+                excluido: z4.boolean().optional().nullable().default(false)
             })
         });
         export type Input = z4.infer<typeof InputSchema>;
@@ -168,7 +207,7 @@ namespace ControllerContaReceber {
                     cliente_id: z4.string().optional(),
                     parcelas: z4.number().optional(),
                     valor: z4.number().int().optional().describe("O valor original deve ser multiplicado por 100"),
-                    vencimento: z4.string().optional(),
+                    vencimento: z4.iso.datetime().optional(),
                     codigo: z4.string().optional(),
                     metodo_pagamento: z4.array(z4.string()).optional(),
                     tipo_pagamento: z4.number().optional(),
@@ -189,7 +228,18 @@ namespace ControllerContaReceber {
                     url_pedido: z4.string().optional(),
                     url_cobranca: z4.string().optional(),
                     transacao_id: z4.string().optional()
-                })
+                }).refine(
+                    (val) => {
+                        if (!val.vencimento) return true;
+                        const hoje = new Date();
+                        const vencimento = new Date(val.vencimento);
+                        return vencimento < hoje;
+                    },
+                    {
+                        path: ["vencimento"],
+                        message: "A data de vencimento não pode ser anterior à data atual.",
+                    }
+                )
             })
         });
         export type Input = z4.infer<typeof InputSchema>;
