@@ -207,7 +207,7 @@ namespace ServicePagarme {
                 document: z4.string(),
                 type: z4.string(),
                 payment_mode: z4.literal("bank_transfer"),
-                status: z4.literal("active"),
+                status: z4.string(),
                 created_at: z4.string(),
                 updated_at: z4.string(),
                 transfer_settings: ConfiguracoesTransferenciaSchema,
