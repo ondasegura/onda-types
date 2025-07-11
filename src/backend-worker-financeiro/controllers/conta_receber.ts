@@ -18,6 +18,12 @@ namespace ControllerContaReceber {
         z4.literal('debit_card'),
         z4.literal('pix'),
     ])
+
+    export const JurosSchemaAsaas = z4.object({
+        tipo: z4.union([z4.literal('PERCENTAGE'), z4.literal('FIXED')]),
+        valor: z4.number().max(99.99)
+    }).optional()
+
     export const ContaReceberBaseSchema = z4.object({
         _id: z4.uuid(),
         data_criacao: z4.date(),
@@ -56,7 +62,7 @@ namespace ControllerContaReceber {
         export const InputSchema = z4.object({
             data: z4.object({
                 conta_receber: z4.object({
-                    checkout: (CheckoutSchema),
+                    checkout: CheckoutSchema,
                     cliente_id: z4.string(),
                     parcelas: z4.number(),
                     valor: z4.number(),
@@ -65,7 +71,12 @@ namespace ControllerContaReceber {
                     metodo_pagamento: z4.array(MetodoPagamentoSchema).min(1),
                     tipo_pagamento: z4.number(),
                     descricao: z4.string(),
-                    porcentagem_juros: z4.number().optional(),
+                    juros: z4.object({
+                        tipo: z4.union([z4.literal('PERCENTAGE'), z4.literal('FIXED')]),
+                        valor: z4.number().max(99.99)
+                    })
+                    ,
+                    multa: z4.number().int().max(10).optional(),
                     referencia_externa_primaria: z4.string(),
                     referencia_externa_secundaria: z4.string(),
                     referencia_externa_terciaria: z4.string(),
@@ -80,16 +91,29 @@ namespace ControllerContaReceber {
                     transacao_id: z4.string().optional()
                 }).refine(
                     (val) => {
-                        const checkout = val.checkout === 'pagarme'
-                        const aceitaCartao = val.metodo_pagamento.includes("credit_card");
-                        const jurosInformado = val.porcentagem_juros !== undefined;
-                        return !aceitaCartao || jurosInformado || checkout;
+                        if (!val.vencimento) return true;
+                        const hoje = new Date();
+                        const vencimento = new Date(val.vencimento);
+                        return vencimento < hoje;
                     },
                     {
-                        path: ["porcentagem_juros"],
-                        message: "porcentagem_juros é obrigatória quando o método de pagamento inclui cartão de crédito",
+                        path: ["vencimento"],
+                        message: "A data de vencimento não pode ser anterior à data atual.",
                     }
                 )
+                    .refine(
+                        (val) => {
+                            const checkout = val.checkout === 'asaas'
+                            const aceitaBoleto = val.metodo_pagamento.includes("boleto")
+                            const multaInformado = val.multa === undefined;
+
+                            return checkout || aceitaBoleto || multaInformado || multaInformado
+                        },
+                        {
+                            path: ["multa"],
+                            message: "multa é obrigatória quando o checkout é asaas"
+                        }
+                    )
 
             })
         });
@@ -181,7 +205,7 @@ namespace ControllerContaReceber {
                     cliente_id: z4.string().optional(),
                     parcelas: z4.number().optional(),
                     valor: z4.number().int().optional().describe("O valor original deve ser multiplicado por 100"),
-                    vencimento: z4.string().optional(),
+                    vencimento: z4.iso.datetime().optional(),
                     codigo: z4.string().optional(),
                     metodo_pagamento: z4.array(z4.string()).optional(),
                     tipo_pagamento: z4.number().optional(),
@@ -202,7 +226,18 @@ namespace ControllerContaReceber {
                     url_pedido: z4.string().optional(),
                     url_cobranca: z4.string().optional(),
                     transacao_id: z4.string().optional()
-                })
+                }).refine(
+                    (val) => {
+                        if (!val.vencimento) return true;
+                        const hoje = new Date();
+                        const vencimento = new Date(val.vencimento);
+                        return vencimento < hoje;
+                    },
+                    {
+                        path: ["vencimento"],
+                        message: "A data de vencimento não pode ser anterior à data atual.",
+                    }
+                )
             })
         });
         export type Input = z4.infer<typeof InputSchema>;
