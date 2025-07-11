@@ -46,6 +46,7 @@ namespace ControllerContaReceber {
         documento_titular: z4.string(),
         titular: z4.string(),
         status: z4.number(),
+        status_descricao: z4.string(),
         numero_cartao: z4.string(),
         numero_serial: z4.string(),
         pagamento_id: z4.string(),
@@ -185,7 +186,7 @@ namespace ControllerContaReceber {
         export const InputSchema = z4.object({
             data: z4.object({
                 _id: z4.uuidv4(),
-                excluido: z4.boolean().optional().nullable().default(false)
+                excluido: z4.boolean().default(false)
             })
         });
         export type Input = z4.infer<typeof InputSchema>;
