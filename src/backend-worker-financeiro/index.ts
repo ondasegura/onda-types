@@ -2,9 +2,6 @@ import {Context as HonoContext} from "hono";
 
 // CONTROLLERS:
 import UP from "./controllers/token";
-import P from "./controllers/pagarme";
-import DefaultOrder from "./controllers/default_order";
-import TypeCustomer from "./controllers/pagarme/customer";
 import R from "./controllers/response";
 import UserPayload from "./controllers/token";
 import {ControllerFinanceiro as CF} from "./controllers/order";
@@ -36,12 +33,9 @@ namespace BackendWorkerFinanceiro {
         SK_TOKEN_ASAAS: string;
     }
     export namespace Controllers {
-        export import Pagarme = P;
-        export import TypeDefaultOrderRequest = DefaultOrder;
         export import Response = R;
         export import UserPayload = UP;
         export import Helpers = ControllerHelpers;
-        export import Customer = TypeCustomer;
         export import ControllerFinanceiro = CF; //remover apos o teste
         export import Log = ControllerLog;
         export import Recebedor = ControllerRecebedor;
