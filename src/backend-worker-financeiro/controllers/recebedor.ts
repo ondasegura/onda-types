@@ -215,6 +215,7 @@ export namespace ControllerRecebedor {
                 recebedor: z4.object({
                     _id: z4.string(),
                     pagarme_recebedor_id: z4.string().optional().nullable(),
+                    status: z4.string().optional().nullable(),
                 }),
             }),
         });
