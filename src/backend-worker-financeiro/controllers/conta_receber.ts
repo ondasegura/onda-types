@@ -185,7 +185,7 @@ namespace ControllerContaReceber {
         export const InputSchema = z4.object({
             data: z4.object({
                 _id: z4.uuidv4(),
-                excluido: z4.boolean().optional().nullable().default(false)
+                excluido: z4.boolean().default(false)
             })
         });
         export type Input = z4.infer<typeof InputSchema>;
