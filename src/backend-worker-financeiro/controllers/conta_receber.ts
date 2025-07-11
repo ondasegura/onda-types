@@ -94,26 +94,26 @@ namespace ControllerContaReceber {
                         if (!val.vencimento) return true;
                         const hoje = new Date();
                         const vencimento = new Date(val.vencimento);
-                        return vencimento < hoje;
+                        return vencimento > hoje;
                     },
                     {
                         path: ["vencimento"],
                         message: "A data de vencimento não pode ser anterior à data atual.",
                     }
                 )
-                    .refine(
-                        (val) => {
-                            const checkout = val.checkout === 'asaas'
-                            const aceitaBoleto = val.metodo_pagamento.includes("boleto")
-                            const multaInformado = val.multa === undefined;
+                .refine(
+                    (val) => {
+                        const checkout = val.checkout === 'asaas'
+                        const aceitaBoleto = val.metodo_pagamento.includes("boleto")
+                        const multaInformado = val.multa === undefined;
 
-                            return checkout || aceitaBoleto || multaInformado || multaInformado
-                        },
-                        {
-                            path: ["multa"],
-                            message: "multa é obrigatória quando o checkout é asaas"
-                        }
-                    )
+                        return checkout || aceitaBoleto || multaInformado || multaInformado
+                    },
+                    {
+                        path: ["multa"],
+                        message: "multa é obrigatória quando o checkout é asaas"
+                    }
+                )
 
             })
         });
