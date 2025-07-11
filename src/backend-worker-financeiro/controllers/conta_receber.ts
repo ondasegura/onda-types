@@ -69,7 +69,7 @@ namespace ControllerContaReceber {
                     vencimento: z4.iso.datetime().optional(),
                     codigo: z4.string(),
                     metodo_pagamento: z4.array(MetodoPagamentoSchema).min(1),
-                    tipo_pagamento: z4.number(),
+                    tipo_pagamento: z4.union([z4.enum(['241'])]).optional().nullable().default("241"),
                     descricao: z4.string(),
                     juros: z4.object({
                         tipo: z4.union([z4.literal('PERCENTAGE'), z4.literal('FIXED')]),
@@ -78,9 +78,9 @@ namespace ControllerContaReceber {
                     ,
                     multa: z4.number().int().max(10).optional(),
                     referencia_externa_primaria: z4.string(),
-                    referencia_externa_secundaria: z4.string(),
-                    referencia_externa_terciaria: z4.string(),
-                    referencia_externa_quartenaria: z4.string(),
+                    referencia_externa_secundaria: z4.string().optional().nullable(),
+                    referencia_externa_terciaria: z4.string().optional().nullable(),
+                    referencia_externa_quartenaria: z4.string().optional().nullable(),
                     metadata: z4.record(z4.string(), z4.any()).optional(),
                     status: z4.number().optional(),
                     pagamento_id: z4.string().optional(),
@@ -159,6 +159,7 @@ namespace ControllerContaReceber {
                     url_cobranca: z4.string().optional().nullable(),
                     transacao_id: z4.string().optional().nullable(),
                     usuario_create_id: z4.uuidv4().optional().nullable(),
+                    excluido: z4.boolean().optional().nullable().default(false)
                 }),
 
             })
@@ -183,7 +184,8 @@ namespace ControllerContaReceber {
     export namespace BuscarPeloId {
         export const InputSchema = z4.object({
             data: z4.object({
-                _id: z4.uuidv4()
+                _id: z4.uuidv4(),
+                excluido: z4.boolean().optional().nullable().default(false)
             })
         });
         export type Input = z4.infer<typeof InputSchema>;
