@@ -282,6 +282,10 @@ namespace ServicePagarme {
                 };
             };
         }
+        export namespace ReceberEventoWebhook {
+            // input e output
+            //função
+        }
     }
 
     export namespace Pedido {
