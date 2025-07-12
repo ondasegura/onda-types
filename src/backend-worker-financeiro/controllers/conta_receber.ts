@@ -54,7 +54,6 @@ namespace ControllerContaReceber {
         valor_pacela: z4.number(),
         url_pedido: z4.string(),
         url_cobranca: z4.string(),
-        transacao_id: z4.string(),
         metadata: z4.record(z4.string(), z4.any()).optional()
     });
     export type ContaReceberBase = z4.infer<typeof ContaReceberBaseSchema>;
@@ -89,7 +88,6 @@ namespace ControllerContaReceber {
                     valor_pacela: z4.number().optional(),
                     url_pedido: z4.string().optional(),
                     url_cobranca: z4.string().optional(),
-                    transacao_id: z4.string().optional()
                 }).refine(
                     (val) => {
                         if (!val.vencimento) return true;
@@ -158,7 +156,6 @@ namespace ControllerContaReceber {
                     valor_pacela: z4.number().optional().nullable(),
                     url_pedido: z4.string().optional().nullable(),
                     url_cobranca: z4.string().optional().nullable(),
-                    transacao_id: z4.string().optional().nullable(),
                     usuario_create_id: z4.uuidv4().optional().nullable(),
                     excluido: z4.boolean().optional().nullable().default(false)
                 }),
@@ -228,7 +225,6 @@ namespace ControllerContaReceber {
                     valor_pacela: z4.number().optional(),
                     url_pedido: z4.string().optional(),
                     url_cobranca: z4.string().optional(),
-                    transacao_id: z4.string().optional()
                 }).refine(
                     (val) => {
                         if (!val.vencimento) return true;
