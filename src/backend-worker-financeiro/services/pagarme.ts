@@ -540,24 +540,13 @@ namespace ServicePagarme {
         }
 
         export namespace ReceberWebhookContaReceber {
-            export const PagarmeStatusSchema = z4.enum(["charge.paid", "charge.refunded", "charge.pending", "charge.deleted"]);
-
-            export type ListaPagarmeStatus = z4.infer<typeof PagarmeStatusSchema>;
-
-            export const ListEnumPagarmeStatus: Record<ListaPagarmeStatus, number> = {
-                "charge.paid": 503,
-                "charge.refunded": 504,
-                "charge.pending": 501,
-                "charge.deleted": 502,
-            };
-
             export const InputSchema = z4.object({
                 id: z4.string(),
                 account: z4.object({
                     id: z4.string(),
                     name: z4.string(),
                 }),
-                type: PagarmeStatusSchema,
+                type: z4.string(),
                 created_at: z4.string(),
                 data: z4.object({
                     id: z4.string(),
