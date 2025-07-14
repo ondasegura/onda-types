@@ -280,12 +280,24 @@ export namespace ControllerRecebedor {
                     itens_por_pagina: number;
                 };
             };
-            formulario: {
-                open?: boolean;
-                item: BuscarPeloId.Output["data"]["recebedor"];
-                progress?: number;
+            pagina_mini_select: {
                 loading: boolean;
-                loading_submit?: boolean;
+                itens: BuscarPeloFiltro.Output["data"]["recebedor"];
+                item_selecionado: BuscarPeloId.Output["data"]["recebedor"];
+                paginacao: {
+                    total_itens: number;
+                    total_paginas: number;
+                    total_itens_pagina_atual: number;
+                    itens_por_pagina: number;
+                };
+            };
+            formulario: {
+                open: boolean;
+                atualizar: BuscarPeloId.Output["data"]["recebedor"];
+                criar: Criar.Input["data"]["recebedor"];
+                progress: number;
+                loading: boolean;
+                loading_submit: boolean;
             };
         };
     };
