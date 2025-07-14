@@ -540,13 +540,16 @@ namespace ServicePagarme {
         }
 
         export namespace ReceberWebhookContaReceber {
-            export  enum ListaPagarmeStatus  {
-                "charge.paid"= 503,
-                "charge.refunded"= 504,
-                "charge.pending"=501,
-                "charge.deleted"= 502
+            export const PagarmeStatusSchema = z4.enum(["charge.paid", "charge.refunded", "charge.pending", "charge.deleted"]);
 
-            }
+            export type ListaPagarmeStatus = z4.infer<typeof PagarmeStatusSchema>;
+
+            export const ListEnumPagarmeStatus: Record<ListaPagarmeStatus, number> = {
+                "charge.paid": 503,
+                "charge.refunded": 504,
+                "charge.pending": 501,
+                "charge.deleted": 502,
+            };
 
             export const InputSchema = z4.object({
                 id: z4.string(),
@@ -554,7 +557,7 @@ namespace ServicePagarme {
                     id: z4.string(),
                     name: z4.string(),
                 }),
-                type: z4.enum(["charge.paid", "charge.refunded", "charge.pending", "charge.deleted"]),
+                type: PagarmeStatusSchema,
                 created_at: z4.string(),
                 data: z4.object({
                     id: z4.string(),
@@ -588,7 +591,7 @@ namespace ServicePagarme {
                             status: z4.string(),
                             created_at: z4.string(),
                             updated_at: z4.string(),
-                            metadata: z4.record(z4.string(),z4.any()),
+                            metadata: z4.record(z4.string(), z4.any()),
                         }),
                         created_at: z4.string(),
                         updated_at: z4.string(),
@@ -599,7 +602,7 @@ namespace ServicePagarme {
                                 area_code: z4.string(),
                             }),
                         }),
-                        metadata: z4.record(z4.string(),z4.any()),
+                        metadata: z4.record(z4.string(), z4.any()),
                     }),
                     order: z4.object({
                         id: z4.string(),
@@ -611,7 +614,7 @@ namespace ServicePagarme {
                         currency: z4.string(),
                         status: z4.string(),
                         customer_id: z4.string(),
-                        metadata: z4.record(z4.string(),z4.any()),
+                        metadata: z4.record(z4.string(), z4.any()),
                     }),
                     checkout_payment: z4.object({
                         id: z4.string(),
@@ -625,10 +628,12 @@ namespace ServicePagarme {
                     last_transaction: z4.object({
                         transaction_type: z4.string(),
                         expires_at: z4.string(),
-                        additional_information: z4.array(z4.object({
-                            name: z4.string(),
-                            value: z4.string(),
-                        })),
+                        additional_information: z4.array(
+                            z4.object({
+                                name: z4.string(),
+                                value: z4.string(),
+                            })
+                        ),
                         id: z4.string(),
                         amount: z4.number(),
                         status: z4.string(),
@@ -637,12 +642,14 @@ namespace ServicePagarme {
                         updated_at: z4.string(),
                         gateway_response: z4.object({
                             code: z4.string(),
-                            errors: z4.array(z4.object({
-                                message: z4.string(),
-                            })),
+                            errors: z4.array(
+                                z4.object({
+                                    message: z4.string(),
+                                })
+                            ),
                         }),
-                        antifraud_response: z4.record(z4.string(),z4.any()),
-                        metadata: z4.record(z4.string(),z4.any()),
+                        antifraud_response: z4.record(z4.string(), z4.any()),
+                        metadata: z4.record(z4.string(), z4.any()),
                     }),
                 }),
             });
