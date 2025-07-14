@@ -173,6 +173,7 @@ export namespace ControllerRecebedor {
                     nome: z4.string().nullable().optional(),
                     nome_fantasia: z4.string().nullable().optional(),
                     razao_social: z4.string().nullable().optional(),
+                    usuario_criacao: z4.string().nullable().optional(),
                 }),
             }),
         });
