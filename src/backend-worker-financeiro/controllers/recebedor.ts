@@ -206,7 +206,9 @@ export namespace ControllerRecebedor {
             _id: z4.string(),
         });
 
-        export type Input = z4.infer<typeof InputSchema>;
+        export type Input = {
+            data: z4.infer<typeof InputSchema>;
+        };
 
         export const OutputSchema = z4.object({
             sucesso: z4.boolean(),
