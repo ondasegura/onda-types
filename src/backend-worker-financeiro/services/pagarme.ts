@@ -539,7 +539,118 @@ namespace ServicePagarme {
             };
         }
 
-        export namespace ReceberWebhookContaReceber {
+        // export namespace ReceberWebhookContaReceber {
+        //     export const InputSchema = z4.object({
+        //         id: z4.string(),
+        //         account: z4.object({
+        //             id: z4.string(),
+        //             name: z4.string(),
+        //         }),
+        //         type: z4.string(),
+        //         created_at: z4.string(),
+        //         data: z4.object({
+        //             id: z4.string(),
+        //             code: z4.string(),
+        //             amount: z4.number(),
+        //             status: z4.string(),
+        //             currency: z4.string(),
+        //             payment_method: z4.string(),
+        //             created_at: z4.string(),
+        //             updated_at: z4.string(),
+        //             pending_cancellation: z4.boolean(),
+        //             customer: z4.object({
+        //                 id: z4.string(),
+        //                 name: z4.string(),
+        //                 email: z4.string().email(),
+        //                 code: z4.string(),
+        //                 document: z4.string(),
+        //                 document_type: z4.string(),
+        //                 type: z4.string(),
+        //                 delinquent: z4.boolean(),
+        //                 address: z4.object({
+        //                     id: z4.string(),
+        //                     street: z4.string(),
+        //                     number: z4.string(),
+        //                     complement: z4.string(),
+        //                     zip_code: z4.string(),
+        //                     neighborhood: z4.string(),
+        //                     city: z4.string(),
+        //                     state: z4.string(),
+        //                     country: z4.string(),
+        //                     status: z4.string(),
+        //                     created_at: z4.string(),
+        //                     updated_at: z4.string(),
+        //                     metadata: z4.record(z4.string(), z4.any()),
+        //                 }),
+        //                 created_at: z4.string(),
+        //                 updated_at: z4.string(),
+        //                 phones: z4.object({
+        //                     home_phone: z4.object({
+        //                         country_code: z4.string(),
+        //                         number: z4.string(),
+        //                         area_code: z4.string(),
+        //                     }),
+        //                 }),
+        //                 metadata: z4.record(z4.string(), z4.any()),
+        //             }),
+        //             order: z4.object({
+        //                 id: z4.string(),
+        //                 code: z4.string(),
+        //                 amount: z4.number(),
+        //                 closed: z4.boolean(),
+        //                 created_at: z4.string(),
+        //                 updated_at: z4.string(),
+        //                 currency: z4.string(),
+        //                 status: z4.string(),
+        //                 customer_id: z4.string(),
+        //                 metadata: z4.record(z4.string(), z4.any()),
+        //             }),
+        //             checkout_payment: z4.object({
+        //                 id: z4.string(),
+        //                 amount: z4.number(),
+        //                 status: z4.string(),
+        //                 payment_url: z4.string(),
+        //                 billing_address_editable: z4.boolean(),
+        //                 created_at: z4.string(),
+        //                 updated_at: z4.string(),
+        //             }),
+        //             last_transaction: z4.object({
+        //                 transaction_type: z4.string(),
+        //                 expires_at: z4.string(),
+        //                 additional_information: z4.array(
+        //                     z4.object({
+        //                         name: z4.string(),
+        //                         value: z4.string(),
+        //                     })
+        //                 ),
+        //                 id: z4.string(),
+        //                 amount: z4.number(),
+        //                 status: z4.string(),
+        //                 success: z4.boolean(),
+        //                 created_at: z4.string(),
+        //                 updated_at: z4.string(),
+        //                 gateway_response: z4.object({
+        //                     code: z4.string(),
+        //                     errors: z4.array(
+        //                         z4.object({
+        //                             message: z4.string(),
+        //                         })
+        //                     ),
+        //                 }),
+        //                 antifraud_response: z4.record(z4.string(), z4.any()),
+        //                 metadata: z4.record(z4.string(), z4.any()),
+        //             }),
+        //         }),
+        //     });
+        //     export type Input = z4.infer<typeof InputSchema>;
+
+        //     export const OutputSchema = z4.object({});
+        //     export type Output = {
+        //         data: z4.infer<typeof OutputSchema>;
+        //     };
+        // }
+
+        export namespace ReberWebhookContaReceber {
             export const InputSchema = z4.object({
                 id: z4.string(),
                 account: z4.object({
@@ -552,94 +663,109 @@ namespace ServicePagarme {
                     id: z4.string(),
                     code: z4.string(),
                     amount: z4.number(),
-                    status: z4.string(),
                     currency: z4.string(),
-                    payment_method: z4.string(),
-                    created_at: z4.string(),
-                    updated_at: z4.string(),
-                    pending_cancellation: z4.boolean(),
+                    closed: z4.boolean(),
+                    items: z4.array(
+                        z4.object({
+                            id: z4.string(),
+                            description: z4.string(),
+                            amount: z4.number(),
+                            quantity: z4.number(),
+                            status: z4.string(),
+                            created_at: z4.string(),
+                            updated_at: z4.string(),
+                        })
+                    ),
                     customer: z4.object({
                         id: z4.string(),
                         name: z4.string(),
                         email: z4.string().email(),
-                        code: z4.string(),
                         document: z4.string(),
-                        document_type: z4.string(),
                         type: z4.string(),
                         delinquent: z4.boolean(),
+                        created_at: z4.string(),
+                        updated_at: z4.string(),
+                        phones: z4.record(z4.string(), z4.any()),
+                    }),
+                    shipping: z4.object({
+                        amount: z4.number(),
+                        description: z4.string(),
                         address: z4.object({
-                            id: z4.string(),
-                            street: z4.string(),
-                            number: z4.string(),
-                            complement: z4.string(),
                             zip_code: z4.string(),
-                            neighborhood: z4.string(),
                             city: z4.string(),
                             state: z4.string(),
                             country: z4.string(),
+                            line_1: z4.string(),
+                        }),
+                    }),
+                    status: z4.string(),
+                    created_at: z4.string(),
+                    updated_at: z4.string(),
+                    closed_at: z4.string(),
+                    charges: z4.array(
+                        z4.object({
+                            id: z4.string(),
+                            code: z4.string(),
+                            gateway_id: z4.string(),
+                            amount: z4.number(),
                             status: z4.string(),
+                            currency: z4.string(),
+                            payment_method: z4.string(),
+                            paid_at: z4.string(),
                             created_at: z4.string(),
                             updated_at: z4.string(),
-                            metadata: z4.record(z4.string(), z4.any()),
-                        }),
-                        created_at: z4.string(),
-                        updated_at: z4.string(),
-                        phones: z4.object({
-                            home_phone: z4.object({
-                                country_code: z4.string(),
-                                number: z4.string(),
-                                area_code: z4.string(),
-                            }),
-                        }),
-                        metadata: z4.record(z4.string(), z4.any()),
-                    }),
-                    order: z4.object({
-                        id: z4.string(),
-                        code: z4.string(),
-                        amount: z4.number(),
-                        closed: z4.boolean(),
-                        created_at: z4.string(),
-                        updated_at: z4.string(),
-                        currency: z4.string(),
-                        status: z4.string(),
-                        customer_id: z4.string(),
-                        metadata: z4.record(z4.string(), z4.any()),
-                    }),
-                    checkout_payment: z4.object({
-                        id: z4.string(),
-                        amount: z4.number(),
-                        status: z4.string(),
-                        payment_url: z4.string(),
-                        billing_address_editable: z4.boolean(),
-                        created_at: z4.string(),
-                        updated_at: z4.string(),
-                    }),
-                    last_transaction: z4.object({
-                        transaction_type: z4.string(),
-                        expires_at: z4.string(),
-                        additional_information: z4.array(
-                            z4.object({
+                            customer: z4.object({
+                                id: z4.string(),
                                 name: z4.string(),
-                                value: z4.string(),
-                            })
-                        ),
-                        id: z4.string(),
-                        amount: z4.number(),
-                        status: z4.string(),
-                        success: z4.boolean(),
-                        created_at: z4.string(),
-                        updated_at: z4.string(),
-                        gateway_response: z4.object({
-                            code: z4.string(),
-                            errors: z4.array(
-                                z4.object({
-                                    message: z4.string(),
-                                })
-                            ),
-                        }),
-                        antifraud_response: z4.record(z4.string(), z4.any()),
-                        metadata: z4.record(z4.string(), z4.any()),
-                    }),
+                                email: z4.string().email(),
+                                document: z4.string(),
+                                type: z4.string(),
+                                delinquent: z4.boolean(),
+                                created_at: z4.string(),
+                                updated_at: z4.string(),
+                                phones: z4.record(z4.string(), z4.any()),
+                            }),
+                            last_transaction: z4.object({
+                                id: z4.string(),
+                                transaction_type: z4.string(),
+                                gateway_id: z4.string(),
+                                amount: z4.number(),
+                                status: z4.string(),
+                                success: z4.boolean(),
+                                installments: z4.number(),
+                                acquirer_name: z4.string(),
+                                acquirer_affiliation_code: z4.string(),
+                                acquirer_tid: z4.string(),
+                                acquirer_nsu: z4.string(),
+                                acquirer_auth_code: z4.string(),
+                                operation_type: z4.string(),
+                                card: z4.object({
+                                    id: z4.string(),
+                                    last_four_digits: z4.string(),
+                                    brand: z4.string(),
+                                    holder_name: z4.string(),
+                                    exp_month: z4.number(),
+                                    exp_year: z4.number(),
+                                    status: z4.string(),
+                                    created_at: z4.string(),
+                                    updated_at: z4.string(),
+                                    billing_address: z4.object({
+                                        zip_code: z4.string(),
+                                        city: z4.string(),
+                                        state: z4.string(),
+                                        country: z4.string(),
+                                        line_1: z4.string(),
+                                    }),
+                                    type: z4.string(),
+                                }),
+                                created_at: z4.string(),
+                                updated_at: z4.string(),
+                                gateway_response: z4.object({
+                                    code: z4.string(),
+                                }),
+                            }),
+                        })
+                    ),
                 }),
             });
             export type Input = z4.infer<typeof InputSchema>;
