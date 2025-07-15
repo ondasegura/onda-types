@@ -1,11 +1,10 @@
 import z4 from "zod/v4";
 
 // tipagem:
-// COMO USAR ESE NAMESPACE NA HORA DE IMPORTAR: 
+// COMO USAR ESE NAMESPACE NA HORA DE IMPORTAR:
 // import t from "onda-types"
 // t.Financeiro.Controllers.Cliente.Criar.Input
 namespace ControllerCliente {
-
     export const ClienteTipoSchema = z4.union([z4.literal("individual"), z4.literal("corporativo")]);
     export type ClienteTipo = z4.infer<typeof ClienteTipoSchema>;
 
@@ -35,7 +34,9 @@ namespace ControllerCliente {
         estado: z4.string(),
         pais: z4.string(),
         telefone: z4.string(),
-        celular: z4.string()
+        celular: z4.string(),
+        asaas_external_id: z4.string(),
+        pagarme_external_id: z4.string(),
     });
     export type ClienteBase = z4.infer<typeof ClienteBaseSchema>;
 
@@ -57,9 +58,9 @@ namespace ControllerCliente {
                     estado: z4.string().optional().nullable(),
                     pais: z4.string().optional().nullable(),
                     telefone: z4.string().optional().nullable(),
-                    celular: z4.string()
-                })
-            })
+                    celular: z4.string(),
+                }),
+            }),
         });
         export type Input = z4.infer<typeof InputSchema>;
 
@@ -67,8 +68,8 @@ namespace ControllerCliente {
         export type Output = {
             data: {
                 cliente: z4.infer<typeof OutputSchema>;
-            }
-        }
+            };
+        };
     }
 
     export namespace BuscarPeloFiltro {
@@ -95,8 +96,7 @@ namespace ControllerCliente {
                     excluido: z4.boolean().optional().nullable(),
                     usuario_criacao: z4.string().optional().nullable(),
                 }),
-
-            })
+            }),
         });
 
         export type Input = z4.infer<typeof InputSchema>;
@@ -109,26 +109,26 @@ namespace ControllerCliente {
                     total_paginas: number;
                     itens_por_pagina: number;
                     total_itens_pagina_atual: number;
-                },
+                };
                 clientes: z4.infer<typeof OutputSchema>;
-            }
-        }
+            };
+        };
     }
 
     export namespace BuscarPeloId {
         export const InputSchema = z4.object({
             data: z4.object({
-                _id: z4.uuidv4()
-            })
+                _id: z4.uuidv4(),
+            }),
         });
         export type Input = z4.infer<typeof InputSchema>;
 
         export const OutputSchema = ClienteBaseSchema;
         export type Output = {
             data: {
-                cliente: z4.infer<typeof OutputSchema>
-            }
-        }
+                cliente: z4.infer<typeof OutputSchema>;
+            };
+        };
     }
 
     export namespace AtualizarPeloId {
@@ -153,32 +153,32 @@ namespace ControllerCliente {
                     celular: z4.string().optional().nullable(),
                     asaas_external_id: z4.string().optional().nullable(),
                     pagarme_external_id: z4.string().optional().nullable(),
-                    excluido: z4.boolean().optional().nullable()
-                })
-            })
+                    excluido: z4.boolean().optional().nullable(),
+                }),
+            }),
         });
         export type Input = z4.infer<typeof InputSchema>;
 
         export const OutputSchema = ClienteBaseSchema;
         export type Output = {
             data: {
-                cliente: z4.infer<typeof OutputSchema>
-            }
-        }
+                cliente: z4.infer<typeof OutputSchema>;
+            };
+        };
     }
 
     export namespace DeletarPeloId {
         export const InputSchema = z4.object({
-            _id: z4.string()
+            _id: z4.string(),
         });
         export type Input = z4.infer<typeof InputSchema>;
 
         export const OutputSchema = ClienteBaseSchema;
         export type Output = {
             data: {
-                cliente: {}
-            }
-        }
+                cliente: {};
+            };
+        };
     }
 }
 
