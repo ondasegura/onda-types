@@ -16,7 +16,7 @@ namespace ControllerContasPagar {
         data_criacao: z4.date(),
         data_atualizacao: z4.date().nullable(),
         usuario_create_id: z4.uuidv4(),
-        checkout: CheckoutSchema,
+        checkout: CheckoutSchema.default("asaas"),
         cliente_id: z4.string(),
         parcelas: z4.number(),
         valor: z4.number(),
