@@ -7,7 +7,6 @@ import UserPayload from "./controllers/token";
 import {ControllerFinanceiro as CF} from "./controllers/order";
 import ControllerLog from "./controllers/log";
 import ControllerRecebedor from "./controllers/recebedor";
-import ControllerContaPagar from "../backend-banco/controllers/contasPagar";
 import ControllerContasPagar from "./controllers/conta_pagar";
 
 // USAR ESSE PADRÃO DE IMPORTAÇÃO COM O NOME ESPLICITO:
