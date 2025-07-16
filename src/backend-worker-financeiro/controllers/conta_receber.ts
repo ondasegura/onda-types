@@ -1,28 +1,21 @@
-import z4, { includes } from "zod/v4";
+import z4, {includes} from "zod/v4";
 
 // tipagem:
-// COMO USAR ESE NAMESPACE NA HORA DE IMPORTAR: 
+// COMO USAR ESE NAMESPACE NA HORA DE IMPORTAR:
 // import t from "onda-types"
 // t.Financeiro.Controllers.ContaReceber.Criar.Input
 namespace ControllerContaReceber {
-
     export const ContaReceberStatusSchema = z4.union([z4.literal("ativo"), z4.literal("inativo")]);
     export type ContaReceberStatus = z4.infer<typeof ContaReceberStatusSchema>;
-    export const CheckoutSchema = z4.union([
-        z4.literal("pagarme"),
-        z4.literal("asaas")
-    ])
-    export const MetodoPagamentoSchema = z4.union([
-        z4.literal('credit_card'),
-        z4.literal('boleto'),
-        z4.literal('debit_card'),
-        z4.literal('pix'),
-    ])
+    export const CheckoutSchema = z4.union([z4.literal("pagarme"), z4.literal("asaas")]);
+    export const MetodoPagamentoSchema = z4.union([z4.literal("credit_card"), z4.literal("boleto"), z4.literal("debit_card"), z4.literal("pix")]);
 
-    export const JurosSchemaAsaas = z4.object({
-        tipo: z4.union([z4.literal('PERCENTAGE'), z4.literal('FIXED')]),
-        valor: z4.number().max(99.99)
-    }).optional()
+    export const JurosSchemaAsaas = z4
+        .object({
+            tipo: z4.union([z4.literal("PERCENTAGE"), z4.literal("FIXED")]),
+            valor: z4.number().max(99.99),
+        })
+        .optional();
 
     export const ContaReceberBaseSchema = z4.object({
         _id: z4.uuid(),
@@ -54,67 +47,71 @@ namespace ControllerContaReceber {
         valor_pacela: z4.number(),
         url_pedido: z4.string(),
         url_cobranca: z4.string(),
-        metadata: z4.record(z4.string(), z4.any()).optional()
+        metadata: z4.record(z4.string(), z4.any()).optional(),
     });
     export type ContaReceberBase = z4.infer<typeof ContaReceberBaseSchema>;
 
     export namespace Criar {
         export const InputSchema = z4.object({
             data: z4.object({
-                conta_receber: z4.object({
-                    checkout: CheckoutSchema,
-                    cliente_id: z4.string(),
-                    parcelas: z4.number(),
-                    valor: z4.number(),
-                    vencimento: z4.iso.datetime().optional(),
-                    codigo: z4.string(),
-                    metodo_pagamento: z4.array(MetodoPagamentoSchema).min(1),
-                    tipo_pagamento: z4.union([z4.enum(['241'])]).optional().nullable().default("241"),
-                    descricao: z4.string(),
-                    juros: z4.object({
-                        tipo: z4.union([z4.literal('PERCENTAGE'), z4.literal('FIXED')]),
-                        valor: z4.number().max(99.99)
+                conta_receber: z4
+                    .object({
+                        checkout: CheckoutSchema,
+                        cliente_id: z4.string(),
+                        parcelas: z4.number(),
+                        valor: z4.number(),
+                        vencimento: z4.iso.datetime().optional(),
+                        codigo: z4.string(),
+                        metodo_pagamento: z4.array(MetodoPagamentoSchema).min(1),
+                        tipo_pagamento: z4
+                            .union([z4.enum(["241"])])
+                            .optional()
+                            .nullable()
+                            .default("241"),
+                        descricao: z4.string(),
+                        juros: z4.object({
+                            tipo: z4.union([z4.literal("PERCENTAGE"), z4.literal("FIXED")]),
+                            valor: z4.number().max(99.99),
+                        }),
+                        multa: z4.number().int().max(10).optional(),
+                        referencia_externa_primaria: z4.string(),
+                        referencia_externa_secundaria: z4.string().optional().nullable(),
+                        referencia_externa_terciaria: z4.string().optional().nullable(),
+                        referencia_externa_quartenaria: z4.string().optional().nullable(),
+                        metadata: z4.record(z4.string(), z4.any()).optional(),
+                        status: z4.number().optional(),
+                        pagamento_id: z4.string().optional(),
+                        parcela: z4.number().optional(),
+                        valor_pacela: z4.number().optional(),
+                        url_pedido: z4.string().optional(),
+                        url_cobranca: z4.string().optional(),
                     })
-                    ,
-                    multa: z4.number().int().max(10).optional(),
-                    referencia_externa_primaria: z4.string(),
-                    referencia_externa_secundaria: z4.string().optional().nullable(),
-                    referencia_externa_terciaria: z4.string().optional().nullable(),
-                    referencia_externa_quartenaria: z4.string().optional().nullable(),
-                    metadata: z4.record(z4.string(), z4.any()).optional(),
-                    status: z4.number().optional(),
-                    pagamento_id: z4.string().optional(),
-                    parcela: z4.number().optional(),
-                    valor_pacela: z4.number().optional(),
-                    url_pedido: z4.string().optional(),
-                    url_cobranca: z4.string().optional(),
-                }).refine(
-                    (val) => {
-                        if (!val.vencimento) return true;
-                        const hoje = new Date();
-                        const vencimento = new Date(val.vencimento);
-                        return vencimento > hoje;
-                    },
-                    {
-                        path: ["vencimento"],
-                        message: "A data de vencimento não pode ser anterior à data atual.",
-                    }
-                )
-                .refine(
-                    (val) => {
-                        const checkout = val.checkout === 'asaas'
-                        const aceitaBoleto = val.metodo_pagamento.includes("boleto")
-                        const multaInformado = val.multa === undefined;
+                    .refine(
+                        (val) => {
+                            if (!val.vencimento) return true;
+                            const hoje = new Date();
+                            const vencimento = new Date(val.vencimento);
+                            return vencimento > hoje;
+                        },
+                        {
+                            path: ["vencimento"],
+                            message: "A data de vencimento não pode ser anterior à data atual.",
+                        }
+                    )
+                    .refine(
+                        (val) => {
+                            const checkout = val.checkout === "asaas";
+                            const aceitaBoleto = val.metodo_pagamento.includes("boleto");
+                            const multaInformado = val.multa !== undefined;
 
-                        return checkout || aceitaBoleto || multaInformado || multaInformado
-                    },
-                    {
-                        path: ["multa"],
-                        message: "multa é obrigatória quando o checkout é asaas"
-                    }
-                )
-
-            })
+                            return checkout || aceitaBoleto || multaInformado;
+                        },
+                        {
+                            path: ["multa"],
+                            message: "multa é obrigatória quando o checkout é asaas",
+                        }
+                    ),
+            }),
         });
         export type Input = z4.infer<typeof InputSchema>;
 
@@ -122,8 +119,8 @@ namespace ControllerContaReceber {
         export type Output = {
             data: {
                 conta_receber: z4.infer<typeof OutputSchema>;
-            }
-        }
+            };
+        };
     }
 
     export namespace BuscarPeloFiltro {
@@ -157,10 +154,9 @@ namespace ControllerContaReceber {
                     url_pedido: z4.string().optional().nullable(),
                     url_cobranca: z4.string().optional().nullable(),
                     usuario_create_id: z4.uuidv4().optional().nullable(),
-                    excluido: z4.boolean().optional().nullable().default(false)
+                    excluido: z4.boolean().optional().nullable().default(false),
                 }),
-
-            })
+            }),
         });
 
         export type Input = z4.infer<typeof InputSchema>;
@@ -173,96 +169,98 @@ namespace ControllerContaReceber {
                     total_paginas: number;
                     itens_por_pagina: number;
                     total_itens_pagina_atual: number;
-                },
+                };
                 conta_receber: z4.infer<typeof OutputSchema>;
-            }
-        }
+            };
+        };
     }
 
     export namespace BuscarPeloId {
         export const InputSchema = z4.object({
             data: z4.object({
                 _id: z4.uuidv4(),
-                excluido: z4.boolean().default(false)
-            })
+                excluido: z4.boolean().default(false),
+            }),
         });
         export type Input = z4.infer<typeof InputSchema>;
 
         export const OutputSchema = ContaReceberBaseSchema;
         export type Output = {
             data: {
-                conta_receber: z4.infer<typeof OutputSchema>
-            }
-        }
+                conta_receber: z4.infer<typeof OutputSchema>;
+            };
+        };
     }
 
     export namespace AtualizarPeloId {
         export const InputSchema = z4.object({
             data: z4.object({
-                conta_receber: z4.object({
-                    _id: z4.uuidv4(),
-                    checkout: z4.string().optional(),
-                    cliente_id: z4.string().optional(),
-                    parcelas: z4.number().optional(),
-                    valor: z4.number().int().optional().describe("O valor original deve ser multiplicado por 100"),
-                    vencimento: z4.iso.datetime().optional(),
-                    codigo: z4.string().optional(),
-                    metodo_pagamento: z4.array(z4.string()).optional(),
-                    tipo_pagamento: z4.number().optional(),
-                    descricao: z4.string().optional(),
-                    referencia_externa_primaria: z4.string().optional(),
-                    referencia_externa_secundaria: z4.string().optional(),
-                    referencia_externa_terciaria: z4.string().optional(),
-                    referencia_externa_quartenaria: z4.string().optional(),
-                    ativo: z4.boolean().optional(),
-                    documento_titular: z4.string().optional(),
-                    titular: z4.string().optional(),
-                    status: z4.number().optional(),
-                    numero_cartao: z4.string().optional(),
-                    numero_serial: z4.string().optional(),
-                    pagamento_id: z4.string().optional(),
-                    parcela: z4.number().optional(),
-                    valor_pacela: z4.number().optional(),
-                    url_pedido: z4.string().optional(),
-                    url_cobranca: z4.string().optional(),
-                }).refine(
-                    (val) => {
-                        if (!val.vencimento) return true;
-                        const hoje = new Date();
-                        const vencimento = new Date(val.vencimento);
-                        return vencimento < hoje;
-                    },
-                    {
-                        path: ["vencimento"],
-                        message: "A data de vencimento não pode ser anterior à data atual.",
-                    }
-                )
-            })
+                conta_receber: z4
+                    .object({
+                        _id: z4.uuidv4(),
+                        checkout: z4.string().optional(),
+                        cliente_id: z4.string().optional(),
+                        parcelas: z4.number().optional(),
+                        valor: z4.number().int().optional().describe("O valor original deve ser multiplicado por 100"),
+                        vencimento: z4.iso.datetime().optional(),
+                        codigo: z4.string().optional(),
+                        metodo_pagamento: z4.array(z4.string()).optional(),
+                        tipo_pagamento: z4.number().optional(),
+                        descricao: z4.string().optional(),
+                        referencia_externa_primaria: z4.string().optional(),
+                        referencia_externa_secundaria: z4.string().optional(),
+                        referencia_externa_terciaria: z4.string().optional(),
+                        referencia_externa_quartenaria: z4.string().optional(),
+                        ativo: z4.boolean().optional(),
+                        documento_titular: z4.string().optional(),
+                        titular: z4.string().optional(),
+                        status: z4.number().optional(),
+                        numero_cartao: z4.string().optional(),
+                        numero_serial: z4.string().optional(),
+                        pagamento_id: z4.string().optional(),
+                        parcela: z4.number().optional(),
+                        valor_pacela: z4.number().optional(),
+                        url_pedido: z4.string().optional(),
+                        url_cobranca: z4.string().optional(),
+                    })
+                    .refine(
+                        (val) => {
+                            if (!val.vencimento) return true;
+                            const hoje = new Date();
+                            const vencimento = new Date(val.vencimento);
+                            return vencimento < hoje;
+                        },
+                        {
+                            path: ["vencimento"],
+                            message: "A data de vencimento não pode ser anterior à data atual.",
+                        }
+                    ),
+            }),
         });
         export type Input = z4.infer<typeof InputSchema>;
 
         export const OutputSchema = ContaReceberBaseSchema;
         export type Output = {
             data: {
-                conta_receber: z4.infer<typeof OutputSchema>
-            }
-        }
+                conta_receber: z4.infer<typeof OutputSchema>;
+            };
+        };
     }
 
     export namespace DeletarPeloId {
         export const InputSchema = z4.object({
             data: z4.object({
-                _id: z4.uuidv4()
-            })
+                _id: z4.uuidv4(),
+            }),
         });
         export type Input = z4.infer<typeof InputSchema>;
 
         export const OutputSchema = ContaReceberBaseSchema;
         export type Output = {
             data: {
-                conta_receber: {}
-            }
-        }
+                conta_receber: {};
+            };
+        };
     }
 
     export type TController = {
