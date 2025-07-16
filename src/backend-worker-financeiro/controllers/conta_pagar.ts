@@ -43,7 +43,7 @@ namespace ControllerContasPagar {
     export namespace Criar {
         export const InputSchema = z4.object({
             data: z4.object({
-                conta_receber: z4
+                conta_pagar: z4
                     .object({
                         checkout: z4.string(),
                         cliente_id: z4.string(),
@@ -81,7 +81,7 @@ namespace ControllerContasPagar {
         export const OutputSchema = ContasPagarBaseSchema;
         export type Output = {
             data: {
-                conta_receber: z4.infer<typeof OutputSchema>;
+                conta_pagar: z4.infer<typeof OutputSchema>;
             };
         };
     }
@@ -89,7 +89,7 @@ namespace ControllerContasPagar {
     export namespace BuscarPeloFiltro {
         export const InputSchema = z4.object({
             filtros: z4.object({
-                conta_receber: z4.object({
+                conta_pagar: z4.object({
                     pagina: z4.number().min(0),
                     _id: z4.uuidv4().optional().nullable(),
                     checkout: z4.string().optional().nullable(),
@@ -128,7 +128,7 @@ namespace ControllerContasPagar {
                     itens_por_pagina: number;
                     total_itens_pagina_atual: number;
                 };
-                conta_receber: z4.infer<typeof OutputSchema>;
+                conta_pagar: z4.infer<typeof OutputSchema>;
             };
         };
     }
@@ -144,7 +144,7 @@ namespace ControllerContasPagar {
         export const OutputSchema = ContasPagarBaseSchema;
         export type Output = {
             data: {
-                conta_receber: z4.infer<typeof OutputSchema>;
+                conta_pagar: z4.infer<typeof OutputSchema>;
             };
         };
     }
@@ -152,7 +152,7 @@ namespace ControllerContasPagar {
     export namespace AtualizarPeloId {
         export const InputSchema = z4.object({
             data: z4.object({
-                conta_receber: z4.object({
+                conta_pagar: z4.object({
                     _id: z4.uuidv4(),
                     checkout: z4.string().optional(),
                     cliente_id: z4.string().optional(),
@@ -188,7 +188,7 @@ namespace ControllerContasPagar {
         export const OutputSchema = ContasPagarBaseSchema;
         export type Output = {
             data: {
-                conta_receber: z4.infer<typeof OutputSchema>;
+                conta_pagar: z4.infer<typeof OutputSchema>;
             };
         };
     }
@@ -202,7 +202,7 @@ namespace ControllerContasPagar {
         export const OutputSchema = ContasPagarBaseSchema;
         export type Output = {
             data: {
-                conta_receber: {};
+                conta_pagar: {};
             };
         };
     }
