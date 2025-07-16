@@ -104,7 +104,7 @@ namespace ControllerContaReceber {
                             const aceitaBoleto = val.metodo_pagamento.includes("boleto");
                             const multaInformado = val.multa !== undefined;
 
-                            return checkout || aceitaBoleto || multaInformado;
+                            return checkout && aceitaBoleto && multaInformado;
                         },
                         {
                             path: ["multa"],
