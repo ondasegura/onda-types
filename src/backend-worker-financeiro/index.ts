@@ -7,6 +7,7 @@ import UserPayload from "./controllers/token";
 import {ControllerFinanceiro as CF} from "./controllers/order";
 import ControllerLog from "./controllers/log";
 import ControllerRecebedor from "./controllers/recebedor";
+import ControllerContaPagar from "../backend-banco/controllers/contasPagar";
 
 // USAR ESSE PADRÃO DE IMPORTAÇÃO COM O NOME ESPLICITO:
 import ControllerHelpers from "./controllers/helpers";
@@ -41,6 +42,7 @@ namespace BackendWorkerFinanceiro {
         export import Recebedor = ControllerRecebedor;
 
         export import ContaReceber = ControllerContasReceber;
+        export import ContaPagar = ControllerContaPagar;
         //Cliente correto novo cadastro
         export import Cliente = ControllerCliente;
     }
