@@ -15,7 +15,11 @@ namespace ControllerRecebedor {
         data_criacao: z4.date(),
         data_atualizacao: z4.date().nullable(),
         usuario_create_id: z4.uuidv4(),
-        documento: z4.string().min(11).max(14),
+        documento: z4
+            .string()
+            .min(11)
+            .max(14)
+            .transform((val) => val.replace(/\D+/g, "")),
         chave_pix: z4.string(),
         tipo_de_chave: RecebedorTipoDeChaveSchema,
         codigo_externo: z4.string(),
@@ -30,7 +34,11 @@ namespace ControllerRecebedor {
             data: z4.object({
                 recebedor: z4
                     .object({
-                        documento: z4.string().min(11).max(14),
+                        documento: z4
+                            .string()
+                            .min(11)
+                            .max(14)
+                            .transform((val) => val.replace(/\D+/g, "")),
                         chave_pix: z4.string(),
                         tipo_de_chave: RecebedorTipoDeChaveSchema,
                         codigo_externo: z4.string(),
@@ -51,8 +59,7 @@ namespace ControllerRecebedor {
                         {
                             error: "Chave pix inválida para o tipo informado.",
                         }
-                    )
-                    .transform((val) => val.documento.replace(/\D+/g, "")),
+                    ),
             }),
         });
         export type Input = z4.infer<typeof InputSchema>;
