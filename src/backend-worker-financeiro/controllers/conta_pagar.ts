@@ -70,15 +70,10 @@ namespace ControllerContasPagar {
                             observacoes: z4.string(),
                         }),
                     })
-                    .refine(
-                        (val) => {
-                            return val.metodo_pagamento === "pix" && val.parcelas !== 1;
-                        },
-                        {
-                            message: "O máximo de parcelas para Pix é 1.",
-                            path: ["parcelas"],
-                        }
-                    ),
+                    .refine((data) => !(data.metodo_pagamento === "pix" && data.parcelas !== 1), {
+                        path: ["parcelas"],
+                        message: "Para pagamento via PIX, o número de parcelas deve ser 1.",
+                    }),
             }),
         });
         export type Input = z4.infer<typeof InputSchema>;
