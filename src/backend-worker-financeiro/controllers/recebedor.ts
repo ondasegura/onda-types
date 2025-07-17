@@ -8,8 +8,6 @@ namespace ControllerRecebedor {
     export const RecebedorTipoDeChaveSchema = z4.enum(["cpf", "cnpj", "email", "telefone", "chave_aleatoria"]);
     export type RecebedorTipoDeChave = z4.infer<typeof RecebedorTipoDeChaveSchema>;
 
-    const TipoDeDocumento = z4.union([z4.literal("cpf"), z4.literal("cnpj")]);
-
     export const RecebedorBaseSchema = z4.object({
         _id: z4.uuid(),
         data_criacao: z4.date(),
