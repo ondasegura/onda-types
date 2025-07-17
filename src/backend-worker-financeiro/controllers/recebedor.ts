@@ -13,7 +13,7 @@ namespace ControllerRecebedor {
         data_criacao: z4.date(),
         data_atualizacao: z4.date().nullable(),
         usuario_create_id: z4.uuidv4(),
-        documento: z4.string(),
+        documento: z4.string().transform((val) => val.replace(/\D+/g, "")),
         chave_pix: z4.string(),
         tipo_de_chave: RecebedorTipoDeChaveSchema,
         codigo_externo: z4.string(),
@@ -28,7 +28,7 @@ namespace ControllerRecebedor {
             data: z4.object({
                 recebedor: z4
                     .object({
-                        documento: z4.string(),
+                        documento: z4.string().transform((val) => val.replace(/\D+/g, "")),
                         chave_pix: z4.string(),
                         tipo_de_chave: RecebedorTipoDeChaveSchema,
                         codigo_externo: z4.string(),
@@ -38,7 +38,6 @@ namespace ControllerRecebedor {
                     })
                     .refine(
                         (val) => {
-                            if (val.tipo_de_chave === "cpf") return val.chave_pix.length === 11;
                             if (val.tipo_de_chave === "cnpj") return val.chave_pix.length === 14;
                             if (val.tipo_de_chave === "telefone") return val.chave_pix.length >= 10 && val.chave_pix.length <= 11;
                             if (val.tipo_de_chave === "chave_aleatoria") return val.chave_pix.length === 36;
