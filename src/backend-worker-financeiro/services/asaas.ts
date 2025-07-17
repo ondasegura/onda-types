@@ -408,7 +408,7 @@ namespace ServiceAsaas {
                 data: {
                     transferencia: z4.object({
                         object: z4.literal("transfer"),
-                        id: z4.uuidv4(),
+                        id: z4.uuidv4(), //external_id que veio do asaas
                         value: z4.number().transform((val) => val * 100),
                         netValue: z4.number().transform((val) => val * 100),
                         transferFee: z4.number(),
