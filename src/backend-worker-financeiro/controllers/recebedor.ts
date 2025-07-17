@@ -127,7 +127,13 @@ namespace ControllerRecebedor {
             data: z4.object({
                 recebedor: z4.object({
                     _id: z4.uuidv4().optional(),
-                    documento: z4.string().optional(),
+                    documento: z4
+                        .string()
+                        .transform((val) => val.replace(/\D+/g, ""))
+                        .refine((val) => val.length >= 11 && val.length <= 14, {
+                            error: "O documento deve ter entre 11 e 14 dígitos.",
+                        })
+                        .optional(),
                     chave_pix: z4.string().optional(),
                     tipo_de_chave: z4.string().optional(),
                     codigo_externo: z4.string().optional(),
