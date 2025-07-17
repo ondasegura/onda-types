@@ -396,7 +396,7 @@ namespace ServiceAsaas {
                 .nullable(),
         });
 
-        export namespace Criar {
+        export namespace PagarPix {
             export const InputSchema = z4.object({
                 data: z4.object({
                     transferencia: TransferenciaSchema,
