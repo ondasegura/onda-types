@@ -1,4 +1,4 @@
-import z4, {optional} from "zod/v4";
+import z4, {optional, uuidv4} from "zod/v4";
 
 namespace ServiceAsaas {
     export namespace Cobranca {
@@ -363,21 +363,24 @@ namespace ServiceAsaas {
         const TipoDeStatus = z4.union([z4.literal("PENDING"), z4.literal("DONE"), z4.literal("CANCELLED")]);
 
         export const TransferenciaSchema = z4.object({
+            _id: z4.uuidv4(),
             value: z4.number().transform((val) => val * 100),
-            bankAccount: z4.object({
-                bank: z4.object({
-                    code: z4.string(),
-                }),
-                accountName: z4.string().optional().nullable(),
-                ownerName: z4.string(),
-                ownerBirthDate: z4.string().optional().nullable(),
-                cpfCnpj: z4.string(),
-                agency: z4.string(),
-                account: z4.string(),
-                accountDigit: z4.string(),
-                bankAccountType: z4.literal("CONTA_CORRENTE").optional(),
-                ispb: z4.string().optional().nullable(),
-            }),
+            bankAccount: z4
+                .object({
+                    bank: z4.object({
+                        code: z4.string(),
+                    }),
+                    accountName: z4.string().optional().nullable(),
+                    ownerName: z4.string(),
+                    ownerBirthDate: z4.string().optional().nullable(),
+                    cpfCnpj: z4.string(),
+                    agency: z4.string(),
+                    account: z4.string(),
+                    accountDigit: z4.string(),
+                    bankAccountType: z4.literal("CONTA_CORRENTE").optional(),
+                    ispb: z4.string().optional().nullable(),
+                })
+                .optional(),
             operationType: z4.string().default("PIX"),
             pixAddressKey: z4.string(),
             pixAddressKeyType: z4.array(TipoDeChavePix).min(1),
@@ -448,6 +451,68 @@ namespace ServiceAsaas {
                 },
             });
             export type Output = {};
+        }
+
+        export namespace BuscarPeloFiltro {
+            export const InputSchema = z4.object({
+                filtros: z4.object({
+                    transferencia: z4.object({
+                        value: z4.number().optional().nullable(),
+                        operationType: z4.string().optional().nullable(),
+                        pixAddressKey: z4.string().optional().nullable(),
+                        pixAddressKeyType: z4.array(z4.string()).optional().nullable(),
+                        description: z4.string().optional().nullable(),
+                        scheduleDate: z4.string().optional().nullable(),
+                        externalReference: z4.string().optional().nullable(),
+                    }),
+                }),
+            });
+            export type Input = z4.infer<typeof InputSchema>;
+
+            export const OutputSchema = TransferenciaSchema;
+            export type Output = {
+                data: {
+                    paginacao: {
+                        total_itens: number;
+                        total_paginas: number;
+                        itens_por_pagina: number;
+                        total_itens_pagina_atual: number;
+                    };
+                    trasnferencia: z4.infer<typeof OutputSchema>;
+                };
+            };
+        }
+
+        export namespace BuscarPeloId {
+            export const InputSchema = z4.object({
+                data: z4.object({
+                    _id: z4.string(),
+                }),
+            });
+            export type Input = z4.infer<typeof InputSchema>;
+
+            export const OutputSchema = TransferenciaSchema;
+            export type Output = {
+                data: {
+                    resultado: z4.infer<typeof OutputSchema>;
+                };
+            };
+        }
+
+        export namespace DeletarPeloId {
+            export const InputSchema = z4.object({
+                _id: uuidv4(),
+            });
+
+            export type Input = z4.infer<typeof InputSchema>;
+
+            export const OutputSchema = TransferenciaSchema;
+
+            export type Output = {
+                data: {
+                    recebedor: {};
+                };
+            };
         }
     }
 }
