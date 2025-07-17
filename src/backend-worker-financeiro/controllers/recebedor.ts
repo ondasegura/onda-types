@@ -20,7 +20,6 @@ namespace ControllerRecebedor {
         razao_social: z4.string(),
         nome: z4.string(),
         ativo: z4.boolean(),
-        referencia_externa: z4.string(),
     });
     export type RecebedorBase = z4.infer<typeof RecebedorBaseSchema>;
 
@@ -35,7 +34,6 @@ namespace ControllerRecebedor {
                     razao_social: z4.string(),
                     nome: z4.string(),
                     ativo: z4.boolean().optional().default(true),
-                    referencia_externa: z4.string(),
                 }),
             }),
         });
@@ -63,7 +61,6 @@ namespace ControllerRecebedor {
                     nome: z4.string().optional().nullable(),
                     ativo: z4.boolean().optional().nullable(),
                     usuario_create_id: z4.uuidv4().optional().nullable(),
-                    referencia_externa: z4.string().optional().nullable(),
                 }),
             }),
         });
@@ -112,7 +109,6 @@ namespace ControllerRecebedor {
                     razao_social: z4.string().optional(),
                     nome: z4.string().optional(),
                     ativo: z4.boolean().optional(),
-                    referencia_externa: z4.string().optional(),
                 }),
             }),
         });
