@@ -15,11 +15,12 @@ namespace ControllerRecebedor {
         usuario_create_id: z4.uuidv4(),
         documento: z4.string(),
         chave_pix: z4.string(),
-        tipo_de_chave: z4.string(),
+        tipo_de_chave: z4.array(RecebedorTipoDeChaveSchema).min(1),
         codigo_externo: z4.string(),
         razao_social: z4.string(),
         nome: z4.string(),
         ativo: z4.boolean(),
+        referencia_externa: z4.string(),
     });
     export type RecebedorBase = z4.infer<typeof RecebedorBaseSchema>;
 
@@ -34,6 +35,7 @@ namespace ControllerRecebedor {
                     razao_social: z4.string(),
                     nome: z4.string(),
                     ativo: z4.boolean().optional().default(true),
+                    referencia_externa: z4.string(),
                 }),
             }),
         });
