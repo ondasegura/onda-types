@@ -101,7 +101,7 @@ namespace ControllerRecebedor {
         export const InputSchema = z4.object({
             data: z4.object({
                 recebedor: z4.object({
-                    _id: z4.uuidv4(),
+                    _id: z4.uuidv4().optional(),
                     documento: z4.string().optional(),
                     chave_pix: z4.string().optional(),
                     tipo_de_chave: z4.string().optional(),
