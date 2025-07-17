@@ -41,7 +41,7 @@ namespace ControllerRecebedor {
                             if (val.tipo_de_chave === "cpf") return val.chave_pix.length === 11;
                             if (val.tipo_de_chave === "cnpj") return val.chave_pix.length === 14;
                             if (val.tipo_de_chave === "telefone") return val.chave_pix.length >= 10 && val.chave_pix.length <= 11;
-                            if (val.tipo_de_chave === "chave_aleatoria") return val.chave_pix.length === 32;
+                            if (val.tipo_de_chave === "chave_aleatoria") return val.chave_pix.length === 36;
                             if (val.tipo_de_chave === "email") return z4.email().safeParse(val.chave_pix).success;
 
                             return true;
