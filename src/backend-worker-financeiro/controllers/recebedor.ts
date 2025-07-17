@@ -5,7 +5,7 @@ import z4 from "zod/v4";
 // import t from "onda-types"
 // t.Financeiro.Controllers.Recebedor.Criar.Input
 namespace ControllerRecebedor {
-    export const RecebedorTipoDeChaveSchema = z4.union([z4.literal("email"), z4.literal("cpf"), z4.literal("cnpj"), z4.literal("telefone"), z4.literal("chave_aleatoria")]);
+    export const RecebedorTipoDeChaveSchema = z4.enum(["cpf", "cnpj", "email", "telefone", "chave_aleatoria"]);
     export type RecebedorTipoDeChave = z4.infer<typeof RecebedorTipoDeChaveSchema>;
 
     export const RecebedorBaseSchema = z4.object({
@@ -15,7 +15,7 @@ namespace ControllerRecebedor {
         usuario_create_id: z4.uuidv4(),
         documento: z4.string(),
         chave_pix: z4.string(),
-        tipo_de_chave: z4.array(RecebedorTipoDeChaveSchema).min(1),
+        tipo_de_chave: RecebedorTipoDeChaveSchema,
         codigo_externo: z4.string(),
         razao_social: z4.string(),
         nome: z4.string(),
@@ -26,15 +26,30 @@ namespace ControllerRecebedor {
     export namespace Criar {
         export const InputSchema = z4.object({
             data: z4.object({
-                recebedor: z4.object({
-                    documento: z4.string(),
-                    chave_pix: z4.string(),
-                    tipo_de_chave: z4.string(),
-                    codigo_externo: z4.string(),
-                    razao_social: z4.string(),
-                    nome: z4.string(),
-                    ativo: z4.boolean().optional().default(true),
-                }),
+                recebedor: z4
+                    .object({
+                        documento: z4.string(),
+                        chave_pix: z4.string(),
+                        tipo_de_chave: RecebedorTipoDeChaveSchema,
+                        codigo_externo: z4.string(),
+                        razao_social: z4.string(),
+                        nome: z4.string(),
+                        ativo: z4.boolean().optional().default(true),
+                    })
+                    .refine(
+                        (val) => {
+                            if (val.tipo_de_chave === "cpf") return val.chave_pix.length === 11;
+                            if (val.tipo_de_chave === "cnpj") return val.chave_pix.length === 14;
+                            if (val.tipo_de_chave === "telefone") return val.chave_pix.length >= 10 && val.chave_pix.length <= 11;
+                            if (val.tipo_de_chave === "chave_aleatoria") return val.chave_pix.length === 32;
+                            if (val.tipo_de_chave === "email") return z4.email().safeParse(val.chave_pix).success;
+
+                            return true;
+                        },
+                        {
+                            error: "Chave pix inválida para o tipo informado.",
+                        }
+                    ),
             }),
         });
         export type Input = z4.infer<typeof InputSchema>;
