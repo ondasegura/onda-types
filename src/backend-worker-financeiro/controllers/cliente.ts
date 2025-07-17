@@ -130,7 +130,6 @@ namespace ControllerCliente {
             };
         };
     }
-
     export namespace AtualizarPeloId {
         export const InputSchema = z4.object({
             data: z4.object({
