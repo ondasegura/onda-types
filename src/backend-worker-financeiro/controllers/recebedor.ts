@@ -13,7 +13,6 @@ namespace ControllerRecebedor {
         data_criacao: z4.date(),
         data_atualizacao: z4.date().nullable(),
         usuario_create_id: z4.uuidv4(),
-        id: z4.string(),
         documento: z4.string(),
         chave_pix: z4.string(),
         tipo_de_chave: z4.string(),
@@ -28,7 +27,6 @@ namespace ControllerRecebedor {
         export const InputSchema = z4.object({
             data: z4.object({
                 recebedor: z4.object({
-                    id: z4.string(),
                     documento: z4.string(),
                     chave_pix: z4.string(),
                     tipo_de_chave: z4.string(),
@@ -55,7 +53,6 @@ namespace ControllerRecebedor {
                 recebedor: z4.object({
                     pagina: z4.number().min(0),
                     _id: z4.uuidv4().optional().nullable(),
-                    id: z4.string().optional().nullable(),
                     documento: z4.string().optional().nullable(),
                     chave_pix: z4.string().optional().nullable(),
                     tipo_de_chave: z4.string().optional().nullable(),
@@ -105,7 +102,6 @@ namespace ControllerRecebedor {
             data: z4.object({
                 recebedor: z4.object({
                     _id: z4.uuidv4(),
-                    id: z4.string().optional(),
                     documento: z4.string().optional(),
                     chave_pix: z4.string().optional(),
                     tipo_de_chave: z4.string().optional(),
