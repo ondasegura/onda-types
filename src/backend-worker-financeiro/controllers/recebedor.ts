@@ -15,9 +15,10 @@ namespace ControllerRecebedor {
         usuario_create_id: z4.uuidv4(),
         documento: z4
             .string()
-            .min(11)
-            .max(14)
-            .transform((val) => val.replace(/\D+/g, "")),
+            .transform((val) => val.replace(/\D+/g, ""))
+            .refine((val) => val.length >= 11 && val.length <= 14, {
+                error: "O documento deve ter entre 11 e 14 dígitos.",
+            }),
         chave_pix: z4.string(),
         tipo_de_chave: RecebedorTipoDeChaveSchema,
         codigo_externo: z4.string(),
@@ -34,9 +35,10 @@ namespace ControllerRecebedor {
                     .object({
                         documento: z4
                             .string()
-                            .min(11)
-                            .max(14)
-                            .transform((val) => val.replace(/\D+/g, "")),
+                            .transform((val) => val.replace(/\D+/g, ""))
+                            .refine((val) => val.length >= 11 && val.length <= 14, {
+                                error: "O documento deve ter entre 11 e 14 dígitos.",
+                            }),
                         chave_pix: z4.string(),
                         tipo_de_chave: RecebedorTipoDeChaveSchema,
                         codigo_externo: z4.string(),
