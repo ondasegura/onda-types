@@ -8,12 +8,13 @@ namespace ControllerRecebedor {
     export const RecebedorTipoDeChaveSchema = z4.enum(["cpf", "cnpj", "email", "telefone", "chave_aleatoria"]);
     export type RecebedorTipoDeChave = z4.infer<typeof RecebedorTipoDeChaveSchema>;
 
+    const TipoDeDocumento = z4.union([z4.literal("cpf"), z4.literal("cnpj")]);
     export const RecebedorBaseSchema = z4.object({
         _id: z4.uuid(),
         data_criacao: z4.date(),
         data_atualizacao: z4.date().nullable(),
         usuario_create_id: z4.uuidv4(),
-        documento: z4.string().transform((val) => val.replace(/\D+/g, "")),
+        documento: TipoDeDocumento,
         chave_pix: z4.string(),
         tipo_de_chave: RecebedorTipoDeChaveSchema,
         codigo_externo: z4.string(),
@@ -28,7 +29,7 @@ namespace ControllerRecebedor {
             data: z4.object({
                 recebedor: z4
                     .object({
-                        documento: z4.string().transform((val) => val.replace(/\D+/g, "")),
+                        documento: TipoDeDocumento,
                         chave_pix: z4.string(),
                         tipo_de_chave: RecebedorTipoDeChaveSchema,
                         codigo_externo: z4.string(),
@@ -49,7 +50,12 @@ namespace ControllerRecebedor {
                         {
                             error: "Chave pix inválida para o tipo informado.",
                         }
-                    ),
+                    )
+                    .refine((val) => {
+                        if (val.documento === "cnpj") return val.documento.length === 14;
+                        if (val.documento === "cpf") return val.documento.length === 11;
+                    })
+                    .transform((val) => val.documento.replace(/\D+/g, "")),
             }),
         });
         export type Input = z4.infer<typeof InputSchema>;
