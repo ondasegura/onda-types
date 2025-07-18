@@ -47,7 +47,7 @@ namespace ControllerCliente {
                     nome: z4.string(),
                     email: z4.email(),
                     referencia_externa: z4.uuidv4(),
-                    cpf_cnpj: z4.string(),
+                    cpf_cnpj: z4.string().transform((val) => val.replace(/\d+/g, "")),
                     tipo: ClienteTipoSchema.optional().nullable(),
                     genero: ClienteGeneroSchema.optional().nullable(),
                     data_nascimento: z4.string().optional().nullable(),
@@ -55,10 +55,14 @@ namespace ControllerCliente {
                     complemento: z4.string().optional().nullable(),
                     cep: z4.string().optional().nullable(),
                     cidade: z4.string().optional().nullable(),
-                    estado: z4.string().optional().nullable(),
+                    estado: z4.string().max(2).uppercase().optional().nullable(),
                     pais: z4.string().optional().nullable(),
-                    telefone: z4.string().optional().nullable(),
-                    celular: z4.string(),
+                    telefone: z4
+                        .string()
+                        .optional()
+                        .nullable()
+                        .transform((val) => val && val.replace(/\d+/g, "")),
+                    celular: z4.string().transform((val) => val.replace(/\d+/g, "")),
                 }),
             }),
         });
