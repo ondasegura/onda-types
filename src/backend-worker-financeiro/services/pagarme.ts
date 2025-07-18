@@ -650,7 +650,7 @@ namespace ServicePagarme {
         //     };
         // }
 
-        export namespace ReberWebhookContaReceber {
+        export namespace ReceberWebhookContaReceber {
             export const InputSchema = z4.object({
                 id: z4.string(),
                 account: z4.object({
