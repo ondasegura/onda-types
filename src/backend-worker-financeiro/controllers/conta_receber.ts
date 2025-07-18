@@ -100,11 +100,15 @@ namespace ControllerContaReceber {
                     )
                     .refine(
                         (val) => {
-                            const checkout = val.checkout === "asaas";
-                            const aceitaBoleto = val.metodo_pagamento.includes("boleto");
+                            const isCheckoutAsaas = val.checkout === "asaas";
+                            const aceitaBoleto = Array.isArray(val.metodo_pagamento) && val.metodo_pagamento.includes("boleto");
                             const multaInformado = val.multa !== undefined;
 
-                            return checkout && aceitaBoleto && multaInformado;
+                            if (isCheckoutAsaas && aceitaBoleto) {
+                                return multaInformado;
+                            }
+
+                            return true;
                         },
                         {
                             path: ["multa"],
