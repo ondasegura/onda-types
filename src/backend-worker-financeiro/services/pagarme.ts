@@ -31,24 +31,20 @@ namespace ServicePagarme {
                     })
                     .optional(),
                 birthdate: z4.string().optional(),
-                phones: z4
-                    .object({
-                        home_phone: z4
-                            .object({
-                                country_code: z4.string(),
-                                area_code: z4.string(),
-                                number: z4.string(),
-                            })
-                            .optional(),
-                        mobile_phone: z4
-                            .object({
-                                country_code: z4.string(),
-                                area_code: z4.string(),
-                                number: z4.string(),
-                            })
-                            .optional(),
-                    })
-                    .optional(),
+                phones: z4.object({
+                    home_phone: z4
+                        .object({
+                            country_code: z4.string(),
+                            area_code: z4.string(),
+                            number: z4.string(),
+                        })
+                        .optional(),
+                    mobile_phone: z4.object({
+                        country_code: z4.string(),
+                        area_code: z4.string(),
+                        number: z4.string(),
+                    }),
+                }),
                 metadata: z4.record(z4.string(), z4.any()).optional(),
             });
             export type Input = z4.infer<typeof InputSchema>;
