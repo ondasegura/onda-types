@@ -100,7 +100,9 @@ namespace ControllerHelpers {
 
     export namespace DeletarPeloId {
         export const InputSchema = z4.object({
-            _id: z4.string()
+            data: z4.object({
+                _id: z4.uuidv4(),
+            }),
         });
         export type Input = z4.infer<typeof InputSchema>;
 
