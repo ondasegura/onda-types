@@ -6,9 +6,20 @@ import z4, {includes} from "zod/v4";
 // t.Financeiro.Controllers.ContaReceber.Criar.Input
 namespace ControllerContaReceber {
     export const ContaReceberStatusSchema = z4.union([z4.literal("ativo"), z4.literal("inativo")]);
+
     export type ContaReceberStatus = z4.infer<typeof ContaReceberStatusSchema>;
+
     export const CheckoutSchema = z4.union([z4.literal("pagarme"), z4.literal("asaas")]);
+
     export const MetodoPagamentoSchema = z4.union([z4.literal("credit_card"), z4.literal("boleto"), z4.literal("debit_card"), z4.literal("pix")]);
+
+    const DadosDaTabelaCliente = z4.object({
+        _id: z4.uuidv4(),
+        nome: z4.string(),
+        email: z4.email(),
+        telefone: z4.string(),
+        celular: z4.string(),
+    });
 
     export const JurosSchemaAsaas = z4
         .object({
@@ -198,7 +209,7 @@ namespace ControllerContaReceber {
 
         export type Input = z4.infer<typeof InputSchema>;
 
-        export const OutputSchema = z4.array(ContaReceberBaseSchema);
+        export const OutputSchema = z4.array(z4.intersection(ContaReceberBaseSchema, DadosDaTabelaCliente));
         export type Output = {
             data: {
                 paginacao: {
@@ -221,7 +232,7 @@ namespace ControllerContaReceber {
         });
         export type Input = z4.infer<typeof InputSchema>;
 
-        export const OutputSchema = ContaReceberBaseSchema;
+        export const OutputSchema = z4.intersection(ContaReceberBaseSchema, DadosDaTabelaCliente);
         export type Output = {
             data: {
                 conta_receber: z4.infer<typeof OutputSchema>;
