@@ -68,7 +68,7 @@ namespace ControllerContaReceber {
                             .optional()
                             .nullable()
                             .default("241"),
-                        descricao: z4.string(),
+                        descricao: z4.string().nullable().optional(),
                         juros: z4.object({
                             tipo: z4.union([z4.literal("PERCENTAGE"), z4.literal("FIXED")]),
                             valor: z4.number().max(99.99),
