@@ -18,7 +18,7 @@ namespace ServiceAsaas {
                         description: z4.string(),
                         externalReference: z4.string(),
                         installmentCount: z4.number(),
-                        totalValue: z4.number().transform((val) => val / 100),
+                        totalValue: z4.number(),
                         postalService: z4.boolean().default(false),
                         interest: z4
                             .object({
@@ -409,8 +409,8 @@ namespace ServiceAsaas {
                     transferencia: z4.object({
                         object: z4.literal("transfer"),
                         id: z4.uuidv4(), //external_id que veio do asaas
-                        value: z4.number().transform((val) => val * 100),
-                        netValue: z4.number().transform((val) => val * 100),
+                        value: z4.number(),
+                        netValue: z4.number(),
                         transferFee: z4.number(),
                         dateCreated: z4.string(),
                         status: z4.array(TipoDeStatus),

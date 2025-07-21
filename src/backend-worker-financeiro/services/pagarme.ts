@@ -343,7 +343,7 @@ namespace ServicePagarme {
                         metadata: z4.record(z4.string(), z4.any()).optional(),
                         items: z4.array(
                             z4.object({
-                                amount: z4.number(),
+                                amount: z4.number().transform((val) => val * 100),
                                 code: z4.string(),
                                 description: z4.string(),
                                 quantity: z4.number(),
