@@ -148,9 +148,9 @@ namespace ControllerContaReceber {
                     .refine(
                         (val) => {
                             const metodo_pagamento = Array.isArray(val.metodo_pagamento) && val.metodo_pagamento.includes("pix");
-                            const parcelas = val.parcelas > 1;
+                            const parcelas = val.parcelas == 1;
 
-                            return parcelas && metodo_pagamento;
+                            return metodo_pagamento ?? parcelas;
                         },
                         {
                             path: ["parcelas"],
