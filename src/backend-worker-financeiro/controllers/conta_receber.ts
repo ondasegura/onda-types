@@ -114,7 +114,34 @@ namespace ControllerContaReceber {
                             path: ["multa"],
                             message: "multa é obrigatória quando o checkout é asaas",
                         }
-                    ),
+                    )
+                    .refine(
+                        (val) => {
+                            const checkout = val.checkout === "pagarme";
+                            const parcelas = val.parcelas === 1;
+                            const metodo_boleto = Array.isArray(val.metodo_pagamento) && val.metodo_pagamento.includes("boleto");
+
+                            if (checkout && metodo_boleto) {
+                                return parcelas;
+                            }
+
+                            return true;
+                        },
+                        {
+                            path: ["parcelas"],
+                            message: "Se o checkout for pagar.me a quantidade de parcelas no boleto é apenas 1",
+                        }
+                    )
+                    .refine((val) => {
+                        const descricao = val?.descricao !== undefined;
+                        const checkout = val?.checkout == "pagarme";
+
+                        if (descricao && checkout) {
+                            return (val?.descricao && val?.descricao?.length > 0) || false;
+                        }
+
+                        return true;
+                    }),
             }),
         });
         export type Input = z4.infer<typeof InputSchema>;
