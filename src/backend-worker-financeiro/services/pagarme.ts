@@ -322,7 +322,7 @@ namespace ServicePagarme {
                         .array(
                             z4.object({
                                 number: z4.number(),
-                                total: z4.number(),
+                                total: z4.number().transform((val) => val * 100),
                             })
                         )
                         .optional(),
