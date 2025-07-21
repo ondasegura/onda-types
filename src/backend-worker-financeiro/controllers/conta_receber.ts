@@ -131,23 +131,23 @@ namespace ControllerContaReceber {
                             path: ["parcelas"],
                             message: "Se o checkout for pagar.me a quantidade de parcelas no boleto é apenas 1",
                         }
-                    )
-                    .refine(
-                        (val) => {
-                            const descricao = val?.descricao !== undefined;
-                            const checkout = val?.checkout == "pagarme";
-
-                            if (descricao && checkout) {
-                                return (val?.descricao && val?.descricao?.length > 0) || false;
-                            }
-
-                            return true;
-                        },
-                        {
-                            path: ["descricao"],
-                            message: "Se o checkout for pagar.me deverá enviar uma decrição do pedido",
-                        }
                     ),
+                // .refine(
+                //     (val) => {
+                //         const descricao = val?.descricao !== undefined;
+                //         const checkout = val?.checkout == "pagarme";
+
+                //         if (descricao && checkout) {
+                //             return (val?.descricao && val?.descricao?.length > 0) || false;
+                //         }
+
+                //         return true;
+                //     },
+                //     {
+                //         path: ["descricao"],
+                //         message: "Se o checkout for pagar.me deverá enviar uma decrição do pedido",
+                //     }
+                // ),
             }),
         });
         export type Input = z4.infer<typeof InputSchema>;
