@@ -14,11 +14,13 @@ namespace ControllerContaReceber {
     export const MetodoPagamentoSchema = z4.union([z4.literal("credit_card"), z4.literal("boleto"), z4.literal("debit_card"), z4.literal("pix")]);
 
     const DadosDaTabelaCliente = z4.object({
-        _id: z4.uuidv4(),
-        nome: z4.string(),
-        email: z4.email(),
-        telefone: z4.string(),
-        celular: z4.string(),
+        cliente: z4.object({
+            _id: z4.uuidv4(),
+            nome: z4.string(),
+            email: z4.email(),
+            telefone: z4.string(),
+            celular: z4.string(),
+        }),
     });
 
     export const JurosSchemaAsaas = z4
