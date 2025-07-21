@@ -331,6 +331,7 @@ namespace ServicePagarme {
                     max_installments: z4.number().optional().default(2),
                 })
                 .optional();
+
             export type CartaoDeCredito = z4.infer<typeof CartaoDeCreditoSchema>;
 
             const MetodoPagamentoSchema = z4.union([z4.literal("pix"), z4.literal("boleto"), z4.literal("credit_card"), z4.literal("debit_card")]);
