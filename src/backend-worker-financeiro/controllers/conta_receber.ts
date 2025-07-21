@@ -150,7 +150,7 @@ namespace ControllerContaReceber {
                             const metodo_pagamento = Array.isArray(val.metodo_pagamento) && val.metodo_pagamento.includes("pix");
                             const parcelas = val.parcelas === 1;
 
-                            metodo_pagamento ? parcelas : true;
+                            return metodo_pagamento ? parcelas : true;
                         },
                         {
                             path: ["parcelas"],
