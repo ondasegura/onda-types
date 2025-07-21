@@ -144,23 +144,19 @@ namespace ControllerContaReceber {
                             path: ["parcelas"],
                             message: "Se o checkout for pagar.me a quantidade de parcelas no boleto é apenas 1",
                         }
+                    )
+                    .refine(
+                        (val) => {
+                            const metodo_pagamento = Array.isArray(val.metodo_pagamento) && val.metodo_pagamento.includes("pix");
+                            const parcelas = val.parcelas > 1;
+
+                            return parcelas && metodo_pagamento;
+                        },
+                        {
+                            path: ["parcelas"],
+                            message: "Se o metodo de pagamento for pix as parcelas não podem exceder 1",
+                        }
                     ),
-                // .refine(
-                //     (val) => {
-                //         const descricao = val?.descricao !== undefined;
-                //         const checkout = val?.checkout == "pagarme";
-
-                //         if (descricao && checkout) {
-                //             return (val?.descricao && val?.descricao?.length > 0) || false;
-                //         }
-
-                //         return true;
-                //     },
-                //     {
-                //         path: ["descricao"],
-                //         message: "Se o checkout for pagar.me deverá enviar uma decrição do pedido",
-                //     }
-                // ),
             }),
         });
         export type Input = z4.infer<typeof InputSchema>;
