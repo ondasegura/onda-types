@@ -11,7 +11,7 @@ namespace ControllerContaReceber {
 
     export const CheckoutSchema = z4.union([z4.literal("pagarme"), z4.literal("asaas")]);
 
-    export const MetodoPagamentoSchema = z4.union([z4.literal("credit_card"), z4.literal("boleto"), z4.literal("debit_card"), z4.literal("pix")]);
+    export const MetodoPagamentoSchema = z4.union([z4.literal("credit_card"), z4.literal("boleto"), z4.literal("pix")]);
 
     const DadosDaTabelaCliente = z4.object({
         _id: z4.uuidv4(),
