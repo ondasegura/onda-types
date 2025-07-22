@@ -56,7 +56,7 @@ namespace ControllerLog {
                     error_message: z4.string().optional().nullable(),
                     error_returned_by_system: z4.unknown().optional().nullable(),
                     organization: z4.string().optional().nullable(),
-                    type: LogTypeSchema,
+                    type: LogTypeSchema.optional().nullable(),
                     user: z4.string().optional().nullable(),
                     type_user: z4.string().optional().nullable(),
                 }),
