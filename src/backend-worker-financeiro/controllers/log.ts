@@ -6,6 +6,7 @@ namespace ControllerLog {
     export type LogType = z4.infer<typeof LogTypeSchema>;
 
     export const LogSchema = z4.object({
+        _id: z4.uuid(),
         class_name: z4.string(),
         matrix: z4.string(),
         static_function: z4.string(),
@@ -56,7 +57,7 @@ namespace ControllerLog {
                     error_message: z4.string().optional().nullable(),
                     error_returned_by_system: z4.unknown().optional().nullable(),
                     organization: z4.string().optional().nullable(),
-                    type: LogTypeSchema,
+                    type: LogTypeSchema.optional().nullable(),
                     user: z4.string().optional().nullable(),
                     type_user: z4.string().optional().nullable(),
                 }),
