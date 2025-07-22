@@ -14,11 +14,13 @@ namespace ControllerContaReceber {
     export const MetodoPagamentoSchema = z4.union([z4.literal("credit_card"), z4.literal("boleto"), z4.literal("pix")]);
 
     const DadosDaTabelaCliente = z4.object({
-        _id: z4.uuidv4(),
-        nome: z4.string(),
-        email: z4.email(),
-        telefone: z4.string(),
-        celular: z4.string(),
+        cliente: z4.object({
+            _id: z4.uuidv4(),
+            nome: z4.string(),
+            email: z4.email(),
+            telefone: z4.string(),
+            celular: z4.string(),
+        }),
     });
 
     export const JurosSchemaAsaas = z4
@@ -142,23 +144,19 @@ namespace ControllerContaReceber {
                             path: ["parcelas"],
                             message: "Se o checkout for pagar.me a quantidade de parcelas no boleto é apenas 1",
                         }
+                    )
+                    .refine(
+                        (val) => {
+                            const metodo_pagamento = Array.isArray(val.metodo_pagamento) && val.metodo_pagamento.includes("pix");
+                            const parcelas = val.parcelas === 1;
+
+                            return metodo_pagamento ? parcelas : true;
+                        },
+                        {
+                            path: ["parcelas"],
+                            message: "Se o metodo de pagamento for pix as parcelas não podem exceder 1",
+                        }
                     ),
-                // .refine(
-                //     (val) => {
-                //         const descricao = val?.descricao !== undefined;
-                //         const checkout = val?.checkout == "pagarme";
-
-                //         if (descricao && checkout) {
-                //             return (val?.descricao && val?.descricao?.length > 0) || false;
-                //         }
-
-                //         return true;
-                //     },
-                //     {
-                //         path: ["descricao"],
-                //         message: "Se o checkout for pagar.me deverá enviar uma decrição do pedido",
-                //     }
-                // ),
             }),
         });
         export type Input = z4.infer<typeof InputSchema>;

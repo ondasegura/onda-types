@@ -322,7 +322,7 @@ namespace ServicePagarme {
                         .array(
                             z4.object({
                                 number: z4.number(),
-                                total: z4.number(),
+                                total: z4.number().transform((val) => val * 100),
                             })
                         )
                         .optional(),
@@ -331,6 +331,7 @@ namespace ServicePagarme {
                     max_installments: z4.number().optional().default(2),
                 })
                 .optional();
+
             export type CartaoDeCredito = z4.infer<typeof CartaoDeCreditoSchema>;
 
             const MetodoPagamentoSchema = z4.union([z4.literal("pix"), z4.literal("boleto"), z4.literal("credit_card"), z4.literal("debit_card")]);
@@ -343,7 +344,7 @@ namespace ServicePagarme {
                         metadata: z4.record(z4.string(), z4.any()).optional(),
                         items: z4.array(
                             z4.object({
-                                amount: z4.number(),
+                                amount: z4.number().transform((val) => val * 100),
                                 code: z4.string(),
                                 description: z4.string(),
                                 quantity: z4.number(),
