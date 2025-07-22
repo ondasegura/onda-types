@@ -876,6 +876,7 @@ namespace ServicePagarme {
             export type Input = z4.infer<typeof InputSchema>;
 
             export const OutputSchema = z4.object({});
+
             export type Output = {
                 data: z4.infer<typeof OutputSchema>;
             };
