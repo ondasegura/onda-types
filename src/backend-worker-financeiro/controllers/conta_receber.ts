@@ -61,7 +61,9 @@ namespace ControllerContaReceber {
         url_pedido: z4.string(),
         url_cobranca: z4.string(),
         metadata: z4.record(z4.string(), z4.any()).optional(),
+        data_pagamento: z4.iso.datetime(),
     });
+
     export type ContaReceberBase = z4.infer<typeof ContaReceberBaseSchema>;
 
     export namespace Criar {
@@ -201,6 +203,7 @@ namespace ControllerContaReceber {
                     url_cobranca: z4.string().optional().nullable(),
                     usuario_create_id: z4.uuidv4().optional().nullable(),
                     excluido: z4.boolean().optional().nullable().default(false),
+                    data_pagamento: z4.iso.datetime().optional().nullable(),
                 }),
             }),
         });
@@ -268,6 +271,7 @@ namespace ControllerContaReceber {
                         valor_pacela: z4.number().optional(),
                         url_pedido: z4.string().optional(),
                         url_cobranca: z4.string().optional(),
+                        data_pagamento: z4.iso.datetime().optional(),
                     })
                     .refine(
                         (val) => {
