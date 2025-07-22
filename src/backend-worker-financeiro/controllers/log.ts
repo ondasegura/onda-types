@@ -112,7 +112,7 @@ namespace ControllerLog {
             pagina_mini_select: {
                 loading: boolean;
                 itens: BuscarPeloFiltro.Output["data"]["log"];
-                item_selecionado: any;
+                item_selecionado: BuscarPeloFiltro.Output["data"]["log"][0];
                 paginacao: {
                     total_itens: number;
                     total_paginas: number;
