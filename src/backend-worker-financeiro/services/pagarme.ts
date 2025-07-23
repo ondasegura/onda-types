@@ -853,6 +853,7 @@ namespace ServicePagarme {
                     id: z4.string(),
                     status: z4.string(),
                     updated_at: z4.string(),
+                    metadata: z4.record(z4.string(), z4.any()).optional(),
                 }),
                 paid_amount: z4.number(),
                 paid_at: z4.string(),
