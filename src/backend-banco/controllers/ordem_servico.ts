@@ -4,18 +4,11 @@ import ControllerAsaas from "./asaas";
 import ControllerCliente from "./cliente";
 namespace ControllerOrdemServico {
     // Schema para tipos de serviço
-    export const TipoServicoSchema = z4.union([
-        z4.literal("consulta_nome"),
-        z4.literal("limpa_nome")
-    ]);
+    export const TipoServicoSchema = z4.union([z4.literal("consulta_nome"), z4.literal("limpa_nome")]);
     export type TipoServico = z4.infer<typeof TipoServicoSchema>;
 
     // Schema para tipos de usuário
-    const UsuarioTipoSchema = z4.union([
-        z4.literal("master"),
-        z4.literal("franqueado"),
-        z4.literal("advogado")
-    ]);
+    const UsuarioTipoSchema = z4.union([z4.literal("master"), z4.literal("franqueado"), z4.literal("advogado")]);
     export type UsuarioTipo = z4.infer<typeof UsuarioTipoSchema>;
 
     // Schema para status geral de ordem de serviço
@@ -26,17 +19,12 @@ namespace ControllerOrdemServico {
         z4.literal("aguardando_assinatura"),
         z4.literal("em_andamento"),
         z4.literal("concluido"),
-        z4.literal("cancelada")
+        z4.literal("cancelada"),
     ]);
     export type OrdemServicoStatus = z4.infer<typeof OrdemServicoStatusSchema>;
 
     // Schemas para status específicos por tipo
-    const StatusConsultaNomeSchema = z4.union([
-        z4.literal("aguardando_pagamento"),
-        z4.literal("processando_analise"),
-        z4.literal("concluido"),
-        z4.literal("cancelada")
-    ]);
+    const StatusConsultaNomeSchema = z4.union([z4.literal("aguardando_pagamento"), z4.literal("processando_analise"), z4.literal("concluido"), z4.literal("cancelada")]);
 
     const StatusLimpaNomeSchema = z4.union([
         z4.literal("aguardando_pagamento"),
@@ -44,9 +32,8 @@ namespace ControllerOrdemServico {
         z4.literal("em_negociacao"),
         z4.literal("em_andamento"),
         z4.literal("concluido"),
-        z4.literal("cancelada")
+        z4.literal("cancelada"),
     ]);
-
 
     // Schema para informações de IP
     const IpInfoSchema = z4.object({
@@ -76,16 +63,12 @@ namespace ControllerOrdemServico {
         country_area: z4.number(),
         country_population: z4.number(),
         asn: z4.string(),
-        org: z4.string()
+        org: z4.string(),
     });
 
     export type IpInfo = z4.infer<typeof IpInfoSchema>;
 
-
-
-
     export type CobrancaAsaas = z4.infer<typeof ControllerAsaas.PagamentoAsaasSchema>;
-
 
     const OrdemServicoBaseSchema = z4.object({
         _id: z4.uuidv4(),
@@ -118,28 +101,21 @@ namespace ControllerOrdemServico {
         cobranca: ControllerAsaas.PagamentoAsaasSchema.optional(),
         fornecedor: z4.object({
             _id: z4.uuidv4(),
-            nome: z4.string()
-        })
+            nome: z4.string(),
+        }),
     });
 
     const OrdemConsultaNomeSchema = OrdemServicoBaseSchema.extend({
         tipo_servico: z4.literal("consulta_nome"),
-        status: StatusConsultaNomeSchema
+        status: StatusConsultaNomeSchema,
     });
 
     const OrdemLimpaNomeSchema = OrdemServicoBaseSchema.extend({
         tipo_servico: z4.literal("limpa_nome"),
-        status: StatusLimpaNomeSchema
+        status: StatusLimpaNomeSchema,
     });
 
-
-
-
-    const OrdemServicoSchema = z4.union([
-        OrdemConsultaNomeSchema,
-        OrdemLimpaNomeSchema,
-
-    ]);
+    const OrdemServicoSchema = z4.union([OrdemConsultaNomeSchema, OrdemLimpaNomeSchema]);
 
     export type OrdemServicoBase = z4.infer<typeof OrdemServicoBaseSchema>;
     export type OrdemConsultaNome = z4.infer<typeof OrdemConsultaNomeSchema>;
@@ -152,17 +128,17 @@ namespace ControllerOrdemServico {
             data: z4.object({
                 ordem_servico: z4.object({
                     cliente_id: z4.string(),
-                    tipo_servico: TipoServicoSchema
-                })
-            })
+                    tipo_servico: TipoServicoSchema,
+                }),
+            }),
         });
 
         export type Input = z4.infer<typeof InputSchema>;
         export type Output = {
             data: {
-                ordem_servico: z4.infer<typeof OrdemServicoSchema>
-            }
-        }
+                ordem_servico: z4.infer<typeof OrdemServicoSchema>;
+            };
+        };
     }
 
     export namespace BuscarPeloFiltro {
@@ -177,8 +153,8 @@ namespace ControllerOrdemServico {
                     tipo_servico: TipoServicoSchema.optional().nullable(),
                     status: OrdemServicoStatusSchema.optional().nullable(),
                     cliente_nome: z4.string().optional().nullable(),
-                })
-            })
+                }),
+            }),
         });
 
         const OutputSchema = z4.array(OrdemServicoSchema);
@@ -191,25 +167,25 @@ namespace ControllerOrdemServico {
                     total_paginas: number;
                     itens_por_pagina: number;
                     total_itens_pagina_atual: number;
-                },
-                ordem_servico: z4.infer<typeof OutputSchema>
-            }
-        }
+                };
+                ordem_servico: z4.infer<typeof OutputSchema>;
+            };
+        };
     }
 
     export namespace BuscarPeloId {
         export const InputSchema = z4.object({
             data: z4.object({
-                _id: z4.uuidv4()
-            })
+                _id: z4.uuidv4(),
+            }),
         });
 
         export type Input = z4.infer<typeof InputSchema>;
         export type Output = {
             data: {
-                ordem_servico: z4.infer<typeof OrdemServicoSchema>
-            }
-        }
+                ordem_servico: z4.infer<typeof OrdemServicoSchema>;
+            };
+        };
     }
 
     export namespace AtualizarPeloId {
@@ -237,31 +213,31 @@ namespace ControllerOrdemServico {
                     data_processo_concluido: z4.date().optional(),
                     consulta_nome_realisada: z4.boolean().optional(),
                     data_consulta_nome_realisada: z4.date().optional(),
-                })
-            })
+                }),
+            }),
         });
 
         export type Input = z4.infer<typeof InputSchema>;
         export type Output = {
             data: {
-                ordem_servico: z4.infer<typeof OrdemServicoSchema>
-            }
-        }
+                ordem_servico: z4.infer<typeof OrdemServicoSchema>;
+            };
+        };
     }
 
     export namespace DeletarPeloId {
         export const InputSchema = z4.object({
             data: z4.object({
-                _id: z4.uuidv4()
-            })
+                _id: z4.uuidv4(),
+            }),
         });
 
         export type Input = z4.infer<typeof InputSchema>;
         export type Output = {
             data: {
-                ordem_servico: {}
-            }
-        }
+                ordem_servico: {};
+            };
+        };
     }
 
     export type TController = {
@@ -289,6 +265,7 @@ namespace ControllerOrdemServico {
             modal: {
                 item: BuscarPeloId.Output["data"]["ordem_servico"];
                 loading: boolean;
+                open: boolean;
             };
             pagina: {
                 loading: boolean;

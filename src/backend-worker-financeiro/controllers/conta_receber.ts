@@ -338,6 +338,7 @@ namespace ControllerContaReceber {
             modal: {
                 item: BuscarPeloId.Output["data"]["conta_receber"];
                 loading: boolean;
+                open: boolean;
             };
             pagina: {
                 loading: boolean;

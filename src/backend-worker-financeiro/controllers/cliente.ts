@@ -186,7 +186,6 @@ namespace ControllerCliente {
         };
     }
 
-
     export type TController = {
         Criar: {
             Input: Criar.Input;
@@ -212,6 +211,7 @@ namespace ControllerCliente {
             modal: {
                 item: BuscarPeloId.Output["data"]["cliente"];
                 loading: boolean;
+                open: boolean;
             };
             pagina: {
                 loading: boolean;

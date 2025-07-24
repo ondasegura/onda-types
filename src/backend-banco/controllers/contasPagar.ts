@@ -1,11 +1,10 @@
 import z4 from "zod/v4";
 
 // tipagem:
-// COMO USAR ESE NAMESPACE NA HORA DE IMPORTAR: 
+// COMO USAR ESE NAMESPACE NA HORA DE IMPORTAR:
 // import t from "onda-types"
 // Criar.Input
 namespace ControllerContaPagar {
-
     export const ContaPagarStatusSchema = z4.union([z4.literal("pendente"), z4.literal("pago"), z4.literal("cancelado")]);
     export type ContaPagarStatus = z4.infer<typeof ContaPagarStatusSchema>;
 
@@ -27,7 +26,7 @@ namespace ControllerContaPagar {
         forma_pagamento: ContaPagarFormaPagamentoSchema,
         categoria: z4.string(),
         deletado: z4.boolean(),
-        ativo: z4.boolean()
+        ativo: z4.boolean(),
     });
     export type Base = z4.infer<typeof BaseSchema>;
 
@@ -46,8 +45,8 @@ namespace ControllerContaPagar {
                     categoria: z4.string(),
                     deletado: z4.boolean().optional().default(false),
                     ativo: z4.boolean().optional().default(true),
-                })
-            })
+                }),
+            }),
         });
         export type Input = z4.infer<typeof InputSchema>;
 
@@ -55,8 +54,8 @@ namespace ControllerContaPagar {
         export type Output = {
             data: {
                 conta_pagar: z4.infer<typeof OutputSchema>;
-            }
-        }
+            };
+        };
     }
 
     export namespace BuscarPeloFiltro {
@@ -78,8 +77,7 @@ namespace ControllerContaPagar {
                     ativo: z4.boolean().optional().nullable(),
                     usuario_create_id: z4.uuidv4().optional().nullable(),
                 }),
-
-            })
+            }),
         });
 
         export type Input = z4.infer<typeof InputSchema>;
@@ -92,26 +90,26 @@ namespace ControllerContaPagar {
                     total_paginas: number;
                     itens_por_pagina: number;
                     total_itens_pagina_atual: number;
-                },
+                };
                 conta_pagar: z4.infer<typeof OutputSchema>;
-            }
-        }
+            };
+        };
     }
 
     export namespace BuscarPeloId {
         export const InputSchema = z4.object({
             data: z4.object({
-                _id: z4.string()
-            })
+                _id: z4.string(),
+            }),
         });
         export type Input = z4.infer<typeof InputSchema>;
 
         export const OutputSchema = BaseSchema;
         export type Output = {
             data: {
-                conta_pagar: z4.infer<typeof OutputSchema>
-            }
-        }
+                conta_pagar: z4.infer<typeof OutputSchema>;
+            };
+        };
     }
 
     export namespace AtualizarPeloId {
@@ -129,32 +127,32 @@ namespace ControllerContaPagar {
                     forma_pagamento: ContaPagarFormaPagamentoSchema.optional(),
                     categoria: z4.string().optional(),
                     deletado: z4.boolean().optional(),
-                    ativo: z4.boolean().optional()
-                })
-            })
+                    ativo: z4.boolean().optional(),
+                }),
+            }),
         });
         export type Input = z4.infer<typeof InputSchema>;
 
         export const OutputSchema = BaseSchema;
         export type Output = {
             data: {
-                conta_pagar: z4.infer<typeof OutputSchema>
-            }
-        }
+                conta_pagar: z4.infer<typeof OutputSchema>;
+            };
+        };
     }
 
     export namespace DeletarPeloId {
         export const InputSchema = z4.object({
-            _id: z4.string()
+            _id: z4.string(),
         });
         export type Input = z4.infer<typeof InputSchema>;
 
         export const OutputSchema = BaseSchema;
         export type Output = {
             data: {
-                conta_pagar: {}
-            }
-        }
+                conta_pagar: {};
+            };
+        };
     }
 
     export type TController = {
@@ -182,6 +180,7 @@ namespace ControllerContaPagar {
             modal: {
                 item: BuscarPeloId.Output["data"]["conta_pagar"];
                 loading: boolean;
+                open: boolean;
             };
             pagina: {
                 loading: boolean;
