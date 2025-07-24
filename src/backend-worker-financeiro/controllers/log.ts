@@ -16,6 +16,7 @@ namespace ControllerLog {
         type: LogTypeSchema,
         user: z4.string(),
         type_user: z4.string(),
+        created_at: z4.string().optional(),
     });
 
     export type LogBase = z4.infer<typeof LogSchema>;
@@ -60,6 +61,7 @@ namespace ControllerLog {
                     type: LogTypeSchema.optional().nullable(),
                     user: z4.string().optional().nullable(),
                     type_user: z4.string().optional().nullable(),
+                    created_at: z4.string().optional().nullable(),
                 }),
             }),
         });
