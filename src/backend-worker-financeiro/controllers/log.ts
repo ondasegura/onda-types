@@ -96,8 +96,9 @@ namespace ControllerLog {
         };
         states: {
             modal: {
-                item: any;
+                item: BuscarPeloFiltro.Output["data"]["log"][0];
                 loading: boolean;
+                open: boolean;
             };
             pagina: {
                 loading: boolean;
