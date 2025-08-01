@@ -41,7 +41,7 @@ namespace ControllerContaReceber {
         valor: z4.number(),
         vencimento: z4.iso.datetime(),
         codigo: z4.string(),
-        metodo_pagamento: z4.array(MetodoPagamentoSchema).min(1),
+        metodo_pagamento: MetodoPagamentoSchema,
         tipo_pagamento: z4.number(),
         descricao: z4.string(),
         referencia_externa_primaria: z4.string(),
@@ -77,7 +77,7 @@ namespace ControllerContaReceber {
                         valor: z4.number(),
                         vencimento: z4.iso.datetime().optional(),
                         codigo: z4.string(),
-                        metodo_pagamento: z4.array(MetodoPagamentoSchema).min(1),
+                        metodo_pagamento: MetodoPagamentoSchema,
                         tipo_pagamento: z4
                             .union([z4.enum(["241"])])
                             .optional()
@@ -183,7 +183,7 @@ namespace ControllerContaReceber {
                     valor: z4.number().optional().nullable(),
                     vencimento: z4.string().optional().nullable(),
                     codigo: z4.string().optional().nullable(),
-                    metodo_pagamento: z4.array(z4.string()).optional().nullable(),
+                    metodo_pagamento: MetodoPagamentoSchema.optional().nullable(),
                     tipo_pagamento: z4.number().optional().nullable(),
                     descricao: z4.string().optional().nullable(),
                     referencia_externa_primaria: z4.string().optional().nullable(),
@@ -253,7 +253,7 @@ namespace ControllerContaReceber {
                         valor: z4.number().int().optional().describe("O valor original deve ser multiplicado por 100"),
                         vencimento: z4.iso.datetime().optional(),
                         codigo: z4.string().optional(),
-                        metodo_pagamento: z4.array(z4.string()).optional(),
+                        metodo_pagamento: MetodoPagamentoSchema.optional(),
                         tipo_pagamento: z4.number().optional(),
                         descricao: z4.string().optional(),
                         referencia_externa_primaria: z4.string().optional(),
